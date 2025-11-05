@@ -4,11 +4,9 @@ using UnityEngine;
 public class WeaponEffect : MonoBehaviour
 {
     public int IdWeapon => _idWeapon;
-    [SerializeField] private Transform _startFire;
     [SerializeField] private Animator _animator;
     [SerializeField] private ParticleSystem _particleSystem;
     [SerializeField] private AudioSource _audioSource;
-    [SerializeField] private GameObject _shootMark;
     [SerializeField] private int _idWeapon;
     private ControlViewMark _controlViewMark;
     private ShootingWeapon _testWeapon;
@@ -38,12 +36,17 @@ public class WeaponEffect : MonoBehaviour
 
     private void Fire(TypeShoot typeShoot)
     {
-        _animator.SetBool(_isShootAnimationID, true);
-        _animator.SetTrigger(_shootAnimationID);
+        if (_animator != null)
+        {
+            _animator.SetBool(_isShootAnimationID, true);
+            _animator.SetTrigger(_shootAnimationID);
+        }
+
         if (_audioSource != null)
         {
             _audioSource.Play();
         }
+
         if (_particleSystem != null)
         {
             _particleSystem.Play();
@@ -53,7 +56,7 @@ public class WeaponEffect : MonoBehaviour
 
     private void CreateMark(RaycastHit Pos)
     {
-        if (_shootMark != null && Pos.point != Vector3.zero)
+        if (Pos.point != Vector3.zero)
         {
             Mark tempMark = _controlViewMark.GetMark();
             tempMark.transform.position = Pos.point;
@@ -64,11 +67,14 @@ public class WeaponEffect : MonoBehaviour
 
     private void ControlFire()
     {
-        _animator.SetBool(_isShootAnimationID, false);
-        _animator.SetTrigger(_endShootAnimationID);
-        if (_particleSystem != null)
+        if (_animator != null)
         {
-            _particleSystem.Stop();
+            _animator.SetBool(_isShootAnimationID, false);
+            _animator.SetTrigger(_endShootAnimationID);
+            if (_particleSystem != null)
+            {
+                _particleSystem.Stop();
+            }
         }
     }
 }
