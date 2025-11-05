@@ -18,7 +18,6 @@ public class MainSystem : MonoBehaviour
     {
         _inputControl.Initialization(_weaponSystem, _inventorySystem);
     }
-
     private void Start()
     {
         Initialization();
@@ -31,8 +30,8 @@ public class MainSystem : MonoBehaviour
 
     private void Initialization()
     {
-        _weaponSystem.Initialization(_player.PlayerData, _camera);
         _playerSystem.Initialization(_player, _camera);
+        _weaponSystem.Initialization(_player.PlayerData, _camera);
         _inventorySystem.Initialization(_player.PlayerData.Inventory);
         _uiSystem.Initialization(_player.PlayerData);
     }
