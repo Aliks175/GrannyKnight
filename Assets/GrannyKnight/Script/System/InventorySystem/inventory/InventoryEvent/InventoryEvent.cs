@@ -11,6 +11,7 @@ public class InventoryEvent : MonoBehaviour
 
     private void OnDisable()
     {
+        if (_playerInventory != null)
         _playerInventory.OnAddItem -= ChangeInventory;
     }
 

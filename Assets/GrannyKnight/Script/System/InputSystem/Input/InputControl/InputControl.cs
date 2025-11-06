@@ -1,4 +1,6 @@
+using Unity.VisualScripting.YamlDotNet.Core.Tokens;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class InputControl : MonoBehaviour
 {
@@ -33,8 +35,8 @@ public class InputControl : MonoBehaviour
         _playerActions.Jump.performed += Context => _playerMover.Jump();
         _playerActions.Aim.started += Context => _playerAim.AimingOn();
         _playerActions.Aim.canceled += Context => _playerAim.AimingOff();
-        _playerActions.Aim.started += Context => _playerMover.ChangeSpeedCoefficient(_playerAim.SpeedCoefficient);
-        _playerActions.Aim.canceled += Context => _playerMover.ChangeSpeedCoefficient(1);
+        _playerActions.Aim.started += _playerMover.ActiveAimSpeed;
+        _playerActions.Aim.canceled += _playerMover.ActiveAimSpeed;
         _playerActions.Interact.started += Context => _playerInteracteble.OnInteracteble(true);
         _playerActions.Interact.canceled += Context => _playerInteracteble.OnInteracteble(false);
         _playerActions.Inventory.started += Context => _inventorySystem.ShowInventory();
@@ -44,6 +46,8 @@ public class InputControl : MonoBehaviour
         _playerActions.Shoot.started += _weaponSystem.Shoot;
         _playerActions.Shoot.canceled += _weaponSystem.Shoot;
         _playerActions.Throw.performed += Context => _playerWeaponThrow.Throw();
+        _playerActions.Run.started += _playerMover.ActiveRunSpeed;
+        _playerActions.Run.canceled += _playerMover.ActiveRunSpeed;
     }
 
     private void OnDisable()
@@ -51,8 +55,8 @@ public class InputControl : MonoBehaviour
         _playerActions.Jump.performed -= Context => _playerMover.Jump();
         _playerActions.Aim.started -= Context => _playerAim.AimingOn();
         _playerActions.Aim.canceled -= Context => _playerAim.AimingOff();
-        _playerActions.Aim.started -= Context => _playerMover.ChangeSpeedCoefficient(_playerAim.SpeedCoefficient);
-        _playerActions.Aim.canceled -= Context => _playerMover.ChangeSpeedCoefficient(1);
+        _playerActions.Aim.started -= _playerMover.ActiveAimSpeed;
+        _playerActions.Aim.canceled -= _playerMover.ActiveAimSpeed;
         _playerActions.Interact.started -= Context => _playerInteracteble.OnInteracteble(true);
         _playerActions.Interact.canceled -= Context => _playerInteracteble.OnInteracteble(false);
         _playerActions.Inventory.started -= Context => _inventorySystem.ShowInventory();
@@ -62,6 +66,8 @@ public class InputControl : MonoBehaviour
         _playerActions.Shoot.started -= _weaponSystem.Shoot;
         _playerActions.Shoot.canceled -= _weaponSystem.Shoot;
         _playerActions.Throw.performed -= Context => _playerWeaponThrow.Throw();
+        _playerActions.Run.started -= _playerMover.ActiveRunSpeed;
+        _playerActions.Run.canceled -= _playerMover.ActiveRunSpeed;
         _playerActions.Disable();
     }
 
