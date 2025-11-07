@@ -1,16 +1,20 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMover : MonoBehaviour
 {
     [Header("Player-Parameters")]
-    [SerializeField] private float _speedMove = 5.0f;
+    [SerializeField] private float _speedWalk = 5.0f;
+    [SerializeField] private float _speedRun = 8.0f;
+    [SerializeField] private float _coefficientSpeedForAim = 0.5f;
     [SerializeField] private float jumpHeight = 3.0f;
     [Header("Physic")]
     [SerializeField] private float _gravity = -9.8f;
     [SerializeField] private bool _isGrounded;
+    private bool _isAim;
+    private bool _isRun;
     private float _speed;
-    private float _speedCoefficient;
     private CharacterController _controller;
     private Vector3 _playerVelocity;
     private Vector3 _moveDirection;
@@ -23,8 +27,7 @@ public class PlayerMover : MonoBehaviour
 
     public void Initialization()
     {
-        _speed = _speedMove;
-        _speedCoefficient = 1f;
+        _speed = _speedWalk;
         _controller = GetComponent<CharacterController>();
         MainSystem.OnUpdate += OnUpdate;
     }
@@ -38,20 +41,41 @@ public class PlayerMover : MonoBehaviour
         _playerVelocity.y += _gravity * Time.deltaTime;
         if (!_isGrounded)
         {
-            _speed = _speedMove / 4;
+            _speed = _speedWalk / 4;
         }
         else if (_isGrounded && _playerVelocity.y < 0)
         {
             _playerVelocity.y = -2;
-            _speed = _speedMove;
+
+            _speed = _isRun ? _speedRun : _speedWalk;
         }
-        _final = _moveDirection * _speed * _speedCoefficient + _playerVelocity;
+        if (_isAim) _speed *= _coefficientSpeedForAim;
+        _final = _moveDirection * _speed + _playerVelocity;
         _controller.Move(_final * Time.deltaTime);
     }
 
-    public void ChangeSpeedCoefficient(float speedCoefficient)
+    public void ActiveAimSpeed(InputAction.CallbackContext value)
     {
-        _speedCoefficient = Mathf.Abs(speedCoefficient);
+        if (value.phase == InputActionPhase.Started)
+        {
+            _isAim = true;
+        }
+        if (value.phase == InputActionPhase.Canceled)
+        {
+            _isAim = false;
+        }
+    }
+
+    public void ActiveRunSpeed(InputAction.CallbackContext value)
+    {
+        if (value.phase == InputActionPhase.Started)
+        {
+            _isRun = true;
+        }
+        if (value.phase == InputActionPhase.Canceled)
+        {
+            _isRun = false;
+        }
     }
 
     public void Jump()

@@ -12,7 +12,7 @@ public class WeaponSystem : MonoBehaviour
     {
         _playerData.ChooseWeapon.OnChangeWeapon -= _chooseWeaponView.ChangeWeapon;
         _playerData.ChooseWeapon.OnChangeWeapon -= _shootingWeapon.SetWeapon;
-        _chooseWeaponView.OnWeaponEquip -= _shootingWeapon.SetWeaponEffect;
+        //_chooseWeaponView.OnWeaponEquip -= _shootingWeapon.SetWeaponEffect;
         _playerData.ChooseWeapon.OnChangeWeapon -= Contect => _shootingWeapon.StopFire();
     }
 

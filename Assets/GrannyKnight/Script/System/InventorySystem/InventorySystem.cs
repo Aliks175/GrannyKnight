@@ -8,11 +8,11 @@ public class InventorySystem : MonoBehaviour
     public void Initialization(PlayerInventory playerInventory)
     {
         _inventoryEvent.Initialization(playerInventory);
-        _inventoryView.Initialization();
+        //_inventoryView.Initialization();
     }
 
     public void ShowInventory()
     {
-        _inventoryView.ControlShowInventory();
+        //_inventoryView.ControlShowInventory();
     }
 }

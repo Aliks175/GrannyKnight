@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[SelectionBase]
 public class PickUp : Interacteble
 {
     [Header("Item")]

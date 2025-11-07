@@ -9,8 +9,8 @@ public class UiSystem : MonoBehaviour
 
     private void OnDisable()
     {
-        _playerChooseWeapon.OnChangeWeapon -= Context => _uiEquip.ChangeWeaponName(Context.Name);
-        _playerWeaponThrow.OnChangeWeapon -= Context => _uiEquip.ChangeBonusWeapon();
+        //_playerChooseWeapon.OnChangeWeapon -= Context => _uiEquip.ChangeWeaponName(Context.Name);
+        //_playerWeaponThrow.OnChangeWeapon -= Context => _uiEquip.ChangeBonusWeapon();
     }
 
     public void Initialization(IPlayerDatable playerDatable)

@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class PlayerAim : MonoBehaviour
@@ -10,16 +11,16 @@ public class PlayerAim : MonoBehaviour
     [SerializeField] private float _startFieldOfView = 60f;
     [SerializeField] private float _endFieldOfView = 30f;
     [SerializeField, Min(0.1f)] private float _speedChooseView = 1;
-    private Camera _camera;
+    private CinemachineCamera _cinemachineCamera;
     private Coroutine _coroutine;
     private bool _isActive = false;
     private bool _isPlaying = false;
     private const int _zoomOn = -1;
     private const int _zoomOFF = 1;
 
-    public void Initialization(Camera camera)
+    public void Initialization(CinemachineCamera cinemachineCamera)
     {
-        _camera = camera;
+        _cinemachineCamera = cinemachineCamera;
         _isActive = false;
         _isPlaying = false;
     }
@@ -61,15 +62,15 @@ public class PlayerAim : MonoBehaviour
     {
         while (_isPlaying)
         {
-            if (_camera.fieldOfView <= end && modifier < 0)
+            if (_cinemachineCamera.Lens.FieldOfView <= end && modifier < 0)
             {
                 _isPlaying = false;
             }
-            else if (_camera.fieldOfView >= end && modifier > 0)
+            else if (_cinemachineCamera.Lens.FieldOfView >= end && modifier > 0)
             {
                 _isPlaying = false;
             }
-            _camera.fieldOfView += Time.deltaTime * _speedChooseView * modifier;
+            _cinemachineCamera.Lens.FieldOfView += Time.deltaTime * _speedChooseView * modifier;
             yield return null;
         }
         _coroutine = null;
