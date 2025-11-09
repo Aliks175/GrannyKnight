@@ -11,27 +11,30 @@ public class DustCreater : MonoBehaviour
     public void CreateOnStart()
     {
         GameObject dust = Instantiate(_prefabDust, _spawnPoint[Random.Range(0, _spawnPoint.Length)].position, Quaternion.identity, transform);
-        dust.GetComponent<TargetDust>().SetParameters(_stageDust[_stageDust.Length-1], this, _endPoint);
+        dust.GetComponent<TargetDust>().SetParameters(_stageDust[_stageDust.Length-1], this, _endPoint, _stageDust.Length-1);
     }
     void CreateChild(int stage, Transform trans)
     {
-        float spawnRadius = _stageDust[stage-1].SpawnRadStage;
+        float SpawnWidthStage = _stageDust[stage - 1].SpawnWidthStage;
+        float SpawnHeightStage = _stageDust[stage-1].SpawnHeightStage;
         int childCount = _stageDust[stage].CountChildStage;
 
         for (int i = 0; i < childCount; i++)
         {
-            Vector3 spawnPos = GetRandomPositionAround(trans.position, spawnRadius);
+            Vector3 spawnPos = GetRandomPositionInRectangle(trans.position, SpawnWidthStage,SpawnHeightStage);
             spawnPos.x = trans.position.x;
             
             GameObject dust = Instantiate(_prefabDust, spawnPos, Quaternion.identity, transform);
-            dust.GetComponent<TargetDust>().SetParameters(_stageDust[stage - 1], this, _endPoint);
+            dust.GetComponent<TargetDust>().SetParameters(_stageDust[stage - 1], this, _endPoint, stage - 1 );
         }
     }
 
-    Vector3 GetRandomPositionAround(Vector3 center, float radius)
+    Vector3 GetRandomPositionInRectangle(Vector3 center, float width, float height)
     {
-        // Случайная точка в сфере
-        return center + Random.insideUnitSphere * radius;
+        float randomY = Random.Range(-height / 2f, height / 2f);
+        float randomZ = Random.Range(-width / 2f, width / 2f);
+        
+        return center + new Vector3(0f, randomY, randomZ);
     }
     public void OnDustDie(Transform dust, int stage)
     {

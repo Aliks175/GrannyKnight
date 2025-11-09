@@ -9,26 +9,21 @@ public class TargetDust : MonoBehaviour , IHealtheble
     private DustCreater _creater;
     private int _stage;
     private Transform _endPoint;
-    private float _scale, _scaleStep;
-    public void SetParameters(StageDust stage, DustCreater creater, Transform distance)
+    public void SetParameters(StageDust stage, DustCreater creater, Transform distance, int index)
     {
         _colorStart = stage.ColorStage;
         _speed = stage.SpeedStage;
         _health = stage.HealthStage;
         _creater = creater;
-        _stage = stage.Stage;
+        _stage = index;
         _endPoint = distance;
         gameObject.transform.localScale = stage.BaseScaleStage * Vector3.one;
-        _scale = stage.BaseScaleStage;
-        _scaleStep = (stage.MaxScaleStage - stage.BaseScaleStage) / _health;
         GetComponent<Renderer>().material.color = _colorStart;
         StartMove();
     }
     public void TakeDamage(float damage)
     {
-        _health -= damage;
-        _scale += _scaleStep;
-        gameObject.transform.DOScale(_scale, 0.1f);
+        _health -= damage;;
         if (_health <= 0)
         {
             Die();
