@@ -1,5 +1,6 @@
-using System.Collections.Generic;
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 [CreateAssetMenu(fileName = "FairySettings", menuName = "Create/Enemy/FairySettings")]
 public class FairySettings : ScriptableObject
@@ -7,7 +8,14 @@ public class FairySettings : ScriptableObject
     [Header("ValueEnemy")]
     [SerializeField] private AnimationCurve _valueEnemyForWave;
     [Header("RangeSpeed")]
-    [SerializeField] private List<FairyType> _listFairyTypes;
+    [SerializeField] private float _minSpeed;
+    [SerializeField] private float _maxSpeed;
+    [Header("RangeValueChangeTarget")]
+    [SerializeField] private int _minValueChangeTarget;
+    [SerializeField] private int _maxValueChangeTarget;
+    [Header("RangeTimeWait")]
+    [SerializeField] private int _minTimeWait;
+    [SerializeField] private int _maxTimeWait;
 
     public int GetEnemyForWave(int waveCount)
     {
@@ -16,18 +24,26 @@ public class FairySettings : ScriptableObject
 
     public FairyType GetEnemyType()
     {
-        if (_listFairyTypes == null)
+        int tempValueChangeTarget = Random.Range(_minValueChangeTarget, _maxValueChangeTarget + 1);
+        float tempSpeed = Random.Range(_minSpeed, _maxSpeed + 1);
+        float tempTime = Random.Range(_minTimeWait, _maxTimeWait + 1);
+        bool tempisDolly = Random.Range(0, 4) > 0;
+        FairyType fairyType = new FairyType()
         {
-            Debug.LogError("NotFound -  _listFairyTypes");
-        }
-        int index = Random.Range(0, _listFairyTypes.Count);
-        return _listFairyTypes[index];
+            IsDolly = tempisDolly,
+            ValueChangeTarget = tempValueChangeTarget,
+            Speed = tempSpeed,
+            TimeWait = tempTime
+        };
+        return fairyType;
     }
 }
 
+[Serializable]
 public struct FairyType
 {
     public float Speed;
-    public int _minValueChangeTarget;
+    public float TimeWait;
+    public int ValueChangeTarget;
     public bool IsDolly;
 }
