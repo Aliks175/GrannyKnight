@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "StageDust", menuName = "Enemy/StageDust")]
+[CreateAssetMenu(fileName = "StageDust", menuName = "Create/Enemy/StageDust")]
 public class StageDust : ScriptableObject
 {
     [Tooltip("Цвет пыли")]public Color ColorStage;
