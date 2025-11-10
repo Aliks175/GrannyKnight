@@ -1,5 +1,6 @@
 using UnityEngine;
 using DG.Tweening;
+using DG.Tweening.Core;
 
 public class TargetDust : MonoBehaviour , IHealtheble
 {
@@ -9,6 +10,13 @@ public class TargetDust : MonoBehaviour , IHealtheble
     private DustCreater _creater;
     private int _stage;
     private Transform _endPoint;
+    private Tween _tween;
+
+    private void OnDisable()
+    {
+        _tween.Kill();
+    }
+
     public void SetParameters(StageDust stage, DustCreater creater, Transform distance, int index)
     {
         _colorStart = stage.ColorStage;
@@ -21,9 +29,10 @@ public class TargetDust : MonoBehaviour , IHealtheble
         GetComponent<Renderer>().material.color = _colorStart;
         StartMove();
     }
+
     public void TakeDamage(float damage)
     {
-        _health -= damage;;
+        _health -= damage;
         if (_health <= 0)
         {
             Die();
@@ -35,10 +44,13 @@ public class TargetDust : MonoBehaviour , IHealtheble
         _creater.OnDustDie(this.transform, _stage);
         Destroy(gameObject);
     }
+
     private void StartMove()
     {
-        transform.DOMove(_endPoint.position, _speed).SetSpeedBased().SetEase(Ease.Linear).OnComplete(() => OnEndPoint());
+        _tween =  transform.DOMove(_endPoint.position, _speed).SetSpeedBased().SetEase(Ease.Linear).OnComplete(() => OnEndPoint());
+        _tween.Play();
     }
+
     private void OnEndPoint()
     {
         Destroy(gameObject);
