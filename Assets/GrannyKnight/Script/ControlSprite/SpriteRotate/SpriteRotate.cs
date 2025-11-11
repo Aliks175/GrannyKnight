@@ -10,7 +10,7 @@ public class SpriteRotate : MonoBehaviour
         _camera = Camera.main;
     }
 
-    private void LateUpdate()
+    private void Update()
     {
         if (_IsRotateOnlyForY)
         {
