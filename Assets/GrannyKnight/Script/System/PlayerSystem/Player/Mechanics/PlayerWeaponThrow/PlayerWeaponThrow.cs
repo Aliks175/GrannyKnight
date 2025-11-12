@@ -9,16 +9,16 @@ public class PlayerWeaponThrow : MonoBehaviour
     [SerializeField] private float _directionY = 15;
     [SerializeField] private Transform _firePoint;
     private PlayerInventory _playerInventory;
-    private Camera _camera;
+    private Transform _head;
     private Weapon _equipWeapon;
     private List<Weapon> _throwWeaponsSlot;
     private float _nextTimeToFire;
     public event Action<Weapon> OnChangeWeapon;
 
-    public void Initialization(Camera camera, PlayerInventory playerInventory)
+    public void Initialization(Transform head, PlayerInventory playerInventory)
     {
         _playerInventory = playerInventory;
-        _camera = camera;
+        _head = head;
         _throwWeaponsSlot = new List<Weapon>();
         _weaponThrowPool.Initialization();
     }
@@ -49,7 +49,7 @@ public class PlayerWeaponThrow : MonoBehaviour
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         rb.position = _firePoint.position;
-        Vector3 tempDirection = Quaternion.AngleAxis(-_directionY, _camera.transform.right) * _camera.transform.forward;
+        Vector3 tempDirection = Quaternion.AngleAxis(-_directionY, _head.right) * _head.forward;
         rb.AddForce(tempDirection * _forceThrow, ForceMode.Impulse);
         return true;
     }

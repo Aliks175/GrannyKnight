@@ -5,7 +5,7 @@ public class PlayerInteracteble : MonoBehaviour
 {
     [SerializeField] private LayerMask _mask;
     [SerializeField] private float _distance;
-    private Camera _camera;
+    private Transform _head;
     private PlayerUi _playerUi;
     private bool _isInteract = false;
 
@@ -14,9 +14,9 @@ public class PlayerInteracteble : MonoBehaviour
         MainSystem.OnUpdate -= OnUpdate;
     }
 
-    public void Initialization(Camera camera)
+    public void Initialization( Transform head)
     {
-        _camera = camera;
+        _head = head;
         _playerUi = GetComponent<PlayerUi>();
         MainSystem.OnUpdate += OnUpdate;
     }
@@ -24,7 +24,7 @@ public class PlayerInteracteble : MonoBehaviour
     private void OnUpdate()
     {
         _playerUi.UpdateText(string.Empty);
-        Ray ray = new(_camera.transform.position, _camera.transform.forward);
+        Ray ray = new(_head.position, _head.forward);
         if (Physics.Raycast(ray, out RaycastHit hit, _distance, _mask))
         {
             if (hit.collider.gameObject.TryGetComponent(out IInteracteble interacteble))

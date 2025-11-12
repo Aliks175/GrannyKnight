@@ -8,21 +8,23 @@ public class PlayerCharacter : MonoBehaviour
     [SerializeField] private PlayerLook _playerLook;
     [SerializeField] private PlayerAim _playerAim;
     [SerializeField] private PlayerInteracteble _playerInteracteble;
+    [SerializeField] private PlayerControlAnimation _playerControlAnimation;
     [SerializeField] private CinemachineCamera _cinemachineCamera;
     private IPlayerDatable _playerData;
 
-    public void Initialization(Camera camera)
+    public void Initialization( Transform head)
     {
         _playerData = GetComponent<IPlayerDatable>();
-        SetUp(camera, _cinemachineCamera);
+        SetUp(head, _cinemachineCamera);
     }
 
-    private void SetUp(Camera camera, CinemachineCamera cinemachineCamera)
+    private void SetUp( Transform head, CinemachineCamera cinemachineCamera)
     {
-        _playerMover.Initialization();
+        _playerControlAnimation.Initialization();
+        _playerMover.Initialization(_playerControlAnimation);
         _playerLook.Initialization();
         _playerAim.Initialization(cinemachineCamera);
-        _playerInteracteble.Initialization(camera);
-        _playerData.Initialization(this, camera);
+        _playerInteracteble.Initialization(head);
+        _playerData.Initialization(this, head);
     }
 }

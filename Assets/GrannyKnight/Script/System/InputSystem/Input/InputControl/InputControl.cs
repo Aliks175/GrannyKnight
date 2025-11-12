@@ -27,9 +27,10 @@ public class InputControl : MonoBehaviour
         _playerWeaponThrow = GetComponent<PlayerWeaponThrow>();
         _weaponSystem = weaponSystem;
         _inventorySystem = inventorySystem;
+        SetUp();
     }
 
-    private void OnEnable()
+    private void SetUp()
     {
         _playerActions.Enable();
         _playerActions.Jump.performed += Context => _playerMover.Jump();

@@ -8,17 +8,17 @@ public class ShootingWeapon : MonoBehaviour
     private WeaponEffect _weaponEffect;
     private ControlViewMark _controlViewMark;
     private Weapon _weapon;
-    private Camera _camera;
+    private Transform _head;
     private Coroutine _coroutine;
     private bool _isFire = false;
     private float _nextTimeToFire = 0f;
     public Action<TypeShoot> OnFire;
     public Action OnEndFire;
 
-    public void Initialization(Camera camera, ControlViewMark controlViewMark)
+    public void Initialization( Transform head, ControlViewMark controlViewMark)
     {
         _controlViewMark = controlViewMark;
-        _camera = camera;
+        _head = head;
         _coroutine = null;
         _nextTimeToFire = 0f;
         _isFire = false;
@@ -92,7 +92,7 @@ public class ShootingWeapon : MonoBehaviour
         {
             _nextTimeToFire = Time.time + _weapon.TimeWaitFire;
 
-            if (Physics.Raycast(_camera.transform.position, _camera.transform.forward, out RaycastHit hit, _weapon.Range))
+            if (Physics.Raycast(_head.position, _head.forward, out RaycastHit hit, _weapon.Range))
             {
                 if (hit.collider.TryGetComponent(out IHealtheble target))
                 {

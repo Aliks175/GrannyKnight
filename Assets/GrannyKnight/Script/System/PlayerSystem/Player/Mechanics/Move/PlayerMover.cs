@@ -12,21 +12,23 @@ public class PlayerMover : MonoBehaviour
     [Header("Physic")]
     [SerializeField] private float _gravity = -9.8f;
     [SerializeField] private bool _isGrounded;
-    private bool _isAim;
-    private bool _isRun;
-    private float _speed;
+    private PlayerControlAnimation _playerControlAnimation;
     private CharacterController _controller;
     private Vector3 _playerVelocity;
     private Vector3 _moveDirection;
     private Vector3 _final;
+    private float _speed;
+    private bool _isAim;
+    private bool _isRun;
 
     private void OnDisable()
     {
         MainSystem.OnUpdate -= OnUpdate;
     }
 
-    public void Initialization()
+    public void Initialization(PlayerControlAnimation playerControlAnimation)
     {
+        _playerControlAnimation = playerControlAnimation;
         _speed = _speedWalk;
         _controller = GetComponent<CharacterController>();
         MainSystem.OnUpdate += OnUpdate;
@@ -51,6 +53,7 @@ public class PlayerMover : MonoBehaviour
         }
         if (_isAim) _speed *= _coefficientSpeedForAim;
         _final = _moveDirection * _speed + _playerVelocity;
+       
         _controller.Move(_final * Time.deltaTime);
     }
 
@@ -89,5 +92,7 @@ public class PlayerMover : MonoBehaviour
     private void OnUpdate()
     {
         _isGrounded = _controller.isGrounded;
+        _playerControlAnimation.SetCheckGround(_isGrounded);
+        _playerControlAnimation.SetSpeed(Vector3.SqrMagnitude(_final));
     }
 }
