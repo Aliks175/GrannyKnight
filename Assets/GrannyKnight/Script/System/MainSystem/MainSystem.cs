@@ -8,6 +8,7 @@ public class MainSystem : MonoBehaviour
     [SerializeField] private PlayerSystem _playerSystem;
     [SerializeField] private InventorySystem _inventorySystem;
     [SerializeField] private UiSystem _uiSystem;
+    [SerializeField] private SoundSystem _soundSystem;
     [Header("Other")]
     [SerializeField] private InputControl _inputControl;
     [SerializeField] private PlayerCharacter _player;
@@ -31,5 +32,6 @@ public class MainSystem : MonoBehaviour
         _weaponSystem.Initialization(_player.PlayerData, _head);
         _inventorySystem.Initialization(_player.PlayerData.Inventory);
         _uiSystem.Initialization(_player.PlayerData);
+        _soundSystem.Initialization();
     }
 }
