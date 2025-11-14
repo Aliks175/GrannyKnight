@@ -7,20 +7,16 @@ public class FairyCreater : Quest
     [SerializeField] private FairySettings _settings;
     [SerializeField] private TargetFairy _prefEnemy;
     [SerializeField] private int _valueWaves;
-
     [Header("TargetMove")]
     [SerializeField] private List<Transform> _targetsPoints;
     [SerializeField] private Transform _finalTarget;
     [Header("SpawnPointers")]
     [SerializeField] private List<Transform> _spawnPointers;
     private FairyTargets _fairyTargets;
-    private bool _isActiveQuest = false;
     private int _wavesCount;
     private int _enemyForWave;
-
     private int _valueEnemyFollow;
-
-
+    private bool _isActiveQuest = false;
 
     private void Start()
     {
@@ -74,9 +70,7 @@ public class FairyCreater : Quest
         TargetFairy enemy = gameObject.GetComponent<TargetFairy>();
         FairyTargets tempFairyTargets = _fairyTargets;
         ControlEnemyFollow(ref fairyType, ref tempFairyTargets);
-
         enemy.Instantiate(fairyType, tempFairyTargets);
-
         enemy.OnEnd += () => CheckLiveEnemy(enemy);
         enemy.Play();
     }
@@ -106,16 +100,6 @@ public class FairyCreater : Quest
             StartWaves();
         }
     }
-
-    //private void GetValueEnemy()
-    //{// ћы получаем настройки из ScriptableObject
-    // // мы подсчитываем кака€ это волна фей
-    // // и по анимационной кривой мы спавним нужное количество фей на волну
-    // // ‘еи летают ’ количество раз и после лет€т к дому
-    // // ≈сли фе€ катаетс€ на тележке то она ждет определенное врем€
-    // // и летит к финальной цели 
-    //    Debug.Log($"wavesCount {_wavesCount} Value {_settings.GetEnemyForWave(_wavesCount)} ");
-    //}
 }
 
 public struct FairyTargets

@@ -19,7 +19,6 @@ public class TargetFairy : MonoBehaviour, IHealtheble
     private int _index;
     private bool _isDolly;
     private bool _isPlay;
-
     public event Action OnEnd;
 
     private void OnDisable()
@@ -68,14 +67,12 @@ public class TargetFairy : MonoBehaviour, IHealtheble
         if (_count - 1 > 0)
         {
             _count--;
-            Debug.Log($"- count {_count}");
         }
         else
         {
             _isPlay = false;
             _tween = transform.DOMove(_finalTarget.position, 2).SetSpeedBased().SetEase(_ease).OnComplete(() => End());
             _tween.Play();
-            Debug.Log("Over");
             return;
         }
         ChangeTarget();
@@ -84,10 +81,7 @@ public class TargetFairy : MonoBehaviour, IHealtheble
 
     private void ChangeTarget()
     {
-        // если фея в тележке то её перемещение работает через лерп Vector 3
-        // Если она прыгает по точкам то через твины 
         _tempTarget = _targetsPoints[_index];
-        Debug.Log("ChangeTarget");
     }
 
     private void MoveDashToTarget()
