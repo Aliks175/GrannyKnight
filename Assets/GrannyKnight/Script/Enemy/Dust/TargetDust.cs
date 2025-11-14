@@ -5,7 +5,7 @@ using DG.Tweening.Core;
 public class TargetDust : MonoBehaviour , IHealtheble
 {
     private float _health;
-    private Color _colorStart;
+    [SerializeField] private SpriteRenderer _sprite;
     private float _speed;
     private DustCreater _creater;
     private int _stage;
@@ -19,14 +19,13 @@ public class TargetDust : MonoBehaviour , IHealtheble
 
     public void SetParameters(StageDust stage, DustCreater creater, Transform distance, int index)
     {
-        _colorStart = stage.ColorStage;
+        _sprite.color = stage.ColorStage;
         _speed = stage.SpeedStage;
         _health = stage.HealthStage;
         _creater = creater;
         _stage = index;
         _endPoint = distance;
         gameObject.transform.localScale = stage.BaseScaleStage * Vector3.one;
-        GetComponent<Renderer>().material.color = _colorStart;
         StartMove();
     }
 
