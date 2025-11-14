@@ -10,6 +10,7 @@ public class DustCreater : Quest
 
     public override void StartQuest()
     {
+        if (_endPoint == null) _endPoint = FindAnyObjectByType<PlayerCharacter>().gameObject.transform;
         GameObject dust = Instantiate(_prefabDust, _spawnPoint[Random.Range(0, _spawnPoint.Length)].position, Quaternion.identity, transform);
         dust.GetComponent<TargetDust>().SetParameters(_stageDust[_stageDust.Length - 1], this, _endPoint, _stageDust.Length - 1);
     }
@@ -38,6 +39,7 @@ public class DustCreater : Quest
         {
             Vector3 spawnPos = GetRandomPositionInRectangle(trans.position, SpawnWidthStage, SpawnHeightStage);
             spawnPos.x = trans.position.x;
+            spawnPos.y = trans.position.y;
             GameObject dust = Instantiate(_prefabDust, spawnPos, Quaternion.identity, transform);
             dust.GetComponent<TargetDust>().SetParameters(_stageDust[stage - 1], this, _endPoint, stage - 1);
         }
