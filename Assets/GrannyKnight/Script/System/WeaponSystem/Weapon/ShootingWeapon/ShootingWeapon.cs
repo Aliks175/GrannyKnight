@@ -1,3 +1,5 @@
+using DG.Tweening;
+using DG.Tweening.Plugins.Core.PathCore;
 using System;
 using System.Collections;
 using UnityEngine;

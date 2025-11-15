@@ -38,7 +38,11 @@ public class PlayerMover : MonoBehaviour
         _playerVelocity.y += _gravity * Time.deltaTime;
         if (!_isGrounded)
         {
+<<<<<<< Updated upstream
             _speed = _speedMove / 4;
+=======
+            _speed = _speedWalk / 2;
+>>>>>>> Stashed changes
         }
         else if (_isGrounded && _playerVelocity.y < 0)
         {
