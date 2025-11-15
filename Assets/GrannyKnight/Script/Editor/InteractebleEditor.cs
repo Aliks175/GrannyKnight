@@ -3,6 +3,7 @@ using UnityEditor;
 [CustomEditor(typeof(Interacteble), true)]
 public class InteractebleEditor : Editor
 {
+    
     public override void OnInspectorGUI()// Вызывается каждый раз когда юнити обновляет интерфейс редактора 
     {
         Interacteble interacteble = (Interacteble)target;// тот самый скрипт который выбран в редакторе  
