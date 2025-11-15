@@ -15,6 +15,7 @@ public class PlayerMover : MonoBehaviour
     private PlayerControlAnimation _playerControlAnimation;
     private CharacterController _controller;
     private Vector3 _playerVelocity;
+    private Vector3 _velocityGround;
     private Vector3 _moveDirection;
     private Vector3 _final;
     private float _speed;
@@ -29,13 +30,13 @@ public class PlayerMover : MonoBehaviour
     {
         _playerControlAnimation = playerControlAnimation;
         _speed = _speedWalk;
+        _velocityGround = new Vector3(0, -2, 0);
         _controller = GetComponent<CharacterController>();
         MainSystem.OnUpdate += OnUpdate;
     }
 
     public void ProcessMove(Vector2 pos)
     {
-        _moveDirection = Vector3.zero;
         _moveDirection.x = pos.x;
         _moveDirection.z = pos.y;
         _moveDirection = transform.TransformDirection(_moveDirection);
@@ -46,7 +47,7 @@ public class PlayerMover : MonoBehaviour
         }
         else if (_isGrounded && _playerVelocity.y < 0)
         {
-            _playerVelocity.y = -2;
+            _playerVelocity = _velocityGround;
             _speed = _speedWalk;
         }
         if (_isAim) _speed *= _coefficientSpeedForAim;
@@ -71,6 +72,8 @@ public class PlayerMover : MonoBehaviour
         if (_isGrounded)
         {
             _playerVelocity.y = Mathf.Sqrt(jumpHeight * -3.0f * _gravity);
+            _playerVelocity.x = _moveDirection.x * _speed;
+            _playerVelocity.z = _moveDirection.z * _speed;
         }
     }
 
@@ -79,5 +82,8 @@ public class PlayerMover : MonoBehaviour
         _isGrounded = _controller.isGrounded;
         //_playerControlAnimation.SetCheckGround(_isGrounded);
         //_playerControlAnimation.SetSpeed(Vector3.SqrMagnitude(_final));
+      
     }
+
+   
 }
