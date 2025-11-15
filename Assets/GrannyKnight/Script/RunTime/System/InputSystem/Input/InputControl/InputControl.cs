@@ -45,8 +45,6 @@ public class InputControl : MonoBehaviour
         _playerActions.Shoot.started += _weaponSystem.Shoot;
         _playerActions.Shoot.canceled += _weaponSystem.Shoot;
         _playerActions.Throw.performed += Context => _playerWeaponThrow.Throw();
-        //_playerActions.Run.started += _playerMover.ActiveRunSpeed;
-        //_playerActions.Run.canceled += _playerMover.ActiveRunSpeed;
     }
 
     private void OnDisable()
@@ -65,8 +63,6 @@ public class InputControl : MonoBehaviour
         _playerActions.Shoot.started -= _weaponSystem.Shoot;
         _playerActions.Shoot.canceled -= _weaponSystem.Shoot;
         _playerActions.Throw.performed -= Context => _playerWeaponThrow.Throw();
-        //_playerActions.Run.started -= _playerMover.ActiveRunSpeed;
-        //_playerActions.Run.canceled -= _playerMover.ActiveRunSpeed;
         _playerActions.Disable();
     }
 

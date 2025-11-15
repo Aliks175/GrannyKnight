@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class ControlLoading : MonoBehaviour
 {
+    [SerializeField] private ListScene listScene;
     //[SerializeField] private GameObject _panelLoading;
     //[SerializeField] private Slider _loadSlider;
     //private List<AsyncOperation> asyncOperations = new List<AsyncOperation>();
@@ -26,7 +27,7 @@ public class ControlLoading : MonoBehaviour
 
     public void LoadGame()
     {
-        SceneManager.LoadSceneAsync((int)ListScene.TestGameBild, LoadSceneMode.Single);
+        SceneManager.LoadSceneAsync((int)listScene, LoadSceneMode.Single);
         //_panelLoading.SetActive(true);
         //asyncOperations.Clear();
         //asyncOperations.Add(SceneManager.UnloadSceneAsync((int)ListScene.Menu));

@@ -12,6 +12,8 @@ public class PlayerCharacter : MonoBehaviour
     [SerializeField] private CinemachineCamera _cinemachineCamera;
     private IPlayerDatable _playerData;
 
+
+
     public void Initialization( Transform head)
     {
         _playerData = GetComponent<IPlayerDatable>();

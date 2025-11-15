@@ -27,8 +27,8 @@ public class MainSystem : MonoBehaviour
 
     private void Initialization()
     {
-        _inputControl.Initialization(_weaponSystem, _inventorySystem);
         _playerSystem.Initialization(_player, _head);
+        _inputControl.Initialization(_weaponSystem, _inventorySystem);
         _weaponSystem.Initialization(_player.PlayerData, _head);
         _inventorySystem.Initialization(_player.PlayerData.Inventory);
         _uiSystem.Initialization(_player.PlayerData);
