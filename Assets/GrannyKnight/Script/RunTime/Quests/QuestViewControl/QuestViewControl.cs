@@ -9,6 +9,6 @@ public class QuestViewControl : MonoBehaviour
     public void SetInfo(QuestInfo questInfo)
     {
         _nameQuest.SetText(questInfo.NameQuest);
-        _descriptionQuest.SetText(questInfo.NameQuest);
+        _descriptionQuest.SetText(questInfo.Description);
     }
 }
