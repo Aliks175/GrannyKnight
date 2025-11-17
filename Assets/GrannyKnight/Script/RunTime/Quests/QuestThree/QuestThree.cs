@@ -49,21 +49,23 @@ public class QuestThree : Quest
         _isActiveQuest = true;
     }
 
+    public override void StopQuest(QuestEnding quest)
+    {
+        _controlDollyCart.Stop();
+    }
+
     public FairyItem GetFairyTarget()
     {
         return _controlFairyItem.GetFairyTarget();
     }
 
-    public override void StopQuest()
-    {
-        _controlDollyCart.Stop();
-    }
+ 
 
     private void StartWaves()
     {
         if (_wavesCount >= _valueWaves)
         {
-            StopQuest();
+            StopQuest(QuestEnding.Good);
             return;
         }
         _fairyCreater.SpawnEnemy(GetEnemyForWave(_wavesCount));
@@ -84,4 +86,6 @@ public class QuestThree : Quest
         _enemyForWave = Mathf.RoundToInt(_valueEnemyForWave.Evaluate(waveCount));
         return _enemyForWave;
     }
+
+    
 }

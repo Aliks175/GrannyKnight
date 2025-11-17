@@ -22,12 +22,12 @@ public class WeaponSystem : MonoBehaviour
         _playerData.ChooseWeapon.OnChangeWeapon -= Contect => _physicsWeapon.ResetShot();
     }
 
-    public void Initialization(IPlayerDatable playerDatable, Camera camera)
+    public void Initialization(IPlayerDatable playerDatable, Transform head)
     {
         _playerData = playerDatable;
         _chooseWeaponView.Initialization();
-        _shootingWeapon.Initialization(camera, _controlViewMark);
-        _physicsWeapon.Initialization(camera); 
+        _shootingWeapon.Initialization(head, _controlViewMark);
+        _physicsWeapon.Initialization(head); 
         _controlViewMark.Initialization();
         SetUp();
     }

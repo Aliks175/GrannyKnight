@@ -3692,9 +3692,10 @@ MonoBehaviour:
   _playerSystem: {fileID: 2001296262}
   _inventorySystem: {fileID: 669669742}
   _uiSystem: {fileID: 81291966}
+  _soundSystem: {fileID: 0}
   _inputControl: {fileID: 292768957}
   _player: {fileID: 292768958}
-  _camera: {fileID: 330585545}
+  _head: {fileID: 0}
 --- !u!4 &82602563
 Transform:
   m_ObjectHideFlags: 0
@@ -7605,7 +7606,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 1000
-  field of view: 60.000004
+  field of view: 60
   orthographic: 0
   orthographic size: 5
   m_Depth: -1

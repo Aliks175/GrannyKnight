@@ -14,21 +14,21 @@ public class PhysicsWeapon : MonoBehaviour
     private float _maxProjectileForce,_forceMultiplier,_koefCharge, _currentForce ,_launchAngle, _flightDistance;
     private GameObject _arrowPrefab;
     private Vector3 _launchDirection;
-    private Camera _camera;
+     private Transform _head;
     private Coroutine _coroutine;
     private bool _isFire;
     private Weapon _weapon;
     private PhysicsEffect _weaponEffect;
 
-    public void Initialization(Camera camera)
+    public void Initialization(Transform head)
     {
-        if (camera == null)
+        if (head == null)
         {
             Debug.LogError("Camera cannot be null");
             return;
         }
-        
-        _camera = camera;
+
+        _head = head;
         _isFire = false;
     }
 
@@ -49,7 +49,7 @@ public class PhysicsWeapon : MonoBehaviour
 
     public void Shoot(InputAction.CallbackContext value)
     {
-        if (_weapon == null || _camera == null || _startPoint == null || _arrowPrefab == null) return;
+        if (_weapon == null || _head == null || _startPoint == null || _arrowPrefab == null) return;
         
         if (value.phase == InputActionPhase.Started)
         {
@@ -110,7 +110,7 @@ public class PhysicsWeapon : MonoBehaviour
     public void ChargeShotTime()
     {
         _currentForce = Mathf.Clamp(_currentForce + Time.deltaTime * _koefCharge, 0f, _maxProjectileForce);
-        _launchDirection = _camera.transform.forward;
+        _launchDirection = _head.forward;
         _launchAngle = CalculateLaunchAngle();
         _flightDistance = CalculateFlightDistance();
         
@@ -118,13 +118,13 @@ public class PhysicsWeapon : MonoBehaviour
     }
     private float CalculateLaunchAngle()
     {
-        float angle = Mathf.Asin(_camera.transform.forward.y) * Mathf.Rad2Deg;
+        float angle = Mathf.Asin(_head.forward.y) * Mathf.Rad2Deg;
         
         // Если угол слишком мал, используем минимальный угол для стрельбы
         if (Mathf.Abs(angle) < 5f)
             angle = 15f; // Минимальный угол возвышения
             
-        Debug.Log($"Camera forward: {_camera.transform.forward}, Angle: {angle}");
+        Debug.Log($"Camera forward: {_head.forward}, Angle: {angle}");
         return Mathf.Clamp(angle, 5f, 89f);
     }
     private Vector3[] CalculateParabolicPath(float flightDistance)
