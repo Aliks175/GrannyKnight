@@ -1,21 +1,24 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
 public class CutSceneTrigger : MonoBehaviour
 {
+    [SerializeField] private LayerMask _playerLayer;
     [SerializeField] private string NameCutscene;
     private bool isPlay = false;
 
+
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("fas");
-        if (isPlay) { return; }
+        if (isPlay) return;
+        Debug.Log("Start");
+        Debug.Log(other.gameObject.name);
 
-        if (other.TryGetComponent(out PlayerCharacter component))
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 5, _playerLayer);
+        if (colliders.Length > 0 && colliders != null)
         {
-            isPlay = true;
+            Debug.Log("FindPlayer");
             CutsceneManager.Instance.StartCutscene(NameCutscene);
-            gameObject.SetActive(false);
+            isPlay = true;
         }
     }
 }
