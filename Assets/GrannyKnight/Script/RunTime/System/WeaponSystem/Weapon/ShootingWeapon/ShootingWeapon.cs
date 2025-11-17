@@ -24,6 +24,8 @@ public class ShootingWeapon : MonoBehaviour
         _coroutine = null;
         _nextTimeToFire = 0f;
         _isFire = false;
+        
+        Instantiate(gameObject, transform.position, transform.rotation, transform.parent);
     }
 
     public void SetWeapon(Weapon weapon)
