@@ -39,7 +39,7 @@ public class FairyCreater : Quest
         _isActiveQuest = true;
     }
 
-    public override void StopQuest()
+    public override void StopQuest(QuestEnding quest)
     {
         throw new System.NotImplementedException();
     }

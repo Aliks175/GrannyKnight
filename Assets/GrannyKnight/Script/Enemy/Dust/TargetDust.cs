@@ -52,6 +52,7 @@ public class TargetDust : MonoBehaviour , IHealtheble
 
     private void OnEndPoint()
     {
+        _creater.StopQuest(QuestEnding.Bad);
         Destroy(gameObject);
     }
 }

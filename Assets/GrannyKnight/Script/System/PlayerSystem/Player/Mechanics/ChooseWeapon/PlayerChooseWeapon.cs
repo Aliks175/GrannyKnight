@@ -126,7 +126,7 @@ public class PlayerChooseWeapon : MonoBehaviour
     {
         if (weaponsSlot.Contains(weapon))
         {
-            Debug.Log("Добавили два предмета");
+            Debug.Log("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
         }
         else
         {
