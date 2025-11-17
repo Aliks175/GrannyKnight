@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2232106529671829742}
@@ -128,8 +128,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5974444628303889598}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0061082956, y: -0.37667012, z: 0.20808327, w: 0.9026537}
-  m_LocalPosition: {x: -40.869938, y: 0.9333391, z: 11.262913}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -151,7 +151,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -166,8 +166,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5974444628303889598}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b4df0460910ac046b3db6a7edd5eeff, type: 3}
+  m_Script: {fileID: 11500000, guid: 54746d3f4cd4e1143ae97c259c5445f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _ease: 28
-  _minDistanceForTarget: 1
+  _timerPickUp: 4
+  _bazeOffsetHeight: 1
+  _coefficientSpeedWithItem: 2
+  _coefficientSpeedWithoutItem: 2
