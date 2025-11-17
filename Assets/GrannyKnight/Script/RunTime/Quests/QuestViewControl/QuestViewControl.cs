@@ -1,68 +1,82 @@
-using System.Collections;
-using TMPro;
+using DG.Tweening;
+using System.Collections.Generic;
+using UnityEditor.PackageManager.Requests;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class QuestViewControl : MonoBehaviour
 {
     [SerializeField] private CanvasGroup _questPanel;
-    [SerializeField] private TextMeshProUGUI _nameQuest;
-    [SerializeField] private TextMeshProUGUI _descriptionQuest;
-    [SerializeField, Range(0.8f, 2)] private float SpeedChangeAlpha;
+    [SerializeField] private GameObject _poolQuest;
+    [SerializeField] private QuestView _questPref;
 
-    private Coroutine _coroutine;
-    private float _valueAlpha;
-    private int _coefficient;
-    private bool _isVisible;
-    private bool _isPlay;
+    private List<QuestView> questViews;
+    private Tween _tweenOpen;
+    private Tween _tweenClose;
 
-    public void ShowQuest()
+    private void Start()
     {
-        _isVisible = true;
-        _coroutine = StartCoroutine(WaitCanvasGroup());
+        questViews = new();
+        _tweenOpen = DOTween.To(() => _questPanel.alpha, x => _questPanel.alpha = x, 1f, 0.2f);
+        _tweenClose = DOTween.To(() => _questPanel.alpha, x => _questPanel.alpha = x, 0f, 0.2f);
+    }
+
+    public void ShowQuestPanel()
+    {
+        _tweenOpen.Play();
         Debug.Log("ShowQuest");
     }
 
-    public void HideQuest()
+    public void HideQuestPanel()
     {
-        _isVisible = false;
-        _coroutine = StartCoroutine(WaitCanvasGroup());
+        _tweenClose.Play();
         Debug.Log("HideQuest");
     }
 
-    public void SetInfo(QuestInfo questInfo)
+    public void SetQuest(QuestViewSettings questInfo)
     {
-        _nameQuest.SetText(questInfo.NameQuest);
-        _descriptionQuest.SetText(questInfo.Description);
+        QuestView newQuest = Instantiate(_questPref, _poolQuest.transform);
+        newQuest.SetQuest(questInfo);
+        newQuest.ShowQuestPanel();
+        questViews.Add(newQuest);
+        newQuest.OnDestroy += ClearQuest;
     }
 
-    private IEnumerator WaitCanvasGroup()
+    public void OverQuest(int id)
     {
-        _coefficient = _isVisible ? 1 : -1;
-        _isPlay = true;
-        while (_isPlay)
+        QuestView tempQuest =  GetQuest(id);
+        if (tempQuest != null)
         {
-            yield return null;
-            _valueAlpha += SpeedChangeAlpha * _coefficient * Time.deltaTime;
-            _valueAlpha = Mathf.Clamp01(_valueAlpha);
-            _questPanel.alpha = _valueAlpha;
-            Debug.Log($"_valueAlpha {_valueAlpha}");
-            Debug.Log($"_isVisible {_isVisible}");
+            tempQuest.HideQuestPanel();
+        }
+    }
 
-            Debug.Log($"_isVisible && _valueAlpha >= 0.9f {_isVisible && _valueAlpha >= 0.9f}");
-            Debug.Log($"!_isVisible && _valueAlpha <= 0.1f {!_isVisible && _valueAlpha <= 0.1f}");
-            if (_isVisible && _valueAlpha >= 0.9f)
+    public void StartQuest(int id)
+    {
+        QuestView tempQuest = GetQuest(id);
+        if (tempQuest != null)
+        {
+            tempQuest.HideQuestPanel();
+        }
+    }
+
+    public QuestView GetQuest(int id)
+    {
+        QuestView tempQuest = null;
+        foreach (var quest in questViews)
+        {
+            if (quest.ID == id)
             {
-                _questPanel.alpha = 1;
-                _isPlay = false;
-            }
-            else if (!_isVisible && _valueAlpha <= 0.1f)
-            {
-                _questPanel.alpha = 0;
-                _isPlay = false;
+                tempQuest = quest;
+                return tempQuest;
             }
         }
-        _valueAlpha = _questPanel.alpha;
-        StopCoroutine(_coroutine);
+        return tempQuest;
     }
+
+    private void ClearQuest(QuestView questView)
+    {
+        questView.OnDestroy -= ClearQuest;
+        questViews.Remove(questView);
+    }
+
 }

@@ -1,21 +1,50 @@
+using DG.Tweening;
 using System;
+using TMPro;
 using UnityEngine;
 
 public class QuestView : MonoBehaviour
 {
+    public int ID => _questId;
+    [SerializeField] private TextMeshProUGUI _nameText;
+    [SerializeField] private TextMeshProUGUI _discriptionText;
+    [SerializeField] private CanvasGroup _questViewPanel;
+    private QuestViewSettings _questViewSettings;
+    private Tween _tweenOpen;
+    private Tween _tweenClose;
+    private int _questId;
+    public event Action<QuestView> OnDestroy;
 
-    // Здесь должен быть класс который будет висеть на панеле UI через него можно будет
-    // изменить имя квеста и его условие отображение
-    // мы создаем его на QuestCanvas
-    // а на тригерах меняем текс 
-    // Для мини игр мы спавним свой UI
-
-    [SerializeField] private QuestViewControl _questViewControl;
-    [SerializeField] private QuestInfo _questInfo;
-
-    public void SetQuest()
+    private void OnDisable()
     {
-        _questViewControl.SetInfo(_questInfo);
+        OnDestroy?.Invoke(this);
+    }
+
+    public void ShowQuestPanel()
+    {
+        _tweenOpen.Play();
+        Debug.Log("ShowQuest");
+    }
+
+    public void HideQuestPanel()
+    {
+        _tweenClose.Play();
+        Debug.Log("HideQuest");
+    }
+
+    public void SetQuest(QuestViewSettings questInfo)
+    {
+        _questViewSettings = questInfo;
+        _nameText.SetText(_questViewSettings.questInfo.NameQuest);
+        _discriptionText.SetText(_questViewSettings.questInfo.Description);
+        _questId = _questViewSettings.questInfo.Id; 
+        Initialization();
+    }
+
+    private void Initialization()
+    {
+        _tweenOpen = DOTween.To(() => _questViewPanel.alpha, x => _questViewPanel.alpha = x, 1f, 0.5f);
+        _tweenClose = DOTween.To(() => _questViewPanel.alpha, x => _questViewPanel.alpha = x, 0f, 0.5f).OnComplete(() => Destroy(gameObject));
     }
 }
 
@@ -24,4 +53,5 @@ public struct QuestInfo
 {
     public string NameQuest;
     public string Description;
+    public int Id;
 }
