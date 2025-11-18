@@ -115,12 +115,12 @@ public class PlayerWeaponThrow : MonoBehaviour
         }
     }
 
-    public void SetWeapon(Weapon weapon)
-    {
-        if (weapon.TypeWeapon == TypeWeapon.Grenade)
-        {
-            _throwWeaponsSlot.Add(weapon);
-            ChooseWeapon();
-        }
-    }
+    //public void SetWeapon(Weapon weapon)
+    //{
+    //    if (weapon.TypeWeapon == TypeWeapon.Grenade)
+    //    {
+    //        _throwWeaponsSlot.Add(weapon);
+    //        ChooseWeapon();
+    //    }
+    //}
 }

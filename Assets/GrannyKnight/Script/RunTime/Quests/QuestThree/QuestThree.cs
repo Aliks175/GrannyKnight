@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,6 +14,8 @@ public class QuestThree : Quest
     [Header("QuestSettings")]
     [SerializeField] private AnimationCurve _valueEnemyForWave;
     [SerializeField] private int _valueWaves;
+
+    public override event Action<QuestEnding> OnEnd;
 
     private int _wavesCount;
     private int _enemyForWave;
@@ -51,6 +54,7 @@ public class QuestThree : Quest
 
     public override void StopQuest(QuestEnding quest)
     {
+        OnEnd?.Invoke(quest);
         _controlDollyCart.Stop();
     }
 
@@ -59,7 +63,7 @@ public class QuestThree : Quest
         return _controlFairyItem.GetFairyTarget();
     }
 
- 
+
 
     private void StartWaves()
     {
@@ -87,5 +91,5 @@ public class QuestThree : Quest
         return _enemyForWave;
     }
 
-    
+
 }

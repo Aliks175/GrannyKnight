@@ -16,16 +16,20 @@ MonoBehaviour:
   IconItem: {fileID: -445449147, guid: f819a353ab92e1341ada06381a9ea44b, type: 3}
   DataItem:
     Name: Crossbow
-    Id: 1
+    Id: 0
     IsStackable: 0
-    CountItem: 0
+    CountItem: 1
     TypeUse: 2
     TypeItem: 1
     DescriptionItem: 
   DataWeapon:
-    TypeWeapon: 1
+    TypeWeapon: 0
     TypeShoot: 1
     Damage: 1
     TimeWaitFire: 2
     Range: 40
     IsAutoFire: 0
+    MaxForce: 0
+    ForceMultiplier: 0
+    KoefCharge: 0
+    ArrowPrefab: {fileID: 0}

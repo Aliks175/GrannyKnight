@@ -1,16 +1,20 @@
+using System;
 using System.Collections.Generic;
-using UnityEditor.EditorTools;
 using UnityEngine;
+using Random = UnityEngine.Random;
+
 public class DustCreater : Quest
 {
     [Header("Компоненты")]
     [Tooltip("Стадии пыли")][SerializeField] private StageDust[] _stageDust;
     [Tooltip("Префаб пыли")][SerializeField] private GameObject _prefabDust;
     [Tooltip("Точки старта")][SerializeField] private Transform _spawnPoint;
-    [Tooltip("Область создания пыли")][SerializeField]private float _spawnWidth;
+    [Tooltip("Область создания пыли")][SerializeField] private float _spawnWidth;
     [Tooltip("Точка конца маршрута")][SerializeField] private Transform _endPoint;
     [Tooltip("Визуальные частицы при уничтожении")][SerializeField] private GameObject _effectOnDeath;
     private List<GameObject> _dusts = new List<GameObject>();
+
+    public override event Action<QuestEnding> OnEnd;
 
     public override void StartQuest()
     {
@@ -57,6 +61,7 @@ public class DustCreater : Quest
                 Debug.Log("Middle endind");
                 break;
         }
+        OnEnd?.Invoke(quest);
     }
 
     private void CreateChild(int stage, Transform trans)
@@ -82,9 +87,10 @@ public class DustCreater : Quest
         }
         return center + new Vector3(0f, 0, randomZ);
     }
+
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawLine(_spawnPoint.position + new Vector3(0,0,-_spawnWidth),_spawnPoint.position + new Vector3(0,0,_spawnWidth));
+        Gizmos.DrawLine(_spawnPoint.position + new Vector3(0, 0, -_spawnWidth), _spawnPoint.position + new Vector3(0, 0, _spawnWidth));
     }
 }

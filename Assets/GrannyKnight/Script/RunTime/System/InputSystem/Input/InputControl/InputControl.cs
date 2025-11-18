@@ -41,6 +41,7 @@ public class InputControl : MonoBehaviour
         _playerActions.Inventory.started += Context => _inventorySystem.ShowInventory();
         _playerActions.FastSlotOne.started += Context => _playerChooseWeapon.GiveWeapon(SlotNumber.OneSlot);
         _playerActions.FastSlotTwo.started += Context => _playerChooseWeapon.GiveWeapon(SlotNumber.TwoSlot);
+        _playerActions.FastSlotThree.started += Context => _playerChooseWeapon.GiveWeapon(SlotNumber.ThreeSlot);
         _playerActions.ChangeItem.started += Context => _playerChooseWeapon.ChangeSlot();
         _playerActions.Shoot.started += _weaponSystem.Shoot;
         _playerActions.Shoot.canceled += _weaponSystem.Shoot;
@@ -59,6 +60,7 @@ public class InputControl : MonoBehaviour
         _playerActions.Inventory.started -= Context => _inventorySystem.ShowInventory();
         _playerActions.FastSlotOne.started -= Context => _playerChooseWeapon.GiveWeapon(SlotNumber.OneSlot);
         _playerActions.FastSlotTwo.started -= Context => _playerChooseWeapon.GiveWeapon(SlotNumber.TwoSlot);
+        _playerActions.FastSlotThree.started -= Context => _playerChooseWeapon.GiveWeapon(SlotNumber.ThreeSlot);
         _playerActions.ChangeItem.started -= Context => _playerChooseWeapon.ChangeSlot();
         _playerActions.Shoot.started -= _weaponSystem.Shoot;
         _playerActions.Shoot.canceled -= _weaponSystem.Shoot;

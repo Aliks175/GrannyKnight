@@ -29,11 +29,11 @@ public class Weapon : Item
 public enum TypeWeapon
 {
     none,
-    Pistol,
-    Stick,
+    EasterEgg,
+    Metlomet,
     Sling,
-    Grenade
 }
+
 public enum TypeShootPhysics
 {
     Raycast,

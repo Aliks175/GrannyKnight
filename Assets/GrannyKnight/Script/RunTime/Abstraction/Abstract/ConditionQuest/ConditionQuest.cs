@@ -3,5 +3,5 @@ using UnityEngine;
 
 public abstract class ConditionQuest : ScriptableObject
 {
-    public abstract float Evaluate();
+    public abstract bool Evaluate(IPlayerDatable playerDatable);
 }

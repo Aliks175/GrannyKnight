@@ -6,12 +6,13 @@ public class PlayerChooseWeapon : MonoBehaviour
 {
     private List<Weapon> _oneSlot;
     private List<Weapon> _twoSlot;
+    private List<Weapon> _threeSlot;
     //...
     private Weapon _equipWeapon;
     private SlotNumber _slotNumber;
     private int _indexWeapon;
     public event Action<Weapon> OnChangeWeapon;
-    public event Action<Weapon> OnSetThrowWeapon;
+    //public event Action<Weapon> OnSetThrowWeapon;
 
     public void Initialization()
     {
@@ -19,6 +20,7 @@ public class PlayerChooseWeapon : MonoBehaviour
         _slotNumber = SlotNumber.None;
         _oneSlot = new List<Weapon>();
         _twoSlot = new List<Weapon>();
+        _threeSlot = new List<Weapon>();
     }
 
     public void GiveWeapon(SlotNumber slotNumber)
@@ -32,8 +34,9 @@ public class PlayerChooseWeapon : MonoBehaviour
             case SlotNumber.TwoSlot:
                 GiveWeaponForSlot(ref tempWeapon, _twoSlot, slotNumber);
                 break;
-            //case SlotNumber.ThreeSlot:
-            //    break;
+            case SlotNumber.ThreeSlot:
+                GiveWeaponForSlot(ref tempWeapon, _threeSlot, slotNumber);
+                break;
             //case SlotNumber.FourSlot:
             //    break;
             //case SlotNumber.FiveSlot:
@@ -92,18 +95,51 @@ public class PlayerChooseWeapon : MonoBehaviour
         {
             case TypeWeapon.none:
                 break;
-            case TypeWeapon.Pistol:
+            case TypeWeapon.Metlomet:
                 CheckWeapon(_oneSlot, Weapon);
                 break;
-            case TypeWeapon.Stick:
+            case TypeWeapon.Sling:
                 CheckWeapon(_twoSlot, Weapon);
                 break;
-            case TypeWeapon.Grenade:
-                OnSetThrowWeapon?.Invoke(Weapon);
+            case TypeWeapon.EasterEgg:
+                CheckWeapon(_threeSlot, Weapon);
                 break;
+            //case TypeWeapon.Grenade:
+            //    OnSetThrowWeapon?.Invoke(Weapon);
+            //    break;
             default:
                 break;
         }
+    }
+
+    public bool FindWeapon(TypeWeapon typeWeapon)
+    {
+        bool isFind = false;
+
+        foreach (var item in _oneSlot)
+        {
+            if(item.TypeWeapon == typeWeapon)
+            {
+                return true;
+            }
+        }
+
+        foreach (var item in _twoSlot)
+        {
+            if (item.TypeWeapon == typeWeapon)
+            {
+                return true;
+            }
+        }
+
+        foreach (var item in _threeSlot)
+        {
+            if (item.TypeWeapon == typeWeapon)
+            {
+                return true;
+            }
+        }
+        return isFind;
     }
 
     private Weapon GetWeapon(List<Weapon> weaponsSlot, SlotNumber slotNumber)
@@ -126,7 +162,7 @@ public class PlayerChooseWeapon : MonoBehaviour
     {
         if (weaponsSlot.Contains(weapon))
         {
-            Debug.Log("�������� ��� ��������");
+            Debug.Log("Null");
         }
         else
         {
@@ -140,7 +176,7 @@ public enum SlotNumber
     None,
     OneSlot,
     TwoSlot,
-    //ThreeSlot,
+    ThreeSlot,
     //FourSlot,
     //FiveSlot,
     //SixSlot,

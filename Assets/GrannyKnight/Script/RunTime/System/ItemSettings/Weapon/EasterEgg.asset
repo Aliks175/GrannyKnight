@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a71bec6a54829942a7dcfb8eec065d1, type: 3}
+  m_Name: EasterEgg
+  m_EditorClassIdentifier: 
+  Model: {fileID: 5267993137450114267, guid: 2135c1bd332222742b744b919f02502e, type: 3}
+  IconItem: {fileID: -1054097420, guid: f819a353ab92e1341ada06381a9ea44b, type: 3}
+  DataItem:
+    Name: "\u041F\u0430\u0441\u0445\u0430\u043B\u044C\u043D\u044B\u0435 \u044F\u0439\u0446\u0430"
+    Id: 1
+    IsStackable: 0
+    CountItem: 1
+    TypeUse: 2
+    TypeItem: 1
+    DescriptionItem: "\u041F\u0430\u0441\u0445\u0430\u043B\u044C\u043D\u044B\u0435
+      \u044F\u0439\u0446\u0430"
+  DataWeapon:
+    TypeWeapon: 1
+    TypeShoot: 1
+    Damage: 15
+    TimeWaitFire: 0.5
+    Range: 0
+    IsAutoFire: 0
+    MaxForce: 15
+    ForceMultiplier: 7
+    KoefCharge: 3
+    ArrowPrefab: {fileID: 1919883078180203037, guid: 36fc43fd35260e04b81ecc46f0d433c6, type: 3}
