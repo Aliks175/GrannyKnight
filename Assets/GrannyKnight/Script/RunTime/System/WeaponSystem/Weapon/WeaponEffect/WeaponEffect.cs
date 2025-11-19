@@ -8,7 +8,7 @@ public class WeaponEffect : MonoBehaviour
     [SerializeField] private ParticleSystem _particleSystem;
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private int _idWeapon;
-    private ControlViewMark _controlViewMark;
+    //private ControlViewMark _controlViewMark;
     private ShootingWeapon _testWeapon;
     private int _shootAnimationID;
     private int _endShootAnimationID;
@@ -23,10 +23,10 @@ public class WeaponEffect : MonoBehaviour
         }
     }
 
-    public void Initialization(ShootingWeapon testWeapon, ControlViewMark controlViewMark)
+    public void Initialization(ShootingWeapon testWeapon )//, ControlViewMark controlViewMark)
     {
         _testWeapon = testWeapon;
-        _controlViewMark = controlViewMark;
+        //_controlViewMark = controlViewMark;
         _shootAnimationID = Animator.StringToHash("Shoot");
         _endShootAnimationID = Animator.StringToHash("EndShoot");
         _isShootAnimationID = Animator.StringToHash("IsShoot");
@@ -51,19 +51,19 @@ public class WeaponEffect : MonoBehaviour
         {
             _particleSystem.Play();
         }
-        CreateMark(typeShoot.raycastHit);
+        //CreateMark(typeShoot.raycastHit);
     }
 
-    private void CreateMark(RaycastHit Pos)
-    {
-        if (Pos.point != Vector3.zero)
-        {
-            Mark tempMark = _controlViewMark.GetMark();
-            tempMark.transform.position = Pos.point;
-            tempMark.transform.rotation = Quaternion.LookRotation(Pos.normal);
-            tempMark.SetMark();
-        }
-    }
+    //private void CreateMark(RaycastHit Pos)
+    //{
+    //    if (Pos.point != Vector3.zero)
+    //    {
+    //        Mark tempMark = _controlViewMark.GetMark();
+    //        tempMark.transform.position = Pos.point;
+    //        tempMark.transform.rotation = Quaternion.LookRotation(Pos.normal);
+    //        tempMark.SetMark();
+    //    }
+    //}
 
     private void ControlFire()
     {

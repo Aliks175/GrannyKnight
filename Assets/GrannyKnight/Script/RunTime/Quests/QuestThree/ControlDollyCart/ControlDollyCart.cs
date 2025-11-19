@@ -19,6 +19,7 @@ public class ControlDollyCart : MonoBehaviour
         {
             item.OnPlay();
         }
+        Debug.Log("PlayONMoveDollyCart");
     }
 
     public void Stop()
@@ -27,6 +28,7 @@ public class ControlDollyCart : MonoBehaviour
         {
             item.OnPlay(false);
         }
+        Debug.Log("PlayOFFMoveDollyCart");
     }
 
 }

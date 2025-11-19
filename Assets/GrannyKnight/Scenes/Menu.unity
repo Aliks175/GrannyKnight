@@ -1442,7 +1442,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 483314654}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameManagementSystem, Assembly-CSharp
         m_MethodName: ExitGame
         m_Mode: 1
@@ -2555,7 +2555,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 483314653}
-  - component: {fileID: 483314654}
   - component: {fileID: 483314655}
   m_Layer: 0
   m_Name: System
@@ -2579,19 +2578,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &483314654
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 483314652}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eac3e43728e3faa4ebd753276d64710b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _controlLoading: {fileID: 483314655}
 --- !u!114 &483314655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2604,7 +2590,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f031cbaf917cc542b518bb4d2513fef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  listScene: 2
+  listScene: 3
 --- !u!1 &510162110
 GameObject:
   m_ObjectHideFlags: 0
@@ -5961,7 +5947,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 483314654}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameManagementSystem, Assembly-CSharp
         m_MethodName: ChangeFullScreen
         m_Mode: 0

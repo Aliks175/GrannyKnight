@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 5592359867951175541}
   - component: {fileID: 5444414749366796025}
   - component: {fileID: 4916548963990125110}
-  - component: {fileID: 8058837508614706545}
   m_Layer: 6
   m_Name: Fruit
   m_TagString: Untagged
@@ -97,26 +96,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 5444414749366796025}
---- !u!114 &8058837508614706545
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2329678337074385543}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8c1a34d6a299cc40858073d32c8d71a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  UseEvents: 0
-  _description: '"E"\nTake'
-  _bazeItem: {fileID: 11400000, guid: b13e832ac9c298a44aff2aac6279b3ae, type: 2}
-  _isDestroyForOver: 1
-  _layerPlayer:
-    serializedVersion: 2
-    m_Bits: 128
-  _distanceForPlayer: 2
 --- !u!1 &2849828551206216378
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,18 +15,18 @@ public class QuestViewControl : MonoBehaviour
     public void Initialization()
     {
         questViews = new();
-        _tweenOpen = DOTween.To(() => _questPanel.alpha, x => _questPanel.alpha = x, 1f, 0.2f);
-        _tweenClose = DOTween.To(() => _questPanel.alpha, x => _questPanel.alpha = x, 0f, 0.2f);
     }
 
     public void ShowQuestPanel()
     {
+        _tweenOpen = DOTween.To(() => _questPanel.alpha, x => _questPanel.alpha = x, 1f, 0.2f);
         _tweenOpen.Play();
         Debug.Log("ShowQuest");
     }
 
     public void HideQuestPanel()
     {
+        _tweenClose = DOTween.To(() => _questPanel.alpha, x => _questPanel.alpha = x, 0f, 0.2f);
         _tweenClose.Play();
         Debug.Log("HideQuest");
     }

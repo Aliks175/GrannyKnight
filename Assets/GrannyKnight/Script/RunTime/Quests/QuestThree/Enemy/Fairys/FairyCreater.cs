@@ -10,13 +10,18 @@ public class FairyCreater : MonoBehaviour
     [SerializeField] private Fairy _prefEnemy;
     [Header("SpawnPointers")]
     [SerializeField] private List<Transform> _spawnPointers;
+    private List<Fairy> fairies;
     private QuestThree _questThree;
     private FairyTargets _fairyTargets;
     private int _valueEnemyFollow;
+    private bool _isPlay;
     public event Action OnCheckOverWaves;
+    public event Action OnSleepFairy;
 
     public void Initialization(FairyTargets fairyTargets, QuestThree questThree)
     {
+        _isPlay = true;
+        fairies = new();
         _fairyTargets = fairyTargets;
         _questThree = questThree;
     }
@@ -36,14 +41,23 @@ public class FairyCreater : MonoBehaviour
         return _questThree.GetFairyTarget();
     }
 
+    public void Stop()
+    {
+        _isPlay = false;
+        foreach (var item in fairies)
+        {
+            item.End();
+        }
+    }
+
     private void CreateEnemy(FairyType fairyType)
     {
         int indexSpawnPointer = Random.Range(0, _spawnPointers.Count);
-        GameObject gameObject = Instantiate(_prefEnemy.gameObject, _spawnPointers[indexSpawnPointer].position, Quaternion.identity);
-        Fairy enemy = gameObject.GetComponent<Fairy>();
+        Fairy enemy = Instantiate(_prefEnemy, _spawnPointers[indexSpawnPointer].position, Quaternion.identity);
+        fairies.Add(enemy);
         FairyTargets tempFairyTargets = _fairyTargets;
         ControlEnemyFollow(ref fairyType, ref tempFairyTargets);
-        enemy.Instantiate(fairyType, tempFairyTargets,this);
+        enemy.Instantiate(fairyType, tempFairyTargets, this);
         enemy.OnEnd += () => CheckLiveEnemy(enemy);
         enemy.Play();
     }
@@ -61,12 +75,11 @@ public class FairyCreater : MonoBehaviour
     private void CheckLiveEnemy(Fairy targetFairy)
     {
         targetFairy.OnEnd -= () => CheckLiveEnemy(targetFairy);
-        OnCheckOverWaves?.Invoke();
+        fairies.Remove(targetFairy);
+        if (_isPlay)
+        {
+            OnCheckOverWaves?.Invoke();
+        }
+        OnSleepFairy?.Invoke();
     }
 }
-
-//public struct FairyTargets
-//{
-//    public Transform FinalTarget;
-//    public List<Transform> MovePoints;
-//}

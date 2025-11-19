@@ -23,10 +23,10 @@ public class MoveDollyCart : MonoBehaviour
     public void OnPlay(bool isPlay = true)
     {
         _isPlay = isPlay;
-
         if (!_isPlay)
         {
             MainSystem.OnUpdate -= OnUpdate;
+            return;
         }
     }
 
