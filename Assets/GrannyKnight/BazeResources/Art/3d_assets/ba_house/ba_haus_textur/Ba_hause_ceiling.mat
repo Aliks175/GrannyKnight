@@ -72,6 +72,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: 4584f264a5a990a4d9513cc55d4f8af6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _emissiom:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _metall:
         m_Texture: {fileID: 2800000, guid: 3047c1e0a78a8794782c5f4a325cb494, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -130,7 +134,10 @@ Material:
     - _Surface: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
-    - _roughness_IN: 0.02
+    - _emissiom_in: 0
+    - _normal_in: 1
+    - _roughness_IN: 1
+    - _use_roughness: 0
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
