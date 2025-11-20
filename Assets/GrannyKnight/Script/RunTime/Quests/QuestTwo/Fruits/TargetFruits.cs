@@ -7,6 +7,7 @@ public class TargetFruits : MonoBehaviour, IHealtheble
     public void TakeDamage(float damage)
     {
         rb.isKinematic = false;
+        QuestTwo.Instance.CollectFruit(this.transform.position);
     }
 
     
