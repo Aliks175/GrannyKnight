@@ -26,7 +26,7 @@ public class PickUp : Interacteble
             }
         }
         if (_playerCharacter == null) return;
-        if (_playerCharacter.PlayerData.Inventory.CheckSlot(_bazeItem))
+        //if (_playerCharacter.PlayerData.Inventory.CheckSlot(_bazeItem))
         {
             if (_isDestroyForOver == TypeUse.Expendable)
             {

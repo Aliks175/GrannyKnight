@@ -1,74 +1,53 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerChooseWeapon : MonoBehaviour
 {
-    private List<Weapon> _oneSlot;
-    private List<Weapon> _twoSlot;
-    private List<Weapon> _threeSlot;
-    //...
+    [SerializeField] private BazeWeapon _slingshot;
+    [SerializeField] private BazeWeapon _podmetatus;
+    [SerializeField] private BazeWeapon _easterEggs;
+    private Weapon _slingshotHand;
+    private Weapon _podmetatusHand;
+    private Weapon _easterEggsHand;
     private Weapon _equipWeapon;
-    private SlotNumber _slotNumber;
-    private int _indexWeapon;
+    private IPlayerDatable _iplayerDatable;
     public event Action<Weapon> OnChangeWeapon;
-    //public event Action<Weapon> OnSetThrowWeapon;
+    public event Action<EquipHand> OnClearHand;
 
-    public void Initialization()
+    public void Initialization(IPlayerDatable playerDatable )
     {
-        _indexWeapon = 0;
-        _slotNumber = SlotNumber.None;
-        _oneSlot = new List<Weapon>();
-        _twoSlot = new List<Weapon>();
-        _threeSlot = new List<Weapon>();
+        _iplayerDatable = playerDatable;
+        CreateWeapon(ref _slingshotHand, _slingshot);
+        CreateWeapon(ref _podmetatusHand, _podmetatus);
+        CreateWeapon(ref _easterEggsHand, _easterEggs);
     }
 
-    public void GiveWeapon(SlotNumber slotNumber)
+    public void GiveWeapon(EquipHand slotNumber)
     {
-        Weapon tempWeapon = null;
         switch (slotNumber)
         {
-            case SlotNumber.OneSlot:
-                GiveWeaponForSlot(ref tempWeapon, _oneSlot, slotNumber);
+            case EquipHand.ArmorHand:
+            case EquipHand.GlovesHand:
+                OnClearHand?.Invoke(slotNumber);
+                _equipWeapon = null;
+                OnChangeWeapon?.Invoke(_equipWeapon);
                 break;
-            case SlotNumber.TwoSlot:
-                GiveWeaponForSlot(ref tempWeapon, _twoSlot, slotNumber);
+            case EquipHand.SlingshotHand:
+                EquipWeapon(ref _slingshotHand);
                 break;
-            case SlotNumber.ThreeSlot:
-                GiveWeaponForSlot(ref tempWeapon, _threeSlot, slotNumber);
+            case EquipHand.PodmetatusHand:
+                EquipWeapon(ref _podmetatusHand);
                 break;
-            //case SlotNumber.FourSlot:
-            //    break;
-            //case SlotNumber.FiveSlot:
-            //    break;
-            //case SlotNumber.SixSlot:
-            //    break;
-            //case SlotNumber.SevenSlot:
-            //    break;
-            //case SlotNumber.EightSlot:
-            //    break;
-            //case SlotNumber.NineSlot:
-            //    break;
+            case EquipHand.EasterEggsHand:
+                EquipWeapon(ref _easterEggsHand);
+                break;
             default:
                 break;
         }
     }
 
-    public void ChangeSlot()
+    private void EquipWeapon(ref Weapon tempWeapon)
     {
-        if (_slotNumber == SlotNumber.OneSlot)
-        {
-            GiveWeapon(SlotNumber.TwoSlot);
-        }
-        else if (_slotNumber == SlotNumber.TwoSlot)
-        {
-            GiveWeapon(SlotNumber.OneSlot);
-        }
-    }
-
-    private void GiveWeaponForSlot(ref Weapon tempWeapon, List<Weapon> weaponsSlot, SlotNumber slotNumber)
-    {
-        tempWeapon = GetWeapon(weaponsSlot, slotNumber);
         if (tempWeapon != null)
         {
             _equipWeapon = tempWeapon;
@@ -76,111 +55,9 @@ public class PlayerChooseWeapon : MonoBehaviour
         }
     }
 
-    private void AddIndex(List<Weapon> weaponsSlot, SlotNumber slotNumber)
+    private void CreateWeapon(ref Weapon weapon, BazeWeapon bazeWeapon)
     {
-        if (slotNumber != _slotNumber)
-        {
-            _indexWeapon = 0;
-            _slotNumber = slotNumber;
-        }
-        else
-        {
-            _indexWeapon = weaponsSlot.Count - 1 == _indexWeapon ? 0 : _indexWeapon + 1;
-        }
+        weapon = new();
+        weapon.Initialization(bazeWeapon, _iplayerDatable);
     }
-
-    public void SetWeapon(TypeWeapon typeWeapon, Weapon Weapon)
-    {
-        switch (typeWeapon)
-        {
-            case TypeWeapon.none:
-                break;
-            case TypeWeapon.Metlomet:
-                CheckWeapon(_oneSlot, Weapon);
-                break;
-            case TypeWeapon.Sling:
-                CheckWeapon(_twoSlot, Weapon);
-                break;
-            case TypeWeapon.EasterEgg:
-                CheckWeapon(_threeSlot, Weapon);
-                break;
-            //case TypeWeapon.Grenade:
-            //    OnSetThrowWeapon?.Invoke(Weapon);
-            //    break;
-            default:
-                break;
-        }
-    }
-
-    public bool FindWeapon(TypeWeapon typeWeapon)
-    {
-        bool isFind = false;
-
-        foreach (var item in _oneSlot)
-        {
-            if(item.TypeWeapon == typeWeapon)
-            {
-                return true;
-            }
-        }
-
-        foreach (var item in _twoSlot)
-        {
-            if (item.TypeWeapon == typeWeapon)
-            {
-                return true;
-            }
-        }
-
-        foreach (var item in _threeSlot)
-        {
-            if (item.TypeWeapon == typeWeapon)
-            {
-                return true;
-            }
-        }
-        return isFind;
-    }
-
-    private Weapon GetWeapon(List<Weapon> weaponsSlot, SlotNumber slotNumber)
-    {
-        AddIndex(weaponsSlot, slotNumber);
-        Weapon weapon = null;
-        if (weaponsSlot == null) return weapon;
-
-        if (_indexWeapon < weaponsSlot.Count)
-        {
-            if (weaponsSlot[_indexWeapon] != _equipWeapon && weaponsSlot[_indexWeapon] != null)
-            {
-                weapon = weaponsSlot[_indexWeapon];
-            }
-        }
-        return weapon;
-    }
-
-    private void CheckWeapon(List<Weapon> weaponsSlot, Weapon weapon)
-    {
-        if (weaponsSlot.Contains(weapon))
-        {
-            Debug.Log("Null");
-        }
-        else
-        {
-            weaponsSlot.Add(weapon);
-        }
-    }
-}
-
-public enum SlotNumber
-{
-    None,
-    OneSlot,
-    TwoSlot,
-    ThreeSlot,
-    //FourSlot,
-    //FiveSlot,
-    //SixSlot,
-    //SevenSlot,
-    //EightSlot,
-    //NineSlot
 }

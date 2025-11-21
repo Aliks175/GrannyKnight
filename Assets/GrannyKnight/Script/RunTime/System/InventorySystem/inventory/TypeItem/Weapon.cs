@@ -21,7 +21,7 @@ public class Weapon : Item
         if (bazeItem is BazeWeapon weapon)
         {
             DataWeapon = weapon.DataWeapon;
-            characterData.ChooseWeapon.SetWeapon(DataWeapon.TypeWeapon, this);
+            //characterData.ChooseWeapon.SetWeapon(DataWeapon.TypeWeapon, this);
         }
     }
 }

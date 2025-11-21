@@ -17,7 +17,7 @@ public class UiSystem : MonoBehaviour
     {
         _playerChooseWeapon = playerDatable.ChooseWeapon;
         //_playerWeaponThrow = playerDatable.PlayerWeaponThrow;
-        _playerInventory = playerDatable.Inventory;
+        //_playerInventory = playerDatable.Inventory;
         //_uiEquip.Initialization(_playerInventory, _playerWeaponThrow);
         SetUp();
     }
