@@ -25,6 +25,6 @@ public class PlayerCharacter : MonoBehaviour
         _playerLook.Initialization();
         _playerAim.Initialization(cinemachineCamera);
         _playerInteracteble.Initialization(head);
-        _playerData.Initialization(this, head);
+        _playerData.Initialization(this);
     }
 }

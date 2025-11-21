@@ -9,11 +9,9 @@ public class InputControl : MonoBehaviour
     private PlayerAim _playerAim;
     private PlayerInteracteble _playerInteracteble;
     private PlayerChooseWeapon _playerChooseWeapon;
-    private PlayerWeaponThrow _playerWeaponThrow;
     private WeaponSystem _weaponSystem;
-    private InventorySystem _inventorySystem;
 
-    public void Initialization(WeaponSystem weaponSystem, InventorySystem inventorySystem)
+    public void Initialization(WeaponSystem weaponSystem )
     {
         _playerInput = new PlayerSystemActions();
         _playerActions = _playerInput.Player;
@@ -22,9 +20,7 @@ public class InputControl : MonoBehaviour
         _playerAim = GetComponent<PlayerAim>();
         _playerInteracteble = GetComponent<PlayerInteracteble>();
         _playerChooseWeapon = GetComponent<PlayerChooseWeapon>();
-        _playerWeaponThrow = GetComponent<PlayerWeaponThrow>();
         _weaponSystem = weaponSystem;
-        _inventorySystem = inventorySystem;
         SetUp();
     }
 
@@ -38,14 +34,12 @@ public class InputControl : MonoBehaviour
         _playerActions.Aim.canceled += _playerMover.ActiveAimSpeed;
         _playerActions.Interact.started += Context => _playerInteracteble.OnInteracteble(true);
         _playerActions.Interact.canceled += Context => _playerInteracteble.OnInteracteble(false);
-        _playerActions.Inventory.started += Context => _inventorySystem.ShowInventory();
         _playerActions.FastSlotOne.started += Context => _playerChooseWeapon.GiveWeapon(SlotNumber.OneSlot);
         _playerActions.FastSlotTwo.started += Context => _playerChooseWeapon.GiveWeapon(SlotNumber.TwoSlot);
         _playerActions.FastSlotThree.started += Context => _playerChooseWeapon.GiveWeapon(SlotNumber.ThreeSlot);
         _playerActions.ChangeItem.started += Context => _playerChooseWeapon.ChangeSlot();
         _playerActions.Shoot.started += _weaponSystem.Shoot;
         _playerActions.Shoot.canceled += _weaponSystem.Shoot;
-        _playerActions.Throw.performed += Context => _playerWeaponThrow.Throw();
     }
 
     private void OnDisable()
@@ -57,14 +51,12 @@ public class InputControl : MonoBehaviour
         _playerActions.Aim.canceled -= _playerMover.ActiveAimSpeed;
         _playerActions.Interact.started -= Context => _playerInteracteble.OnInteracteble(true);
         _playerActions.Interact.canceled -= Context => _playerInteracteble.OnInteracteble(false);
-        _playerActions.Inventory.started -= Context => _inventorySystem.ShowInventory();
         _playerActions.FastSlotOne.started -= Context => _playerChooseWeapon.GiveWeapon(SlotNumber.OneSlot);
         _playerActions.FastSlotTwo.started -= Context => _playerChooseWeapon.GiveWeapon(SlotNumber.TwoSlot);
         _playerActions.FastSlotThree.started -= Context => _playerChooseWeapon.GiveWeapon(SlotNumber.ThreeSlot);
         _playerActions.ChangeItem.started -= Context => _playerChooseWeapon.ChangeSlot();
         _playerActions.Shoot.started -= _weaponSystem.Shoot;
         _playerActions.Shoot.canceled -= _weaponSystem.Shoot;
-        _playerActions.Throw.performed -= Context => _playerWeaponThrow.Throw();
         _playerActions.Disable();
     }
 

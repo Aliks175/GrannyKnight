@@ -82,7 +82,7 @@ public class PlayerMover : MonoBehaviour
         _isGrounded = _controller.isGrounded;
         //_playerControlAnimation.SetCheckGround(_isGrounded);
         //_playerControlAnimation.SetSpeed(Vector3.SqrMagnitude(_final));
-      
+
     }
 
    

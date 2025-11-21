@@ -6,7 +6,7 @@ public class WeaponSystem : MonoBehaviour
     [SerializeField] private ChooseWeaponView _chooseWeaponView;
     [SerializeField] private ShootingWeapon _shootingWeapon;
     [SerializeField] private PhysicsWeapon _physicsWeapon;
-    [SerializeField] private ControlViewMark _controlViewMark;
+    //[SerializeField] private ControlViewMark _controlViewMark;
     private IPlayerDatable _playerData;
     private Weapon _activeWeapon;
 
@@ -26,9 +26,9 @@ public class WeaponSystem : MonoBehaviour
     {
         _playerData = playerDatable;
         _chooseWeaponView.Initialization();
-        _shootingWeapon.Initialization(head, _controlViewMark);
+        _shootingWeapon.Initialization(head);//, _controlViewMark);
         _physicsWeapon.Initialization(head); 
-        _controlViewMark.Initialization();
+        //_controlViewMark.Initialization();
         SetUp();
     }
 

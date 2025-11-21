@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 public class ShootingWeapon : MonoBehaviour
 {
     private WeaponEffect _weaponEffect;
-    private ControlViewMark _controlViewMark;
+    //private ControlViewMark _controlViewMark;
     private Weapon _weapon;
     private Transform _head;
     private Coroutine _coroutine;
@@ -17,9 +17,9 @@ public class ShootingWeapon : MonoBehaviour
     public Action<TypeShoot> OnFire;
     public Action OnEndFire;
 
-    public void Initialization( Transform head, ControlViewMark controlViewMark)
+    public void Initialization( Transform head )//, ControlViewMark controlViewMark)
     {
-        _controlViewMark = controlViewMark;
+        //_controlViewMark = controlViewMark;
         _head = head;
         _coroutine = null;
         _nextTimeToFire = 0f;
@@ -36,7 +36,7 @@ public class ShootingWeapon : MonoBehaviour
     public void SetWeaponEffect(WeaponEffect weaponEffect)
     {
         _weaponEffect = weaponEffect;
-        _weaponEffect.Initialization(this, _controlViewMark);
+        _weaponEffect.Initialization(this);//, _controlViewMark);
     }
 
     public void Shoot(InputAction.CallbackContext value)

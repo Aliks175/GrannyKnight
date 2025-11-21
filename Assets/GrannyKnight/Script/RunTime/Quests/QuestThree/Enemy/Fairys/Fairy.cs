@@ -166,7 +166,7 @@ public class Fairy : MonoBehaviour, IHealtheble
         End();
     }
 
-    private void End()
+    public void End()
     {
         OnEnd?.Invoke();
         _tween?.Kill();

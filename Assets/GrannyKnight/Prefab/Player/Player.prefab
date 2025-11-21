@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6479727612706406453
 Transform:
   m_ObjectHideFlags: 0
@@ -301,7 +301,6 @@ GameObject:
   - component: {fileID: 3773893096623501402}
   - component: {fileID: 5870274744854549379}
   - component: {fileID: 4980174317610463746}
-  - component: {fileID: 966309481819548813}
   - component: {fileID: 8381526334266683465}
   - component: {fileID: 8109470514127535279}
   - component: {fileID: 211983607758814104}
@@ -362,7 +361,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _chooseWeapon: {fileID: 8381526334266683465}
   _inventory: {fileID: 0}
-  _playerWeaponThrow: {fileID: 966309481819548813}
   _playerQuestControl: {fileID: 4980174317610463746}
 --- !u!114 &4980174317610463746
 MonoBehaviour:
@@ -376,23 +374,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a609fa3737d6c7448bb057f35ccd030, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _mainQuestList:
+    OneQuestEnding: 0
+    TwoQuestEnding: 0
+    ThreeQuestEnding: 0
   _questViewControl: {fileID: 0}
---- !u!114 &966309481819548813
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7630512764666189019}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2400bc372ca103498e4b86ccb00fc01, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _weaponThrowPool: {fileID: 0}
-  _forceThrow: 10
-  _directionY: 15
-  _firePoint: {fileID: 4523475693074839194}
 --- !u!114 &8381526334266683465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -536,7 +522,7 @@ CharacterController:
   m_Height: 2
   m_Radius: 0.5
   m_SlopeLimit: 45
-  m_StepOffset: 0.1
+  m_StepOffset: 0.4
   m_SkinWidth: 0.02
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
