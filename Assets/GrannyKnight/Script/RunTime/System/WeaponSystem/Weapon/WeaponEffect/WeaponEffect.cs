@@ -1,15 +1,16 @@
 using UnityEngine;
 
 [SelectionBase]
-public class WeaponEffect : MonoBehaviour
+public class WeaponEffect : WeaponEffectAbstract
 {
-    public int IdWeapon => _idWeapon;
+    public override Animator AnimatorWeapon => _animator;
+    public override int IdWeapon => _idWeapon;
     [SerializeField] private Animator _animator;
     [SerializeField] private ParticleSystem _particleSystem;
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private int _idWeapon;
     //private ControlViewMark _controlViewMark;
-    private ShootingWeapon _testWeapon;
+    private IFireble _testWeapon;
     private int _shootAnimationID;
     private int _endShootAnimationID;
     private int _isShootAnimationID;
@@ -23,7 +24,7 @@ public class WeaponEffect : MonoBehaviour
         }
     }
 
-    public void Initialization(ShootingWeapon testWeapon )//, ControlViewMark controlViewMark)
+    public override void Initialization(IFireble testWeapon , ControlViewMark controlViewMark)
     {
         _testWeapon = testWeapon;
         //_controlViewMark = controlViewMark;

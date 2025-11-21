@@ -13,10 +13,10 @@ public class PlayerControlAnimation : MonoBehaviour
 
     public void Initialization()
     {
-        //_idSpeed = Animator.StringToHash("Speed");
-        //_idIsGround = Animator.StringToHash("IsGround");
-        //_activeAnimator = _animatorArmorHand;
-        //ChangeAnimator(_animatorArmorHand);
+        _idSpeed = Animator.StringToHash("Speed");
+        _idIsGround = Animator.StringToHash("IsGround");
+        _activeAnimator = _animatorArmorHand;
+        ChangeAnimator(_animatorArmorHand);
     }
 
     public void SetSpeed(float speed)
@@ -35,22 +35,34 @@ public class PlayerControlAnimation : MonoBehaviour
         _tempGround = isGround;
     }
 
-    public void ChangeHand()
+    public void ChangeHand(EquipHand equipHand)
     {
-        if (_activeAnimator != _animatorArmorHand)
+        switch (equipHand)
         {
-            ChangeAnimator(_animatorArmorHand);
-        }
-        else
-        {
-            ChangeAnimator(_animatorGlovesHand);
+            case EquipHand.ArmorHand:
+                ChangeAnimator(_animatorArmorHand);
+                break;
+            case EquipHand.GlovesHand:
+                ChangeAnimator(_animatorGlovesHand);
+                break;
+            default:
+                break;
         }
     }
 
-    private void ChangeAnimator(Animator animator)
+    public void ChangeAnimator(Animator animator)
     {
         _activeAnimator.gameObject.SetActive(false);
         _activeAnimator = animator;
         _activeAnimator.gameObject.SetActive(true);
     }
+}
+
+public enum EquipHand
+{
+    ArmorHand,
+    GlovesHand,
+    SlingshotHand,
+    PodmetatusHand,
+    EasterEggsHand,
 }

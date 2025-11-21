@@ -1,14 +1,16 @@
 using UnityEngine;
 
-public class PhysicsEffect : MonoBehaviour
+[SelectionBase]
+public class PhysicsEffect : WeaponEffectAbstract
 {
-   public int IdWeapon => _idWeapon;
+    public override Animator AnimatorWeapon => _animator;
+    public override int IdWeapon => _idWeapon;
     [SerializeField] private Animator _animator;
     [SerializeField] private ParticleSystem _particleSystem;
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private int _idWeapon;
     private ControlViewMark _controlViewMark;
-    private PhysicsWeapon _testWeapon;
+    private IFireble _testWeapon;
     private int _shootAnimationID;
     private int _endShootAnimationID;
     private int _isShootAnimationID;
@@ -17,20 +19,22 @@ public class PhysicsEffect : MonoBehaviour
     {
         if (_testWeapon != null)
         {
-           // _testWeapon.Shoot -= Fire;
-           // _testWeapon.ResetShot -= ControlFire;
+            // _testWeapon.Shoot -= Fire;
+            // _testWeapon.ResetShot -= ControlFire;
         }
     }
 
-    public void Initialization(PhysicsWeapon testWeapon, ControlViewMark controlViewMark)
+    public override void Initialization(IFireble testWeapon, ControlViewMark controlViewMark)
     {
         _testWeapon = testWeapon;
         _controlViewMark = controlViewMark;
         _shootAnimationID = Animator.StringToHash("Shoot");
         _endShootAnimationID = Animator.StringToHash("EndShoot");
         _isShootAnimationID = Animator.StringToHash("IsShoot");
+        testWeapon.OnFire += Fire;
+        testWeapon.OnEndFire += ControlFire;
         //.OnFire += Fire;
-       //_testWeapon.OnEndFire += ControlFire;
+        //_testWeapon.OnEndFire += ControlFire;
     }
 
     private void Fire(TypeShoot typeShoot)
@@ -50,19 +54,19 @@ public class PhysicsEffect : MonoBehaviour
         {
             _particleSystem.Play();
         }
-        CreateMark(typeShoot.raycastHit);
+        //CreateMark(typeShoot.raycastHit);
     }
 
-    private void CreateMark(RaycastHit Pos)
-    {
-        if (Pos.point != Vector3.zero)
-        {
-            Mark tempMark = _controlViewMark.GetMark();
-            tempMark.transform.position = Pos.point;
-            tempMark.transform.rotation = Quaternion.LookRotation(Pos.normal);
-            tempMark.SetMark();
-        }
-    }
+    //private void CreateMark(RaycastHit Pos)
+    //{
+    //    if (Pos.point != Vector3.zero)
+    //    {
+    //        Mark tempMark = _controlViewMark.GetMark();
+    //        tempMark.transform.position = Pos.point;
+    //        tempMark.transform.rotation = Quaternion.LookRotation(Pos.normal);
+    //        tempMark.SetMark();
+    //    }
+    //}
 
     private void ControlFire()
     {

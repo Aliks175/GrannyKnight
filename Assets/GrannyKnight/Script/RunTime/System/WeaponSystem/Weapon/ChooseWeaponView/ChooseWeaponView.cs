@@ -4,49 +4,63 @@ using UnityEngine;
 
 public class ChooseWeaponView : MonoBehaviour
 {
-    [SerializeField] private GameObject _handSlot;
-    private List<WeaponEffect> _listWeaponEffect;
-    private WeaponEffect _activeWeapon;
-    private GameObject _weaponSlot;
-    public event Action<WeaponEffect> OnWeaponEquip;
+    [SerializeField] private PlayerControlAnimation _playerControlAnimation;
+    [SerializeField] private GameObject _armorHand;
+    [SerializeField] private GameObject _glovesHand;
+    [SerializeField] private List<WeaponEffectAbstract> _listWeaponEffect;
+    private WeaponEffectAbstract _activeWeapon;
+
+    public event Action<WeaponEffectAbstract> OnWeaponEquip;
 
     public void Initialization()
     {
-        _listWeaponEffect = new List<WeaponEffect>();
+
+    }
+
+    public void ClearHand(EquipHand equipHand)
+    {
+        _playerControlAnimation.ChangeHand(equipHand);
+        Clear();
+    }
+
+    private void Clear()
+    {
+        foreach (var item in _listWeaponEffect)
+        {
+            item.gameObject.SetActive(false);
+        }
     }
 
     public void ChangeWeapon(Weapon weapon)
     {
-        WeaponEffect tempWeaponEffect = CheckWeapon(weapon);
+        if (weapon == null)
+        {
+            _activeWeapon = null;
+            return;
+        }
+        WeaponEffectAbstract tempWeaponEffect = CheckWeapon(weapon);
         if (tempWeaponEffect != null)
         {
             ActiveNewWeapon(tempWeaponEffect);
         }
-        else
-        {
-            _weaponSlot = Instantiate(weapon.Model, _handSlot.transform);
-            if (_weaponSlot.TryGetComponent(out WeaponEffect weaponEffect))
-            {
-                _listWeaponEffect.Add(weaponEffect);
-                ActiveNewWeapon(weaponEffect);
-            }
-        }
     }
 
-    private void ActiveNewWeapon(WeaponEffect weaponEffect)
+    private void ActiveNewWeapon(WeaponEffectAbstract weaponEffect)
     {
         if (_activeWeapon != null)
         {
             _activeWeapon.gameObject.SetActive(false);
+            _armorHand.SetActive(false);
+            _glovesHand.SetActive(false);
         }
         _activeWeapon = weaponEffect;
         OnWeaponEquip?.Invoke(_activeWeapon);
-        _activeWeapon.gameObject.SetActive(true);
+        _playerControlAnimation.ChangeAnimator(_activeWeapon.AnimatorWeapon);
     }
 
-    private WeaponEffect CheckWeapon(Weapon weapon)
+    private WeaponEffectAbstract CheckWeapon(Weapon weapon)
     {
-        WeaponEffect tempWeaponEffect = null;
+        WeaponEffectAbstract tempWeaponEffect = null;
 
         foreach (var item in _listWeaponEffect)
         {

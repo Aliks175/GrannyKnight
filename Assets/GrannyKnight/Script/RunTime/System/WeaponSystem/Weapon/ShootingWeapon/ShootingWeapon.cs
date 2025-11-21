@@ -1,57 +1,47 @@
-using DG.Tweening;
-using DG.Tweening.Plugins.Core.PathCore;
 using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class ShootingWeapon : MonoBehaviour
+public class ShootingWeapon : MonoBehaviour , IFireble
 {
-    private WeaponEffect _weaponEffect;
-    //private ControlViewMark _controlViewMark;
-    private Weapon _weapon;
+    private WeaponEffectAbstract _weaponEffect;
+    private ControlViewMark _controlViewMark;
     private Transform _head;
     private Coroutine _coroutine;
     private bool _isFire = false;
     private float _nextTimeToFire = 0f;
-    public Action<TypeShoot> OnFire;
-    public Action OnEndFire;
+    public event Action<TypeShoot> OnFire;
+    public event Action OnEndFire;
 
-    public void Initialization( Transform head )//, ControlViewMark controlViewMark)
+    public void Initialization(Transform head)
     {
-        //_controlViewMark = controlViewMark;
         _head = head;
         _coroutine = null;
         _nextTimeToFire = 0f;
         _isFire = false;
-        
-        Instantiate(gameObject, transform.position, transform.rotation, transform.parent);
     }
 
-    public void SetWeapon(Weapon weapon)
-    {
-        _weapon = weapon;
-    }
 
-    public void SetWeaponEffect(WeaponEffect weaponEffect)
+    public void SetWeaponEffect(WeaponEffectAbstract weaponEffect)
     {
         _weaponEffect = weaponEffect;
-        _weaponEffect.Initialization(this);//, _controlViewMark);
+        _weaponEffect.Initialization(this, _controlViewMark);
     }
 
-    public void Shoot(InputAction.CallbackContext value)
+    public void Shoot(InputAction.CallbackContext value, Weapon weapon)
     {
-        if (_weaponEffect == null || _weapon == null) return;
+        if (weapon == null) return;
 
         if (value.phase == InputActionPhase.Started)
         {
-            if (_weapon.IsAutoFire)
+            if (weapon.IsAutoFire)
             {
-                ShootAutoFire();
+                ShootAutoFire(weapon);
             }
             else
             {
-                ShootSingleFire();
+                ShootSingleFire(weapon);
             }
         }
         if (value.phase == InputActionPhase.Canceled)
@@ -70,42 +60,48 @@ public class ShootingWeapon : MonoBehaviour
         }
     }
 
-    private void ShootAutoFire()
+    private void ShootAutoFire(Weapon weapon)
     {
         _isFire = true;
-        _coroutine = StartCoroutine(AutoFire());
+        _coroutine = StartCoroutine(AutoFire(weapon));
     }
 
-    private void ShootSingleFire()
+    private void ShootSingleFire(Weapon weapon)
     {
-        Fire(false);
+        Fire(false,weapon);
     }
 
-    private IEnumerator AutoFire()
+    private IEnumerator AutoFire(Weapon weapon)
     {
         while (_isFire)
         {
             yield return null;
-            Fire(true);
+            Fire(true,weapon);
         }
     }
 
-    private void Fire(bool _isShootAutoFire)
+    private void Fire(bool _isShootAutoFire, Weapon weapon)
     {
         if (Time.time >= _nextTimeToFire)
         {
-            _nextTimeToFire = Time.time + _weapon.TimeWaitFire;
+            _nextTimeToFire = Time.time + weapon.TimeWaitFire;
 
-            if (Physics.Raycast(_head.position, _head.forward, out RaycastHit hit, _weapon.Range))
+            if (Physics.Raycast(_head.position, _head.forward, out RaycastHit hit, weapon.Range))
             {
                 if (hit.collider.TryGetComponent(out IHealtheble target))
                 {
-                    target.TakeDamage(_weapon.Damage);
+                    target.TakeDamage(weapon.Damage);
                 }
             }
             OnFire?.Invoke(new TypeShoot { IsShootAutoFire = _isShootAutoFire, raycastHit = hit });
         }
     }
+}
+
+public interface IFireble
+{
+    public event Action<TypeShoot> OnFire;
+    public event Action OnEndFire;
 }
 
 public struct TypeShoot
