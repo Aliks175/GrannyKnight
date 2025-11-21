@@ -46,8 +46,20 @@ public class TargetDust : MonoBehaviour , IHealtheble
 
     private void StartMove()
     {
-        _tween =  transform.DOMove(_endPoint.position, _speed).SetSpeedBased().SetEase(Ease.Linear).OnComplete(() => OnEndPoint());
-        _tween.Play();
+        // Движение к динамической позиции через Update
+    }
+
+    private void Update()
+    {
+        if (_endPoint != null)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, _endPoint.position, _speed * Time.deltaTime);
+            
+            if (Vector3.Distance(transform.position, _endPoint.position) < 0.1f)
+            {
+                OnEndPoint();
+            }
+        }
     }
 
     private void OnEndPoint()
