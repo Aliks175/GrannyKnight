@@ -6,65 +6,189 @@ using DG.Tweening;
 
 public class QuestTwo : Quest
 {
+    
+    // Синглтон с ленивой инициализацией
     public static QuestTwo Instance { get; private set; }
+    
+    // События
     public override event Action<QuestEnding> OnEnd;
+    
+    // Сериализуемые поля
+    [Header("Quest Settings")]
     [SerializeField] private GameObject _basket;
     [SerializeField] private float _timeToSleep = 5f;
     [SerializeField] private Transform _startPos;
-    private float _time;
+    [SerializeField] private float _movementDurationToBack = 1f;
+    [SerializeField] private int _targetFruit;
+    
+    // Приватные поля
     private int _fruitCount = 0;
-    private Tween _tween, _tweenToStart;
-    private CancellationTokenSource _cancellationTokenSource;
+    private float _sleepEndTime;
+    private Tween _currentTween;
+    private CancellationTokenSource _cts;
+    private bool _isQuestActive;
 
-
+    #region Unity Lifecycle
+    
     private void Awake()
+    {
+        InitializeSingleton();
+        ResetBasketPosition();
+        StartQuest();
+    }
+    
+    private void OnDestroy()
+    {
+        Cleanup();
+    }
+    
+    #endregion
+
+    #region Public API
+    
+    public Vector3 BasketPos => _basket.transform.position;
+    
+    public override void StartQuest()
+    {
+        _isQuestActive = true;
+        ResetQuestState();
+    }
+    
+    public void CollectFruit(Vector3 fruitPosition, float time)
+    {
+        if (!_isQuestActive) return;
+        CancelCurrentOperations();
+        MoveBasketToFruit(fruitPosition, time);
+    }
+    
+    public void OnFruitCollected()
+    {
+        if (!_isQuestActive) return;
+        
+        _fruitCount++;
+        UpdateSleepTimer();
+        
+        Debug.Log($"Fruits collected: {_fruitCount}");
+        
+        if (_fruitCount >= _targetFruit)
+        {
+            CompleteQuest();
+            return;
+        }
+        
+        StartSleepTimer();
+    }
+    
+    public override void StopQuest(QuestEnding questEnding)
+    {
+        _isQuestActive = false;
+        Cleanup();
+        OnEnd?.Invoke(questEnding);
+    }
+    
+    #endregion
+
+    #region Private Methods
+    
+    private void InitializeSingleton()
     {
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;
         }
-        _basket.transform.position = _startPos.position;
+        
         Instance = this;
     }
-    public Vector3 BasketPos => _basket.transform.position;
-
-    public override void StartQuest()
+    
+    private void ResetBasketPosition()
     {
-
+        if (_basket != null && _startPos != null)
+        {
+            _basket.transform.position = _startPos.position;
+        }
     }
-    public void CollectFruit(Vector3 pos, float time)
+    
+    private void ResetQuestState()
     {
-        _cancellationTokenSource?.Cancel();
-        _tweenToStart.Kill();
-        _tween = _basket.transform.DOMove(pos, time);
-        _tween.Play();
+        _fruitCount = 0;
+        ResetBasketPosition();
+        Cleanup();
     }
-    public void IsCollected()
+    
+    private void CancelCurrentOperations()
     {
-        _fruitCount++;
-        _time = Time.time + _timeToSleep;
-        Debug.Log(_fruitCount);
-        TimeToSleep().Forget();
+        _cts?.Cancel();
+        _currentTween?.Kill();
+        _cts = null;
     }
-    private async UniTaskVoid TimeToSleep()
+    
+    private void MoveBasketToFruit(Vector3 fruitPosition, float time)
     {
-        _cancellationTokenSource?.Dispose();
-        _cancellationTokenSource = new CancellationTokenSource();
-        await UniTask.WaitUntil(() => Time.time >= _time, cancellationToken: _cancellationTokenSource.Token);
-        ToStartPoint();
+        _currentTween = _basket.transform
+            .DOMove(fruitPosition, time)
+            .SetEase(Ease.OutCubic)
+            .OnComplete(OnBasketArrivedAtFruit);
+        _currentTween.Play();
     }
-    private void ToStartPoint()
+    
+    private void OnBasketArrivedAtFruit()
     {
-        _tweenToStart = _basket.transform.DOMove(_startPos.position, _timeToSleep);
-        _tweenToStart.Play();
+        // Можно добавить логику при прибытии корзины
+        Debug.Log("Basket arrived at fruit");
     }
-
-    public override void StopQuest(QuestEnding quest)
+    
+    private void UpdateSleepTimer()
     {
-        _cancellationTokenSource?.Cancel();
-        _cancellationTokenSource?.Dispose();
-        _cancellationTokenSource = null;
-        OnEnd?.Invoke(quest);
+        _sleepEndTime = Time.time + _timeToSleep;
     }
+    
+    private void StartSleepTimer()
+    {
+        CancelCurrentOperations();
+        
+        _cts = new CancellationTokenSource();
+        WaitForSleepPeriod().Forget();
+    }
+    
+    private async UniTaskVoid WaitForSleepPeriod()
+    {
+        try
+        {
+            await UniTask.WaitUntil(
+                () => Time.time >= _sleepEndTime, 
+                cancellationToken: _cts.Token
+            );
+            
+            ReturnBasketToStart();
+        }
+        catch (OperationCanceledException)
+        {
+            // Таймер был отменен - это нормально
+        }
+    }
+    
+    private void ReturnBasketToStart()
+    {
+        if (_startPos == null) return;
+        
+        _currentTween = _basket.transform
+            .DOMove(_startPos.position, _movementDurationToBack)
+            .SetEase(Ease.InOutCubic);
+    }
+    
+    private void CompleteQuest()
+    {
+        Debug.Log("Quest completed successfully!");
+        StopQuest(QuestEnding.Good);
+    }
+    
+    private void Cleanup()
+    {
+        CancelCurrentOperations();
+        _cts?.Dispose();
+        _cts = null;
+    }
+    
+    #endregion
 }
