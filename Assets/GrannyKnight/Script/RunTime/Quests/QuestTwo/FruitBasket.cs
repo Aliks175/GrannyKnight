@@ -8,7 +8,6 @@ public class FruitBasket : MonoBehaviour
         {
             QuestTwo.Instance.IsCollected();
             Destroy(other.gameObject);
-            Destroy(gameObject);
         }
     }
 }
