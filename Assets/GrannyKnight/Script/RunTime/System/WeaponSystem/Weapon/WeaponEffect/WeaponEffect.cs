@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 [SelectionBase]
 public class WeaponEffect : WeaponEffectAbstract
@@ -14,6 +15,9 @@ public class WeaponEffect : WeaponEffectAbstract
     private int _shootAnimationID;
     private int _endShootAnimationID;
     private int _isShootAnimationID;
+
+    public UnityEvent OnFire;
+    public UnityEvent OnEndFire;
 
     private void OnDisable()
     {
@@ -52,6 +56,7 @@ public class WeaponEffect : WeaponEffectAbstract
         {
             _particleSystem.Play();
         }
+        OnFire?.Invoke();
         //CreateMark(typeShoot.raycastHit);
     }
 
@@ -77,5 +82,6 @@ public class WeaponEffect : WeaponEffectAbstract
                 _particleSystem.Stop();
             }
         }
+        OnEndFire?.Invoke();
     }
 }
