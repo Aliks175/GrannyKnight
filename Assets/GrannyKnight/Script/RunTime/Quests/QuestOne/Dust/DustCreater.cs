@@ -13,6 +13,7 @@ public class DustCreater : Quest
     [Tooltip("Точка конца маршрута")][SerializeField] private Transform _endPoint;
     [Tooltip("Визуальные частицы при уничтожении")][SerializeField] private GameObject _effectOnDeath;
     private List<GameObject> _dusts = new List<GameObject>();
+    private float _fullHealth = 0f;
 
     public override event Action<QuestEnding> OnEnd;
 
@@ -22,6 +23,8 @@ public class DustCreater : Quest
         GameObject dust = Instantiate(_prefabDust, _spawnPoint.position, Quaternion.identity, transform);
         dust.GetComponent<TargetDust>().SetParameters(_stageDust[_stageDust.Length - 1], this, _endPoint, _stageDust.Length - 1);
         _dusts.Add(dust);
+        SetHealth();
+        Debug.Log(_fullHealth);
     }
 
     public void OnDustDie(Transform dust, int stage)
@@ -92,5 +95,16 @@ public class DustCreater : Quest
     {
         Gizmos.color = Color.red;
         Gizmos.DrawLine(_spawnPoint.position + new Vector3(0, 0, -_spawnWidth), _spawnPoint.position + new Vector3(0, 0, _spawnWidth));
+    }
+    private void SetHealth()
+    {
+        _fullHealth += _stageDust[_stageDust.Length - 1].HealthStage;
+        _fullHealth += _stageDust[_stageDust.Length - 1].CountChildStage * _stageDust[_stageDust.Length - 2].HealthStage;
+        _fullHealth += _stageDust[_stageDust.Length - 2].CountChildStage *_stageDust[_stageDust.Length - 1].CountChildStage* _stageDust[_stageDust.Length - 3].HealthStage;
+    }
+    public void Damage(float damage)
+    {
+        _fullHealth -= damage;
+        Debug.Log(_fullHealth);
     }
 }
