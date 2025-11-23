@@ -24449,15 +24449,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 231437129701342073, guid: 0b92f778d38453c49832e00ecfc9e074, type: 3}
       propertyPath: m_Parameters.colorGradient.key1.b
-      value: 0.76305485
+      value: 0.17647058
       objectReference: {fileID: 0}
     - target: {fileID: 231437129701342073, guid: 0b92f778d38453c49832e00ecfc9e074, type: 3}
       propertyPath: m_Parameters.colorGradient.key1.g
-      value: 0.8396226
+      value: 0.30310676
       objectReference: {fileID: 0}
     - target: {fileID: 231437129701342073, guid: 0b92f778d38453c49832e00ecfc9e074, type: 3}
       propertyPath: m_Parameters.colorGradient.key1.r
-      value: 0.1782218
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 231437129701342073, guid: 0b92f778d38453c49832e00ecfc9e074, type: 3}
       propertyPath: m_Parameters.colorGradient.m_ColorSpace
@@ -80820,6 +80820,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startPoint: {fileID: 1951570921}
   _minForce: 1
+  _distanceMultiplier: 10
   _trajectoryLine: {fileID: 1008409396}
   _trajectoryPoints: 30
 --- !u!4 &9056679056597628139

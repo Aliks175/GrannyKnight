@@ -8,6 +8,7 @@ public class PhysicsWeapon : MonoBehaviour, IFireble
     [Header("Ballistics Settings")]
     [SerializeField] private Transform _startPoint;
     [SerializeField] private float _minForce = 1f;
+    [SerializeField] private float _distanceMultiplier = 10f;
 
     [Header("Trajectory Visualization")]
     [SerializeField] private LineRenderer _trajectoryLine;
@@ -18,7 +19,12 @@ public class PhysicsWeapon : MonoBehaviour, IFireble
     private WeaponEffectAbstract _weaponEffect;
     private Transform _head;
     private Vector3 _launchDirection;
-    private float _maxProjectileForce, _forceMultiplier, _koefCharge, _currentForce, _launchAngle, _flightDistance;
+    private float _maxProjectileForce;
+    private float _forceMultiplier;
+    private float _koefCharge;
+    private float _currentForce;
+    private float _launchAngle;
+    private float _flightDistance;
     private bool _isFire;
 
     public event Action<TypeShoot> OnFire;
@@ -29,7 +35,7 @@ public class PhysicsWeapon : MonoBehaviour, IFireble
     {
         if (head == null)
         {
-            Debug.LogError("Camera cannot be null");
+            Debug.LogError("Head cannot be null");
             return;
         }
 
@@ -39,7 +45,11 @@ public class PhysicsWeapon : MonoBehaviour, IFireble
 
     public void SetWeapon(Weapon weapon)
     {
-        if (weapon == null) return;
+        if (weapon == null)
+        {
+            Debug.LogWarning("Weapon is null");
+            return;
+        }
         _weapon = weapon;
         _maxProjectileForce = weapon.MaxForce;
         _forceMultiplier = weapon.ForceMultiplier;
@@ -49,6 +59,7 @@ public class PhysicsWeapon : MonoBehaviour, IFireble
 
     public void SetWeaponEffect(WeaponEffectAbstract weaponEffect)
     {
+        if (weaponEffect == null) return;
         _weaponEffect = weaponEffect;
         _weaponEffect.Initialization(this, null);
     }
@@ -104,12 +115,17 @@ public class PhysicsWeapon : MonoBehaviour, IFireble
             return;
         }
 
-        GameObject arrow = Instantiate(_arrowPrefab, _startPoint.position, _startPoint.rotation);
+        Vector3[] trajectoryPath = CalculateParabolicPath(_flightDistance);
+        GameObject arrow = Instantiate(_arrowPrefab, trajectoryPath[0], _startPoint.rotation);
         ArrowWeapon arrowComponent = arrow.GetComponent<ArrowWeapon>();
 
         if (arrowComponent != null)
         {
-            arrowComponent.StartFlight(_currentForce, _launchAngle, CalculateParabolicPath(_flightDistance), _weapon.Damage);
+            arrowComponent.StartFlight(_currentForce, _launchAngle, trajectoryPath, _weapon.Damage);
+        }
+        else
+        {
+            Debug.LogWarning("ArrowWeapon component not found on arrow prefab");
         }
 
         ResetShot();
@@ -126,19 +142,14 @@ public class PhysicsWeapon : MonoBehaviour, IFireble
     }
     private float CalculateLaunchAngle()
     {
-        float angle = Mathf.Asin(_head.forward.y) * Mathf.Rad2Deg;
-
-        // Если угол слишком мал, используем минимальный угол для стрельбы
-        if (Mathf.Abs(angle) < 5f)
-            angle = 15f; // Минимальный угол возвышения
-
-        Debug.Log($"Camera forward: {_head.forward}, Angle: {angle}");
-        return Mathf.Clamp(angle, 5f, 89f);
+        float clampedY = Mathf.Clamp(_head.forward.y, -1f, 1f);
+        float angle = Mathf.Asin(clampedY) * Mathf.Rad2Deg;
+        return Mathf.Clamp(angle, -89f, 89f);
     }
     private Vector3[] CalculateParabolicPath(float flightDistance)
     {
         Vector3[] path = new Vector3[_trajectoryPoints];
-        Vector3 endPoint = _startPoint.position + _launchDirection * _flightDistance;
+        Vector3 endPoint = CalculateEndPoint(flightDistance);
 
         for (int i = 0; i < _trajectoryPoints; i++)
         {
@@ -148,22 +159,50 @@ public class PhysicsWeapon : MonoBehaviour, IFireble
 
         return path;
     }
+
+    private Vector3 CalculateEndPoint(float flightDistance)
+    {
+        Vector3 horizontalDirection = new Vector3(_launchDirection.x, 0, _launchDirection.z).normalized;
+        Vector3 endPoint = _startPoint.position + horizontalDirection * flightDistance;
+        
+        // При отрицательных углах конечная точка ниже
+        if (_launchAngle < 0)
+        {
+            float verticalDrop = Mathf.Tan(Mathf.Abs(_launchAngle) * Mathf.Deg2Rad) * flightDistance;
+            endPoint.y -= verticalDrop;
+        }
+        
+        return endPoint;
+    }
     private float CalculateFlightDistance()
     {
+        if (_launchAngle < 3f)
+        {
+            // При горизонтальном полете используем простую формулу
+            return _currentForce * _distanceMultiplier * 0.5f;
+        }
+        
         float angleRad = _launchAngle * Mathf.Deg2Rad;
         float distance = (_currentForce * _currentForce * Mathf.Sin(2 * angleRad)) / Physics.gravity.magnitude;
-        distance *= 10f; // Увеличиваем дальность в 10 раз
-
-        Debug.Log($"Force: {_currentForce}, Angle: {_launchAngle}, Distance: {distance}");
-        return distance;
+        return Mathf.Abs(distance) * _distanceMultiplier;
     }
     private Vector3 CalculatePointOnTrajectory(float t, Vector3 endPoint)
     {
-        Vector3 horizontalPos = Vector3.Lerp(_startPoint.position, endPoint, t);
-        float maxHeight = CalculateMaxHeight();
-        float verticalOffset = maxHeight * (1f - 4f * (t - 0.5f) * (t - 0.5f));
+        Vector3 basePos = Vector3.Lerp(_startPoint.position, endPoint, t);
+        
+        // При углах меньше 3 градусов - прямая линия
+        if (_launchAngle < 3f)
+        {
+            return basePos;
+        }
+        
+        float maxHeight = Mathf.Abs(CalculateMaxHeight());
+        float parabolaHeight = maxHeight * (1f - 4f * (t - 0.5f) * (t - 0.5f));
+        
+        // При отрицательных углах парабола идет вниз
+        if (_launchAngle < 0) parabolaHeight = -parabolaHeight;
 
-        return new Vector3(horizontalPos.x, _startPoint.position.y + verticalOffset, horizontalPos.z);
+        return new Vector3(basePos.x, basePos.y + parabolaHeight, basePos.z);
     }
     private float CalculateMaxHeight()
     {
@@ -185,8 +224,7 @@ public class PhysicsWeapon : MonoBehaviour, IFireble
         _trajectoryLine.enabled = true;
         _trajectoryLine.positionCount = _trajectoryPoints;
 
-        float flightDistance = CalculateFlightDistance();
-        Vector3 endPoint = _startPoint.transform.position + _launchDirection * flightDistance;
+        Vector3 endPoint = CalculateEndPoint(_flightDistance);
 
         for (int i = 0; i < _trajectoryPoints; i++)
         {
@@ -200,8 +238,7 @@ public class PhysicsWeapon : MonoBehaviour, IFireble
         if (_startPoint == null || _currentForce <= 0.1f) return;
 
         Gizmos.color = Color.red;
-        float distance = CalculateFlightDistance();
-        Vector3 endPoint = _startPoint.position + _launchDirection * distance;
+        Vector3 endPoint = CalculateEndPoint(_flightDistance);
         Gizmos.DrawLine(_startPoint.position, endPoint);
 
         Gizmos.color = Color.yellow;

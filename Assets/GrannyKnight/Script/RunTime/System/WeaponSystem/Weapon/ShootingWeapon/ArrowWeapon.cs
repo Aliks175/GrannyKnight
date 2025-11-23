@@ -36,7 +36,7 @@ public class ArrowWeapon : MonoBehaviour
     {
         float angleRad = angle * Mathf.Deg2Rad;
         float distance = (force * force * Mathf.Sin(2 * angleRad)) / Physics.gravity.magnitude;
-        return distance * 10f; // Увеличиваем дальность в 10 раз
+        return Mathf.Abs(distance) * 10f; // Увеличиваем дальность в 10 раз
     }
     void OnTriggerEnter(Collider other)
     {
