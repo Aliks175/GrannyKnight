@@ -49,7 +49,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -68,6 +68,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sprite: {fileID: 4024684331429794578}
+  _distanceForPlayer: 0.5
 --- !u!1 &4667711103879628591
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,5 +169,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb64b306902eaf64389063d7a14f66c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _camera: {fileID: 0}
+  _cameraTransform: {fileID: 0}
   _IsRotateOnlyForY: 0

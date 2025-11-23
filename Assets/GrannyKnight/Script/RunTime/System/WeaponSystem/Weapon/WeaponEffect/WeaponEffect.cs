@@ -46,16 +46,16 @@ public class WeaponEffect : WeaponEffectAbstract
     {
         _animator.SetBool(_isShootAnimationID, true);
         _animator.SetTrigger(_shootAnimationID);
+        //_isShootNow = true;
     }
 
     private void Fire(TypeShoot typeShoot)
     {
-        if (_animator != null)
-        {
-            if (typeShoot.IsShootAutoFire && _isShootNow) return;
-            _animator.SetTrigger(_shootAnimationID);
-            _isShootNow = true;
-        }
+        //if (_animator != null)
+        //{
+        //    if (typeShoot.IsShootAutoFire && _isShootNow) return;
+        //    _animator.SetTrigger(_shootAnimationID);
+        //}
 
         if (_audioSource != null)
         {

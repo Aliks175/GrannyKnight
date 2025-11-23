@@ -70,11 +70,13 @@ public class ShootingWeapon : MonoBehaviour, IFireble
 
     private void ShootSingleFire(Weapon weapon)
     {
+        OnStartFire?.Invoke();
         _waitAnimationFire = StartCoroutine(SingleFire(weapon));
     }
 
     private IEnumerator AutoFire(Weapon weapon)
     {
+        OnStartFire?.Invoke();
         while (_isFire)
         {
             yield return null;
@@ -84,7 +86,6 @@ public class ShootingWeapon : MonoBehaviour, IFireble
 
     private IEnumerator SingleFire(Weapon weapon)
     {
-        OnStartFire?.Invoke();
         yield return new WaitForSeconds(weapon.TimeWaitFire);
         Fire(false, weapon);
     }
@@ -97,11 +98,8 @@ public class ShootingWeapon : MonoBehaviour, IFireble
 
             if (Physics.Raycast(_head.position, _head.forward, out RaycastHit hit, weapon.Range))
             {
-                Debug.Log("Выстрел");
                 if (hit.collider.TryGetComponent(out IHealtheble target))
                 {
-                    Debug.Log($"Pos - {hit.point}");
-
                     target.TakeDamage(weapon.Damage);
                 }
             }
