@@ -4,9 +4,9 @@ public class SpriteRotate : MonoBehaviour
 {
     [SerializeField] private Transform _cameraTransform;
     [SerializeField] private bool _IsRotateOnlyForY;
-    [SerializeField] private float _speedLerp;
+    //[SerializeField] private float _speedLerp;
 
-    private float eulerAnglesY;
+    //private float eulerAnglesY;
 
     private void Start()
     {

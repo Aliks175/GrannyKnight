@@ -3,14 +3,16 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class ShootingWeapon : MonoBehaviour , IFireble
+public class ShootingWeapon : MonoBehaviour, IFireble
 {
     private WeaponEffectAbstract _weaponEffect;
     private ControlViewMark _controlViewMark;
     private Transform _head;
     private Coroutine _coroutine;
+    private Coroutine _waitAnimationFire;
     private bool _isFire = false;
     private float _nextTimeToFire = 0f;
+    public event Action OnStartFire;
     public event Action<TypeShoot> OnFire;
     public event Action OnEndFire;
 
@@ -68,7 +70,7 @@ public class ShootingWeapon : MonoBehaviour , IFireble
 
     private void ShootSingleFire(Weapon weapon)
     {
-        Fire(false,weapon);
+        _waitAnimationFire = StartCoroutine(SingleFire(weapon));
     }
 
     private IEnumerator AutoFire(Weapon weapon)
@@ -76,8 +78,15 @@ public class ShootingWeapon : MonoBehaviour , IFireble
         while (_isFire)
         {
             yield return null;
-            Fire(true,weapon);
+            Fire(true, weapon);
         }
+    }
+
+    private IEnumerator SingleFire(Weapon weapon)
+    {
+        OnStartFire?.Invoke();
+        yield return new WaitForSeconds(weapon.TimeWaitFire);
+        Fire(false, weapon);
     }
 
     private void Fire(bool _isShootAutoFire, Weapon weapon)
@@ -88,8 +97,11 @@ public class ShootingWeapon : MonoBehaviour , IFireble
 
             if (Physics.Raycast(_head.position, _head.forward, out RaycastHit hit, weapon.Range))
             {
+                Debug.Log("Выстрел");
                 if (hit.collider.TryGetComponent(out IHealtheble target))
                 {
+                    Debug.Log($"Pos - {hit.point}");
+
                     target.TakeDamage(weapon.Damage);
                 }
             }
@@ -102,6 +114,7 @@ public interface IFireble
 {
     public event Action<TypeShoot> OnFire;
     public event Action OnEndFire;
+    public event Action OnStartFire;
 }
 
 public struct TypeShoot

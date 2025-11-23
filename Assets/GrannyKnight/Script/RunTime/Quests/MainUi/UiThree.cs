@@ -46,7 +46,7 @@ public class UiThree : MonoBehaviour
 
     public void OnUpdateUi(int countEnemy, int countItem)
     {
-        _textDiscription = $"Кол-во Рулетов : {countItem} / {StartcountItem}\n\nКол-во Пикси : {countEnemy} / {StartcountEnemy}";
+        _textDiscription = $"{countItem} / {StartcountItem}\n\n{countEnemy} / {StartcountEnemy}";
         _textProgressQuest.SetText(_textDiscription);
     }
 }

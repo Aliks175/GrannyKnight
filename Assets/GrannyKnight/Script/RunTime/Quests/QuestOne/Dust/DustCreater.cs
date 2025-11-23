@@ -16,6 +16,7 @@ public class DustCreater : Quest
     private float _fullHealth = 0f;
 
     public override event Action<QuestEnding> OnEnd;
+    public override event Action OnStart;
 
     public override void StartQuest()
     {

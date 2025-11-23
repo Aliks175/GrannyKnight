@@ -7,6 +7,7 @@ public abstract class Quest : MonoBehaviour
     public abstract void StopQuest(QuestEnding quest);
 
     public abstract event Action<QuestEnding> OnEnd;
+    public abstract event Action OnStart;
 }
 
 public enum QuestEnding

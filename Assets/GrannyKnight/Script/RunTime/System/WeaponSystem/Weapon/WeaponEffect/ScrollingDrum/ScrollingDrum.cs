@@ -10,12 +10,17 @@ public class ScrollingDrum : MonoBehaviour
 
     private void Start()
     {
-        _endRotation = new Vector3(360f,0,0);
+        _endRotation = new Vector3(355f,0,0);
     }
 
     public void StartRotation()
     {
-        _rotation = Drum.DOLocalRotate(_endRotation, _speedScroll, RotateMode.FastBeyond360).From(Vector3.zero).SetLoops(-1,LoopType.Restart).OnComplete(()=> Drum.transform.localRotation = Quaternion.identity);
+        Debug.Log("TryRotation");
+        if(_rotation != null) return;
+        Debug.Log($"Drum = {Drum.localPosition}");
+        //_rotation = Drum.DOLocalRotate(_endRotation, _speedScroll, RotateMode.FastBeyond360).From(Vector3.zero).SetLoops(-1,LoopType.Restart).OnComplete(()=> Drum.transform.localRotation = Quaternion.identity);
+        _rotation = Drum.DOLocalRotate(_endRotation, _speedScroll, RotateMode.FastBeyond360);//.From(Vector3.zero)//.SetLoops(-1, LoopType.Restart);
+        _rotation.Play();
     }
 
     public void StopRotation()
