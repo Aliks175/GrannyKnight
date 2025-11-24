@@ -27,9 +27,10 @@ public class PhysicsWeapon : MonoBehaviour, IFireble
     private float _flightDistance;
     private bool _isFire;
 
-    public event Action<TypeShoot> OnFire;
+    public event Action OnPreFire;
+    public event Action<RaycastHit> OnFireRaycast;
+    public event Action OnFirePhysics;
     public event Action OnEndFire;
-    public event Action OnStartFire;
 
     public void Initialization(Transform head)
     {
@@ -61,7 +62,7 @@ public class PhysicsWeapon : MonoBehaviour, IFireble
     {
         if (weaponEffect == null) return;
         _weaponEffect = weaponEffect;
-        _weaponEffect.Initialization(this, null);
+        _weaponEffect.Initialization(this);
     }
 
     public void Shoot(InputAction.CallbackContext value)
@@ -76,7 +77,7 @@ public class PhysicsWeapon : MonoBehaviour, IFireble
             _isFire = true;
             _currentForce = 0f;
             _coroutine = StartCoroutine(ChargeShot());
-            OnFire?.Invoke(new TypeShoot());
+            OnFirePhysics?.Invoke();
         }
         else if (value.phase == InputActionPhase.Canceled)
         {

@@ -1,7 +1,7 @@
 using UnityEngine;
+using UnityEngine.Events;
 
-[SelectionBase]
-public class PhysicsEffect : WeaponEffectAbstract
+public class EasterEggsEffect : WeaponEffectAbstract
 {
     public override Animator AnimatorWeapon => _animator;
     public override int IdWeapon => _idWeapon;
@@ -13,13 +13,18 @@ public class PhysicsEffect : WeaponEffectAbstract
     private int _shootAnimationID;
     private int _endShootAnimationID;
     private int _isShootAnimationID;
+    private bool _isShootNow;
+
+    public UnityEvent OnFire;
+    public UnityEvent OnEndFire;
 
     private void OnDisable()
     {
         if (_testWeapon != null)
         {
-            // _testWeapon.Shoot -= Fire;
-            // _testWeapon.ResetShot -= ControlFire;
+            _testWeapon.OnFireRaycast -= Fire;
+            _testWeapon.OnEndFire -= EndFire;
+            _testWeapon.OnPreFire -= PreFire;
         }
     }
 
@@ -29,16 +34,25 @@ public class PhysicsEffect : WeaponEffectAbstract
         _shootAnimationID = Animator.StringToHash("Shoot");
         _endShootAnimationID = Animator.StringToHash("EndShoot");
         _isShootAnimationID = Animator.StringToHash("IsShoot");
-        testWeapon.OnFirePhysics += Fire;
-        testWeapon.OnEndFire += ControlFire;
+        _testWeapon.OnPreFire += PreFire;
+        _testWeapon.OnFireRaycast += Fire;
+        _testWeapon.OnEndFire += EndFire;
     }
 
-    private void Fire()
+    private void PreFire()
+    {
+        if (_isShootNow) return;
+        //_animator.SetBool(_isShootAnimationID, true);
+        _animator.SetTrigger(_shootAnimationID);
+        _isShootNow = true;
+    }
+
+    private void Fire(RaycastHit raycastHit)
     {
         if (_animator != null)
         {
-            _animator.SetBool(_isShootAnimationID, true);
-            _animator.SetTrigger(_shootAnimationID);
+            //_animator.SetBool(_isShootAnimationID, false);
+            //_animator.SetTrigger(_shootAnimationID);
         }
 
         if (_audioSource != null)
@@ -46,13 +60,22 @@ public class PhysicsEffect : WeaponEffectAbstract
             _audioSource.Play();
         }
 
+        //if (_particleSystem != null)
+        //{
+        //    _particleSystem.Play();
+        //}
+        OnFire?.Invoke();
+    }
+
+    private void PlayShootEffect()
+    {
         if (_particleSystem != null)
         {
             _particleSystem.Play();
         }
     }
 
-    private void ControlFire()
+    private void EndFire()
     {
         if (_animator != null)
         {
@@ -63,5 +86,7 @@ public class PhysicsEffect : WeaponEffectAbstract
                 _particleSystem.Stop();
             }
         }
+        OnEndFire?.Invoke();
+        _isShootNow = false;
     }
 }

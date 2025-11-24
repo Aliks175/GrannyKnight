@@ -83,10 +83,11 @@ public class Fairy : MonoBehaviour, IHealtheble
             {
                 _fairyItem = _fairyCreater.GetFairyTarget();
                 _fairyItem.SetFairy();
-                _count = 2;
+                _count = 5;
                 CheckCompliteMove();
                 return;
             }
+
             Vector3 target = _fairyItem.transform.position;
             target.y += _bazeOffsetHeight;
 

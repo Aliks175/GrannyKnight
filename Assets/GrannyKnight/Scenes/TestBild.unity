@@ -15230,9 +15230,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 379391111604017424, guid: f2d11c68953d5ff448909785248eb2f2, type: 3}
-      propertyPath: m_IsActive
-      value: 0
+    - target: {fileID: 2090133506179689178, guid: f2d11c68953d5ff448909785248eb2f2, type: 3}
+      propertyPath: _koefAim
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 2925017501006570999, guid: f2d11c68953d5ff448909785248eb2f2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -20900,15 +20900,15 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!114 &2045221195 stripped
+--- !u!114 &2045221198 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7321134772112978374, guid: f2d11c68953d5ff448909785248eb2f2, type: 3}
+  m_CorrespondingSourceObject: {fileID: 6250841107885579178, guid: f2d11c68953d5ff448909785248eb2f2, type: 3}
   m_PrefabInstance: {fileID: 1378808905}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5dd516a08671ed438b1628d8352cf85, type: 3}
+  m_Script: {fileID: 11500000, guid: 8c42bc3467244654c8e3b55bf3aa7594, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &2070645909 stripped
@@ -21639,6 +21639,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 513874344334900875, guid: 87368e17052d8e647a22e331cb15d2d9, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -1.3999023
+      objectReference: {fileID: 0}
     - target: {fileID: 1567287133111468519, guid: 87368e17052d8e647a22e331cb15d2d9, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -21719,9 +21723,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3297358052113974533, guid: 87368e17052d8e647a22e331cb15d2d9, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.09375
+      objectReference: {fileID: 0}
     - target: {fileID: 5364275502663281692, guid: 87368e17052d8e647a22e331cb15d2d9, type: 3}
       propertyPath: m_Name
       value: QuestCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8243815350410604379, guid: 87368e17052d8e647a22e331cb15d2d9, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.26220703
+      objectReference: {fileID: 0}
+    - target: {fileID: 8243815350410604379, guid: 87368e17052d8e647a22e331cb15d2d9, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.23999023
+      objectReference: {fileID: 0}
+    - target: {fileID: 8996994511269761247, guid: 87368e17052d8e647a22e331cb15d2d9, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.000061035156
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -36304,7 +36324,7 @@ PrefabInstance:
     - target: {fileID: 6123998067695533893, guid: 23eb575ccbd9f3c42ae3c5c7d667ce15, type: 3}
       propertyPath: '_listWeaponEffect.Array.data[1]'
       value: 
-      objectReference: {fileID: 2045221195}
+      objectReference: {fileID: 2045221198}
     - target: {fileID: 6123998067695533893, guid: 23eb575ccbd9f3c42ae3c5c7d667ce15, type: 3}
       propertyPath: '_listWeaponEffect.Array.data[2]'
       value: 

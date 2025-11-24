@@ -25,20 +25,20 @@ public class WeaponEffect : WeaponEffectAbstract
     {
         if (_testWeapon != null)
         {
-            _testWeapon.OnFire -= Fire;
+            _testWeapon.OnFireRaycast -= Fire;
             _testWeapon.OnEndFire -= ControlFire;
+            _testWeapon.OnPreFire -= PreFire;
         }
     }
 
-    public override void Initialization(IFireble testWeapon, ControlViewMark controlViewMark)
+    public override void Initialization(IFireble testWeapon)
     {
         _testWeapon = testWeapon;
-        //_controlViewMark = controlViewMark;
         _shootAnimationID = Animator.StringToHash("Shoot");
         _endShootAnimationID = Animator.StringToHash("EndShoot");
         _isShootAnimationID = Animator.StringToHash("IsShoot");
-        _testWeapon.OnStartFire += PreFire;
-        _testWeapon.OnFire += Fire;
+        _testWeapon.OnPreFire += PreFire;
+        _testWeapon.OnFireRaycast += Fire;
         _testWeapon.OnEndFire += ControlFire;
     }
 
@@ -49,7 +49,7 @@ public class WeaponEffect : WeaponEffectAbstract
         //_isShootNow = true;
     }
 
-    private void Fire(TypeShoot typeShoot)
+    private void Fire(RaycastHit raycastHit)
     {
         //if (_animator != null)
         //{
