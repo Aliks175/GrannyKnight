@@ -10,6 +10,9 @@ public class PlayerMover : MonoBehaviour
     [SerializeField, Range(0.1f, 1f)] private float _coefficientSpeedWalkForAir = 0.5f;
     [SerializeField] private float jumpHeight = 3.0f;
     [Header("Physic")]
+    [SerializeField] private Transform _groundPoint;
+    [SerializeField] private LayerMask _groundLayer;
+    [SerializeField] private float _groundPointRadius = 1f;
     [SerializeField] private float _gravity = -9.8f;
     [SerializeField] private bool _isGrounded;
     private PlayerControlAnimation _playerControlAnimation;
@@ -43,14 +46,14 @@ public class PlayerMover : MonoBehaviour
         _playerVelocity.y += _gravity * Time.deltaTime;
         if (!_isGrounded)
         {
-            _speed *= _coefficientSpeedWalkForAir;
+            _speed = _speedWalk * _coefficientSpeedWalkForAir;
         }
         else if (_isGrounded && _playerVelocity.y < 0)
         {
             _playerVelocity = _velocityGround;
             _speed = _speedWalk;
         }
-        if (_isAim) _speed *= _coefficientSpeedForAim;
+        if (_isAim) _speed = _speed * _coefficientSpeedForAim;
         _final = _moveDirection * _speed + _playerVelocity;
         _controller.Move(_final * Time.deltaTime);
     }
@@ -79,8 +82,13 @@ public class PlayerMover : MonoBehaviour
 
     private void OnUpdate()
     {
-        _isGrounded = _controller.isGrounded;
+        _isGrounded = Physics.OverlapSphere(_groundPoint.position, _groundPointRadius, _groundLayer).Length > 0;
         _playerControlAnimation.SetCheckGround(_isGrounded);
         _playerControlAnimation.SetSpeed(Vector3.SqrMagnitude(_final));
     }
+
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.DrawSphere(_groundPoint.position, _groundPointRadius);
+    //}
 }

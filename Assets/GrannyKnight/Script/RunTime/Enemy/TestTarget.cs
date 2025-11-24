@@ -5,6 +5,7 @@ public class TestTarget : MonoBehaviour, IHealtheble
     [SerializeField] private float _startHealth = 50f;
     [SerializeField] private GameObject _dropItem;
     [SerializeField] private Transform _dropPoint;
+    [SerializeField] private GameObject _dropTarget;
     private float _health;
 
     private void Start()
@@ -30,6 +31,7 @@ public class TestTarget : MonoBehaviour, IHealtheble
 
     private void LootDrop()
     {
+        if (_dropItem == null) return;
         GameObject tempDrop = Instantiate(_dropItem, _dropPoint.position, Quaternion.identity);
     }
 }

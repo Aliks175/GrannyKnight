@@ -10,11 +10,13 @@ public class PlayerControlAnimation : MonoBehaviour
     private bool _tempGround;
     private int _idSpeed;
     private int _idIsGround;
+    private int _idAir;
 
     public void Initialization()
     {
         _idSpeed = Animator.StringToHash("Speed");
         _idIsGround = Animator.StringToHash("IsGround");
+        _idAir = Animator.StringToHash("Air");
         _activeAnimator = _animatorArmorHand;
         ChangeAnimator(_animatorArmorHand);
     }
@@ -30,9 +32,17 @@ public class PlayerControlAnimation : MonoBehaviour
     {
         if (_tempGround == true && isGround == false)
         {
-            _activeAnimator.SetTrigger(_idIsGround);
+            _activeAnimator.SetTrigger(_idAir);
         }
+        _activeAnimator.SetBool(_idIsGround, isGround);
         _tempGround = isGround;
+
+
+        //if (_tempGround == true && isGround == false)
+        //{
+        //    _activeAnimator.SetTrigger(_idIsGround);
+        //}
+        //_tempGround = isGround;
     }
 
     public void ChangeHand(EquipHand equipHand)

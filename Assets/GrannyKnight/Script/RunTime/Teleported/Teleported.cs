@@ -1,10 +1,8 @@
-using DG.Tweening;
 using UnityEngine;
-using Sequence = DG.Tweening.Sequence;
 
 public class Teleported : MonoBehaviour
 {
-    [SerializeField] private PlayerCharacter playerCharacter;
+    [SerializeField] private CharacterController playerCharacter;
     [SerializeField] private Transform _positionTeleported;
     [SerializeField] private BlackOut _blackOut;
 

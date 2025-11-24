@@ -83,7 +83,6 @@ public class DustCreater : Quest
             }
             _dusts.Clear();
         }
-        
     }
 
     private void StartGame()
