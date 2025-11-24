@@ -6,9 +6,17 @@ public class Teleported : MonoBehaviour
     [SerializeField] private Transform _positionTeleported;
     [SerializeField] private BlackOut _blackOut;
 
+    private void Start()
+    {
+        playerCharacter = GameObject.FindFirstObjectByType<CharacterController>();
+    }
+
     public void ActiveTeleport()
     {
-        playerCharacter.transform.position = _positionTeleported.position;
+        if (playerCharacter == null) return;
         _blackOut.Active();
+        playerCharacter.enabled = false;
+        playerCharacter.transform.position = _positionTeleported.position;
+        playerCharacter.enabled = true;
     }
 }
