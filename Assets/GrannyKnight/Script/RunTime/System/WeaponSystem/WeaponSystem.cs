@@ -46,6 +46,7 @@ public class WeaponSystem : MonoBehaviour
     public void Shoot(InputAction.CallbackContext value)
     {
         if (_activeWeapon == null) return;
+       
         if (_activeWeapon.TypeShoot == TypeShootPhysics.Raycast) _shootingWeapon.Shoot(value, _activeWeapon);
         else if (_activeWeapon.TypeShoot == TypeShootPhysics.Physics) _physicsWeapon.Shoot(value);
     }

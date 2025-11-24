@@ -7,6 +7,7 @@ public class ObserverMainQuest : MonoBehaviour
     [SerializeField] private int _indexMainQuest;
     [SerializeField] private PlayerCharacter character;
 
+    public UnityEvent OnStart;
     public UnityEvent OnEnd;
     public UnityEvent OnEndGood;
     public UnityEvent OnEndMidle;
@@ -15,11 +16,13 @@ public class ObserverMainQuest : MonoBehaviour
 
     private void OnEnable()
     {
+        quest.OnStart += () => OnStart?.Invoke();
         quest.OnEnd += OverMainQuest;
     }
 
     private void OnDisable()
     {
+        quest.OnStart -= () => OnStart?.Invoke();
         quest.OnEnd -= OverMainQuest;
     }
 

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2221222693954888039}
   - component: {fileID: 705203023762058863}
   - component: {fileID: 7600709372224900150}
+  - component: {fileID: 4659423956619110064}
   m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
@@ -77,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -445449147, guid: f819a353ab92e1341ada06381a9ea44b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9eec1e95954cde044b8d5187c3dabd4b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -100,8 +101,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb64b306902eaf64389063d7a14f66c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _camera: {fileID: 0}
+  _cameraTransform: {fileID: 0}
   _IsRotateOnlyForY: 0
+--- !u!114 &4659423956619110064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3591063411145958993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b828360872d4964293c2b2b38a616f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _backAngle: 65
+  _sideAngle: 155
+  _spriteRenderer: {fileID: 705203023762058863}
+  _transform: {fileID: 2232106529671829742}
+  _animator: {fileID: 7494408028186571555}
+  _camera: {fileID: 0}
 --- !u!1 &5974444628303889598
 GameObject:
   m_ObjectHideFlags: 0
@@ -113,6 +132,7 @@ GameObject:
   - component: {fileID: 2232106529671829742}
   - component: {fileID: 1762809551604287734}
   - component: {fileID: 4969196822489808502}
+  - component: {fileID: 7494408028186571555}
   m_Layer: 0
   m_Name: Fairy
   m_TagString: Untagged
@@ -129,7 +149,7 @@ Transform:
   m_GameObject: {fileID: 5974444628303889598}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 13.566591, y: 4.11, z: -0.09011054}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -174,3 +194,25 @@ MonoBehaviour:
   _bazeOffsetHeight: 1
   _coefficientSpeedWithItem: 2
   _coefficientSpeedWithoutItem: 2
+--- !u!95 &7494408028186571555
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5974444628303889598}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: edad44d38ee9b5240a98a0c6b16f1f6b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 [SelectionBase]
 public class WeaponEffect : WeaponEffectAbstract
@@ -15,6 +16,11 @@ public class WeaponEffect : WeaponEffectAbstract
     private int _endShootAnimationID;
     private int _isShootAnimationID;
 
+    private bool _isShootNow;
+
+    public UnityEvent OnFire;
+    public UnityEvent OnEndFire;
+
     private void OnDisable()
     {
         if (_testWeapon != null)
@@ -24,24 +30,32 @@ public class WeaponEffect : WeaponEffectAbstract
         }
     }
 
-    public override void Initialization(IFireble testWeapon , ControlViewMark controlViewMark)
+    public override void Initialization(IFireble testWeapon, ControlViewMark controlViewMark)
     {
         _testWeapon = testWeapon;
         //_controlViewMark = controlViewMark;
         _shootAnimationID = Animator.StringToHash("Shoot");
         _endShootAnimationID = Animator.StringToHash("EndShoot");
         _isShootAnimationID = Animator.StringToHash("IsShoot");
+        _testWeapon.OnStartFire += PreFire;
         _testWeapon.OnFire += Fire;
         _testWeapon.OnEndFire += ControlFire;
     }
 
+    private void PreFire()
+    {
+        _animator.SetBool(_isShootAnimationID, true);
+        _animator.SetTrigger(_shootAnimationID);
+        //_isShootNow = true;
+    }
+
     private void Fire(TypeShoot typeShoot)
     {
-        if (_animator != null)
-        {
-            _animator.SetBool(_isShootAnimationID, true);
-            _animator.SetTrigger(_shootAnimationID);
-        }
+        //if (_animator != null)
+        //{
+        //    if (typeShoot.IsShootAutoFire && _isShootNow) return;
+        //    _animator.SetTrigger(_shootAnimationID);
+        //}
 
         if (_audioSource != null)
         {
@@ -52,6 +66,7 @@ public class WeaponEffect : WeaponEffectAbstract
         {
             _particleSystem.Play();
         }
+        OnFire?.Invoke();
         //CreateMark(typeShoot.raycastHit);
     }
 
@@ -77,5 +92,7 @@ public class WeaponEffect : WeaponEffectAbstract
                 _particleSystem.Stop();
             }
         }
+        OnEndFire?.Invoke();
+        _isShootNow = false;
     }
 }

@@ -1,20 +1,21 @@
-using UnityEngine;
 using DG.Tweening;
-using DG.Tweening.Core;
+using UnityEngine;
 
-public class TargetDust : MonoBehaviour , IHealtheble
+public class TargetDust : MonoBehaviour, IHealtheble
 {
-    private float _health;
     [SerializeField] private SpriteRenderer _sprite;
-    private float _speed;
+    [SerializeField] private float _distanceForPlayer;
     private DustCreater _creater;
-    private int _stage;
     private Transform _endPoint;
     private Tween _tween;
+    private float _health;
+    private float _speed;
+    private int _stage;
+    private bool _isPlay;
 
     private void OnDisable()
     {
-        _tween.Kill();
+        _tween?.Kill();
     }
 
     public void SetParameters(StageDust stage, DustCreater creater, Transform distance, int index)
@@ -26,12 +27,14 @@ public class TargetDust : MonoBehaviour , IHealtheble
         _stage = index;
         _endPoint = distance;
         gameObject.transform.localScale = stage.BaseScaleStage * Vector3.one;
+        _isPlay = true;
         StartMove();
     }
 
     public void TakeDamage(float damage)
     {
         _health -= damage;
+        _creater.Damage(damage);
         if (_health <= 0)
         {
             Die();
@@ -51,11 +54,12 @@ public class TargetDust : MonoBehaviour , IHealtheble
 
     private void Update()
     {
+        if (!_isPlay) return;
         if (_endPoint != null)
         {
             transform.position = Vector3.MoveTowards(transform.position, _endPoint.position, _speed * Time.deltaTime);
-            
-            if (Vector3.Distance(transform.position, _endPoint.position) < 0.1f)
+
+            if (Vector3.Distance(transform.position, _endPoint.position) < _distanceForPlayer)
             {
                 OnEndPoint();
             }
@@ -64,6 +68,10 @@ public class TargetDust : MonoBehaviour , IHealtheble
 
     private void OnEndPoint()
     {
+        if (!_isPlay) return;
+        _isPlay = false;
+        _endPoint = null;
+
         _creater.StopQuest(QuestEnding.Bad);
         Destroy(gameObject);
     }

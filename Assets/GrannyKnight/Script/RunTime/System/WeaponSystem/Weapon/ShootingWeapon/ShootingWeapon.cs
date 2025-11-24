@@ -3,14 +3,16 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class ShootingWeapon : MonoBehaviour , IFireble
+public class ShootingWeapon : MonoBehaviour, IFireble
 {
     private WeaponEffectAbstract _weaponEffect;
     private ControlViewMark _controlViewMark;
     private Transform _head;
     private Coroutine _coroutine;
+    private Coroutine _waitAnimationFire;
     private bool _isFire = false;
     private float _nextTimeToFire = 0f;
+    public event Action OnStartFire;
     public event Action<TypeShoot> OnFire;
     public event Action OnEndFire;
 
@@ -68,16 +70,24 @@ public class ShootingWeapon : MonoBehaviour , IFireble
 
     private void ShootSingleFire(Weapon weapon)
     {
-        Fire(false,weapon);
+        OnStartFire?.Invoke();
+        _waitAnimationFire = StartCoroutine(SingleFire(weapon));
     }
 
     private IEnumerator AutoFire(Weapon weapon)
     {
+        OnStartFire?.Invoke();
         while (_isFire)
         {
             yield return null;
-            Fire(true,weapon);
+            Fire(true, weapon);
         }
+    }
+
+    private IEnumerator SingleFire(Weapon weapon)
+    {
+        yield return new WaitForSeconds(weapon.TimeWaitFire);
+        Fire(false, weapon);
     }
 
     private void Fire(bool _isShootAutoFire, Weapon weapon)
@@ -102,6 +112,7 @@ public interface IFireble
 {
     public event Action<TypeShoot> OnFire;
     public event Action OnEndFire;
+    public event Action OnStartFire;
 }
 
 public struct TypeShoot

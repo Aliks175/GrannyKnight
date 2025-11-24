@@ -12,7 +12,8 @@ public class QuestTwo : Quest
     
     // События
     public override event Action<QuestEnding> OnEnd;
-    
+    public override event Action OnStart;
+
     // Сериализуемые поля
     [Header("Quest Settings")]
     [SerializeField] private GameObject _basket;

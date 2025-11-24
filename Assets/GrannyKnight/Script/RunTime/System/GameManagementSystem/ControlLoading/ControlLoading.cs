@@ -8,10 +8,15 @@ using UnityEngine.UI;
 public class ControlLoading : MonoBehaviour
 {
     [SerializeField] private ListScene listScene;
-    
+
     public void LoadGame()
     {
         SceneManager.LoadSceneAsync((int)listScene, LoadSceneMode.Single);
+    }
+
+    public void LoadTestGame()
+    {
+        SceneManager.LoadSceneAsync((int)ListScene.TestGameBild, LoadSceneMode.Single);
     }
 }
 

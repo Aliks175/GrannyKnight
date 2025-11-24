@@ -29,7 +29,7 @@ public class PhysicsWeapon : MonoBehaviour, IFireble
 
     public event Action<TypeShoot> OnFire;
     public event Action OnEndFire;
-
+    public event Action OnStartFire;
 
     public void Initialization(Transform head)
     {

@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.PlayerLoop;
 
 public class QuestThree : Quest
 {
@@ -25,6 +23,7 @@ public class QuestThree : Quest
     private int _countTempItem;
     private bool _isActiveQuest = false;
     public override event Action<QuestEnding> OnEnd;
+    public override event Action OnStart;
 
     private void OnDisable()
     {
