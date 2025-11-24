@@ -19,10 +19,12 @@ public class QuestTwo : Quest
     [SerializeField] private float _timeToSleep = 5f;
     [SerializeField] private Transform _startPos;
     [SerializeField] private float _movementDurationToBack = 1f;
-    [SerializeField] private int _targetFruit;
+    [SerializeField] private int[] _targetFruit;
+    [SerializeField] private float _timeToQuest;
     
     // Приватные поля
     private int _fruitCount = 0;
+    private float _timer;
     private float _sleepEndTime;
     private Tween _currentTween;
     private CancellationTokenSource _cts;
@@ -34,7 +36,6 @@ public class QuestTwo : Quest
     {
         InitializeSingleton();
         ResetBasketPosition();
-        StartQuest();
     }
     
     private void OnDestroy()
@@ -52,6 +53,7 @@ public class QuestTwo : Quest
     {
         _isQuestActive = true;
         ResetQuestState();
+        StartTimer().Forget();
     }
     
     public void CollectFruit(Vector3 fruitPosition, float time)
@@ -70,12 +72,7 @@ public class QuestTwo : Quest
         
         Debug.Log($"Fruits collected: {_fruitCount}");
         
-        if (_fruitCount >= _targetFruit)
-        {
-            CompleteQuest();
-            return;
-        }
-        
+       
         StartSleepTimer();
     }
     
@@ -84,6 +81,16 @@ public class QuestTwo : Quest
         _isQuestActive = false;
         Cleanup();
         OnEnd?.Invoke(questEnding);
+    }
+    private async UniTaskVoid StartTimer()
+    {
+        _timer = _timeToQuest;
+        while (_timer > 0)
+        {
+            await UniTask.Delay(TimeSpan.FromSeconds(1));
+            _timer--;
+        }
+        CompleteQuest();
     }
     
     #endregion
@@ -179,8 +186,18 @@ public class QuestTwo : Quest
     
     private void CompleteQuest()
     {
-        Debug.Log("Quest completed successfully!");
-        StopQuest(QuestEnding.Good);
+        if (_fruitCount <= _targetFruit[0])
+        {
+            StopQuest(QuestEnding.Bad);
+        }
+        else if (_fruitCount <= _targetFruit[1])
+        {
+            StopQuest(QuestEnding.Middle);
+        }
+        else if (_fruitCount >= _targetFruit[2])
+        {
+            StopQuest(QuestEnding.Good);
+        }
     }
     
     private void Cleanup()
