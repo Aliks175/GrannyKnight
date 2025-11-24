@@ -13,6 +13,7 @@ public class PlayerAim : MonoBehaviour
     [SerializeField, Min(0.1f)] private float _speedChooseView = 1;
     private CinemachineCamera _cinemachineCamera;
     private Coroutine _coroutine;
+    private PlayerLook _playerLook;
     private bool _isActive = false;
     private bool _isPlaying = false;
     private const int _zoomOn = -1;
@@ -23,12 +24,14 @@ public class PlayerAim : MonoBehaviour
         _cinemachineCamera = cinemachineCamera;
         _isActive = false;
         _isPlaying = false;
+        _playerLook = GetComponent<PlayerLook>();
     }
 
     public void AimingOn()
     {
         if (_isActive) return;
         _isActive = true;
+        _playerLook.IsAim = true;
         StopMoveAim();
         _isPlaying = true;
         _coroutine = StartCoroutine(MoveAim(_endFieldOfView, _zoomOn));
@@ -38,6 +41,7 @@ public class PlayerAim : MonoBehaviour
     {
         if (!_isActive) return;
         _isActive = false;
+        _playerLook.IsAim = false;
         StopMoveAim();
         _isPlaying = true;
         _coroutine = StartCoroutine(MoveAim(_startFieldOfView, _zoomOFF));
@@ -53,7 +57,7 @@ public class PlayerAim : MonoBehaviour
     }
 
     /// <summary>
-    /// Плавное изменение FieldOfView камеры
+    /// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ FieldOfView пїЅпїЅпїЅпїЅпїЅпїЅ
     /// </summary>
     /// <param name="end"></param>
     /// <param name="modifier"></param>
