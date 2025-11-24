@@ -235,12 +235,7 @@ public class QuestTwo : Quest
     {
         _maxCountFruit = 0;
         if(_targetFruit == null) return;
-
-        foreach (var item in _targetFruit)
-        {
-            _maxCountFruit += item;
-        }
-
+        _maxCountFruit = _targetFruit[2];
     }
 
     #endregion
