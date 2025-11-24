@@ -33,7 +33,6 @@ Transform:
   m_Children:
   - {fileID: 7131688405937479486}
   - {fileID: 2243802766245093523}
-  - {fileID: 1831390440444382349}
   - {fileID: 2753277272391095286}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -264,65 +263,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7131688405937479486}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &3378722691495741525
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1831390440444382349}
-  - component: {fileID: 3780928752131673360}
-  - component: {fileID: 4450006490270922178}
-  m_Layer: 0
-  m_Name: UiSystem
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1831390440444382349
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3378722691495741525}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1839375106437496404}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3780928752131673360
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3378722691495741525}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fc9d9899e0238d42a0a505bbf845351, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &4450006490270922178
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3378722691495741525}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80298abce54b2524c8f0baacad6bcefa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _nameEquipWeapon: {fileID: 0}
-  _nameEquipBonusWeapon: {fileID: 0}
 --- !u!1 &5628832712071816917
 GameObject:
   m_ObjectHideFlags: 0
@@ -526,5 +466,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startPoint: {fileID: 0}
   _minForce: 1
+  _distanceMultiplier: 10
   _trajectoryLine: {fileID: 0}
   _trajectoryPoints: 30
