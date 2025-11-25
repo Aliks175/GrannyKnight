@@ -1,18 +1,11 @@
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using System.Collections;
 
 public class DialogueTrigger : MonoBehaviour
 {
     [SerializeField] private Dialogue _dialoque;
 
-
-    void OnTriggerEnter(Collider other)
+    public void Active()
     {
-        if (other.CompareTag("Player"))
-        {
-            DialogueManager.Instance.StartDialogue(_dialoque);
-        }
+        DialogueManager.Instance.StartDialogue(_dialoque);
     }
 }
