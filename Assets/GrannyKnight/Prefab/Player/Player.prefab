@@ -314,6 +314,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8727596370652486632}
   - component: {fileID: 5526172999113983312}
+  - component: {fileID: 136565644344865399}
   m_Layer: 0
   m_Name: CinemachineCamera
   m_TagString: Untagged
@@ -379,6 +380,23 @@ MonoBehaviour:
       BarrelClipping: 0.25
       Anamorphism: 0
   BlendHint: 0
+--- !u!114 &136565644344865399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4602260920715852119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NoiseProfile: {fileID: 11400000, guid: 46965f9cbaf525742a6da4c2172a99cd, type: 2}
+  PivotOffset: {x: 0, y: 0, z: 0}
+  AmplitudeGain: 0
+  FrequencyGain: 1
+  m_NoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &6762589148004855112
 GameObject:
   m_ObjectHideFlags: 0
@@ -5491,6 +5509,8 @@ MonoBehaviour:
   _animatorArmorHand: {fileID: 2863609477436901766}
   _animatorGlovesHand: {fileID: 7606240564321750837}
   _coefficientSmoothSpeed: 0.2
+  _virtualCamera: {fileID: 136565644344865399}
+  _amplitudeGain: 10
 --- !u!143 &7833044369918077747
 CharacterController:
   m_ObjectHideFlags: 0
@@ -6215,7 +6235,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.000048631668
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 375105059713156721, guid: 63cc8fee6e5d4cd46b6bf03e4780281b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 1522661069792397088, guid: 63cc8fee6e5d4cd46b6bf03e4780281b, type: 3}
@@ -6424,46 +6445,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8969602724692179544, guid: da9d3ae818c22e04291f7e108985e22a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5040949955128728615}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da9d3ae818c22e04291f7e108985e22a, type: 3}
 --- !u!4 &1542836519994800811 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8588855469372039394, guid: da9d3ae818c22e04291f7e108985e22a, type: 3}
-  m_PrefabInstance: {fileID: 7086694591799056969}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &2171457436483477521 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8969602724692179544, guid: da9d3ae818c22e04291f7e108985e22a, type: 3}
-  m_PrefabInstance: {fileID: 7086694591799056969}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &5040949955128728615
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2171457436483477521}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5dd516a08671ed438b1628d8352cf85, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _animator: {fileID: 4866541202397716689}
-  _particleSystem: {fileID: 0}
-  _audioSource: {fileID: 0}
-  _idWeapon: 2
-  OnFire:
-    m_PersistentCalls:
-      m_Calls: []
-  OnEndFire:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!95 &4866541202397716689 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 2436889812962818712, guid: da9d3ae818c22e04291f7e108985e22a, type: 3}
   m_PrefabInstance: {fileID: 7086694591799056969}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7246124520135803946

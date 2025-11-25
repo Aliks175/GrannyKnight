@@ -10,7 +10,6 @@ public class PhysicsEffect : WeaponEffectAbstract
     [SerializeField] private ParticleSystem _particleSystem;
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private int _idWeapon;
-    private ControlViewMark _controlViewMark;
     private IFireble _testWeapon;
     private int _shootAnimationID;
     private int _endShootAnimationID;
@@ -22,23 +21,22 @@ public class PhysicsEffect : WeaponEffectAbstract
     {
         if (_testWeapon != null)
         {
-            _testWeapon.OnFire -= Fire;
+            _testWeapon.OnFirePhysics -= Fire;
             _testWeapon.OnEndFire -= ControlFire;
         }
     }
 
-    public override void Initialization(IFireble testWeapon, ControlViewMark controlViewMark)
+    public override void Initialization(IFireble testWeapon)
     {
         _testWeapon = testWeapon;
-        _controlViewMark = controlViewMark;
         _shootAnimationID = Animator.StringToHash("Shoot");
         _endShootAnimationID = Animator.StringToHash("EndShoot");
         _isShootAnimationID = Animator.StringToHash("IsShoot");
-        _testWeapon.OnFire += Fire;
+        _testWeapon.OnFirePhysics += Fire;
         _testWeapon.OnEndFire += ControlFire;
     }
 
-    private void Fire(TypeShoot typeShoot)
+    private void Fire()
     {
         if (_animator != null)
         {
