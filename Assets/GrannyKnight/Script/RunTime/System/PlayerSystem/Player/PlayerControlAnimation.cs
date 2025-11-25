@@ -1,3 +1,4 @@
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class PlayerControlAnimation : MonoBehaviour
@@ -5,6 +6,8 @@ public class PlayerControlAnimation : MonoBehaviour
     [SerializeField] private Animator _animatorArmorHand;
     [SerializeField] private Animator _animatorGlovesHand;
     [SerializeField] private float _coefficientSmoothSpeed;
+    [SerializeField] private CinemachineBasicMultiChannelPerlin _virtualCamera;
+    [SerializeField] private float _amplitudeGain;
     private Animator _activeAnimator;
     private float _tempSpeed;
     private bool _tempGround;
@@ -26,6 +29,8 @@ public class PlayerControlAnimation : MonoBehaviour
         _tempSpeed = Mathf.Lerp(_tempSpeed, speed, _coefficientSmoothSpeed);
         if (!_tempGround) return;
         _activeAnimator.SetFloat(_idSpeed, _tempSpeed);
+        float temp = (_tempSpeed-4) / _amplitudeGain;
+        _virtualCamera.AmplitudeGain = temp;
     }
 
     public void SetCheckGround(bool isGround)

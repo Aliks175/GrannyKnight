@@ -4483,7 +4483,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50a9c76790441c84192006c23f3ca5c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCharacter: {fileID: 0}
+  _playerCharacter: {fileID: 0}
   _positionTeleported: {fileID: 1723347391}
   _blackOut: {fileID: 1463854502}
 --- !u!114 &473101559
@@ -6233,7 +6233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50a9c76790441c84192006c23f3ca5c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCharacter: {fileID: 0}
+  _playerCharacter: {fileID: 0}
   _positionTeleported: {fileID: 1090745226}
   _blackOut: {fileID: 0}
 --- !u!114 &686270046
@@ -13221,7 +13221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50a9c76790441c84192006c23f3ca5c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCharacter: {fileID: 0}
+  _playerCharacter: {fileID: 0}
   _positionTeleported: {fileID: 1142124512}
   _blackOut: {fileID: 1463854502}
 --- !u!114 &1008383887
@@ -15274,10 +15274,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4671220082497144086, guid: f2d11c68953d5ff448909785248eb2f2, type: 3}
+      propertyPath: _virtualCamera
+      value: 
+      objectReference: {fileID: 1378808910}
     - target: {fileID: 4980174317610463746, guid: f2d11c68953d5ff448909785248eb2f2, type: 3}
       propertyPath: _questViewControl
       value: 
       objectReference: {fileID: 1283467051}
+    - target: {fileID: 6590639487651640494, guid: f2d11c68953d5ff448909785248eb2f2, type: 3}
+      propertyPath: _virtualCamera
+      value: 
+      objectReference: {fileID: 1378808910}
     - target: {fileID: 7630512764666189019, guid: f2d11c68953d5ff448909785248eb2f2, type: 3}
       propertyPath: m_Name
       value: 'Player '
@@ -15327,6 +15335,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 25ebc8d03187a6b4eada0b4ffa22f56c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1378808910 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 136565644344865399, guid: f2d11c68953d5ff448909785248eb2f2, type: 3}
+  m_PrefabInstance: {fileID: 1378808905}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1378808911 stripped
@@ -17527,17 +17546,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4547575041190068321, guid: 204434d8ebd752b4188480902e26a95b, type: 3}
   m_PrefabInstance: {fileID: 5277046940611665574}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1659340791 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5040949955128728615, guid: f2d11c68953d5ff448909785248eb2f2, type: 3}
-  m_PrefabInstance: {fileID: 1378808905}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5dd516a08671ed438b1628d8352cf85, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!43 &1668081341
 Mesh:
   m_ObjectHideFlags: 0
@@ -36328,7 +36336,7 @@ PrefabInstance:
     - target: {fileID: 6123998067695533893, guid: 23eb575ccbd9f3c42ae3c5c7d667ce15, type: 3}
       propertyPath: '_listWeaponEffect.Array.data[2]'
       value: 
-      objectReference: {fileID: 1659340791}
+      objectReference: {fileID: 0}
     - target: {fileID: 6343814602232703911, guid: 23eb575ccbd9f3c42ae3c5c7d667ce15, type: 3}
       propertyPath: _head
       value: 
@@ -50316,7 +50324,7 @@ PrefabInstance:
       objectReference: {fileID: 1533740177}
     - target: {fileID: 2907378481562393591, guid: a89798381fc303e4f9c2ce76b1320bce, type: 3}
       propertyPath: m_VersionIndex
-      value: 1802
+      value: 1805
       objectReference: {fileID: 0}
     - target: {fileID: 2933393169915022204, guid: a89798381fc303e4f9c2ce76b1320bce, type: 3}
       propertyPath: _playerQuestControl
@@ -50448,7 +50456,7 @@ PrefabInstance:
       objectReference: {fileID: 220347725}
     - target: {fileID: 7449353929093745549, guid: a89798381fc303e4f9c2ce76b1320bce, type: 3}
       propertyPath: m_VersionIndex
-      value: 1301
+      value: 1304
       objectReference: {fileID: 0}
     - target: {fileID: 7471563017734993317, guid: a89798381fc303e4f9c2ce76b1320bce, type: 3}
       propertyPath: m_Mesh

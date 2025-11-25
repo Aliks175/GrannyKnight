@@ -1,3 +1,5 @@
+using DG.Tweening;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,6 +12,7 @@ public class WeaponEffect : WeaponEffectAbstract
     [SerializeField] private ParticleSystem _particleSystem;
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private int _idWeapon;
+
     //private ControlViewMark _controlViewMark;
     private IFireble _testWeapon;
     private int _shootAnimationID;
@@ -69,6 +72,7 @@ public class WeaponEffect : WeaponEffectAbstract
         OnFire?.Invoke();
         //CreateMark(typeShoot.raycastHit);
     }
+
 
     //private void CreateMark(RaycastHit Pos)
     //{

@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1615953017164768941
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8749744124480460135}
+  m_Layer: 0
+  m_Name: PhysicPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8749744124480460135
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1615953017164768941}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8266825435659702332}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &8422534381954882289
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10,35 +41,35 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: e09dc27d98e545245af8d389f88dda13, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: -0.028999701
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e09dc27d98e545245af8d389f88dda13, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.15600726
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e09dc27d98e545245af8d389f88dda13, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.515
+      value: 0.19173793
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e09dc27d98e545245af8d389f88dda13, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.99332917
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e09dc27d98e545245af8d389f88dda13, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0.11531374
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e09dc27d98e545245af8d389f88dda13, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e09dc27d98e545245af8d389f88dda13, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e09dc27d98e545245af8d389f88dda13, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -13.243
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e09dc27d98e545245af8d389f88dda13, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -52,6 +83,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SlingshotHand
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e09dc27d98e545245af8d389f88dda13, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3027241015696155282, guid: e09dc27d98e545245af8d389f88dda13, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -59,15 +94,21 @@ PrefabInstance:
     - target: {fileID: 5866666021909216657, guid: e09dc27d98e545245af8d389f88dda13, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 22100000, guid: 71cedb6928bd7d643bdef7c5988c0a5d, type: 2}
+      objectReference: {fileID: 9100000, guid: b64dcd927873a45439e06988410cac41, type: 2}
     - target: {fileID: 9155276747989737948, guid: e09dc27d98e545245af8d389f88dda13, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 910afa7726bdb434b9c8826e71bf6fd1, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8765285211320202547, guid: e09dc27d98e545245af8d389f88dda13, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8749744124480460135}
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e09dc27d98e545245af8d389f88dda13, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8115741631506050767}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e09dc27d98e545245af8d389f88dda13, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5927260371045433440}
@@ -77,11 +118,32 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: e09dc27d98e545245af8d389f88dda13, type: 3}
   m_PrefabInstance: {fileID: 8422534381954882289}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &8266825435659702332 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8765285211320202547, guid: e09dc27d98e545245af8d389f88dda13, type: 3}
+  m_PrefabInstance: {fileID: 8422534381954882289}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8656960497580664736 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: e09dc27d98e545245af8d389f88dda13, type: 3}
   m_PrefabInstance: {fileID: 8422534381954882289}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8115741631506050767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8656960497580664736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb7e5423671fb4144aa3eea57f0f0912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _virtualCamera: {fileID: 0}
+  _shakeDuration: 1
+  _shakeAmplitude: 2
+  _shakeFrequency: 4
 --- !u!114 &5927260371045433440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -97,4 +159,22 @@ MonoBehaviour:
   _animator: {fileID: 2704499316565731168}
   _particleSystem: {fileID: 0}
   _audioSource: {fileID: 0}
-  _idWeapon: 0
+  _idWeapon: 3
+  OnFire:
+    m_PersistentCalls:
+      m_Calls: []
+  OnEndFire:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8115741631506050767}
+        m_TargetAssemblyTypeName: ShakeScreen, Assembly-CSharp
+        m_MethodName: ShakeScreenMetod
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

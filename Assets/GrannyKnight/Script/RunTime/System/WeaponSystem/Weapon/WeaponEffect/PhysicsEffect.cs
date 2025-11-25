@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 [SelectionBase]
 public class PhysicsEffect : WeaponEffectAbstract
@@ -13,13 +14,15 @@ public class PhysicsEffect : WeaponEffectAbstract
     private int _shootAnimationID;
     private int _endShootAnimationID;
     private int _isShootAnimationID;
+    public UnityEvent OnFire;
+    public UnityEvent OnEndFire;
 
     private void OnDisable()
     {
         if (_testWeapon != null)
         {
-            // _testWeapon.Shoot -= Fire;
-            // _testWeapon.ResetShot -= ControlFire;
+            _testWeapon.OnFirePhysics -= Fire;
+            _testWeapon.OnEndFire -= ControlFire;
         }
     }
 
@@ -29,8 +32,8 @@ public class PhysicsEffect : WeaponEffectAbstract
         _shootAnimationID = Animator.StringToHash("Shoot");
         _endShootAnimationID = Animator.StringToHash("EndShoot");
         _isShootAnimationID = Animator.StringToHash("IsShoot");
-        testWeapon.OnFirePhysics += Fire;
-        testWeapon.OnEndFire += ControlFire;
+        _testWeapon.OnFirePhysics += Fire;
+        _testWeapon.OnEndFire += ControlFire;
     }
 
     private void Fire()
@@ -50,7 +53,20 @@ public class PhysicsEffect : WeaponEffectAbstract
         {
             _particleSystem.Play();
         }
+        OnFire?.Invoke();
+        //CreateMark(typeShoot.raycastHit);
     }
+
+    //private void CreateMark(RaycastHit Pos)
+    //{
+    //    if (Pos.point != Vector3.zero)
+    //    {
+    //        Mark tempMark = _controlViewMark.GetMark();
+    //        tempMark.transform.position = Pos.point;
+    //        tempMark.transform.rotation = Quaternion.LookRotation(Pos.normal);
+    //        tempMark.SetMark();
+    //    }
+    //}
 
     private void ControlFire()
     {
@@ -62,6 +78,7 @@ public class PhysicsEffect : WeaponEffectAbstract
             {
                 _particleSystem.Stop();
             }
+            OnEndFire?.Invoke();
         }
     }
 }
