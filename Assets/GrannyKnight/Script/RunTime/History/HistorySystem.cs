@@ -2,15 +2,24 @@ using UnityEngine;
 
 public class HistorySystem : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    private void Awake()
     {
-        
+        Initialization();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        StartGame();
+    }
+
+    public void Initialization()
+    {
+
+    }
+
+    private void StartGame()
+    {
+
     }
 }
