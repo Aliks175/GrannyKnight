@@ -67,23 +67,4 @@ public class DialogueManager : MonoBehaviour
         _dialogueUI.SetActive(false);
     }
 }
-public enum Character
-{
-    ГГ,
-    Бабушка,
-    Сыч,
-    Гвинька,
-    Кролик
-}
-[Serializable]
-public struct Dialogue
-{
-    public DialogueLine[] Lines;
 
-}
-[Serializable]
-public struct DialogueLine
-{
-    public Character Character;
-    public string Line;
-}
