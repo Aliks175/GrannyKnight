@@ -13,6 +13,10 @@ public class UiOne : MonoBehaviour
     {
         _sliderProgress.maxValue = MaxHealth;
         _sliderProgress.value = MaxHealth;
+        if(_uiTimer == null)
+        {
+            _uiTimer = GameObject.FindFirstObjectByType<UiTimer>();
+        }
     }
 
     public void StartTimerGame(Action action)

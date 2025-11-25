@@ -79,7 +79,11 @@ public class DustCreater : Quest
         {
             for (int i = 0; i < _dusts.Count; i++)
             {
-                Destroy(_dusts[i]);
+                GameObject temp = _dusts[i];
+                if (temp != null)
+                {
+                    Destroy(temp);
+                }
             }
             _dusts.Clear();
         }

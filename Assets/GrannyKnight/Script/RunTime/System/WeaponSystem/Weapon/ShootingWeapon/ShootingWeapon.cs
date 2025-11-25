@@ -6,14 +6,15 @@ using UnityEngine.InputSystem;
 public class ShootingWeapon : MonoBehaviour, IFireble
 {
     private WeaponEffectAbstract _weaponEffect;
-    private ControlViewMark _controlViewMark;
     private Transform _head;
     private Coroutine _coroutine;
     private Coroutine _waitAnimationFire;
-    private bool _isFire = false;
     private float _nextTimeToFire = 0f;
-    public event Action OnStartFire;
-    public event Action<TypeShoot> OnFire;
+    private bool _isAutoFire = false;
+    private bool _isSingleFire = false;
+    public event Action OnPreFire;
+    public event Action OnFirePhysics;
+    public event Action<RaycastHit> OnFireRaycast;
     public event Action OnEndFire;
 
     public void Initialization(Transform head)
@@ -21,14 +22,15 @@ public class ShootingWeapon : MonoBehaviour, IFireble
         _head = head;
         _coroutine = null;
         _nextTimeToFire = 0f;
-        _isFire = false;
+        _isAutoFire = false;
+        _isSingleFire = false;
     }
 
 
     public void SetWeaponEffect(WeaponEffectAbstract weaponEffect)
     {
         _weaponEffect = weaponEffect;
-        _weaponEffect.Initialization(this, _controlViewMark);
+        _weaponEffect.Initialization(this);
     }
 
     public void Shoot(InputAction.CallbackContext value, Weapon weapon)
@@ -57,27 +59,34 @@ public class ShootingWeapon : MonoBehaviour, IFireble
         OnEndFire?.Invoke();
         if (_coroutine != null)
         {
-            _isFire = false;
             StopCoroutine(_coroutine);
         }
+        //if (_waitAnimationFire != null)
+        //{
+        //    StopCoroutine(_waitAnimationFire);
+        //}
+        _isAutoFire = false;
+        //_isSingleFire = false;
     }
 
     private void ShootAutoFire(Weapon weapon)
     {
-        _isFire = true;
+        _isAutoFire = true;
         _coroutine = StartCoroutine(AutoFire(weapon));
     }
 
     private void ShootSingleFire(Weapon weapon)
     {
-        OnStartFire?.Invoke();
+        //if (_isSingleFire) return;
+        OnPreFire?.Invoke();
+        //_isSingleFire = true;
         _waitAnimationFire = StartCoroutine(SingleFire(weapon));
     }
 
     private IEnumerator AutoFire(Weapon weapon)
     {
-        OnStartFire?.Invoke();
-        while (_isFire)
+        OnPreFire?.Invoke();
+        while (_isAutoFire)
         {
             yield return null;
             Fire(true, weapon);
@@ -103,16 +112,17 @@ public class ShootingWeapon : MonoBehaviour, IFireble
                     target.TakeDamage(weapon.Damage);
                 }
             }
-            OnFire?.Invoke(new TypeShoot { IsShootAutoFire = _isShootAutoFire, raycastHit = hit });
+            OnFireRaycast?.Invoke(hit);
         }
     }
 }
 
 public interface IFireble
 {
-    public event Action<TypeShoot> OnFire;
+    public event Action OnPreFire;
+    public event Action<RaycastHit> OnFireRaycast;
+    public event Action OnFirePhysics;
     public event Action OnEndFire;
-    public event Action OnStartFire;
 }
 
 public struct TypeShoot

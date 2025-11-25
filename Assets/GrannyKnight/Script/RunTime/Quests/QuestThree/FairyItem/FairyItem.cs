@@ -19,7 +19,7 @@ public class FairyItem : MonoBehaviour
     private void Start()
     {
         _isFree = true;
-        _tweenProgressPickUp = transform.DOScaleY(2, 1).From(1).SetLoops(-1, LoopType.Yoyo);
+        _tweenProgressPickUp = transform.DOScaleY(4, 1).From(2).SetLoops(-1, LoopType.Yoyo);
     }
 
     public void SetFairy()
@@ -54,7 +54,7 @@ public class FairyItem : MonoBehaviour
             _meshRenderer.enabled = true;
         }
         _isFree = true;
-        transform.localScale = Vector3.one;
+        transform.localScale = Vector3.one*2;
         _tweenProgressPickUp.Pause();
     }
 }
