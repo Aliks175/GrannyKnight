@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 [SelectionBase]
 public class PhysicsEffect : WeaponEffectAbstract
@@ -14,13 +15,15 @@ public class PhysicsEffect : WeaponEffectAbstract
     private int _shootAnimationID;
     private int _endShootAnimationID;
     private int _isShootAnimationID;
+    public UnityEvent OnFire;
+    public UnityEvent OnEndFire;
 
     private void OnDisable()
     {
         if (_testWeapon != null)
         {
-            // _testWeapon.Shoot -= Fire;
-            // _testWeapon.ResetShot -= ControlFire;
+            _testWeapon.OnFire -= Fire;
+            _testWeapon.OnEndFire -= ControlFire;
         }
     }
 
@@ -31,10 +34,8 @@ public class PhysicsEffect : WeaponEffectAbstract
         _shootAnimationID = Animator.StringToHash("Shoot");
         _endShootAnimationID = Animator.StringToHash("EndShoot");
         _isShootAnimationID = Animator.StringToHash("IsShoot");
-        testWeapon.OnFire += Fire;
-        testWeapon.OnEndFire += ControlFire;
-        //.OnFire += Fire;
-        //_testWeapon.OnEndFire += ControlFire;
+        _testWeapon.OnFire += Fire;
+        _testWeapon.OnEndFire += ControlFire;
     }
 
     private void Fire(TypeShoot typeShoot)
@@ -54,6 +55,7 @@ public class PhysicsEffect : WeaponEffectAbstract
         {
             _particleSystem.Play();
         }
+        OnFire?.Invoke();
         //CreateMark(typeShoot.raycastHit);
     }
 
@@ -78,6 +80,7 @@ public class PhysicsEffect : WeaponEffectAbstract
             {
                 _particleSystem.Stop();
             }
+            OnEndFire?.Invoke();
         }
     }
 }
