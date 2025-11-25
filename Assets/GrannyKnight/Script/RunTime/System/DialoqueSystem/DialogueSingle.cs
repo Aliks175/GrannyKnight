@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DialogueTrigger : MonoBehaviour
+public class DialogueSingle : MonoBehaviour
 {
     [SerializeField] private Dialogue _dialoque;
 
