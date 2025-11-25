@@ -8,12 +8,10 @@ public class ActiveDoEnter : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //Debug.Log("Start");
-        //Debug.Log(other.gameObject.name);
-
-        Collider[] colliders = Physics.OverlapSphere(transform.position, 5, _playerLayer);
-        if (colliders.Length > 0 && colliders != null)
+        if (other.CompareTag("Player"))
         {
+            Debug.Log("Start");
+            Debug.Log(other.gameObject.name);
             UnityEvent?.Invoke();
         }
     }

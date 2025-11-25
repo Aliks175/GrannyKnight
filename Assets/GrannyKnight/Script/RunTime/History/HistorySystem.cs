@@ -1,25 +1,17 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class HistorySystem : MonoBehaviour
 {
-
-    private void Awake()
-    {
-        Initialization();
-    }
-
-    private void Start()
-    {
-        StartGame();
-    }
+    public UnityEvent OnStartGame;
 
     public void Initialization()
     {
 
     }
 
-    private void StartGame()
+    public void StartGame()
     {
-
+        OnStartGame?.Invoke();
     }
 }

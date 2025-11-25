@@ -10,8 +10,9 @@ public class InputControl : MonoBehaviour
     private PlayerInteracteble _playerInteracteble;
     private PlayerChooseWeapon _playerChooseWeapon;
     private WeaponSystem _weaponSystem;
+    private bool _isPlayerControl;
 
-    public void Initialization(WeaponSystem weaponSystem )
+    public void Initialization(WeaponSystem weaponSystem)
     {
         _playerInput = new PlayerSystemActions();
         _playerActions = _playerInput.Player;
@@ -21,7 +22,13 @@ public class InputControl : MonoBehaviour
         _playerInteracteble = GetComponent<PlayerInteracteble>();
         _playerChooseWeapon = GetComponent<PlayerChooseWeapon>();
         _weaponSystem = weaponSystem;
+        _isPlayerControl = true;
         SetUp();
+    }
+
+    public void ControlMovePlayer(bool isPlayerControl)
+    {
+        _isPlayerControl = isPlayerControl;
     }
 
     private void SetUp()
@@ -54,11 +61,17 @@ public class InputControl : MonoBehaviour
 
     private void Update()
     {
-        _playerMover.ProcessMove(_playerActions.Move.ReadValue<Vector2>());
+        if (_isPlayerControl)
+        {
+            _playerMover.ProcessMove(_playerActions.Move.ReadValue<Vector2>());
+        }
     }
 
     private void LateUpdate()
     {
-        _playerLook.ProcessLook(_playerActions.Look.ReadValue<Vector2>());
+        if (_isPlayerControl)
+        {
+            _playerLook.ProcessLook(_playerActions.Look.ReadValue<Vector2>());
+        }
     }
 }
