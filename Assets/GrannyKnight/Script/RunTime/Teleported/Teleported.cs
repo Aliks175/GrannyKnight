@@ -2,21 +2,22 @@ using UnityEngine;
 
 public class Teleported : MonoBehaviour
 {
-    [SerializeField] private CharacterController playerCharacter;
+    [SerializeField] private CharacterController _playerCharacter;
     [SerializeField] private Transform _positionTeleported;
     [SerializeField] private BlackOut _blackOut;
 
     private void Start()
     {
-        playerCharacter = GameObject.FindFirstObjectByType<CharacterController>();
+        _blackOut = GameObject.FindFirstObjectByType<BlackOut>();
+        _playerCharacter = GameObject.FindFirstObjectByType<CharacterController>();
     }
 
     public void ActiveTeleport()
     {
-        if (playerCharacter == null) return;
+        if (_playerCharacter == null) return;
         _blackOut.Active();
-        playerCharacter.enabled = false;
-        playerCharacter.transform.position = _positionTeleported.position;
-        playerCharacter.enabled = true;
+        _playerCharacter.enabled = false;
+        _playerCharacter.transform.position = _positionTeleported.position;
+        _playerCharacter.enabled = true;
     }
 }
