@@ -24,6 +24,7 @@ public class QuestTwo : Quest
     [SerializeField] private float _movementDurationToBack = 1f;
     [SerializeField] private float _timeToQuest;
     [SerializeField] private int[] _targetFruit;
+    [SerializeField] private ParticleSystem _particle;
 
     // Приватные поля
     private Tween _currentTween;
@@ -83,17 +84,11 @@ public class QuestTwo : Quest
         Cleanup();
         OnEnd?.Invoke(questEnding);
     }
-    private async UniTaskVoid StartTimer()
+    public void ParticleStart(Vector3 pos)
     {
-        _timer = _timeToQuest;
-        while (_timer > 0)
-        {
-            await UniTask.Delay(TimeSpan.FromSeconds(1));
-            _timer--;
-            _uiTwo.OnUpdateUiTimer(_timer);
-        }
-        CompleteQuest();
-    }
+        _particle.transform.position = pos;
+        _particle.Play();
+    }    
 
     #endregion
 
@@ -109,6 +104,17 @@ public class QuestTwo : Quest
     private void EndGame()
     {
         _uiTwo.Stop();
+    }
+    private async UniTaskVoid StartTimer()
+    {
+        _timer = _timeToQuest;
+        while (_timer > 0)
+        {
+            await UniTask.Delay(TimeSpan.FromSeconds(1));
+            _timer--;
+            _uiTwo.OnUpdateUiTimer(_timer);
+        }
+        CompleteQuest();
     }
 
     private void InitializeSingleton()

@@ -20,6 +20,7 @@ public class TargetFruits : MonoBehaviour, IHealtheble
     {
         await UniTask.WaitUntil(() => this.transform.position.y <= _toMove.y);
         QuestTwo.Instance.OnFruitCollected();
+        QuestTwo.Instance.ParticleStart(transform.position);
         Destroy(this.gameObject);
     }
 }
