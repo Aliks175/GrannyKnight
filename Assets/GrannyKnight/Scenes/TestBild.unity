@@ -4485,7 +4485,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerCharacter: {fileID: 0}
   _positionTeleported: {fileID: 1723347391}
-  _blackOut: {fileID: 1463854502}
 --- !u!114 &473101559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6235,7 +6234,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerCharacter: {fileID: 0}
   _positionTeleported: {fileID: 1090745226}
-  _blackOut: {fileID: 0}
 --- !u!114 &686270046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13223,7 +13221,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerCharacter: {fileID: 0}
   _positionTeleported: {fileID: 1142124512}
-  _blackOut: {fileID: 1463854502}
 --- !u!114 &1008383887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15285,18 +15282,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4671220082497144086, guid: f2d11c68953d5ff448909785248eb2f2, type: 3}
-      propertyPath: _virtualCamera
-      value: 
-      objectReference: {fileID: 1378808910}
     - target: {fileID: 4980174317610463746, guid: f2d11c68953d5ff448909785248eb2f2, type: 3}
       propertyPath: _questViewControl
       value: 
       objectReference: {fileID: 1283467051}
-    - target: {fileID: 6590639487651640494, guid: f2d11c68953d5ff448909785248eb2f2, type: 3}
-      propertyPath: _virtualCamera
-      value: 
-      objectReference: {fileID: 1378808910}
     - target: {fileID: 7630512764666189019, guid: f2d11c68953d5ff448909785248eb2f2, type: 3}
       propertyPath: m_Name
       value: 'Player '
@@ -15346,17 +15335,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 25ebc8d03187a6b4eada0b4ffa22f56c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1378808910 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 136565644344865399, guid: f2d11c68953d5ff448909785248eb2f2, type: 3}
-  m_PrefabInstance: {fileID: 1378808905}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1378808911 stripped

@@ -2380,7 +2380,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8598723804361046272
 Transform:
   m_ObjectHideFlags: 0
@@ -4040,7 +4040,7 @@ MonoBehaviour:
   _startPos: {fileID: 6030689846158774715}
   _timeToSleep: 3
   _movementDurationToBack: 1
-  _timeToQuest: 60
+  _timeToQuest: 80
   _targetFruit: 080000000e0000000f000000
 --- !u!114 &2854048576666081960
 MonoBehaviour:
@@ -4127,8 +4127,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 4438275353171857199}
-        m_TargetAssemblyTypeName: SpriteRotate, Assembly-CSharp
+      - m_Target: {fileID: 1383543706818411067}
+        m_TargetAssemblyTypeName: UnityEngine.SpriteRenderer, UnityEngine
         m_MethodName: set_enabled
         m_Mode: 6
         m_Arguments:
@@ -5326,17 +5326,6 @@ SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 3609963331629179018, guid: a60b6826abe21704a8a1064e2fae2df5, type: 3}
   m_PrefabInstance: {fileID: 2389862387178150577}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4438275353171857199 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2070974985693566366, guid: a60b6826abe21704a8a1064e2fae2df5, type: 3}
-  m_PrefabInstance: {fileID: 2389862387178150577}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb64b306902eaf64389063d7a14f66c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2564752530784858978
 PrefabInstance:
   m_ObjectHideFlags: 0

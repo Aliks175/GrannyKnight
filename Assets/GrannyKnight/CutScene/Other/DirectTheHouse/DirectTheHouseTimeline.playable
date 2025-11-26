@@ -93,7 +93,7 @@ MonoBehaviour:
   m_Markers:
     m_Objects: []
   template:
-    volume: 0.1
+    volume: 1
 --- !u!114 &-7844913943745715647
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -166,6 +166,22 @@ MonoBehaviour:
   VirtualCamera:
     exposedName: d8c54e77df60b1d45ad8177b41054488
     defaultValue: {fileID: 0}
+--- !u!114 &-3394666207623345669
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15c38f6fa1940124db1ab7f6fe7268d1, type: 3}
+  m_Name: Signal Emitter
+  m_EditorClassIdentifier: 
+  m_Time: 0
+  m_Retroactive: 0
+  m_EmitOnce: 0
+  m_Asset: {fileID: 11400000, guid: 371a826db5a856e4a96ced15e700a8c3, type: 2}
 --- !u!114 &-3153163955482888702
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -192,6 +208,9 @@ MonoBehaviour:
     - {fileID: 423821655994911478}
     - {fileID: -5524693733199654554}
     - {fileID: -2012576723673780456}
+    - {fileID: -3394666207623345669}
+    - {fileID: 7074463936365890445}
+    - {fileID: 3093790950680226485}
 --- !u!114 &-3053308176281738489
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -340,6 +359,22 @@ MonoBehaviour:
   m_Markers:
     m_Objects:
     - {fileID: -5960443199126013995}
+--- !u!114 &3093790950680226485
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15c38f6fa1940124db1ab7f6fe7268d1, type: 3}
+  m_Name: Signal Emitter
+  m_EditorClassIdentifier: 
+  m_Time: 3
+  m_Retroactive: 0
+  m_EmitOnce: 0
+  m_Asset: {fileID: 11400000, guid: 36b6f2f8d30bf244a988b3bd499b374c, type: 2}
 --- !u!114 &4555229562066754116
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -434,7 +469,7 @@ MonoBehaviour:
     m_Start: 0.25
     m_ClipIn: 0
     m_Asset: {fileID: -5436221427086690333}
-    m_Duration: 3.4454795997589827
+    m_Duration: 2.75
     m_TimeScale: 1
     m_ParentTrack: {fileID: 4555229562066754116}
     m_EaseInDuration: 0
@@ -502,6 +537,22 @@ MonoBehaviour:
   m_Markers:
     m_Objects: []
   TrackPriority: 0
+--- !u!114 &7074463936365890445
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15c38f6fa1940124db1ab7f6fe7268d1, type: 3}
+  m_Name: Signal Emitter
+  m_EditorClassIdentifier: 
+  m_Time: 3
+  m_Retroactive: 0
+  m_EmitOnce: 0
+  m_Asset: {fileID: 11400000, guid: 981b868938adf01438e1bd37401491f4, type: 2}
 --- !u!114 &8026038586240534314
 MonoBehaviour:
   m_ObjectHideFlags: 1
