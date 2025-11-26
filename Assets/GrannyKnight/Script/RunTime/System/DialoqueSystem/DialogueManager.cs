@@ -34,9 +34,20 @@ public class DialogueManager : MonoBehaviour
             _names[i] = dialogue.Lines[i].Character.ToString();
         }
         currentLine = 0;
-        _dialogueUI.SetActive(true);
+        ControlVisible(true);
         UpdateDialogue();
     }
+
+    public void HideDialog()
+    {
+        ControlVisible(false);
+    }
+
+    public void ShowDialog()
+    {
+        ControlVisible(true);
+    }
+
     public void NextLine()
     {
         currentLine++;
@@ -46,7 +57,7 @@ public class DialogueManager : MonoBehaviour
         }
         else
         {
-            CloseDialogue();
+            ControlVisible(false);
         }
     }
 
@@ -55,16 +66,9 @@ public class DialogueManager : MonoBehaviour
         _dialogueText.text = _lines[currentLine];
         _nameText.text = _names[currentLine];
     }
-    void Update()
+
+    private void ControlVisible(bool isVisible)
     {
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            NextLine();
-        }
-    }
-    private void CloseDialogue()
-    {
-        _dialogueUI.SetActive(false);
+        _dialogueUI.SetActive(isVisible);
     }
 }
-

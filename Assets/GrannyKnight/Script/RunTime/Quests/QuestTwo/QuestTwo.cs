@@ -31,7 +31,7 @@ public class QuestTwo : Quest
     private CancellationTokenSource _cts;
     private float _timer;
     private float _sleepEndTime;
-    private int _maxCountFruit ;
+    private int _maxCountFruit;
     private int _fruitCount = 0;
     private bool _isQuestActive;
 
@@ -55,6 +55,7 @@ public class QuestTwo : Quest
 
     public override void StartQuest()
     {
+        OnStart?.Invoke();
         _uiTwo.StartTimerGame(StartGame);
     }
 
@@ -94,7 +95,7 @@ public class QuestTwo : Quest
 
     #region Private Methods
 
-    private void StartGame() 
+    private void StartGame()
     {
         _isQuestActive = true;
         ResetQuestState();
@@ -240,7 +241,7 @@ public class QuestTwo : Quest
     private void CalculateMaxCountFruit()
     {
         _maxCountFruit = 0;
-        if(_targetFruit == null) return;
+        if (_targetFruit == null) return;
         _maxCountFruit = _targetFruit[2];
     }
 

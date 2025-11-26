@@ -12,6 +12,8 @@ public class SoundSystem : MonoBehaviour
     [SerializeField] private EventReference _heroWork_2;
     [SerializeField] private EventReference _babka;
 
+    private FMOD.Studio.EventInstance _activeSound;
+
     public void Initialization()
     {
         instance = this;
@@ -59,5 +61,27 @@ public class SoundSystem : MonoBehaviour
         {
             RuntimeManager.PlayOneShot(_babka);
         }
+    }
+
+    public void StopSound()
+    {
+        _activeSound.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+    }
+
+    public void PlaySound(EventReference eventReference) // ¬ызов другого звука 
+    {
+        _activeSound.getPlaybackState(out FMOD.Studio.PLAYBACK_STATE state);
+        if (state == FMOD.Studio.PLAYBACK_STATE.PLAYING)
+        {
+            _activeSound.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        }
+        _activeSound = RuntimeManager.CreateInstance(eventReference); // —оздаем событие «вука 
+        _activeSound.start(); // «апускаем воспроизведение 
+        _activeSound.release(); // освобождаем пам€ть от этого событи€ 
+
+        //        PLAYING Ч звук играет.
+        //STOPPED Ч не играет.
+        //STARTING Ч запускаетс€.
+        //STOPPING Ч останавливаетс€.
     }
 }
