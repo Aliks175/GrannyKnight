@@ -1,10 +1,12 @@
 using UnityEngine;
 using Cysharp.Threading.Tasks;
+using System.Threading;
 
 public class TargetFruits : MonoBehaviour, IHealtheble
 {
     [SerializeField] private Rigidbody rb;
     private Vector3 _toMove;
+    private CancellationTokenSource _cancellationTokenSource;
 
     public void TakeDamage(float damage)
     {
@@ -14,13 +16,20 @@ public class TargetFruits : MonoBehaviour, IHealtheble
         float time = Mathf.Sqrt(2 * distance / Mathf.Abs(Physics.gravity.y));
         _toMove = new Vector3(this.transform.position.x, basket.y, this.transform.position.z);
         QuestTwo.Instance.CollectFruit(_toMove, time);
-        DestroyFruit().Forget();
+        _cancellationTokenSource = new CancellationTokenSource();
+        DestroyFruit(_cancellationTokenSource.Token).Forget();
     }
-    private async UniTaskVoid DestroyFruit()
+    private async UniTaskVoid DestroyFruit(CancellationToken cancellationToken)
     {
-        await UniTask.WaitUntil(() => this.transform.position.y <= _toMove.y);
+        await UniTask.WaitUntil(() => this.transform.position.y <= _toMove.y, cancellationToken: cancellationToken);
         QuestTwo.Instance.OnFruitCollected();
         QuestTwo.Instance.ParticleStart(transform.position);
         Destroy(this.gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        _cancellationTokenSource?.Cancel();
+        _cancellationTokenSource?.Dispose();
     }
 }
