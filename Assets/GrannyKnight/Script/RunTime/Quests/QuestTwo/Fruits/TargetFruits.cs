@@ -16,6 +16,7 @@ public class TargetFruits : MonoBehaviour, IHealtheble
         QuestTwo.Instance.CollectFruit(_toMove, time);
         DestroyFruit().Forget();
     }
+
     private async UniTaskVoid DestroyFruit()
     {
         await UniTask.WaitUntil(() => this.transform.position.y <= _toMove.y);

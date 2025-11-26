@@ -23,6 +23,11 @@ public class ControlLoading : MonoBehaviour
     {
         SceneManager.LoadSceneAsync((int)ListScene.GameGamePlay, LoadSceneMode.Single);
     }
+
+    public void LoadMenu()
+    {
+        SceneManager.LoadSceneAsync((int)ListScene.Menu, LoadSceneMode.Single);
+    }
 }
 
 public enum ListScene

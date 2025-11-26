@@ -44,9 +44,12 @@ public class FairyCreater : MonoBehaviour
     public void Stop()
     {
         _isPlay = false;
-        foreach (var item in fairies)
+        for (int i = 0; i < fairies.Count; i++)
         {
-            item.End();
+            if (fairies[i] != null)
+            {
+                fairies[i].GameEnd();
+            }
         }
     }
 
