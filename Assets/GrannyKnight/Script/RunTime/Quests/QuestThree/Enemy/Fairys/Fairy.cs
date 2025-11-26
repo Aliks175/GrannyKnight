@@ -11,8 +11,8 @@ public class Fairy : MonoBehaviour, IHealtheble
     [SerializeField] private Ease _ease;
     [SerializeField] private float _timerPickUp;
     [SerializeField] private float _bazeOffsetHeight;
-    [SerializeField, Range(0.1f, 2f)] private float _coefficientSpeedWithItem;
-    [SerializeField, Range(0.1f, 2f)] private float _coefficientSpeedWithoutItem;
+    [SerializeField, Range(0.1f, 10f)] private float _coefficientSpeedWithItem;
+    [SerializeField, Range(0.01f, 1f)] private float _coefficientSpeedWithoutItem;
     [SerializeField] private ParticleSystem _particleSystem;
     public UnityEvent _pickUpevent;
     public UnityEvent _dieEvent;
@@ -54,6 +54,7 @@ public class Fairy : MonoBehaviour, IHealtheble
 
     public void TakeDamage(float damage)
     {
+        if (_isDead) return;
         if (_fairyItem != null)
         {
             _fairyItem.DropItem(transform.position);
@@ -185,19 +186,29 @@ public class Fairy : MonoBehaviour, IHealtheble
             StopCoroutine(_coroutine);
         }
         _isPlay = false;
-
         if (_isDead)
         {
             _dieEvent?.Invoke();
             _particleSystem.Play();
             GetComponent<SphereCollider>().isTrigger = false;
-            GetComponent<Rigidbody>().isKinematic = false; 
+            GetComponent<Rigidbody>().isKinematic = false;
+            Destroy(gameObject, 3f);
         }
         else
         {
             Destroy(gameObject);
         }
-         
+    }
+
+    public void GameEnd()
+    {
+        _tween?.Kill();
+        if (_coroutine != null)
+        {
+            StopCoroutine(_coroutine);
+        }
+        _isPlay = false;
+        Destroy(gameObject);
     }
 
 }

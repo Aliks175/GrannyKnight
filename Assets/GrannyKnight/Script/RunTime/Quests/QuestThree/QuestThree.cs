@@ -15,6 +15,8 @@ public class QuestThree : Quest
     [Header("QuestSettings")]
     [SerializeField] private AnimationCurve _valueEnemyForWave;
     [SerializeField] private int _valueWaves;
+    [Header("VictoryCondition")]
+    [SerializeField] private VictoryCondition victoryConditions;
     private int _wavesCount;
     private int _enemyForWave;
     private int _countAllEnemy;
@@ -53,6 +55,7 @@ public class QuestThree : Quest
 
     public override void StartQuest()
     {
+        OnStart?.Invoke();
         _uiThree.OnUpdateUi(_countTempEnemy, _countTempItem);
         _uiThree.StartTimerGame(StartGame);
     }
@@ -84,8 +87,6 @@ public class QuestThree : Quest
         if (_wavesCount >= _valueWaves)
         {
             EndGame();
-            // Проверять если украли хоть 1 то средняя концовка , если украли 0 то хорошая 
-
             return;
         }
         _fairyCreater.SpawnEnemy(GetEnemyForWave(_wavesCount));
@@ -94,7 +95,7 @@ public class QuestThree : Quest
 
     private void EndGame()
     {
-        if (_countTempItem < _countItem && _countTempItem > 0)
+        if (_countTempItem < victoryConditions.CountCakeMiddleEnding && _countTempItem > 0)
         {
             StopQuest(QuestEnding.Middle);
         }
@@ -102,7 +103,7 @@ public class QuestThree : Quest
         {
             StopQuest(QuestEnding.Bad);
         }
-        else if (_countTempItem == _countItem)
+        else if (_countTempItem >= victoryConditions.CountCakeGoodEnding)
         {
             StopQuest(QuestEnding.Good);
         }
@@ -153,5 +154,12 @@ public class QuestThree : Quest
             //Debug.Log($"Temp_allEnemy{_allEnemy}");
         }
         //Debug.Log($"_allEnemy{_allEnemy}");
+    }
+
+    [Serializable]
+    private struct VictoryCondition
+    {
+        public int CountCakeGoodEnding;
+        public int CountCakeMiddleEnding;
     }
 }

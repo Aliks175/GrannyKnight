@@ -16,6 +16,11 @@ public class PlayerLook : MonoBehaviour
         _isPlay = true;
     }
 
+    public void UnLockCursor()
+    {
+        Cursor.lockState = CursorLockMode.None;
+    }
+
     public void ProcessLook(Vector2 vector2)
     {
         if (!_isPlay) return;
