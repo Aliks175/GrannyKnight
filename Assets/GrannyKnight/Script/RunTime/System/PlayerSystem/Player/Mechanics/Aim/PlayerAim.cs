@@ -1,4 +1,5 @@
 using System.Collections;
+using DG.Tweening;
 using Unity.Cinemachine;
 using UnityEngine;
 
@@ -14,6 +15,7 @@ public class PlayerAim : MonoBehaviour
     private CinemachineCamera _cinemachineCamera;
     private Coroutine _coroutine;
     private PlayerLook _playerLook;
+    private Tween _tween;
     private bool _isActive = false;
     private bool _isPlaying = false;
     private const int _zoomOn = -1;
@@ -35,6 +37,18 @@ public class PlayerAim : MonoBehaviour
         StopMoveAim();
         _isPlaying = true;
         _coroutine = StartCoroutine(MoveAim(_endFieldOfView, _zoomOn));
+    }
+    public void StartAim( float endFieldOfView, float speedChooseView)
+    {
+        _playerLook.IsAim = true;
+        _tween = DOVirtual.Float(_startFieldOfView, endFieldOfView, speedChooseView, value => _cinemachineCamera.Lens.FieldOfView = value);
+        _tween.Play();
+    }
+    public void StopAim()
+    {
+        _playerLook.IsAim = false;
+        _tween.Kill();
+        _cinemachineCamera.Lens.FieldOfView = _startFieldOfView;
     }
 
     public void AimingOff()
