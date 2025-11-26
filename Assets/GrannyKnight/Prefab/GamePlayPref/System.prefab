@@ -59,7 +59,19 @@ MonoBehaviour:
   _head: {fileID: 0}
   OnStartGame:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5274204981028792660}
+        m_TargetAssemblyTypeName: HistorySystem, Assembly-CSharp
+        m_MethodName: StartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2342450303604720121
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,6 +262,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2243802766245093523}
   - component: {fileID: 8043817129431426848}
+  - component: {fileID: 2030057395744561693}
   m_Layer: 0
   m_Name: PlayerSystem
   m_TagString: Untagged
@@ -284,6 +297,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0b2a7e08076e2c49ab51ca5ff4f789a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2030057395744561693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5628832712071816917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74a4d656d154601478cdd0758ea67ba1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _listHand:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &7915922003662576143
 GameObject:
   m_ObjectHideFlags: 0
