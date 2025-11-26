@@ -6,8 +6,8 @@ public class FruitBasket : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent<TargetFruits>(out TargetFruits fruits))
         {
-            QuestTwo.Instance.OnFruitCollected();
-            Destroy(other.gameObject);
+            //QuestTwo.Instance.OnFruitCollected();
+            //Destroy(other.gameObject);
         }
     }
 }

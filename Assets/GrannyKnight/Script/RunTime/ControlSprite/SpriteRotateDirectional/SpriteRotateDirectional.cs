@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SpriteRotateDirectional : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class SpriteRotateDirectional : MonoBehaviour
     [SerializeField] private Transform _transform;
     [SerializeField] private Animator _animator;
     [SerializeField] private Camera _camera;
+    
 
     private Vector2 _backSide = new Vector2(0f, -1f);
     private Vector2 _frontSide = new Vector2(0f, 1f);
@@ -56,5 +58,13 @@ public class SpriteRotateDirectional : MonoBehaviour
         }
         _animator.SetFloat(_moveX, animationDirection.x);
         _animator.SetFloat(_moveY, animationDirection.y);
+    }
+    public void PickUpSet()
+    {
+        _animator.SetBool("PickUp", true);
+    }
+    public void Dead()
+    {
+        _animator.SetTrigger("Dead");
     }
 }

@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 public class Fairy : MonoBehaviour, IHealtheble
@@ -12,6 +13,9 @@ public class Fairy : MonoBehaviour, IHealtheble
     [SerializeField] private float _bazeOffsetHeight;
     [SerializeField, Range(0.1f, 2f)] private float _coefficientSpeedWithItem;
     [SerializeField, Range(0.1f, 2f)] private float _coefficientSpeedWithoutItem;
+    [SerializeField] private ParticleSystem _particleSystem;
+    public UnityEvent _pickUpevent;
+    public UnityEvent _dieEvent;
     private List<Transform> _movePoints;
     private FairyCreater _fairyCreater;
     private FairyItem _fairyItem;
@@ -27,6 +31,7 @@ public class Fairy : MonoBehaviour, IHealtheble
     private int _index;
     private bool _isFollow;
     private bool _isPlay;
+    private bool _isDead = false;
     public event Action OnEnd;
 
     private void OnDisable()
@@ -53,6 +58,7 @@ public class Fairy : MonoBehaviour, IHealtheble
         {
             _fairyItem.DropItem(transform.position);
         }
+        _isDead = true;
         End();
     }
 
@@ -134,6 +140,7 @@ public class Fairy : MonoBehaviour, IHealtheble
     {
         _tween = transform.DOMove(_activeTarget.position, _speed * _coefficientSpeedWithoutItem).SetEase(_ease).OnComplete(() => CheckCompliteMove());
         _tween.Play();
+        transform.LookAt(_activeTarget);
     }
 
     private void MoveFollowToTarget()
@@ -156,6 +163,7 @@ public class Fairy : MonoBehaviour, IHealtheble
     {
         yield return _waitTimer;
         _fairyItem.PickUp();
+        _pickUpevent?.Invoke();
         _tween = transform.DOMove(_finalTarget.position, _speed * _coefficientSpeedWithItem).SetEase(Ease.InSine).OnComplete(() => FairyRanAway());
         _tween.Play();
     }
@@ -164,6 +172,7 @@ public class Fairy : MonoBehaviour, IHealtheble
     private void FairyRanAway()
     {
         _fairyItem.LostItem();
+        _isDead = false;
         End();
     }
 
@@ -176,6 +185,19 @@ public class Fairy : MonoBehaviour, IHealtheble
             StopCoroutine(_coroutine);
         }
         _isPlay = false;
-        Destroy(gameObject);
+
+        if (_isDead)
+        {
+            _dieEvent?.Invoke();
+            _particleSystem.Play();
+            GetComponent<SphereCollider>().isTrigger = false;
+            GetComponent<Rigidbody>().isKinematic = false; 
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+         
     }
+
 }
