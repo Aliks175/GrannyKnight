@@ -6,6 +6,7 @@ public class PlayerMover : MonoBehaviour
 {
     [Header("Player-Parameters")]
     [SerializeField] private float _speedWalk = 8.0f;
+    [SerializeField] private float _questWalk = 2f;
     [SerializeField, Range(0.1f, 1f)] private float _coefficientSpeedForAim = 0.5f;
     [SerializeField, Range(0.1f, 1f)] private float _coefficientSpeedWalkForAir = 0.5f;
     [SerializeField] private float jumpHeight = 3.0f;
@@ -23,6 +24,7 @@ public class PlayerMover : MonoBehaviour
     private Vector3 _final;
     private float _speed;
     private bool _isAim;
+    private bool _isQuest = false;
 
     private void OnDisable()
     {
@@ -37,6 +39,11 @@ public class PlayerMover : MonoBehaviour
         _controller = GetComponent<CharacterController>();
         MainSystem.OnUpdate += OnUpdate;
     }
+    public bool IsQuest
+    {
+        get => _isQuest;
+        set => _isQuest = value;
+    }
 
     public void ProcessMove(Vector2 pos)
     {
@@ -46,12 +53,15 @@ public class PlayerMover : MonoBehaviour
         _playerVelocity.y += _gravity * Time.deltaTime;
         if (!_isGrounded)
         {
-            _speed = _speedWalk * _coefficientSpeedWalkForAir;
+            if (_isQuest) _speed = _speedWalk * _coefficientSpeedWalkForAir;
+            else _speed = _questWalk * _coefficientSpeedWalkForAir;
+            
         }
         else if (_isGrounded && _playerVelocity.y < 0)
         {
             _playerVelocity = _velocityGround;
-            _speed = _speedWalk;
+            if (_isQuest) _speed = _questWalk;
+            else _speed = _speedWalk;
         }
         if (_isAim) _speed = _speed * _coefficientSpeedForAim;
         _final = _moveDirection * _speed + _playerVelocity;
