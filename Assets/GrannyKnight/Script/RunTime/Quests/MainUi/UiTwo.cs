@@ -7,16 +7,17 @@ public class UiTwo : MonoBehaviour
     [SerializeField] private GameObject _panelUi;
     [SerializeField] private UiTimer _uiTimer;
     [SerializeField] private Image _timerUi;
-    [SerializeField] private Slider _sliderProgress;
+    [SerializeField] private Image _progressUI;
     private float _maxTime;
     private int _maxCountFruit;
+    private float _progressForOne;
 
     public void Initialization(float time, int maxCountFruit)
     {
         _maxTime = time;
         _maxCountFruit = maxCountFruit;
-        _sliderProgress.maxValue = _maxCountFruit;
-        _sliderProgress.value = 0;
+        _progressForOne = 1f / _maxCountFruit;
+        _progressUI.fillAmount = 0f;
     }
 
     public void StartTimerGame(Action action)
@@ -35,10 +36,10 @@ public class UiTwo : MonoBehaviour
     {
         if (CountFruit > _maxCountFruit)
         {
-            _sliderProgress.value = _maxCountFruit;
+            _progressUI.fillAmount = 1f;
             return;
         }
-        _sliderProgress.value = CountFruit;
+        _progressUI.fillAmount += _progressForOne;
     }
 
     public void OnUpdateUiTimer(float time)
