@@ -87,6 +87,7 @@ public class PlayerMover : MonoBehaviour
             _playerVelocity.y = Mathf.Sqrt(jumpHeight * -3.0f * _gravity);
             _playerVelocity.x = _moveDirection.x * _speed;
             _playerVelocity.z = _moveDirection.z * _speed;
+            SoundSystem.instance.PlayJump();
         }
     }
 

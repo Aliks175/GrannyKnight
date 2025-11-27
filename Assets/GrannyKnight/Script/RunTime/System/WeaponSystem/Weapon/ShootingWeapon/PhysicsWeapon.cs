@@ -60,9 +60,19 @@ public class PhysicsWeapon : MonoBehaviour, IFireble
 
     public void SetWeaponEffect(WeaponEffectAbstract weaponEffect)
     {
-        if (weaponEffect == null) return;
         _weaponEffect = weaponEffect;
-        _weaponEffect.Initialization(this);
+        if (_weaponEffect != null)
+        {
+            _weaponEffect.Initialization(this);
+        }
+    }
+
+    public void DisableSound()
+    {
+        if (_weaponEffect != null)
+        {
+            _weaponEffect.DisableSound();
+        }
     }
 
     public void Shoot(InputAction.CallbackContext value)
@@ -88,6 +98,7 @@ public class PhysicsWeapon : MonoBehaviour, IFireble
 
     public void ResetShot()
     {
+        OnEndFire?.Invoke();
         if (_coroutine != null)
         {
             StopCoroutine(_coroutine);
@@ -165,14 +176,14 @@ public class PhysicsWeapon : MonoBehaviour, IFireble
     {
         Vector3 horizontalDirection = new Vector3(_launchDirection.x, 0, _launchDirection.z).normalized;
         Vector3 endPoint = _startPoint.position + horizontalDirection * flightDistance;
-        
+
         // При отрицательных углах конечная точка ниже
         if (_launchAngle < 0)
         {
             float verticalDrop = Mathf.Tan(Mathf.Abs(_launchAngle) * Mathf.Deg2Rad) * flightDistance;
             endPoint.y -= verticalDrop;
         }
-        
+
         return endPoint;
     }
     private float CalculateFlightDistance()
@@ -182,7 +193,7 @@ public class PhysicsWeapon : MonoBehaviour, IFireble
             // При горизонтальном полете используем простую формулу
             return _currentForce * _distanceMultiplier * 0.5f;
         }
-        
+
         float angleRad = _launchAngle * Mathf.Deg2Rad;
         float distance = (_currentForce * _currentForce * Mathf.Sin(2 * angleRad)) / Physics.gravity.magnitude;
         return Mathf.Abs(distance) * _distanceMultiplier;
@@ -190,16 +201,16 @@ public class PhysicsWeapon : MonoBehaviour, IFireble
     private Vector3 CalculatePointOnTrajectory(float t, Vector3 endPoint)
     {
         Vector3 basePos = Vector3.Lerp(_startPoint.position, endPoint, t);
-        
+
         // При углах меньше 3 градусов - прямая линия
         if (_launchAngle < 3f)
         {
             return basePos;
         }
-        
+
         float maxHeight = Mathf.Abs(CalculateMaxHeight());
         float parabolaHeight = maxHeight * (1f - 4f * (t - 0.5f) * (t - 0.5f));
-        
+
         // При отрицательных углах парабола идет вниз
         if (_launchAngle < 0) parabolaHeight = -parabolaHeight;
 

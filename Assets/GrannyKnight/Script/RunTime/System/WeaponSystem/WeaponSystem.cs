@@ -19,7 +19,8 @@ public class WeaponSystem : MonoBehaviour
         _playerData.ChooseWeapon.OnChangeWeapon -= _physicsWeapon.SetWeapon;
         _playerData.ChooseWeapon.OnChangeWeapon -= Contect => _physicsWeapon.ResetShot();
         _playerData.ChooseWeapon.OnClearHand -= ClearHand;
-        _chooseWeaponView.OnWeaponEquip -= _shootingWeapon.SetWeaponEffect;
+        _chooseWeaponView.OnWeaponRaycastEquip -= _shootingWeapon.SetWeaponEffect;
+        _chooseWeaponView.OnWeaponPhisicEquip -= _physicsWeapon.SetWeaponEffect;
     }
 
     public void Initialization(IPlayerDatable playerDatable, Transform head)
@@ -39,8 +40,10 @@ public class WeaponSystem : MonoBehaviour
         _playerData.ChooseWeapon.OnChangeWeapon += _physicsWeapon.SetWeapon;
         _playerData.ChooseWeapon.OnChangeWeapon += Contect => _physicsWeapon.ResetShot();
         _playerData.ChooseWeapon.OnClearHand += ClearHand;
-        _chooseWeaponView.OnWeaponEquip += _shootingWeapon.SetWeaponEffect;
-        _chooseWeaponView.OnWeaponEquip += _physicsWeapon.SetWeaponEffect;
+        _chooseWeaponView.OnWeaponRaycastEquip += _shootingWeapon.SetWeaponEffect;
+        _chooseWeaponView.OnWeaponPhisicEquip += _physicsWeapon.SetWeaponEffect;
+        _playerData.ChooseWeapon.OnDisableSound += _shootingWeapon.DisableSound;
+        _playerData.ChooseWeapon.OnDisableSound += _physicsWeapon.DisableSound;
     }
 
     public void Shoot(InputAction.CallbackContext value)

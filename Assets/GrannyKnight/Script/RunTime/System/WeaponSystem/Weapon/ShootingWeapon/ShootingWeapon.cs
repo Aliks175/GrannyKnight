@@ -26,11 +26,21 @@ public class ShootingWeapon : MonoBehaviour, IFireble
         _isSingleFire = false;
     }
 
-
     public void SetWeaponEffect(WeaponEffectAbstract weaponEffect)
     {
         _weaponEffect = weaponEffect;
-        _weaponEffect.Initialization(this);
+        if (_weaponEffect != null)
+        {
+            _weaponEffect.Initialization(this);
+        }
+    }
+
+    public void DisableSound()
+    {
+        if (_weaponEffect != null)
+        {
+            _weaponEffect.DisableSound();
+        }
     }
 
     public void Shoot(InputAction.CallbackContext value, Weapon weapon)
@@ -77,9 +87,9 @@ public class ShootingWeapon : MonoBehaviour, IFireble
 
     private void ShootSingleFire(Weapon weapon)
     {
-        //if (_isSingleFire) return;
+        if (_isSingleFire) return;
         OnPreFire?.Invoke();
-        //_isSingleFire = true;
+        _isSingleFire = true;
         _waitAnimationFire = StartCoroutine(SingleFire(weapon));
     }
 
@@ -96,6 +106,7 @@ public class ShootingWeapon : MonoBehaviour, IFireble
     private IEnumerator SingleFire(Weapon weapon)
     {
         yield return new WaitForSeconds(weapon.TimeWaitFire);
+        _isSingleFire = false;
         Fire(false, weapon);
     }
 

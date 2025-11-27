@@ -14,8 +14,6 @@ public class Fairy : MonoBehaviour, IHealtheble
     [SerializeField, Range(0.1f, 10f)] private float _coefficientSpeedWithItem;
     [SerializeField, Range(0.01f, 1f)] private float _coefficientSpeedWithoutItem;
     [SerializeField] private ParticleSystem _particleSystem;
-    public UnityEvent _pickUpevent;
-    public UnityEvent _dieEvent;
     private List<Transform> _movePoints;
     private FairyCreater _fairyCreater;
     private FairyItem _fairyItem;
@@ -32,7 +30,13 @@ public class Fairy : MonoBehaviour, IHealtheble
     private bool _isFollow;
     private bool _isPlay;
     private bool _isDead = false;
-    public event Action OnEnd;
+    public event Action OnEndGame;
+
+    public UnityEvent OnStart;
+    public UnityEvent OnEnd;
+    public UnityEvent _pickUpevent;
+    public UnityEvent _changeTarget;
+    public UnityEvent _dieEvent;
 
     private void OnDisable()
     {
@@ -65,6 +69,7 @@ public class Fairy : MonoBehaviour, IHealtheble
 
     public void Play()
     {
+        OnStart?.Invoke();
         ChangeTarget();
         if (_isFollow)
         {
@@ -128,6 +133,7 @@ public class Fairy : MonoBehaviour, IHealtheble
     private void ChangeTarget()
     {
         _activeTarget = _movePoints[_index];
+        _changeTarget?.Invoke();
     }
 
     private void FindPath()
@@ -179,6 +185,7 @@ public class Fairy : MonoBehaviour, IHealtheble
 
     public void End()
     {
+        _fairyCreater.CheckLiveEnemy(this);
         OnEnd?.Invoke();
         _tween?.Kill();
         if (_coroutine != null)
@@ -200,15 +207,16 @@ public class Fairy : MonoBehaviour, IHealtheble
         }
     }
 
-    public void GameEnd()
-    {
-        _tween?.Kill();
-        if (_coroutine != null)
-        {
-            StopCoroutine(_coroutine);
-        }
-        _isPlay = false;
-        Destroy(gameObject);
-    }
-
+    //public void GameEnd()
+    //{
+    //    OnEnd?.Invoke();
+    //    OnEndGame?.Invoke();
+    //    _tween?.Kill();
+    //    if (_coroutine != null)
+    //    {
+    //        StopCoroutine(_coroutine);
+    //    }
+    //    _isPlay = false;
+    //    Destroy(gameObject);
+    //}
 }

@@ -15,6 +15,7 @@ public class GetterWeapon : MonoBehaviour
 
     public void Active()
     {
+        _playerWeapon.DisableSoundWeapon();
         _playerWeapon.GiveWeapon(_equipHand);
     }
 }

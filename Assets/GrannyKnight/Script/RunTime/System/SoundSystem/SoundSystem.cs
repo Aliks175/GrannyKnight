@@ -4,62 +4,60 @@ using UnityEngine;
 public class SoundSystem : MonoBehaviour
 {
     public static SoundSystem instance;// мы создали общедоступную переменную этого класса 
+    [Header("Settings")]
+    [SerializeField] private float _timeWaitStep = 1.1f;
     [Header("PlayerMove")]
-    [SerializeField] private EventReference _jump1;// список проигрываемых звуков 
-    [SerializeField] private EventReference _jump2;
-    [Header("Voice")]
-    [SerializeField] private EventReference _heroWork_1;
-    [SerializeField] private EventReference _heroWork_2;
-    [SerializeField] private EventReference _babka;
+    [SerializeField] private EventReference _jump;
+    [SerializeField] private EventReference _moveArmor;
+    [SerializeField] private EventReference _moveGloves;
+    [Header("Music")]
+    [SerializeField] private EventReference _simpleMusic;
 
+    private float _nextTimeToStep;
+    private const string IsActiveParametr = "IsActive";
     private FMOD.Studio.EventInstance _activeSound;
+    private FMOD.Studio.EventInstance _activeMusic;
 
     public void Initialization()
     {
+        _timeWaitStep = 1.1f;
         instance = this;
+        PlayMusic();
     }
 
-    public void PlayJump(bool id)
+    public void PlayJump()
     {
-        if (id)
+        if (!_jump.IsNull)
         {
-            if (!_jump1.IsNull)
+            RuntimeManager.PlayOneShot(_jump);
+        }
+    }
+
+    public void PlayWalk(bool isArmor)
+    {
+        if (Time.time >= _nextTimeToStep)
+        {
+            _nextTimeToStep = Time.time + _timeWaitStep;
+            if (isArmor)
             {
-                RuntimeManager.PlayOneShot(_jump1);
+                RuntimeManager.PlayOneShot(_moveArmor);
             }
+            else
+            {
+                RuntimeManager.PlayOneShot(_moveGloves);
+            }
+        }
+    }
+
+    public void ControlFullVolumeMusic(bool isActive)
+    {
+        if (isActive)
+        {
+            _activeMusic.setParameterByName(IsActiveParametr, 0);
         }
         else
         {
-            if (!_jump2.IsNull)
-            {
-                RuntimeManager.PlayOneShot(_jump2);
-            }
-        }
-    }
-
-    public void PlayHero(bool id)
-    {
-        if (id)
-        {
-            if (!_heroWork_1.IsNull)
-            {
-                RuntimeManager.PlayOneShot(_heroWork_1);
-            }
-        }
-        else
-        {
-            if (!_heroWork_2.IsNull)
-            {
-                RuntimeManager.PlayOneShot(_heroWork_2);
-            }
-        }
-    }
-
-    public void PlayBabka()
-    {
-        if (!_babka.IsNull)
-        {
-            RuntimeManager.PlayOneShot(_babka);
+            _activeMusic.setParameterByName(IsActiveParametr, 1);
         }
     }
 
@@ -83,5 +81,20 @@ public class SoundSystem : MonoBehaviour
         //STOPPED Ч не играет.
         //STARTING Ч запускаетс€.
         //STOPPING Ч останавливаетс€.
+    }
+
+    private void ControlSoundStep()
+    {
+
+        
+
+    }
+
+    private void PlayMusic() // ¬ызов другого звука 
+    {
+        _activeMusic = RuntimeManager.CreateInstance(_simpleMusic); // —оздаем событие «вука 
+        _activeMusic.setParameterByName(IsActiveParametr, transform.localScale.x);
+        _activeMusic.start(); // «апускаем воспроизведение 
+        _activeMusic.release(); // освобождаем пам€ть от этого событи€ 
     }
 }

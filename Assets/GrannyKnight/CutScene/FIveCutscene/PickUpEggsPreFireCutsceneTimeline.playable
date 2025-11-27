@@ -60,6 +60,22 @@ MonoBehaviour:
     - {fileID: -8126301140661760960}
     - {fileID: -4816611313510758841}
     - {fileID: -2818595919421002441}
+--- !u!114 &-5331352732082574623
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15c38f6fa1940124db1ab7f6fe7268d1, type: 3}
+  m_Name: Signal Emitter
+  m_EditorClassIdentifier: 
+  m_Time: 0.15
+  m_Retroactive: 0
+  m_EmitOnce: 0
+  m_Asset: {fileID: 11400000, guid: 9eff06e74cb79554099932508cc662a3, type: 2}
 --- !u!114 &-4816611313510758841
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -152,6 +168,22 @@ MonoBehaviour:
     Path: event:/Dialogs/FiveCutscene/PickUpEggsPreFire
   StopType: 0
   Parameters: []
+--- !u!114 &-4350734271095644974
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15c38f6fa1940124db1ab7f6fe7268d1, type: 3}
+  m_Name: Signal Emitter
+  m_EditorClassIdentifier: 
+  m_Time: 19.816666666666666
+  m_Retroactive: 0
+  m_EmitOnce: 0
+  m_Asset: {fileID: 11400000, guid: 9ba4b137d38f5af4998f0d5540d1d95a, type: 2}
 --- !u!114 &-2818595919421002441
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -168,6 +200,31 @@ MonoBehaviour:
   m_Retroactive: 0
   m_EmitOnce: 0
   m_Asset: {fileID: 11400000, guid: 233949a5fce91214689eec071b7225f9, type: 2}
+--- !u!114 &-174086319852910412
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b46e36075dd1c124a8422c228e75e1fb, type: 3}
+  m_Name: Signal Track (2)
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_AnimClip: {fileID: 0}
+  m_Locked: 0
+  m_Muted: 0
+  m_CustomPlayableFullTypename: 
+  m_Curves: {fileID: 0}
+  m_Parent: {fileID: 11400000}
+  m_Children: []
+  m_Clips: []
+  m_Markers:
+    m_Objects:
+    - {fileID: -5331352732082574623}
+    - {fileID: -4350734271095644974}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,6 +242,7 @@ MonoBehaviour:
   - {fileID: 8625427093935994761}
   - {fileID: -5841767014314348582}
   - {fileID: -4366631818943622397}
+  - {fileID: -174086319852910412}
   m_FixedDuration: 0
   m_EditorSettings:
     m_Framerate: 60

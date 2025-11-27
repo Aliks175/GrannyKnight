@@ -15,8 +15,10 @@ public class EasterEggsEffect : WeaponEffectAbstract
     private int _isShootAnimationID;
     private bool _isShootNow;
 
+    public UnityEvent OnPreFire;
     public UnityEvent OnFire;
     public UnityEvent OnEndFire;
+    public UnityEvent OnSystemDisableSound;
 
     private void OnDisable()
     {
@@ -41,6 +43,7 @@ public class EasterEggsEffect : WeaponEffectAbstract
 
     private void PreFire()
     {
+        OnPreFire?.Invoke();
         if (_isShootNow) return;
         //_animator.SetBool(_isShootAnimationID, true);
         _animator.SetTrigger(_shootAnimationID);
@@ -88,5 +91,10 @@ public class EasterEggsEffect : WeaponEffectAbstract
         }
         OnEndFire?.Invoke();
         _isShootNow = false;
+    }
+
+    public override void DisableSound()
+    {
+        OnSystemDisableSound?.Invoke();
     }
 }

@@ -23,6 +23,7 @@ public class WeaponEffect : WeaponEffectAbstract
 
     public UnityEvent OnFire;
     public UnityEvent OnEndFire;
+    public UnityEvent OnSystemDisableSound;
 
     private void OnDisable()
     {
@@ -32,6 +33,11 @@ public class WeaponEffect : WeaponEffectAbstract
             _testWeapon.OnEndFire -= ControlFire;
             _testWeapon.OnPreFire -= PreFire;
         }
+    }
+
+    public override void DisableSound()
+    {
+        OnSystemDisableSound?.Invoke();
     }
 
     public override void Initialization(IFireble testWeapon)

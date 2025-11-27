@@ -48,7 +48,7 @@ public class FairyCreater : MonoBehaviour
         {
             if (fairies[i] != null)
             {
-                fairies[i].GameEnd();
+                fairies[i].End();
             }
         }
     }
@@ -61,7 +61,7 @@ public class FairyCreater : MonoBehaviour
         FairyTargets tempFairyTargets = _fairyTargets;
         ControlEnemyFollow(ref fairyType, ref tempFairyTargets);
         enemy.Instantiate(fairyType, tempFairyTargets, this);
-        enemy.OnEnd += () => CheckLiveEnemy(enemy);
+        //enemy.OnEndGame += () => CheckLiveEnemy(enemy);
         enemy.Play();
     }
 
@@ -75,9 +75,9 @@ public class FairyCreater : MonoBehaviour
         }
     }
 
-    private void CheckLiveEnemy(Fairy targetFairy)
+    public void CheckLiveEnemy(Fairy targetFairy)
     {
-        targetFairy.OnEnd -= () => CheckLiveEnemy(targetFairy);
+        //targetFairy.OnEndGame -= () => CheckLiveEnemy(targetFairy);
         fairies.Remove(targetFairy);
         if (_isPlay)
         {

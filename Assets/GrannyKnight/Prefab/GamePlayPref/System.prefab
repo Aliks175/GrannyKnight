@@ -60,7 +60,19 @@ MonoBehaviour:
   _head: {fileID: 0}
   OnStartGame:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5274204981028792660}
+        m_TargetAssemblyTypeName: HistorySystem, Assembly-CSharp
+        m_MethodName: StartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2342450303604720121
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,13 +133,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbb43bc65989a1f41bbef65bbe41c5a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _jump1:
-    Guid:
-      Data1: 308440170
-      Data2: 1184364221
-      Data3: -1118811503
-      Data4: -2029763779
-    Path: event:/Voice/Hero/Move/Jump_1
   _jump2:
     Guid:
       Data1: -1246440443
@@ -135,27 +140,13 @@ MonoBehaviour:
       Data3: -638438512
       Data4: -1705283242
     Path: event:/Voice/Hero/Move/Jump_2
-  _heroWork_1:
+  _simpleMusic:
     Guid:
-      Data1: 473519795
-      Data2: 1102481096
-      Data3: 1045606016
-      Data4: 28198985
-    Path: event:/Voice/Hero/Work/Work_1
-  _heroWork_2:
-    Guid:
-      Data1: -1017939222
-      Data2: 1214234670
-      Data3: 218740874
-      Data4: -543780686
-    Path: event:/Voice/Hero/Work/Work_2
-  _babka:
-    Guid:
-      Data1: 1493700261
-      Data2: 1149188210
-      Data3: -1276435567
-      Data4: 629759226
-    Path: event:/Dialogs/ThreeCutscene/ReturnToSich
+      Data1: 2139419138
+      Data2: 1338436853
+      Data3: 1281813919
+      Data4: 1499723862
+    Path: event:/Sound/Music/SimpleMusic
 --- !u!114 &6428694877200613277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,6 +167,7 @@ MonoBehaviour:
   - Dialogs
   - Other
   - Items
+  - Sound
   CollisionTag: 
   PreloadSamples: 0
 --- !u!1 &1946286405759632533
@@ -411,11 +403,11 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: 853372450
-      Data2: 1273026311
-      Data3: 109581476
-      Data4: -891204396
-    Path: event:/Voice/Babka/Babka
+      Data1: 2139419138
+      Data2: 1338436853
+      Data3: 1281813919
+      Data4: 1499723862
+    Path: event:/Sound/Music/SimpleMusic
   Event: 
   EventPlayTrigger: 1
   EventStopTrigger: 2
@@ -423,7 +415,9 @@ MonoBehaviour:
   TriggerOnce: 0
   Preload: 0
   NonRigidbodyVelocity: 0
-  Params: []
+  Params:
+  - Name: IsActive
+    Value: 0
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 20

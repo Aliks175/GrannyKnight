@@ -11,6 +11,7 @@ public class PlayerChooseWeapon : MonoBehaviour
     private Weapon _easterEggsHand;
     private Weapon _equipWeapon;
     private IPlayerDatable _iplayerDatable;
+    public event Action OnDisableSound;
     public event Action<Weapon> OnChangeWeapon;
     public event Action<EquipHand> OnClearHand;
 
@@ -44,6 +45,11 @@ public class PlayerChooseWeapon : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    public void DisableSoundWeapon()
+    {
+        OnDisableSound?.Invoke();
     }
 
     private void EquipWeapon(ref Weapon tempWeapon)

@@ -16,6 +16,7 @@ public class PhysicsEffect : WeaponEffectAbstract
     private int _isShootAnimationID;
     public UnityEvent OnFire;
     public UnityEvent OnEndFire;
+    public UnityEvent OnSystemDisableSound;
 
     private void OnDisable()
     {
@@ -24,6 +25,11 @@ public class PhysicsEffect : WeaponEffectAbstract
             _testWeapon.OnFirePhysics -= Fire;
             _testWeapon.OnEndFire -= ControlFire;
         }
+    }
+
+    public override void DisableSound()
+    {
+        OnSystemDisableSound?.Invoke();
     }
 
     public override void Initialization(IFireble testWeapon)
@@ -78,7 +84,7 @@ public class PhysicsEffect : WeaponEffectAbstract
             {
                 _particleSystem.Stop();
             }
-            OnEndFire?.Invoke();
         }
+        OnEndFire?.Invoke();
     }
 }

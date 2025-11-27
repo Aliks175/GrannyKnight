@@ -14,6 +14,7 @@ public class PlayerControlAnimation : MonoBehaviour
     private int _idSpeed;
     private int _idIsGround;
     private int _idAir;
+    private bool _isArmor;
 
     public void Initialization()
     {
@@ -22,6 +23,7 @@ public class PlayerControlAnimation : MonoBehaviour
         _idAir = Animator.StringToHash("Air");
         _activeAnimator = _animatorArmorHand;
         ChangeAnimator(_animatorArmorHand);
+        _isArmor = true;
     }
 
     public void SetSpeed(float speed)
@@ -29,8 +31,12 @@ public class PlayerControlAnimation : MonoBehaviour
         _tempSpeed = Mathf.Lerp(_tempSpeed, speed, _coefficientSmoothSpeed);
         if (!_tempGround) return;
         _activeAnimator.SetFloat(_idSpeed, _tempSpeed);
-        float temp = (_tempSpeed-4) / _amplitudeGain;
+        float temp = (_tempSpeed - 4) / _amplitudeGain;
         _virtualCamera.AmplitudeGain = temp;
+        if (speed > 5)
+        {
+            SoundSystem.instance.PlayWalk(_isArmor);
+        }
     }
 
     public void SetCheckGround(bool isGround)
@@ -59,6 +65,7 @@ public class PlayerControlAnimation : MonoBehaviour
                 break;
             case EquipHand.GlovesHand:
                 ChangeAnimator(_animatorGlovesHand);
+                _isArmor = false;
                 break;
             default:
                 break;

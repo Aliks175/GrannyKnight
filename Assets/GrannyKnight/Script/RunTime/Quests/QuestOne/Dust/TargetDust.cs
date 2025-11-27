@@ -1,5 +1,6 @@
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TargetDust : MonoBehaviour, IHealtheble
 {
@@ -12,6 +13,9 @@ public class TargetDust : MonoBehaviour, IHealtheble
     private float _speed;
     private int _stage;
     private bool _isPlay;
+
+    public UnityEvent OnDie;
+    public UnityEvent OnHit;
 
     private void OnDisable()
     {
@@ -37,8 +41,11 @@ public class TargetDust : MonoBehaviour, IHealtheble
         _creater.Damage(damage);
         if (_health <= 0)
         {
+            OnDie?.Invoke();
             Die();
+            return;
         }
+        OnHit?.Invoke();
     }
 
     private void Die()

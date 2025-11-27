@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5149925194453705395}
   - component: {fileID: 3642407386327325660}
   - component: {fileID: 2926301680631440346}
+  - component: {fileID: 2521440489982748586}
   m_Layer: 0
   m_Name: Dust
   m_TagString: Untagged
@@ -69,6 +70,62 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sprite: {fileID: 4024684331429794578}
   _distanceForPlayer: 0.5
+  OnDie:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2521440489982748586}
+        m_TargetAssemblyTypeName: DurstSound, Assembly-CSharp
+        m_MethodName: OnDie
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnHit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2521440489982748586}
+        m_TargetAssemblyTypeName: DurstSound, Assembly-CSharp
+        m_MethodName: OnHit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2521440489982748586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 327462366371403036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8f201a2839974b4e876970269fd9118, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hit:
+    Guid:
+      Data1: -1043065727
+      Data2: 1085132220
+      Data3: -2103852139
+      Data4: -1857230583
+    Path: event:/Voice/Enemy/Durst/Hit
+  _die:
+    Guid:
+      Data1: 1932681582
+      Data2: 1322012199
+      Data3: -1967917166
+      Data4: -722709713
+    Path: event:/Voice/Enemy/Durst/Die
 --- !u!1 &4667711103879628591
 GameObject:
   m_ObjectHideFlags: 0

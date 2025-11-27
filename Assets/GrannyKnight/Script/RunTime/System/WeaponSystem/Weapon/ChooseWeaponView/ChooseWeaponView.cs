@@ -10,7 +10,8 @@ public class ChooseWeaponView : MonoBehaviour
     [SerializeField] private List<WeaponEffectAbstract> _listWeaponEffect;
     private WeaponEffectAbstract _activeWeapon;
 
-    public event Action<WeaponEffectAbstract> OnWeaponEquip;
+    public event Action<WeaponEffectAbstract> OnWeaponPhisicEquip;
+    public event Action<WeaponEffectAbstract> OnWeaponRaycastEquip;
 
     public void Initialization()
     {
@@ -36,16 +37,18 @@ public class ChooseWeaponView : MonoBehaviour
         if (weapon == null)
         {
             _activeWeapon = null;
+            OnWeaponPhisicEquip?.Invoke(null);
+            OnWeaponRaycastEquip?.Invoke(null);
             return;
         }
         WeaponEffectAbstract tempWeaponEffect = CheckWeapon(weapon);
         if (tempWeaponEffect != null)
         {
-            ActiveNewWeapon(tempWeaponEffect);
+            ActiveNewWeapon(tempWeaponEffect, weapon);
         }
     }
 
-    private void ActiveNewWeapon(WeaponEffectAbstract weaponEffect)
+    private void ActiveNewWeapon(WeaponEffectAbstract weaponEffect, Weapon weapon)
     {
         if (_activeWeapon != null)
         {
@@ -54,7 +57,15 @@ public class ChooseWeaponView : MonoBehaviour
             _glovesHand.SetActive(false);
         }
         _activeWeapon = weaponEffect;
-        OnWeaponEquip?.Invoke(_activeWeapon);
+
+        if (weapon.TypeShoot == TypeShootPhysics.Physics)
+        {
+            OnWeaponPhisicEquip?.Invoke(_activeWeapon);
+        }
+        else if (weapon.TypeShoot == TypeShootPhysics.Raycast)
+        {
+            OnWeaponRaycastEquip?.Invoke(_activeWeapon);
+        }
         _playerControlAnimation.ChangeAnimator(_activeWeapon.AnimatorWeapon);
     }
 
