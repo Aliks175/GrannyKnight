@@ -6,6 +6,11 @@ public class ViewPlayer : MonoBehaviour
     [SerializeField] private List<SkinnedMeshRenderer> _listHand;
     [SerializeField] private CanvasGroup _canvasGroup;
 
+    public void ControlViewUiPlayer(bool isVisible)
+    {
+        _canvasGroup.alpha = isVisible ? 1 : 0;
+    }
+
     public void ShowPlayer()
     {
         ControlView(true);
