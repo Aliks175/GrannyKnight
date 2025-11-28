@@ -171,6 +171,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: MenuGame
       objectReference: {fileID: 0}
+    - target: {fileID: 8888809538424668845, guid: 43f92dcff2c38e640aa0569c5bdda814, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2887882174124077429}
+    - target: {fileID: 8888809538424668845, guid: 43f92dcff2c38e640aa0569c5bdda814, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Exit
+      objectReference: {fileID: 0}
+    - target: {fileID: 8888809538424668845, guid: 43f92dcff2c38e640aa0569c5bdda814, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ControlLoading, Assembly-CSharp
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 1134059392228615331, guid: 43f92dcff2c38e640aa0569c5bdda814, type: 3}
@@ -178,6 +190,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 43f92dcff2c38e640aa0569c5bdda814, type: 3}
+--- !u!114 &2887882174124077429 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2141399301288728699, guid: 43f92dcff2c38e640aa0569c5bdda814, type: 3}
+  m_PrefabInstance: {fileID: 2887882174124077428}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f031cbaf917cc542b518bb4d2513fef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

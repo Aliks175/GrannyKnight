@@ -22,6 +22,7 @@ public class DustCreater : Quest
 
     public override void StartQuest()
     {
+        OnStart?.Invoke();
         SetHealth();
         _uiOne.Initialization(_fullHealth);
         _uiOne.StartTimerGame(StartGame);

@@ -12,6 +12,12 @@ public class ControlLoading : MonoBehaviour
     {
         SceneManager.LoadSceneAsync((int)ListScene.Menu, LoadSceneMode.Single);
     }
+
+    public void Exit()
+    {
+        Application.Quit();
+    }
+
 }
 
 public enum ListScene
