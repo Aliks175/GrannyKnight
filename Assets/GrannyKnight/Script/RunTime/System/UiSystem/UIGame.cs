@@ -5,40 +5,47 @@ using UnityEngine.SceneManagement;
 public class UIGame : MonoBehaviour
 {
     [SerializeField] private GameObject _pauseMenu;
-    [SerializeField] private string _sceneToLoad;
-    void Awake()
+    [SerializeField] private ControlLoading _sceneToLoad;
+    [SerializeField] private InputControl _inputControl;
+
+    private void Awake()
     {
         _pauseMenu.SetActive(false);
     }
-    public void OnEscButton(InputAction.CallbackContext context)
-    {
-        if (!context.performed) return;
-        
-        if (_pauseMenu.activeSelf) ResumeGame();
-        else PauseGame();
-    }
+
+    //public void OnEscButton(InputAction.CallbackContext context)
+    //{
+    //    if (!context.performed) return;
+
+    //    if (_pauseMenu.activeSelf) ResumeGame();
+    //    else PauseGame();
+    //}
+
     public void PauseGame()
     {
         Cursor.lockState = CursorLockMode.None;
         _pauseMenu.SetActive(true);
-        Time.timeScale = 0;
+        _inputControl.ControlMovePlayer(false);
     }
+
     public void ResumeGame()
     {
         Cursor.lockState = CursorLockMode.Locked;
         _pauseMenu.SetActive(false);
-        Time.timeScale = 1f;
+        _inputControl.ControlMovePlayer(true);
     }
-    public void OnExitGameButton()
-    {
-        Application.Quit();
-    }
+
     public void OnMenuButton()
     {
-        Time.timeScale = 1f;
         Cursor.lockState = CursorLockMode.None;
-        SceneManager.LoadScene(_sceneToLoad);
+        _sceneToLoad.LoadMenu();
     }
+
+    public void ExitGame()
+    {
+        _sceneToLoad.Exit();
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -47,5 +54,4 @@ public class UIGame : MonoBehaviour
             else PauseGame();
         }
     }
-
 }

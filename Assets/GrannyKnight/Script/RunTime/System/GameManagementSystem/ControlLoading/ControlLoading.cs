@@ -17,7 +17,6 @@ public class ControlLoading : MonoBehaviour
     {
         Application.Quit();
     }
-
 }
 
 public enum ListScene
