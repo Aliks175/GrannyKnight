@@ -5,7 +5,7 @@ public class SoundSystem : MonoBehaviour
 {
     public static SoundSystem instance;// мы создали общедоступную переменную этого класса 
     [Header("Settings")]
-    [SerializeField] private float _timeWaitStep = 1.1f;
+    [SerializeField] private float _timeWaitStep = 1.2f;
     [Header("PlayerMove")]
     [SerializeField] private EventReference _jump;
     [SerializeField] private EventReference _moveArmor;
@@ -20,7 +20,7 @@ public class SoundSystem : MonoBehaviour
 
     public void Initialization()
     {
-        _timeWaitStep = 1.1f;
+        _timeWaitStep = 1.2f;
         instance = this;
         PlayMusic();
     }

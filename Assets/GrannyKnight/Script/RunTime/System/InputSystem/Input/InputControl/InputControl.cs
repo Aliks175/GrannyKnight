@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class InputControl : MonoBehaviour
 {
+    [SerializeField] private PlayerControlAnimation playerControlAnimation;
     private PlayerSystemActions _playerInput;
     private PlayerSystemActions.PlayerActions _playerActions;
     private PlayerMover _playerMover;
@@ -29,12 +30,19 @@ public class InputControl : MonoBehaviour
     public void ControlMovePlayer(bool isPlayerControl)
     {
         _isPlayerControl = isPlayerControl;
+        playerControlAnimation.ControlMovePlayer(isPlayerControl);
     }
 
     private void SetUp()
     {
         _playerActions.Enable();
-        _playerActions.Jump.performed += Context => _playerMover.Jump();
+        _playerActions.Jump.performed += Context =>
+        {
+            if (_isPlayerControl)
+            {
+            _playerMover.Jump();
+            }
+        };
         _playerActions.Aim.started += Context => _playerAim.AimingOn();
         _playerActions.Aim.canceled += Context => _playerAim.AimingOff();
         _playerActions.Aim.started += _playerMover.ActiveAimSpeed;
@@ -47,7 +55,13 @@ public class InputControl : MonoBehaviour
 
     private void OnDisable()
     {
-        _playerActions.Jump.performed -= Context => _playerMover.Jump();
+        _playerActions.Jump.performed -= Context =>
+        {
+            if (_isPlayerControl)
+            {
+                _playerMover.Jump();
+            }
+        };
         _playerActions.Aim.started -= Context => _playerAim.AimingOn();
         _playerActions.Aim.canceled -= Context => _playerAim.AimingOff();
         _playerActions.Aim.started -= _playerMover.ActiveAimSpeed;

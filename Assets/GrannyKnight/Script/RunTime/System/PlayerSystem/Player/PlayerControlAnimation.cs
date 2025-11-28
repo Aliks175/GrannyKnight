@@ -15,6 +15,7 @@ public class PlayerControlAnimation : MonoBehaviour
     private int _idIsGround;
     private int _idAir;
     private bool _isArmor;
+    private bool _isPlayerControl;
 
     public void Initialization()
     {
@@ -33,10 +34,17 @@ public class PlayerControlAnimation : MonoBehaviour
         _activeAnimator.SetFloat(_idSpeed, _tempSpeed);
         float temp = (_tempSpeed - 4) / _amplitudeGain;
         _virtualCamera.AmplitudeGain = temp;
+
+        if (!_isPlayerControl) return;
         if (speed > 5)
         {
             SoundSystem.instance.PlayWalk(_isArmor);
         }
+    }
+
+    public void ControlMovePlayer(bool isPlayerControl)
+    {
+        _isPlayerControl = isPlayerControl;
     }
 
     public void SetCheckGround(bool isGround)
