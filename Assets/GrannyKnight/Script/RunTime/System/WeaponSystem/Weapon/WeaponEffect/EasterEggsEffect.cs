@@ -43,7 +43,7 @@ public class EasterEggsEffect : WeaponEffectAbstract
 
     private void PreFire()
     {
-        OnPreFire?.Invoke();
+       
         if (_isShootNow) return;
         //_animator.SetBool(_isShootAnimationID, true);
         _animator.SetTrigger(_shootAnimationID);
@@ -67,11 +67,13 @@ public class EasterEggsEffect : WeaponEffectAbstract
         //{
         //    _particleSystem.Play();
         //}
-        OnFire?.Invoke();
+        
     }
 
     private void PlayShootEffect()
     {
+        OnPreFire?.Invoke();
+        OnFire?.Invoke();
         if (_particleSystem != null)
         {
             _particleSystem.Play();
