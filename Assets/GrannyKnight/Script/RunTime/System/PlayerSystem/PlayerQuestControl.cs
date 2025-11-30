@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
+using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 
 public class PlayerQuestControl : MonoBehaviour
 {
     public QuestList MainQuestList => _mainQuestList;
-    [SerializeField]private QuestList _mainQuestList;
+    [SerializeField] private QuestList _mainQuestList;
     [SerializeField] private QuestViewControl _questViewControl;
     private List<QuestData> _listQuestData;
     private IPlayerDatable _playerDatable;
@@ -28,30 +29,13 @@ public class PlayerQuestControl : MonoBehaviour
         }
     }
 
-    public bool GetCheckOverQuest(int idQuest)
+    public void OverQuest(int idQuest)
     {
-        bool isComplited = false;
         QuestData data = GetQuestData(idQuest);
         if (data != null)
         {
-            isComplited = data.CheckCompliteQuest(_playerDatable);
-            return isComplited;
-        }
-        return isComplited;
-    }
-
-    public void CheckAllQuestForOver()
-    {
-        for (int i = 0; i < _listQuestData.Count; i++)
-        {
-            if (_listQuestData[i].CheckCompliteQuest(_playerDatable))
-            {
-                QuestView questView = _questViewControl.GetQuest(_listQuestData[i].GetQuestInfo().Id);
-                if (questView != null)
-                {
-                    questView.HideQuestPanel();
-                }
-            }
+            _questViewControl.GetQuest(idQuest).HideQuestPanel();
+            _listQuestData.Remove(data);
         }
     }
 

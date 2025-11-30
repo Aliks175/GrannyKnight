@@ -9,17 +9,17 @@ public class QuestChecker : MonoBehaviour
     public UnityEvent OnCompliteQuest;
     public UnityEvent OnNotCompliteQuest;
 
-    public void CheckQuestIsComplited()
-    {
-        _playerQuestControl.CheckAllQuestForOver();
-        bool isComplited = _playerQuestControl.GetCheckOverQuest(_idQuest);
-        if (isComplited)
-        {
-            OnCompliteQuest?.Invoke();
-        }
-        else
-        {
-            OnNotCompliteQuest?.Invoke();
-        }
-    }
+    //public void CheckQuestIsComplited()
+    //{
+    //    _playerQuestControl.CheckAllQuestForOver();
+    //    bool isComplited = _playerQuestControl.GetCheckOverQuest(_idQuest);
+    //    if (isComplited)
+    //    {
+    //        OnCompliteQuest?.Invoke();
+    //    }
+    //    else
+    //    {
+    //        OnNotCompliteQuest?.Invoke();
+    //    }
+    //}
 }
