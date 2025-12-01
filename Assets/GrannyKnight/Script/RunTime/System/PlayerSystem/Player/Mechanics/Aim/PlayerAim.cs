@@ -21,7 +21,6 @@ public class PlayerAim : MonoBehaviour
     private const int _zoomOn = -1;
     private const int _zoomOFF = 1;
 
-
     public void Initialization(CinemachineCamera cinemachineCamera)
     {
         _cinemachineCamera = cinemachineCamera;

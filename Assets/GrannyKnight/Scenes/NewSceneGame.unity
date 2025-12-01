@@ -56496,7 +56496,7 @@ Transform:
   m_GameObject: {fileID: 4717768728442697347}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.9999824, z: -0, w: 0.005934123}
-  m_LocalPosition: {x: 5.975193, y: -0.52, z: 30.957636}
+  m_LocalPosition: {x: 5.975193, y: -0.26999998, z: 30.957636}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -61441,19 +61441,7 @@ MonoBehaviour:
   _head: {fileID: 8304342550146281877}
   OnStartGame:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2536029900519317843}
-        m_TargetAssemblyTypeName: HistorySystem, Assembly-CSharp
-        m_MethodName: StartGame
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &739874309406906588
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -97073,7 +97061,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 647182167199957353, guid: 2d2c79e2fb0d0164aab075665350431f, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 647182167199957353, guid: 2d2c79e2fb0d0164aab075665350431f, type: 3}
       propertyPath: m_AnchorMax.y
@@ -97081,7 +97069,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 647182167199957353, guid: 2d2c79e2fb0d0164aab075665350431f, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 668135144136973204, guid: 2d2c79e2fb0d0164aab075665350431f, type: 3}
       propertyPath: m_AnchorMax.x
@@ -97206,6 +97194,10 @@ PrefabInstance:
     - target: {fileID: 2946476018821200106, guid: 2d2c79e2fb0d0164aab075665350431f, type: 3}
       propertyPath: m_WholeNumbers
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2946476018821200106, guid: 2d2c79e2fb0d0164aab075665350431f, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3311839633240231529, guid: 2d2c79e2fb0d0164aab075665350431f, type: 3}
       propertyPath: m_AnchorMax.x
@@ -119478,7 +119470,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7494444363967408290}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -134953,7 +134945,7 @@ Transform:
   m_GameObject: {fileID: 825665779982292592}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.6, z: 0.1}
+  m_LocalPosition: {x: 0, y: 0.85, z: 0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

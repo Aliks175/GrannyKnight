@@ -2567,17 +2567,17 @@ MonoBehaviour:
   m_FillRect: {fileID: 5727358326575832734}
   m_HandleRect: {fileID: 4081118036784153287}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 5
+  m_MinValue: 0.1
+  m_MaxValue: 2
   m_WholeNumbers: 0
-  m_Value: 5
+  m_Value: 2
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6642510259132121101}
         m_TargetAssemblyTypeName: UISettings, Assembly-CSharp
         m_MethodName: SetSensitivity
-        m_Mode: 0
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -10114,12 +10114,12 @@ MonoBehaviour:
   _sliderMusic: {fileID: 1489956668244371442}
   _sliderDialogVoice: {fileID: 9080149571195010703}
   _sliderSound: {fileID: 371817193882433937}
-  _sliderSensitivity: {fileID: 0}
+  _sliderSensitivity: {fileID: 1715200588302432696}
   _masterText: {fileID: 3195970040320535972}
   _musicText: {fileID: 312853088149446540}
   _dialogText: {fileID: 6352783375675275890}
   _soundText: {fileID: 4282116379427212539}
-  _sensitivityText: {fileID: 0}
+  _sensitivityText: {fileID: 7208003311574654513}
   _masterBusPath: bus:/Master
   _musicBusPath: bus:/Master/Music
   _dialogBusPath: bus:/Master/Dialogs

@@ -4,8 +4,7 @@ using UnityEngine.Rendering;
 public class UIGame : MonoBehaviour
 {
     [SerializeField] private UISettings _settings;
-
-    [SerializeField] private GameObject _pauseMenu;//, _settingsMenu;
+    [SerializeField] private GameObject _pauseMenu;
     [SerializeField] private ControlLoading _sceneToLoad;
     [SerializeField] private InputControl _inputControl;
     [SerializeField] private PlayerLook _playerLook;
@@ -24,14 +23,6 @@ public class UIGame : MonoBehaviour
     {
         _settings.OnChangeSensity -= ChangeSensity;
     }
-    //public void OnEscButton(InputAction.CallbackContext context)
-    //{
-    //    if (!context.performed) return;
-
-    //    if (_pauseMenu.activeSelf) ResumeGame();
-    //    else PauseGame();
-    //}
-
 
     public void Start()
     {
