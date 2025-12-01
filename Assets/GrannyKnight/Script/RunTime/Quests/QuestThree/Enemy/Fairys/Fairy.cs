@@ -12,7 +12,7 @@ public class Fairy : MonoBehaviour, IHealtheble
     [SerializeField] private float _timerPickUp;
     [SerializeField] private float _bazeOffsetHeight;
     [SerializeField, Range(0.1f, 10f)] private float _coefficientSpeedWithItem;
-    [SerializeField, Range(0.01f, 1f)] private float _coefficientSpeedWithoutItem;
+    [SerializeField, Range(0.01f, 10f)] private float _coefficientSpeedWithoutItem;
     [SerializeField] private ParticleSystem _particleSystem;
     private List<Transform> _movePoints;
     private FairyCreater _fairyCreater;
