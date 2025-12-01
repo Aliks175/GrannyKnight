@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class UIGame : MonoBehaviour
 {
@@ -7,14 +8,22 @@ public class UIGame : MonoBehaviour
     [SerializeField] private GameObject _pauseMenu;//, _settingsMenu;
     [SerializeField] private ControlLoading _sceneToLoad;
     [SerializeField] private InputControl _inputControl;
+    [SerializeField] private PlayerLook _playerLook;
+
     private bool _isPaused = false;
 
     private void Awake()
     {
         _pauseMenu.SetActive(false);
         _settings.gameObject.SetActive(false);
+
+        _settings.OnChangeSensity += ChangeSensity;
     }
 
+    private void OnDisable()
+    {
+        _settings.OnChangeSensity -= ChangeSensity;
+    }
     //public void OnEscButton(InputAction.CallbackContext context)
     //{
     //    if (!context.performed) return;
@@ -69,6 +78,11 @@ public class UIGame : MonoBehaviour
     {
         _pauseMenu.SetActive(true);
         _settings.gameObject.SetActive(false);
+    }
+
+    private void ChangeSensity()
+    {
+        _playerLook.Sensitivity = PlayerPrefs.GetFloat(SaveName.Sensitivity.ToString(), 1f);
     }
 
     private void Update()

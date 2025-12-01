@@ -1,4 +1,5 @@
 using FMOD.Studio;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -27,6 +28,8 @@ public class UISettings : MonoBehaviour
     private Bus _dialogBus;
     private Bus _soundBus;
 
+    public event Action OnChangeSensity;
+
     //private void Awake()
     //{
     //    //_musicBus = FMODUnity.RuntimeManager.GetBus(_musicBusPath);
@@ -52,6 +55,7 @@ public class UISettings : MonoBehaviour
         LoadVolumeLevel(_sliderMusic, _musicBus, SaveName.Music);
         LoadVolumeLevel(_sliderDialogVoice, _dialogBus, SaveName.Dialog);
         LoadVolumeLevel(_sliderSound, _soundBus, SaveName.Sound);
+        LoadSensitivity();
 
         SetUpVolume(_masterText, _sliderMaster, _masterBus);
         SetUpVolume(_musicText, _sliderMusic, _musicBus);
@@ -89,9 +93,10 @@ public class UISettings : MonoBehaviour
 
     public void SetSensitivity(float sensitivity)
     {
-        PlayerPrefs.SetFloat(SaveName.Sensitivity.ToString(), sensitivity);
-        PlayerPrefs.Save();
-        _sensitivityText.text = sensitivity.ToString("0.0");
+        //PlayerPrefs.SetFloat(SaveName.Sensitivity.ToString(), sensitivity);
+        //PlayerPrefs.Save();
+        //_sensitivityText.text = sensitivity.ToString("0.0");
+        OnChangeSensity?.Invoke();
     }
 
     private void SetBus(ref Bus bus, string busPath)
@@ -106,6 +111,16 @@ public class UISettings : MonoBehaviour
         }
     }
 
+    private void LoadSensitivity()
+    {
+        float SpeedMouse = PlayerPrefs.GetFloat(SaveName.Sensitivity.ToString(), 1f);
+        if (SpeedMouse <= 0f)
+        {
+            SpeedMouse = 1f;
+        }
+        _sliderSensitivity.value = SpeedMouse;
+    }
+
     private void SetUpVolume(TextMeshProUGUI textValue, Slider slider, Bus bus)
     {
         bus.getVolume(out float volume); // получаем значение громкости шины от 0 до 1 
@@ -113,10 +128,14 @@ public class UISettings : MonoBehaviour
         ChangeValue(textValue, slider, bus); // обновляем значение на слайдере 
     }
 
-    private void LoadVolumeLevel(Slider slider,Bus bus, SaveName saveName)
+    private void LoadVolumeLevel(Slider slider, Bus bus, SaveName saveName)
     {
-        float volume = PlayerPrefs.GetFloat(saveName.ToString(), 1f);
-        bus.setVolume(slider.value / slider.maxValue);
+        float volume = PlayerPrefs.GetFloat(saveName.ToString(), 0.5f);
+        if (volume <= 0f)
+        {
+            volume = 0.5f;
+        }
+        bus.setVolume(volume / slider.maxValue);
     }
 
     private void ChangeValue(TextMeshProUGUI textValue, Slider slider, Bus bus)
