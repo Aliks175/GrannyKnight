@@ -21,6 +21,7 @@ public class PlayerAim : MonoBehaviour
     private const int _zoomOn = -1;
     private const int _zoomOFF = 1;
 
+
     public void Initialization(CinemachineCamera cinemachineCamera)
     {
         _cinemachineCamera = cinemachineCamera;
@@ -38,12 +39,14 @@ public class PlayerAim : MonoBehaviour
         _isPlaying = true;
         _coroutine = StartCoroutine(MoveAim(_endFieldOfView, _zoomOn));
     }
+
     public void StartAim( float endFieldOfView, float speedChooseView)
     {
         _playerLook.IsAim = true;
         _tween = DOVirtual.Float(_startFieldOfView, endFieldOfView, speedChooseView, value => _cinemachineCamera.Lens.FieldOfView = value);
         _tween.Play();
     }
+
     public void StopAim()
     {
         _playerLook.IsAim = false;

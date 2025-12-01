@@ -44,10 +44,12 @@ public class PlayerLook : MonoBehaviour
     {
         _isPlay = play;
     }
+
     public bool IsAim
     {
         set => _isAim = value;
     }
+
     public float Sensitivity
     {
         get => _sensitivity;
