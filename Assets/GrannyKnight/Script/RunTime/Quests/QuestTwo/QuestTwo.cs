@@ -76,6 +76,7 @@ public class QuestTwo : Quest
 
         Debug.Log($"Fruits collected: {_fruitCount}");
 
+        CheckWin();
         StartSleepTimer();
     }
 
@@ -85,6 +86,7 @@ public class QuestTwo : Quest
         Cleanup();
         OnEnd?.Invoke(questEnding);
     }
+
     public void ParticleStart(Vector3 pos)
     {
         _particle.transform.position = pos;
@@ -94,6 +96,14 @@ public class QuestTwo : Quest
     #endregion
 
     #region Private Methods
+
+    private void CheckWin()
+    {
+        if(_fruitCount >= _targetFruit[2])
+        {
+            _timer = 0;
+        }
+    }
 
     private void StartGame()
     {
@@ -106,6 +116,7 @@ public class QuestTwo : Quest
     {
         _uiTwo.Stop();
     }
+
     private async UniTaskVoid StartTimer()
     {
         _timer = _timeToQuest;

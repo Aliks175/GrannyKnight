@@ -46,6 +46,7 @@ public class UiTwo : MonoBehaviour
     {
         float tempProcentTime = time / _maxTime;
         tempProcentTime = Mathf.Clamp01(tempProcentTime);
+        tempProcentTime = 1f - tempProcentTime;
         _timerUi.fillAmount = tempProcentTime;
     }
 }
