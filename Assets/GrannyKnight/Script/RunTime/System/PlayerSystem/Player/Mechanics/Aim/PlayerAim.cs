@@ -1,5 +1,5 @@
-using System.Collections;
 using DG.Tweening;
+using System.Collections;
 using Unity.Cinemachine;
 using UnityEngine;
 
@@ -16,15 +16,16 @@ public class PlayerAim : MonoBehaviour
     private Coroutine _coroutine;
     private PlayerLook _playerLook;
     private Tween _tween;
+    private bool _isPlayerUse = true;
     private bool _isActive = false;
     private bool _isPlaying = false;
     private const int _zoomOn = -1;
     private const int _zoomOFF = 1;
 
-
     public void Initialization(CinemachineCamera cinemachineCamera)
     {
         _cinemachineCamera = cinemachineCamera;
+        _isPlayerUse = true;
         _isActive = false;
         _isPlaying = false;
         _playerLook = GetComponent<PlayerLook>();
@@ -32,6 +33,7 @@ public class PlayerAim : MonoBehaviour
 
     public void AimingOn()
     {
+        if (!_isPlayerUse) return;
         if (_isActive) return;
         _isActive = true;
         _playerLook.IsAim = true;
@@ -40,7 +42,7 @@ public class PlayerAim : MonoBehaviour
         _coroutine = StartCoroutine(MoveAim(_endFieldOfView, _zoomOn));
     }
 
-    public void StartAim( float endFieldOfView, float speedChooseView)
+    public void StartAim(float endFieldOfView, float speedChooseView)
     {
         _playerLook.IsAim = true;
         _tween = DOVirtual.Float(_startFieldOfView, endFieldOfView, speedChooseView, value => _cinemachineCamera.Lens.FieldOfView = value);
@@ -56,12 +58,20 @@ public class PlayerAim : MonoBehaviour
 
     public void AimingOff()
     {
+        if (!_isPlayerUse) return;
         if (!_isActive) return;
         _isActive = false;
         _playerLook.IsAim = false;
         StopMoveAim();
         _isPlaying = true;
         _coroutine = StartCoroutine(MoveAim(_startFieldOfView, _zoomOFF));
+    }
+
+    public void ControlAimPlayer(bool isUse)
+    {
+        _isPlayerUse = isUse;
+        StopMoveAim();
+        _cinemachineCamera.Lens.FieldOfView = _startFieldOfView;
     }
 
     private void StopMoveAim()

@@ -30,20 +30,6 @@ public class UISettings : MonoBehaviour
 
     public event Action OnChangeSensity;
 
-    //private void Awake()
-    //{
-    //    //_musicBus = FMODUnity.RuntimeManager.GetBus(_musicBusPath);
-    //    //_soundBus = FMODUnity.RuntimeManager.GetBus(_soundBusPath);
-    //    //_masterBus = FMODUnity.RuntimeManager.GetBus(_masterBusPath);
-    //    //_dialogBus = FMODUnity.RuntimeManager.GetBus(_dialogBusPath);
-    //    Initialization();
-
-    //    //SetOnStart(_sliderSensitivity, _sensitivityText, SaveName.Sensitivity);
-    //    //SetOnStart(_sliderMusic, _musicText, SaveName.MusicSound);
-    //    //SetOnStart(_sliderSound, _soundText, SaveName.EffectSound);
-    //    //SetOnStart(_sliderMaster, _masterText, SaveName.MasterSound);
-    //}
-
     public void Initialization()
     {
         SetBus(ref _masterBus, _masterBusPath);
@@ -91,11 +77,12 @@ public class UISettings : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-    public void SetSensitivity(float sensitivity)
+    public void SetSensitivity()
     {
-        //PlayerPrefs.SetFloat(SaveName.Sensitivity.ToString(), sensitivity);
-        //PlayerPrefs.Save();
-        //_sensitivityText.text = sensitivity.ToString("0.0");
+        float sensitivity = _sliderSensitivity.value;
+        PlayerPrefs.SetFloat(SaveName.Sensitivity.ToString(), sensitivity);
+        PlayerPrefs.Save();
+        _sensitivityText.SetText(sensitivity.ToString("0.0"));
         OnChangeSensity?.Invoke();
     }
 
@@ -114,7 +101,7 @@ public class UISettings : MonoBehaviour
     private void LoadSensitivity()
     {
         float SpeedMouse = PlayerPrefs.GetFloat(SaveName.Sensitivity.ToString(), 1f);
-        if (SpeedMouse <= 0f)
+        if (SpeedMouse <= 0.1f)
         {
             SpeedMouse = 1f;
         }
