@@ -1,34 +1,26 @@
 using UnityEngine;
 using UnityEngine.AI;
+using Cysharp.Threading.Tasks;
 
 public class Wisp : MonoBehaviour
 {
-    [SerializeField] private Transform _target;
     private NavMeshAgent _agent;
     
     void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
     }
-
-    public void SetTarget(Transform target)
+    public void MoveToTarget(Transform _target)
     {
-        _target = target;
-    }
-    public void MoveToTarget()
-    {
-        Debug.Log("Agent:" + _agent);
-        Debug.Log("Target:" + _target);
         if (_agent != null && _target != null)
         {
             _agent.SetDestination(_target.position);
+            DestroyAtEnd().Forget();
         }
     }
-    void Update()
+    private async UniTaskVoid DestroyAtEnd()
     {
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            MoveToTarget();
-        }
+        await UniTask.WaitUntil(() => _agent.remainingDistance <= 0.1f);
+        Destroy(gameObject);
     }
 }
