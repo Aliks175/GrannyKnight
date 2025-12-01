@@ -1,7 +1,8 @@
 public enum SaveName
 {
-    MasterSound,
-    MusicSound,
-    EffectSound,
+    Master,
+    Music,
+    Dialog,
+    Sound,
     Sensitivity
 }
