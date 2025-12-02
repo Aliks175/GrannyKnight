@@ -13,7 +13,7 @@ public struct DialogueLine
 }
 public enum Character
 {
-    ГГ,
+    Аликсандэр,
     Бабушка,
     Сыч,
     Гвинька,

@@ -1,4 +1,7 @@
 
+using System;
+
+[Serializable]
 public class QuestData
 {
     private QuestInfo _questInfo;
