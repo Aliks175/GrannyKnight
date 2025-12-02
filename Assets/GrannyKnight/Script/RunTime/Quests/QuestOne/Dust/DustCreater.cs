@@ -63,8 +63,14 @@ public class DustCreater : Quest
     public void Damage(float damage)
     {
         _fullHealth -= damage;
-        Debug.Log(_fullHealth);
         _uiOne.OnUpdateUi(_fullHealth);
+    }
+    public void CheckHealth(int health)
+    {
+        if (health <= 0)
+        {
+            StopQuest(QuestEnding.Bad);
+        }
     }
 
     private void EndGame(QuestEnding quest)
@@ -72,6 +78,7 @@ public class DustCreater : Quest
         _uiOne.Stop();
         OnEnd?.Invoke(quest);
         ClearEnemy();
+        _playerTarget.GetComponent<PlayerHealthSystem>().Die();
     }
 
     private void ClearEnemy()
