@@ -74,20 +74,16 @@ public class TargetDust : MonoBehaviour, IHealtheble
         {
             transform.position = Vector3.MoveTowards(transform.position, _endPoint.position, _speed * Time.deltaTime);
 
-            if (Vector3.Distance(transform.position, _endPoint.position) < _distanceForPlayer)
-            {
-                OnEndPoint();
-            }
         }
     }
 
-    private void OnEndPoint()
+    void OnTriggerEnter(Collider other)
     {
-        if (!_isPlay) return;
-        _isPlay = false;
-        _endPoint = null;
-
-        _creater.StopQuest(QuestEnding.Bad);
-        Destroy(gameObject);
+        if (other.gameObject.TryGetComponent(out PlayerHealthSystem player))
+        {
+            int health = player.TakeDamage();
+            Debug.Log("Damage on dust: " + health);
+            _creater.CheckHealth(health);
+        }
     }
 }
