@@ -6,24 +6,21 @@ using UnityEngine.Timeline;
 
 public class SkipDialogue : MonoBehaviour
 {
-    [SerializeField] private PlayableDirector director;
+    private PlayableDirector director;
     [SerializeField] private string signalPrefix = "Dialogue_";
-    [SerializeField] private SignalReceiver[] signalReceiver;
+    [SerializeField] private List<SignalReceiver> signalReceiver;
     [SerializeField] private InputActionReference  moveInputAction;
     private List<SignalEmitter> dialogueSignals = new List<SignalEmitter>();
     
     private int currentSignalIndex = -1;
     private List<SignalEmitter> allSignals = new List<SignalEmitter>();
-    void Start()
-    {
-        FindDialogueSignals();
-        
-    }
     void OnEnable()
     {
+        director = GetComponent<PlayableDirector>();
         moveInputAction.action.started += SkipToNextDialogue;
+        FindDialogueSignals();
     }
-    void OnAnimatorIK(int layerIndex)
+    void OnDisable()
     {
         moveInputAction.action.started -= SkipToNextDialogue;
     }
@@ -101,6 +98,7 @@ public class SkipDialogue : MonoBehaviour
         // Если это последняя реплика - пропускаем до конца
         director.time = director.duration;
     }
+
     private void FireSignalsBetween(double startTime, double endTime)
     {
         foreach (var signal in allSignals)
