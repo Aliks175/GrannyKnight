@@ -7,7 +7,8 @@ public class FairySettings : ScriptableObject
 {
    
     [Header("RangeSpeed")]
-    [SerializeField] private float _speed;
+    [SerializeField] private float _minSpeed;
+    [SerializeField] private float _maxSpeed;
     [Header("RangeValueChangeTarget")]
     [SerializeField] private int _minValueChangeTarget;
     [SerializeField] private int _maxValueChangeTarget;
@@ -18,7 +19,7 @@ public class FairySettings : ScriptableObject
     public FairyType GetEnemyType()
     {
         int tempValueChangeTarget = Random.Range(_minValueChangeTarget, _maxValueChangeTarget + 1);
-        float tempSpeed = _speed;
+        float tempSpeed = Random.Range(_minSpeed, _maxSpeed + 1);
         float tempTime = Random.Range(_minTimeWait, _maxTimeWait + 1);
         bool tempIsFollow = false;
         FairyType fairyType = new FairyType()

@@ -1,5 +1,3 @@
-using DG.Tweening;
-using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,7 +8,6 @@ public class WeaponEffect : WeaponEffectAbstract
     public override int IdWeapon => _idWeapon;
     [SerializeField] private Animator _animator;
     [SerializeField] private ParticleSystem _particleSystem;
-    [SerializeField] private AudioSource _audioSource;
     [SerializeField] private int _idWeapon;
 
     //private ControlViewMark _controlViewMark;
@@ -65,11 +62,6 @@ public class WeaponEffect : WeaponEffectAbstract
         //    if (typeShoot.IsShootAutoFire && _isShootNow) return;
         //    _animator.SetTrigger(_shootAnimationID);
         //}
-
-        if (_audioSource != null)
-        {
-            _audioSource.Play();
-        }
 
         if (_particleSystem != null)
         {
