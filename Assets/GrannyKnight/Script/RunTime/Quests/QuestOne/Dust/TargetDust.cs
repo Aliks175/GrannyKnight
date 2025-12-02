@@ -6,13 +6,16 @@ public class TargetDust : MonoBehaviour, IHealtheble
 {
     [SerializeField] private SpriteRenderer _sprite;
     [SerializeField] private float _distanceForPlayer;
+    [SerializeField] private float _timeToTakeDamage;
     private DustCreater _creater;
     private Transform _endPoint;
     private Tween _tween;
+    private Tween _tweenTakeDamage;
     private float _health;
     private float _speed;
     private int _stage;
     private bool _isPlay;
+    private Color _alpha;
 
     public UnityEvent OnDie;
     public UnityEvent OnHit;
@@ -25,6 +28,7 @@ public class TargetDust : MonoBehaviour, IHealtheble
     public void SetParameters(StageDust stage, DustCreater creater, Transform distance, int index)
     {
         _sprite.color = stage.ColorStage;
+        _alpha = new Color(stage.ColorStage.r, stage.ColorStage.g, stage.ColorStage.b, 0f);
         _speed = stage.SpeedStage;
         _health = stage.HealthStage;
         _creater = creater;
@@ -38,7 +42,11 @@ public class TargetDust : MonoBehaviour, IHealtheble
     public void TakeDamage(float damage)
     {
         _health -= damage;
+        _tweenTakeDamage?.Kill();
         _creater.Damage(damage);
+        _sprite.color = _alpha;
+        _tweenTakeDamage = _sprite.DOFade(1f, _timeToTakeDamage);
+        _tweenTakeDamage.Play();
         if (_health <= 0)
         {
             OnDie?.Invoke();
