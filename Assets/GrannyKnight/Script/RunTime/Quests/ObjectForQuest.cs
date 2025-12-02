@@ -11,11 +11,12 @@ public class ObjectForQuest : MonoBehaviour
     [SerializeField] private Vector3 _rotation;
     [SerializeField] private float _rotationTimeForLoop;
     [SerializeField] private Ease _easeRotate;
+    [SerializeField] private bool _isDebug = false;
     private Tween _moveTween;
     private Tween _rotationTween;
     void Awake()
     {
-        StartMove();
+        if (_isDebug) StartMove();
     }
     public void StartMove()
     {
@@ -24,7 +25,7 @@ public class ObjectForQuest : MonoBehaviour
         _moveTween.Play();
         _rotationTween.Play();
     }
-    private void OnDestroy()
+    private void OnDisable()
     {
         _moveTween?.Kill();
         _rotationTween?.Kill();
