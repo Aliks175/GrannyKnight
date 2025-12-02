@@ -11,6 +11,7 @@ public class InputControl : MonoBehaviour
     private PlayerInteracteble _playerInteracteble;
     private PlayerChooseWeapon _playerChooseWeapon;
     private WeaponSystem _weaponSystem;
+    private PlayerHintSystem _playerHintSystem;
     private bool _isPlayerControl;
 
     public void Initialization(WeaponSystem weaponSystem)
@@ -22,6 +23,7 @@ public class InputControl : MonoBehaviour
         _playerAim = GetComponent<PlayerAim>();
         _playerInteracteble = GetComponent<PlayerInteracteble>();
         _playerChooseWeapon = GetComponent<PlayerChooseWeapon>();
+        _playerHintSystem = GetComponent<PlayerHintSystem>();
         _weaponSystem = weaponSystem;
         _isPlayerControl = true;
         SetUp();
@@ -51,6 +53,7 @@ public class InputControl : MonoBehaviour
         _playerActions.Interact.canceled += Context => _playerInteracteble.OnInteracteble(false);
         _playerActions.Shoot.started += _weaponSystem.Shoot;
         _playerActions.Shoot.canceled += _weaponSystem.Shoot;
+        _playerActions.Help.started += Context => _playerHintSystem.MoveTarget();
     }
 
     private void OnDisable()
@@ -70,6 +73,7 @@ public class InputControl : MonoBehaviour
         _playerActions.Interact.canceled -= Context => _playerInteracteble.OnInteracteble(false);
         _playerActions.Shoot.started -= _weaponSystem.Shoot;
         _playerActions.Shoot.canceled -= _weaponSystem.Shoot;
+        _playerActions.Help.started -= Context => _playerHintSystem.MoveTarget();
         _playerActions.Disable();
     }
 
