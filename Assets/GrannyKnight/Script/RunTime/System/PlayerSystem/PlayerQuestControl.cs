@@ -7,7 +7,7 @@ public class PlayerQuestControl : MonoBehaviour
     public QuestList MainQuestList => _mainQuestList;
     [SerializeField] private QuestList _mainQuestList;
     [SerializeField] private QuestViewControl _questViewControl;
-    private List<QuestData> _listQuestData;
+    [SerializeField]private List<QuestData> _listQuestData;
     private IPlayerDatable _playerDatable;
 
     public void Initialization(IPlayerDatable playerDatable)

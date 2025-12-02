@@ -1,23 +1,30 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
 
 public class SkipDialogue : MonoBehaviour
 {
-    [SerializeField] private PlayableDirector director;
+    private PlayableDirector director;
     [SerializeField] private string signalPrefix = "Dialogue_";
-    [SerializeField] private SignalReceiver signalReceiver;
+    [SerializeField] private List<SignalReceiver> signalReceiver;
+    [SerializeField] private InputActionReference  moveInputAction;
     private List<SignalEmitter> dialogueSignals = new List<SignalEmitter>();
     
     private int currentSignalIndex = -1;
     private List<SignalEmitter> allSignals = new List<SignalEmitter>();
-    void Start()
+    void OnEnable()
     {
+        director = GetComponent<PlayableDirector>();
+        moveInputAction.action.started += SkipToNextDialogue;
         FindDialogueSignals();
-        
     }
-     private void FindDialogueSignals()
+    void OnDisable()
+    {
+        moveInputAction.action.started -= SkipToNextDialogue;
+    }
+    private void FindDialogueSignals()
     {
         dialogueSignals.Clear();
         
@@ -49,15 +56,6 @@ public class SkipDialogue : MonoBehaviour
         dialogueSignals.Sort((a, b) => a.time.CompareTo(b.time));
         allSignals.Sort((a, b) => a.time.CompareTo(b.time));
     }
-    void Update()
-    {
-        UpdateCurrentSignalIndex();
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            SkipToNextDialogue();
-        }
-    }
-
     private void UpdateCurrentSignalIndex()
     {
         if (director == null || !director.playableGraph.IsValid()) return;
@@ -76,8 +74,9 @@ public class SkipDialogue : MonoBehaviour
             }
         }
     }
-     public void SkipToNextDialogue()
+     public void SkipToNextDialogue(InputAction.CallbackContext context)
     {
+        UpdateCurrentSignalIndex();
         if (dialogueSignals.Count == 0) return;
         
         double currentTime = director.time;
@@ -99,6 +98,7 @@ public class SkipDialogue : MonoBehaviour
         // Если это последняя реплика - пропускаем до конца
         director.time = director.duration;
     }
+
     private void FireSignalsBetween(double startTime, double endTime)
     {
         foreach (var signal in allSignals)
@@ -108,6 +108,7 @@ public class SkipDialogue : MonoBehaviour
             {
                 // Вызываем сигнал вручную
                 FireSignal(signal);
+                Debug.Log(signal.name);
             }
         }
     }
@@ -115,10 +116,39 @@ public class SkipDialogue : MonoBehaviour
     {
         if (signalEmitter.asset != null)
         {
-            if (signalReceiver.GetReaction(signalEmitter.asset) != null)
+            // Находим track, к которому принадлежит этот SignalEmitter
+            TimelineAsset timeline = director.playableAsset as TimelineAsset;
+            SignalTrack targetTrack = null;
+            
+            foreach (var track in timeline.GetOutputTracks())
+            {
+                if (track is SignalTrack signalTrack)
                 {
-                    signalReceiver.GetReaction(signalEmitter.asset).Invoke();
+                    foreach (var marker in signalTrack.GetMarkers())
+                    {
+                        if (ReferenceEquals(marker, signalEmitter))
+                        {
+                            targetTrack = signalTrack;
+                            break;
+                        }
+                    }
+                    if (targetTrack != null) break;
                 }
+            }
+            
+            // Находим соответствующий SignalReceiver для этого track
+            if (targetTrack != null)
+            {
+                var binding = director.GetGenericBinding(targetTrack);
+                if (binding is SignalReceiver receiver)
+                {
+                    var reaction = receiver.GetReaction(signalEmitter.asset);
+                    if (reaction != null)
+                    {
+                        reaction.Invoke();
+                    }
+                }
+            }
         }
     }
     

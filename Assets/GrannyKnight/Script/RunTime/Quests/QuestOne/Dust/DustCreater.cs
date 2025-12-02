@@ -78,7 +78,7 @@ public class DustCreater : Quest
         _uiOne.Stop();
         OnEnd?.Invoke(quest);
         ClearEnemy();
-        _playerTarget.GetComponent<PlayerHealthSystem>().Die();
+        _playerTarget.gameObject.GetComponent<PlayerHealthSystem>().Die();
     }
 
     private void ClearEnemy()

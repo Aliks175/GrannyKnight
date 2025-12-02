@@ -67193,6 +67193,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8371715841849379884}
   - component: {fileID: 8044242389303809182}
+  - component: {fileID: 8371715841849379885}
   m_Layer: 0
   m_Name: "Changing\u0421lothesCutscene"
   m_TagString: Untagged
@@ -69402,6 +69403,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7091420364490112635}
   - component: {fileID: 6268033943466367644}
+  - component: {fileID: 7091420364490112636}
   m_Layer: 0
   m_Name: FindPodmetatusCutscene
   m_TagString: Untagged
@@ -72178,6 +72180,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1272792109296357661}
   - component: {fileID: 200550640078840734}
+  - component: {fileID: 1626405049111696498}
   m_Layer: 0
   m_Name: FindSlingshotCutscene
   m_TagString: Untagged
@@ -72185,6 +72188,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1626405049111696498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1626405049111696497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac0cc03579cde4149851f01200e142a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signalPrefix: Dialogue_
+  signalReceiver: []
+  moveInputAction: {fileID: -6405101446448013895, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!1001 &1633065780110806369
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -77856,6 +77874,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8503470744157972351}
   - component: {fileID: 3456460013030868057}
+  - component: {fileID: 8503470744157972352}
   m_Layer: 0
   m_Name: 'PickUpEggsPostFireCutscene '
   m_TagString: Untagged
@@ -78974,6 +78993,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4000986182275651304}
   - component: {fileID: 4939253861872689778}
+  - component: {fileID: 4939253861872689779}
   m_Layer: 0
   m_Name: EndCutscene
   m_TagString: Untagged
@@ -79655,9 +79675,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0cc03579cde4149851f01200e142a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  director: {fileID: 2022201001877729171}
   signalPrefix: Dialogue_
-  signalReceiver: {fileID: 0}
+  signalReceiver:
+  - {fileID: 7768922587452717141}
+  - {fileID: 5049712604584100542}
+  moveInputAction: {fileID: -6405101446448013895, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!1 &2415146411131033893
 GameObject:
   m_ObjectHideFlags: 0
@@ -80202,6 +80224,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1667776375556963792}
   - component: {fileID: 7609361652111506415}
+  - component: {fileID: 7609361652111506416}
   m_Layer: 0
   m_Name: ReturnToGwinyaCutscene
   m_TagString: Untagged
@@ -84780,6 +84803,7 @@ GameObject:
   m_Component:
   - component: {fileID: 239301984449341571}
   - component: {fileID: 5223047932729640611}
+  - component: {fileID: 5223047932729640612}
   m_Layer: 0
   m_Name: PickUpEggsPreFireCutscene
   m_TagString: Untagged
@@ -94680,6 +94704,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6924649334941222796}
   - component: {fileID: 6342280459279469860}
+  - component: {fileID: 6924649334941222797}
   m_Layer: 0
   m_Name: FindHelpersCutscene
   m_TagString: Untagged
@@ -98153,6 +98178,21 @@ PlayableDirector:
     value: {fileID: 4148251028120194563}
   m_ExposedReferences:
     m_References: []
+--- !u!114 &4939253861872689779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2350735348449911346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac0cc03579cde4149851f01200e142a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signalPrefix: Dialogue_
+  signalReceiver: []
+  moveInputAction: {fileID: -6405101446448013895, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!4 &4943104557078243035
 Transform:
   m_ObjectHideFlags: 0
@@ -101259,6 +101299,7 @@ GameObject:
   m_Component:
   - component: {fileID: 93583502311169716}
   - component: {fileID: 3071830142487683804}
+  - component: {fileID: 5039160162689158075}
   m_Layer: 0
   m_Name: FindBonnyCutscene
   m_TagString: Untagged
@@ -101266,6 +101307,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &5039160162689158075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5039160162689158074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac0cc03579cde4149851f01200e142a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signalPrefix: Dialogue_
+  signalReceiver: []
+  moveInputAction: {fileID: -6405101446448013895, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!1 &5041951155819551981
 GameObject:
   m_ObjectHideFlags: 0
@@ -102266,6 +102322,21 @@ PlayableDirector:
     value: {fileID: 7768922587452717141}
   m_ExposedReferences:
     m_References: []
+--- !u!114 &5223047932729640612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3017366838621685442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac0cc03579cde4149851f01200e142a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signalPrefix: Dialogue_
+  signalReceiver: []
+  moveInputAction: {fileID: -6405101446448013895, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!114 &5227856448440747161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102283,6 +102354,7 @@ MonoBehaviour:
     TwoQuestEnding: 0
     ThreeQuestEnding: 0
   _questViewControl: {fileID: 6357794094815063210}
+  _listQuestData: []
 --- !u!4 &5234370920790452363
 Transform:
   m_ObjectHideFlags: 0
@@ -107520,6 +107592,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7225759836692396568}
   - component: {fileID: 6268184086169685584}
+  - component: {fileID: 7225759836692396569}
   m_Layer: 0
   m_Name: ReturnToSichCutscene
   m_TagString: Untagged
@@ -116999,6 +117072,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6072948605114831604}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6924649334941222797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4407352550260597690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac0cc03579cde4149851f01200e142a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signalPrefix: Dialogue_
+  signalReceiver:
+  - {fileID: 7768922587452717141}
+  - {fileID: 5049712604584100542}
+  - {fileID: 6636534157562499926}
+  moveInputAction: {fileID: -6405101446448013895, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!4 &6926006603821599553
 Transform:
   m_ObjectHideFlags: 0
@@ -118308,6 +118399,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3331380689244142111}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7091420364490112636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1145802613917476291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac0cc03579cde4149851f01200e142a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signalPrefix: Dialogue_
+  signalReceiver: []
+  moveInputAction: {fileID: -6405101446448013895, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!1001 &7097039428542853947
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -119321,6 +119427,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6940709070177199439}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7225759836692396569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5519095590268435472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac0cc03579cde4149851f01200e142a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signalPrefix: Dialogue_
+  signalReceiver: []
+  moveInputAction: {fileID: -6405101446448013895, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!1 &7232872675478566889
 GameObject:
   m_ObjectHideFlags: 0
@@ -126605,6 +126726,21 @@ PlayableDirector:
     value: {fileID: 7768922587452717141}
   m_ExposedReferences:
     m_References: []
+--- !u!114 &7609361652111506416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2451935796387276756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac0cc03579cde4149851f01200e142a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signalPrefix: Dialogue_
+  signalReceiver: []
+  moveInputAction: {fileID: -6405101446448013895, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!33 &7640715260085690844
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -130836,6 +130972,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2992728620544290467}
   - component: {fileID: 2399962290486575418}
+  - component: {fileID: 8226863999313132106}
   m_Layer: 0
   m_Name: StartThreeQuestCutscene
   m_TagString: Untagged
@@ -130843,6 +130980,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &8226863999313132106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8226863999313132105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac0cc03579cde4149851f01200e142a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signalPrefix: Dialogue_
+  signalReceiver: []
+  moveInputAction: {fileID: -6405101446448013895, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!1 &8229249068719090086
 GameObject:
   m_ObjectHideFlags: 0
@@ -132019,6 +132171,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6072948605114831604}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8371715841849379885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 825138978194586201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac0cc03579cde4149851f01200e142a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signalPrefix: Dialogue_
+  signalReceiver:
+  - {fileID: 7768922587452717141}
+  - {fileID: 5049712604584100542}
+  - {fileID: 8243090971227694014}
+  moveInputAction: {fileID: -6405101446448013895, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!33 &8371813639487603820
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -133112,6 +133282,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 9181414836375423275}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8503470744157972352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2252685019060450201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac0cc03579cde4149851f01200e142a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signalPrefix: Dialogue_
+  signalReceiver: []
+  moveInputAction: {fileID: -6405101446448013895, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!4 &8516919640155313787
 Transform:
   m_ObjectHideFlags: 0
@@ -133515,9 +133700,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0cc03579cde4149851f01200e142a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  director: {fileID: 7203398535183523515}
   signalPrefix: Dialogue_
-  signalReceiver: {fileID: 0}
+  signalReceiver:
+  - {fileID: 7768922587452717141}
+  moveInputAction: {fileID: -6405101446448013895, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!4 &8580790700367408710
 Transform:
   m_ObjectHideFlags: 0
