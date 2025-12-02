@@ -14,13 +14,11 @@ public class FairyCreater : MonoBehaviour
     private QuestThree _questThree;
     private FairyTargets _fairyTargets;
     private int _valueEnemyFollow;
-    private bool _isPlay;
     public event Action OnCheckOverWaves;
     public event Action OnSleepFairy;
 
     public void Initialization(FairyTargets fairyTargets, QuestThree questThree)
     {
-        _isPlay = true;
         fairies = new();
         _fairyTargets = fairyTargets;
         _questThree = questThree;
@@ -43,7 +41,6 @@ public class FairyCreater : MonoBehaviour
 
     public void Stop()
     {
-        _isPlay = false;
         for (int i = 0; i < fairies.Count; i++)
         {
             if (fairies[i] != null)
@@ -61,7 +58,6 @@ public class FairyCreater : MonoBehaviour
         FairyTargets tempFairyTargets = _fairyTargets;
         ControlEnemyFollow(ref fairyType, ref tempFairyTargets);
         enemy.Instantiate(fairyType, tempFairyTargets, this);
-        //enemy.OnEndGame += () => CheckLiveEnemy(enemy);
         enemy.Play();
     }
 
@@ -77,12 +73,8 @@ public class FairyCreater : MonoBehaviour
 
     public void CheckLiveEnemy(Fairy targetFairy)
     {
-        //targetFairy.OnEndGame -= () => CheckLiveEnemy(targetFairy);
         fairies.Remove(targetFairy);
-        if (_isPlay)
-        {
-            OnCheckOverWaves?.Invoke();
-        }
+        OnCheckOverWaves?.Invoke();
         OnSleepFairy?.Invoke();
     }
 }

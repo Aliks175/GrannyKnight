@@ -60,9 +60,4 @@ public class Wisp : MonoBehaviour
             StopCoroutine(_coroutineWaitDistance);
         }
     }
-
-    //private void Update()
-    //{
-    //    Debug.Log("_agent.remainingDistance" + _agent.remainingDistance);
-    //}
 }

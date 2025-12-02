@@ -64,7 +64,6 @@ public class QuestThree : Quest
     {
         OnEnd?.Invoke(quest);
         _controlDollyCart.Stop();
-        Debug.Log($"StopQuest - Stop");
         _uiThree.Stop();
         _fairyCreater.Stop();
     }
@@ -95,17 +94,20 @@ public class QuestThree : Quest
 
     private void EndGame()
     {
-        if (_countTempItem < victoryConditions.CountCakeMiddleEnding && _countTempItem > 0)
+        if (_countTempItem <= victoryConditions.CountCakeMiddleEnding && _countTempItem > 0)
         {
             StopQuest(QuestEnding.Middle);
+            return;
         }
         else if (_countTempItem <= 0)
         {
             StopQuest(QuestEnding.Bad);
+            return;
         }
         else if (_countTempItem >= victoryConditions.CountCakeGoodEnding)
         {
             StopQuest(QuestEnding.Good);
+            return;
         }
     }
 
@@ -148,12 +150,8 @@ public class QuestThree : Quest
         _countAllEnemy = 0;
         for (int i = 0; i < _valueWaves; i++)
         {
-            //Debug.Log($"i{i}");
             _countAllEnemy += Mathf.RoundToInt(_valueEnemyForWave.Evaluate(i));
-            //Debug.Log($"Mathf.RoundToInt(_valueEnemyForWave.Evaluate(i) {Mathf.RoundToInt(_valueEnemyForWave.Evaluate(i)).ToString()}");
-            //Debug.Log($"Temp_allEnemy{_allEnemy}");
         }
-        //Debug.Log($"_allEnemy{_allEnemy}");
     }
 
     [Serializable]

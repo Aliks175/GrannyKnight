@@ -59,6 +59,7 @@ public class Fairy : MonoBehaviour, IHealtheble
     public void TakeDamage(float damage)
     {
         if (_isDead) return;
+
         if (_fairyItem != null)
         {
             _fairyItem.DropItem(transform.position);
@@ -206,17 +207,4 @@ public class Fairy : MonoBehaviour, IHealtheble
             Destroy(gameObject);
         }
     }
-
-    //public void GameEnd()
-    //{
-    //    OnEnd?.Invoke();
-    //    OnEndGame?.Invoke();
-    //    _tween?.Kill();
-    //    if (_coroutine != null)
-    //    {
-    //        StopCoroutine(_coroutine);
-    //    }
-    //    _isPlay = false;
-    //    Destroy(gameObject);
-    //}
 }
