@@ -18,23 +18,27 @@ public class PlayerHintSystem : MonoBehaviour
         {
             _promptWisper = Instantiate(_wisp, transform.position, Quaternion.identity);
             _promptWisper.Initialization();
+            _promptWisper.gameObject.SetActive(false);
         }
         _isLockWisp = false;
     }
 
     public void ControlWisp(bool isOn)
     {
+        Debug.Log($"ControlWisp = {isOn}");
         _isLockWisp = isOn;
     }
 
     public void SetTarger(Transform transform)
     {
+        Debug.Log(transform.gameObject.name);
         _activeTarget = transform;
     }
 
     public void MoveTarget()
     {
         if (_isLockWisp) return;
+        if (_activeTarget == null) return;
         if (_promptWisper != null)
         {
             _promptWisper.transform.position = transform.position;
