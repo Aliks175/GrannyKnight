@@ -5,11 +5,9 @@ using UnityEngine.Events;
 public class TargetDust : MonoBehaviour, IHealtheble
 {
     [SerializeField] private SpriteRenderer _sprite;
-    [SerializeField] private float _distanceForPlayer;
     [SerializeField] private float _timeToTakeDamage;
     private DustCreater _creater;
     private Transform _endPoint;
-    private Tween _tween;
     private Tween _tweenTakeDamage;
     private float _health;
     private float _speed;
@@ -22,7 +20,7 @@ public class TargetDust : MonoBehaviour, IHealtheble
 
     private void OnDisable()
     {
-        _tween?.Kill();
+        _tweenTakeDamage?.Kill();
     }
 
     public void SetParameters(StageDust stage, DustCreater creater, Transform distance, int index)
@@ -61,6 +59,10 @@ public class TargetDust : MonoBehaviour, IHealtheble
         _creater.OnDustDie(this.transform, _stage);
         Destroy(gameObject);
     }
+    private void ChangePlay()
+    {
+        _isPlay = !_isPlay;
+    }
 
     private void StartMove()
     {
@@ -84,6 +86,9 @@ public class TargetDust : MonoBehaviour, IHealtheble
             int health = player.TakeDamage();
             Debug.Log("Damage on dust: " + health);
             _creater.CheckHealth(health);
+            _isPlay = false;
+            transform.position = this.transform.position - transform.forward;
+            Invoke("ChangePlay", 3f);
         }
     }
 }
