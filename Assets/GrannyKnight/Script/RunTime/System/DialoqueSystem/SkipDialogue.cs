@@ -14,16 +14,19 @@ public class SkipDialogue : MonoBehaviour
     
     private int currentSignalIndex = -1;
     private List<SignalEmitter> allSignals = new List<SignalEmitter>();
+
     void OnEnable()
     {
         director = GetComponent<PlayableDirector>();
-        moveInputAction.action.started += SkipToNextDialogue;
+        moveInputAction.action.performed += SkipToNextDialogue;
         FindDialogueSignals();
     }
+
     void OnDisable()
     {
-        moveInputAction.action.started -= SkipToNextDialogue;
+        moveInputAction.action.performed -= SkipToNextDialogue;
     }
+
     private void FindDialogueSignals()
     {
         dialogueSignals.Clear();

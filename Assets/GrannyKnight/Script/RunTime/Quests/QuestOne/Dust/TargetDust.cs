@@ -34,7 +34,6 @@ public class TargetDust : MonoBehaviour, IHealtheble
         _endPoint = distance;
         gameObject.transform.localScale = stage.BaseScaleStage * Vector3.one;
         _isPlay = true;
-        StartMove();
     }
 
     public void TakeDamage(float damage)
@@ -59,14 +58,10 @@ public class TargetDust : MonoBehaviour, IHealtheble
         _creater.OnDustDie(this.transform, _stage);
         Destroy(gameObject);
     }
+
     private void ChangePlay()
     {
-        _isPlay = !_isPlay;
-    }
-
-    private void StartMove()
-    {
-        // Движение к динамической позиции через Update
+        _isPlay = true;
     }
 
     private void Update()
@@ -75,7 +70,6 @@ public class TargetDust : MonoBehaviour, IHealtheble
         if (_endPoint != null)
         {
             transform.position = Vector3.MoveTowards(transform.position, _endPoint.position, _speed * Time.deltaTime);
-
         }
     }
 
@@ -83,6 +77,7 @@ public class TargetDust : MonoBehaviour, IHealtheble
     {
         if (other.gameObject.TryGetComponent(out PlayerHealthSystem player))
         {
+            if (!_isPlay) return;
             int health = player.TakeDamage();
             Debug.Log("Damage on dust: " + health);
             _creater.CheckHealth(health);

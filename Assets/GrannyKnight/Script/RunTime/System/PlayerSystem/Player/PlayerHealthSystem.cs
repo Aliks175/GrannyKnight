@@ -19,12 +19,14 @@ public class PlayerHealthSystem : MonoBehaviour
     private CancellationTokenSource _cancelToken;
     private Tween _tween;
     private bool _isInvincible = false;
+
     void Start()
     {
         _volume.TryGet(out _vignette);
         _vingetteStart = _vignette.intensity.value;
         _currentHealth = _maxHealth;;
     }
+
     public int TakeDamage()
     {
         if (_isInvincible)
@@ -38,7 +40,7 @@ public class PlayerHealthSystem : MonoBehaviour
             return _currentHealth;
         }
         _vignette.rounded.value = true;
-        _tween = DOTween.To(() => _vignette.intensity.value, x => _vignette.intensity.value = x, _vingetteToGo[_currentHealth], 0.3f);
+        _tween = DOTween.To(() => _vignette.intensity.value, x => _vignette.intensity.value = x, _vingetteToGo[_currentHealth-1], 0.3f);
         _tween.Play();
         if (_cancelToken != null)
         {
@@ -48,8 +50,8 @@ public class PlayerHealthSystem : MonoBehaviour
         RegenHealth(_cancelToken).Forget();
         Inv().Forget();
         return _currentHealth;
-
     }
+
     private async UniTaskVoid RegenHealth(CancellationTokenSource cancellationToken)
     {
         await UniTask.Delay((int)_timeToRegen * 1000 , cancellationToken: cancellationToken.Token);
@@ -57,16 +59,17 @@ public class PlayerHealthSystem : MonoBehaviour
         _tween = DOTween.To(() => _vignette.intensity.value, x => _vignette.intensity.value = x, _vingetteStart, 0.3f);
         _tween.Play();
     }
+
     private async UniTaskVoid Inv()
     {
         _isInvincible = true;
         await UniTask.Delay((int)_timeToInv * 1000);
         _isInvincible = false;
     }
+
     public void Die()
     {
         _vignette.intensity.value = _vingetteStart;
         _vignette.rounded.value = false;
     }
-
 }
