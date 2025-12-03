@@ -12,6 +12,10 @@ public class ControlLoading : MonoBehaviour
     {
         SceneManager.LoadSceneAsync((int)ListScene.Menu, LoadSceneMode.Single);
     }
+    public void LoadFreeGame()
+    {
+        SceneManager.LoadSceneAsync((int)ListScene.FreeGame, LoadSceneMode.Single);
+    }
 
     public void Exit()
     {
@@ -23,4 +27,5 @@ public enum ListScene
 {
     Menu = 0,
     Game = 1,
+    FreeGame = 2
 }
