@@ -34,6 +34,7 @@ public class Fairy : MonoBehaviour, IHealtheble
 
     public UnityEvent OnStart;
     public UnityEvent OnEnd;
+    public UnityEvent OnSystemStop;
     public UnityEvent _pickUpevent;
     public UnityEvent _changeTarget;
     public UnityEvent _dieEvent;
@@ -95,7 +96,10 @@ public class Fairy : MonoBehaviour, IHealtheble
             if (_fairyItem == null)
             {
                 _fairyItem = _fairyCreater.GetFairyTarget();
-                _fairyItem.SetFairy();
+                if (_fairyItem != null)
+                {
+                    _fairyItem.SetFairy();
+                }
                 _count = 5;
                 CheckCompliteMove();
                 return;
@@ -204,7 +208,13 @@ public class Fairy : MonoBehaviour, IHealtheble
         }
         else
         {
-            Destroy(gameObject);
+            Destroy(gameObject, 0.2f);
         }
+    }
+
+    public void Stop()
+    {
+        OnSystemStop?.Invoke();
+        Destroy(gameObject, 1f);
     }
 }

@@ -79,7 +79,6 @@ public class OneSound : MonoBehaviour
     {
         bool result = false;
         _activeSound.getPlaybackState(out FMOD.Studio.PLAYBACK_STATE state);
-        Debug.Log($"ControlEndSound {state}  ||| {gameObject.name}");
         if (state == FMOD.Studio.PLAYBACK_STATE.PLAYING)
         {
             OnPlayingSound?.Invoke();

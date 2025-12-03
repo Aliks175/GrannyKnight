@@ -46,10 +46,12 @@ public class ControlFairyItem : MonoBehaviour
     public void CheckLostItems(FairyItem fairyItem)
     {
         _countFairyItem--;
-        OnLostItem?.Invoke(_countFairyItem);
         if (_countFairyItem <= 0)
         {
+            _countFairyItem = 0;
             OnEnd?.Invoke();
         }
+        Debug.Log($"Lost Items {_countFairyItem}");
+        OnLostItem?.Invoke(_countFairyItem);
     }
 }

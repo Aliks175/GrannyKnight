@@ -45,7 +45,7 @@ public class FairyCreater : MonoBehaviour
         {
             if (fairies[i] != null)
             {
-                fairies[i].End();
+                fairies[i].Stop();
             }
         }
     }
@@ -73,7 +73,7 @@ public class FairyCreater : MonoBehaviour
 
     public void CheckLiveEnemy(Fairy targetFairy)
     {
-        fairies.Remove(targetFairy);
+        //fairies.Remove(targetFairy);
         OnCheckOverWaves?.Invoke();
         OnSleepFairy?.Invoke();
     }

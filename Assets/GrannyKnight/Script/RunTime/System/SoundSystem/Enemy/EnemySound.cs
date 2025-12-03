@@ -77,4 +77,11 @@ public class EnemySound : MonoBehaviour
         _onMove.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         _onActive.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     }
+
+    public void SystemStop()
+    {
+        StopSound();
+        _onMove.release();
+        _onActive.release();
+    }
 }
