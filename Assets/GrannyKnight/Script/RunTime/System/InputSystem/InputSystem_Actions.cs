@@ -262,6 +262,15 @@ public partial class @PlayerSystemActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SkipUi"",
+                    ""type"": ""Button"",
+                    ""id"": ""c0301c41-c39f-415a-829d-db4151939739"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -753,10 +762,21 @@ public partial class @PlayerSystemActions: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""1767afc0-078b-4e9f-917e-c154b5e038ff"",
                     ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
+                    ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Skip"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1e4a167b-feaf-437a-a31d-bca32908bbea"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SkipUi"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1363,6 +1383,7 @@ public partial class @PlayerSystemActions: IInputActionCollection2, IDisposable
         m_Player_Run = m_Player.FindAction("Run", throwIfNotFound: true);
         m_Player_Help = m_Player.FindAction("Help", throwIfNotFound: true);
         m_Player_Skip = m_Player.FindAction("Skip", throwIfNotFound: true);
+        m_Player_SkipUi = m_Player.FindAction("SkipUi", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1475,6 +1496,7 @@ public partial class @PlayerSystemActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Run;
     private readonly InputAction m_Player_Help;
     private readonly InputAction m_Player_Skip;
+    private readonly InputAction m_Player_SkipUi;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -1563,6 +1585,10 @@ public partial class @PlayerSystemActions: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @Skip => m_Wrapper.m_Player_Skip;
         /// <summary>
+        /// Provides access to the underlying input action "Player/SkipUi".
+        /// </summary>
+        public InputAction @SkipUi => m_Wrapper.m_Player_SkipUi;
+        /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
         public InputActionMap Get() { return m_Wrapper.m_Player; }
@@ -1645,6 +1671,9 @@ public partial class @PlayerSystemActions: IInputActionCollection2, IDisposable
             @Skip.started += instance.OnSkip;
             @Skip.performed += instance.OnSkip;
             @Skip.canceled += instance.OnSkip;
+            @SkipUi.started += instance.OnSkipUi;
+            @SkipUi.performed += instance.OnSkipUi;
+            @SkipUi.canceled += instance.OnSkipUi;
         }
 
         /// <summary>
@@ -1713,6 +1742,9 @@ public partial class @PlayerSystemActions: IInputActionCollection2, IDisposable
             @Skip.started -= instance.OnSkip;
             @Skip.performed -= instance.OnSkip;
             @Skip.canceled -= instance.OnSkip;
+            @SkipUi.started -= instance.OnSkipUi;
+            @SkipUi.performed -= instance.OnSkipUi;
+            @SkipUi.canceled -= instance.OnSkipUi;
         }
 
         /// <summary>
@@ -2146,6 +2178,13 @@ public partial class @PlayerSystemActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSkip(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "SkipUi" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSkipUi(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

@@ -176,6 +176,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "SkipUi",
+                    "type": "Button",
+                    "id": "c0301c41-c39f-415a-829d-db4151939739",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -667,10 +676,21 @@
                     "name": "",
                     "id": "1767afc0-078b-4e9f-917e-c154b5e038ff",
                     "path": "<Keyboard>/q",
-                    "interactions": "",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "",
                     "action": "Skip",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1e4a167b-feaf-437a-a31d-bca32908bbea",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SkipUi",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
