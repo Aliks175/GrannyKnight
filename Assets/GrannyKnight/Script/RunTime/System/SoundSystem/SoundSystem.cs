@@ -18,6 +18,11 @@ public class SoundSystem : MonoBehaviour
     private FMOD.Studio.EventInstance _activeSound;
     private FMOD.Studio.EventInstance _activeMusic;
 
+    private void OnDisable()
+    {
+        _activeSound.release();
+    }
+
     public void Initialization()
     {
         _timeWaitStep = 1.2f;
@@ -75,7 +80,7 @@ public class SoundSystem : MonoBehaviour
         }
         _activeSound = RuntimeManager.CreateInstance(eventReference); // —оздаем событие «вука 
         _activeSound.start(); // «апускаем воспроизведение 
-        _activeSound.release(); // освобождаем пам€ть от этого событи€ 
+        // освобождаем пам€ть от этого событи€ 
         return _activeSound;
         //        PLAYING Ч звук играет.
         //STOPPED Ч не играет.

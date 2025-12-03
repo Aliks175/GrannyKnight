@@ -8,100 +8,87 @@ using UnityEngine.Events;
 public class OneSound : MonoBehaviour
 {
     [SerializeField] private EventReference _sound;
+    //private FMOD.Studio.EventInstance _activeSound;
     private SoundSystem _soundSystem;
-    private FMOD.Studio.EventInstance _activeSound;
     private CancellationTokenSource _cts;
-    private bool _isEnd;
+    private bool _isActive;
     public UnityEvent OnStartSound;
     public UnityEvent OnEndSound;
+    public UnityEvent OnPlayingSound;
+    //public UnityEvent OnSTOPPEDSound;
 
     private void OnEnable()
     {
         if (_cts != null)
         {
-            _cts.Dispose();
+            _cts?.Cancel();
+            _cts?.Dispose();
         }
-        _cts = new CancellationTokenSource();
     }
 
     private void OnDisable()
     {
         _cts?.Cancel();
-        _cts.Dispose();
+        _cts?.Dispose();
         _cts = null;
     }
 
     private void Start()
     {
         _soundSystem = GameObject.FindFirstObjectByType<SoundSystem>();
-        _isEnd = false;
+        _isActive = false;
     }
 
     public void Active()
     {
-        _isEnd = false;
-        _activeSound = _soundSystem.PlaySound(_sound);
+        if (_isActive) return;
+        _isActive = true;
         _cts?.Cancel();
-        WaitEndSound().Forget();
+        _cts?.Dispose();
+        _cts = new CancellationTokenSource();
+        FMOD.Studio.EventInstance _activeSound = _soundSystem.PlaySound(_sound);
+        WaitEndSound(_activeSound, _cts).Forget();
     }
 
-    private async UniTaskVoid WaitEndSound()
+    private async UniTaskVoid WaitEndSound(FMOD.Studio.EventInstance eventInstance, CancellationTokenSource cancel)
     {
-        _cts = new CancellationTokenSource();
-        OnStartSound?.Invoke();
+            OnStartSound?.Invoke();
         Debug.Log($"OnStartSound - {gameObject.name}");
-        ;
         try
         {
             await UniTask.WaitUntil(
-                () => ControlEndSound(),
-                cancellationToken: _cts.Token                                                   //cancellationToken: _cts.Token
+                () => ControlEndSound(eventInstance),
+                cancellationToken: cancel.Token                                                   //cancellationToken: _cts.Token
             );
-            if (!_isEnd)
-            {
-                Debug.Log($"OnEndSound - {gameObject.name}");
-                OnEndSound?.Invoke();
-                _isEnd = true;
-            }
+            //if (_isActive)
+            //{
+            //    _isActive = false;
+            //    return;
+            //}
+            Debug.Log($"OnEndSound - {gameObject.name}");
+            OnEndSound?.Invoke();
+
         }
         catch (OperationCanceledException)
         {
-            if (!_isEnd)
-            {
-                Debug.Log($"OnEndSound - {gameObject.name}");
-                //OnEndSound?.Invoke();
-                _isEnd = true;
-            }
+            //OnSTOPPEDSound?.Invoke();
         }
-        //if (state == FMOD.Studio.PLAYBACK_STATE.STOPPED)
-        //{
-        //    OnEndSound?.Invoke();
-        //    Debug.Log("STOPPED");
-        //}
-        //else if (state == FMOD.Studio.PLAYBACK_STATE.PLAYING)
-        //{
-        //    Debug.Log("Playing");
-        //}
     }
 
-    private bool ControlEndSound()
+    private bool ControlEndSound(FMOD.Studio.EventInstance _activeSound)
     {
+        bool result = false;
         _activeSound.getPlaybackState(out FMOD.Studio.PLAYBACK_STATE state);
-        return state == FMOD.Studio.PLAYBACK_STATE.STOPPED;
+        Debug.Log($"ControlEndSound {state}  ||| {gameObject.name}");
+        if (state == FMOD.Studio.PLAYBACK_STATE.PLAYING)
+        {
+            OnPlayingSound?.Invoke();
+        }
+        if (state == FMOD.Studio.PLAYBACK_STATE.STOPPING)
+        {
+            result = true;
+            _isActive = false;
+        }
+        return result;
     }
-
-    //private void Update()
-    //{
-    //    if (!_isPlaying) return;
-    //    _activeSound.getPlaybackState(out FMOD.Studio.PLAYBACK_STATE state);
-    //    if (state == FMOD.Studio.PLAYBACK_STATE.STOPPED)
-    //    {
-    //        Debug.Log("STOPPED");
-    //        _isPlaying = false;
-    //    }
-    //    else if (state == FMOD.Studio.PLAYBACK_STATE.PLAYING)
-    //    {
-    //        Debug.Log("Playing");
-    //    }
-    //}
 }

@@ -1,14 +1,14 @@
-using UnityEngine;
-using TMPro;
 using Cysharp.Threading.Tasks;
 using System.Threading;
+using TMPro;
+using UnityEngine;
 
 public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager Instance;
 
     [Header("UI Elements")]
-    [SerializeField]private GameObject _dialogueUI;
+    [SerializeField] private GameObject _dialogueUI;
     [SerializeField] private TMP_Text _dialogueText, _nameText;
     [SerializeField] private float _delayBetweenChars = 0.05f;
     [SerializeField] private float _delayAfterPunctuation = 0.5f;
@@ -91,26 +91,26 @@ public class DialogueManager : MonoBehaviour
         _dialogueText.ForceMeshUpdate();
 
         int totalCharacters = _fullText.Length;
-        
+
         for (int i = 0; i <= totalCharacters; i++)
         {
             if (cancellationToken.IsCancellationRequested) return;
-            
+
             _dialogueText.maxVisibleCharacters = i;
-            
+
             // Проверяем текущий символ на пунктуацию для добавления задержки
             if (i > 0 && i < totalCharacters)
             {
-                char currentChar = _fullText[i - 1]; 
+                char currentChar = _fullText[i - 1];
                 if (currentChar == '.' || currentChar == '!' || currentChar == '?')
                 {
                     await UniTask.Delay((int)(_delayAfterPunctuation * 1000), cancellationToken: cancellationToken);
                 }
             }
-            
+
             await UniTask.Delay((int)(_delayBetweenChars * 1000), cancellationToken: cancellationToken);
         }
-        
+
         _isTyping = false;
     }
     public void SkipTyping()
@@ -131,6 +131,9 @@ public class DialogueManager : MonoBehaviour
 
     private void ControlVisible(bool isVisible)
     {
-        _dialogueUI.SetActive(isVisible);
+        if (_dialogueUI.activeSelf != isVisible)
+        {
+            _dialogueUI.SetActive(isVisible);
+        }
     }
 }
