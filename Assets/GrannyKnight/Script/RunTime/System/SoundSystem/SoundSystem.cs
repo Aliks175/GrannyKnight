@@ -66,7 +66,7 @@ public class SoundSystem : MonoBehaviour
         _activeSound.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     }
 
-    public void PlaySound(EventReference eventReference) // Вызов другого звука 
+    public FMOD.Studio.EventInstance PlaySound(EventReference eventReference) // Вызов другого звука 
     {
         _activeSound.getPlaybackState(out FMOD.Studio.PLAYBACK_STATE state);
         if (state == FMOD.Studio.PLAYBACK_STATE.PLAYING)
@@ -76,18 +76,11 @@ public class SoundSystem : MonoBehaviour
         _activeSound = RuntimeManager.CreateInstance(eventReference); // Создаем событие Звука 
         _activeSound.start(); // Запускаем воспроизведение 
         _activeSound.release(); // освобождаем память от этого события 
-
+        return _activeSound;
         //        PLAYING — звук играет.
         //STOPPED — не играет.
         //STARTING — запускается.
         //STOPPING — останавливается.
-    }
-
-    private void ControlSoundStep()
-    {
-
-        
-
     }
 
     private void PlayMusic() // Вызов другого звука 
