@@ -48,30 +48,24 @@ public class OneSound : MonoBehaviour
         _cts = new CancellationTokenSource();
         FMOD.Studio.EventInstance _activeSound = _soundSystem.PlaySound(_sound);
         WaitEndSound(_activeSound, _cts).Forget();
+        Invoke(nameof(ResetSound), 20f);
     }
 
     private async UniTaskVoid WaitEndSound(FMOD.Studio.EventInstance eventInstance, CancellationTokenSource cancel)
     {
-            OnStartSound?.Invoke();
-        //Debug.Log($"OnStartSound - {gameObject.name}");
+        OnStartSound?.Invoke();
         try
         {
             await UniTask.WaitUntil(
                 () => ControlEndSound(eventInstance),
                 cancellationToken: cancel.Token                                                   //cancellationToken: _cts.Token
             );
-            //if (_isActive)
-            //{
-            //    _isActive = false;
-            //    return;
-            //}
-            //Debug.Log($"OnEndSound - {gameObject.name}");
             OnEndSound?.Invoke();
 
         }
         catch (OperationCanceledException)
         {
-            //OnSTOPPEDSound?.Invoke();
+
         }
     }
 
@@ -89,5 +83,10 @@ public class OneSound : MonoBehaviour
             _isActive = false;
         }
         return result;
+    }
+
+    private void ResetSound()
+    {
+        _isActive = false;
     }
 }
