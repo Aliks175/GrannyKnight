@@ -7,6 +7,9 @@ public class UiThree : MonoBehaviour
     [SerializeField] private GameObject _panelUi;
     [SerializeField] private TextMeshProUGUI _textProgressQuest;
     [SerializeField] private UiTimer _uiTimer;
+    [SerializeField] private GameObject _panelPrompt;
+    [SerializeField] private float _timeDisablePrompt;
+
     private int _startcountEnemy;
     private int _startcountItem;
 
@@ -20,6 +23,7 @@ public class UiThree : MonoBehaviour
     {
         _panelUi.SetActive(true);
         _uiTimer.StartTimerGame(action);
+        Invoke(nameof(DisablePrompt), _timeDisablePrompt);
     }
 
     public void Stop()
@@ -32,5 +36,10 @@ public class UiThree : MonoBehaviour
     {
        string textDiscription = $"{countEnemy} / {_startcountEnemy}\n\n\n\n{countItem} / {_startcountItem}";
         _textProgressQuest.SetText(textDiscription);
+    }
+
+    private void DisablePrompt()
+    {
+        _panelPrompt.SetActive(false);
     }
 }

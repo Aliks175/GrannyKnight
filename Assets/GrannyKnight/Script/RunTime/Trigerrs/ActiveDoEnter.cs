@@ -10,8 +10,8 @@ public class ActiveDoEnter : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Start");
-            Debug.Log(other.gameObject.name);
+            //Debug.Log("Start");
+            //Debug.Log(other.gameObject.name);
             UnityEvent?.Invoke();
         }
     }

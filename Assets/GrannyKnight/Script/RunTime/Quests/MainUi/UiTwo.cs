@@ -8,6 +8,8 @@ public class UiTwo : MonoBehaviour
     [SerializeField] private UiTimer _uiTimer;
     [SerializeField] private Image _timerUi;
     [SerializeField] private Image _progressUI;
+    [SerializeField] private GameObject _panelPrompt;
+    [SerializeField] private float _timeDisablePrompt;
     private float _maxTime;
     private int _maxCountFruit;
     private float _progressForOne;
@@ -24,6 +26,7 @@ public class UiTwo : MonoBehaviour
     {
         _panelUi.SetActive(true);
         _uiTimer.StartTimerGame(action);
+        Invoke(nameof(DisablePrompt), _timeDisablePrompt);
     }
 
     public void Stop()
@@ -48,5 +51,10 @@ public class UiTwo : MonoBehaviour
         tempProcentTime = Mathf.Clamp01(tempProcentTime);
         tempProcentTime = 1f - tempProcentTime;
         _timerUi.fillAmount = tempProcentTime;
+    }
+
+    private void DisablePrompt()
+    {
+        _panelPrompt.SetActive(false);
     }
 }

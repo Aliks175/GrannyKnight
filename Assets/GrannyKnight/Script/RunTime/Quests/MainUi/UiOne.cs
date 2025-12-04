@@ -8,6 +8,9 @@ public class UiOne : MonoBehaviour
     [SerializeField] private GameObject _panelUi;
     [SerializeField] private Slider _sliderProgress;
     [SerializeField] private UiTimer _uiTimer;
+    [SerializeField] private GameObject _panelPrompt;
+    [SerializeField] private float _timeDisablePrompt;
+
 
     public void Initialization(float MaxHealth)
     {
@@ -23,6 +26,7 @@ public class UiOne : MonoBehaviour
     {
         _panelUi.SetActive(true);
         _uiTimer.StartTimerGame(action);
+        Invoke(nameof(DisablePrompt), _timeDisablePrompt);
     }
 
     public void Stop()
@@ -36,5 +40,10 @@ public class UiOne : MonoBehaviour
         _sliderProgress.value = enemyHealth;
         //_textDiscription = $"{countItem} / {StartcountItem}\n\n{countEnemy} / {StartcountEnemy}";
         //_textProgressQuest.SetText(_textDiscription);
+    }
+
+    private void DisablePrompt()
+    {
+        _panelPrompt.SetActive(false);
     }
 }
