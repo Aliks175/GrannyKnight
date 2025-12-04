@@ -17,12 +17,12 @@ public class SkipDialogue : MonoBehaviour
     void OnEnable()
     {
         director = GetComponent<PlayableDirector>();
-        moveInputAction.action.started += SkipToNextDialogue;
+        moveInputAction.action.performed += SkipToNextDialogue;
         FindDialogueSignals();
     }
     void OnDisable()
     {
-        moveInputAction.action.started -= SkipToNextDialogue;
+        moveInputAction.action.performed -= SkipToNextDialogue;
     }
     private void FindDialogueSignals()
     {
