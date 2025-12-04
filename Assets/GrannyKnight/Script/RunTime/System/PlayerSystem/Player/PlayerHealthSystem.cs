@@ -40,7 +40,7 @@ public class PlayerHealthSystem : MonoBehaviour
             return _currentHealth;
         }
         _vignette.rounded.value = true;
-        _tween = DOTween.To(() => _vignette.intensity.value, x => _vignette.intensity.value = x, _vingetteToGo[_currentHealth-1], 0.3f);
+        _tween = DOTween.To(() => _vignette.intensity.value, x => _vignette.intensity.value = x, _vingetteToGo[_currentHealth], 0.3f);
         _tween.Play();
         if (_cancelToken != null)
         {

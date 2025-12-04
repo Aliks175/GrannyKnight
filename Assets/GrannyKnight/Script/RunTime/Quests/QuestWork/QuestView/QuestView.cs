@@ -23,13 +23,13 @@ public class QuestView : MonoBehaviour
     public void ShowQuestPanel()
     {
         _tweenOpen.Play();
-        Debug.Log("ShowQuest");
+        //Debug.Log("ShowQuest");
     }
 
     public void HideQuestPanel()
     {
         _tweenClose.Play();
-        Debug.Log("HideQuest");
+        //Debug.Log("HideQuest");
     }
 
     public void SetQuest(QuestInfo questInfo)

@@ -74,7 +74,7 @@ public class QuestTwo : Quest
         _uiTwo.OnUpdateUiProgress(_fruitCount);
         UpdateSleepTimer();
 
-        Debug.Log($"Fruits collected: {_fruitCount}");
+        //Debug.Log($"Fruits collected: {_fruitCount}");
 
         CheckWin();
         StartSleepTimer();
@@ -174,7 +174,7 @@ public class QuestTwo : Quest
     private void OnBasketArrivedAtFruit()
     {
         // Можно добавить логику при прибытии корзины
-        Debug.Log("Basket arrived at fruit");
+        //Debug.Log("Basket arrived at fruit");
     }
 
     private void UpdateSleepTimer()

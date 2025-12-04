@@ -111,7 +111,7 @@ public class SkipDialogue : MonoBehaviour
             {
                 // Вызываем сигнал вручную
                 FireSignal(signal);
-                Debug.Log(signal.name);
+                //Debug.Log(signal.name);
             }
         }
     }

@@ -25,13 +25,13 @@ public class PlayerHintSystem : MonoBehaviour
 
     public void ControlWisp(bool isOn)
     {
-        Debug.Log($"ControlWisp = {isOn}");
+        //Debug.Log($"ControlWisp = {isOn}");
         _isLockWisp = isOn;
     }
 
     public void SetTarger(Transform transform)
     {
-        Debug.Log(transform.gameObject.name);
+        //Debug.Log(transform.gameObject.name);
         _activeTarget = transform;
     }
 

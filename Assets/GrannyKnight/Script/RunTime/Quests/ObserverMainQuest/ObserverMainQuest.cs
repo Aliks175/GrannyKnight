@@ -28,8 +28,8 @@ public class ObserverMainQuest : MonoBehaviour
 
     private void OverMainQuest(QuestEnding quest)
     {
-        Debug.Log(new string('-', 10));
-        Debug.Log($"End Vers = {quest}");
+        //Debug.Log(new string('-', 10));
+        //Debug.Log($"End Vers = {quest}");
         character.PlayerData.PlayerQuestControl.OverMainQuest(_indexMainQuest, quest);
         ActiveEvent(quest);
     }

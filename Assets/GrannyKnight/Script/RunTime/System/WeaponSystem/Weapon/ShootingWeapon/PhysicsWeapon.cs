@@ -36,7 +36,7 @@ public class PhysicsWeapon : MonoBehaviour, IFireble
     {
         if (head == null)
         {
-            Debug.LogError("Head cannot be null");
+            //Debug.LogError("Head cannot be null");
             return;
         }
 
@@ -48,7 +48,7 @@ public class PhysicsWeapon : MonoBehaviour, IFireble
     {
         if (weapon == null)
         {
-            Debug.LogWarning("Weapon is null");
+            //Debug.LogWarning("Weapon is null");
             return;
         }
         _weapon = weapon;
@@ -137,7 +137,7 @@ public class PhysicsWeapon : MonoBehaviour, IFireble
         }
         else
         {
-            Debug.LogWarning("ArrowWeapon component not found on arrow prefab");
+            //Debug.LogWarning("ArrowWeapon component not found on arrow prefab");
         }
 
         ResetShot();

@@ -22,7 +22,7 @@ public class ArrowWeapon : MonoBehaviour
                 .OnComplete(OnProjectileLanded);
         _tween.Play();
 
-        Debug.Log($"Выстрел с силой: {force:F1}, дистанция: {flightDistance:F1}");
+        //Debug.Log($"Выстрел с силой: {force:F1}, дистанция: {flightDistance:F1}");
 
         // Сбрасываем силу после выстрела
         force = 0f;
@@ -47,7 +47,7 @@ public class ArrowWeapon : MonoBehaviour
         if (other.gameObject.TryGetComponent(out IHealtheble target))
         {
             target.TakeDamage(_damage);
-            Debug.Log(other.gameObject.name);
+            //Debug.Log(other.gameObject.name);
             Destroy(this.gameObject);
         }
     }

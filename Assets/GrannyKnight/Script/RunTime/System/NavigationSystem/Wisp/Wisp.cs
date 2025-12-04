@@ -45,7 +45,7 @@ public class Wisp : MonoBehaviour
     private IEnumerator WaitTime()
     {
         yield return _wait;
-        Debug.Log($"Disable");
+        //Debug.Log($"Disable");
         gameObject.SetActive(false);
     }
 

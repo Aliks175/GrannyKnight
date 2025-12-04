@@ -750,7 +750,7 @@ public partial class @PlayerSystemActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""f97e2be2-adda-4366-a4ba-2ee80f307920"",
-                    ""path"": ""<Keyboard>/h"",
+                    ""path"": ""<Keyboard>/tab"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

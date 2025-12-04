@@ -29,7 +29,7 @@ public class ShowSingleDialog : MonoBehaviour
 
     public void StartDialog()
     {
-        Debug.Log($"StartDialogue ShowPanelDialog ||| {gameObject.name}");
+        //Debug.Log($"StartDialogue ShowPanelDialog ||| {gameObject.name}");
         DialogueManager.Instance.StartDialogue(_dialogue);
         _isActive = true;
         _cts?.Cancel();
@@ -43,7 +43,7 @@ public class ShowSingleDialog : MonoBehaviour
         DialogueManager.Instance.HideDialog();
         _isActive = false;
         _cts?.Cancel();
-        Debug.Log($"EndDialog - HideDialog ||| {gameObject.name}");
+        //Debug.Log($"EndDialog - HideDialog ||| {gameObject.name}");
     }
 
 
@@ -63,12 +63,12 @@ public class ShowSingleDialog : MonoBehaviour
                 await UniTask.Delay(_waitShowDialogs[_indexDialogPanel] * 1000,
                     cancellationToken: tokenSource.Token
                 );
-                Debug.Log($"_indexDialogPanel {_indexDialogPanel} ||  _waitShowDialogs.Length  {_waitShowDialogs.Length}");
+                //Debug.Log($"_indexDialogPanel {_indexDialogPanel} ||  _waitShowDialogs.Length  {_waitShowDialogs.Length}");
                 if (!_isActive) return;
                 if (_indexDialogPanel + 1 >= _waitShowDialogs.Length)
                 {
                     DialogueManager.Instance.HideDialog();
-                    Debug.Log($"WaitEndDialog - HideDialog ||| {gameObject.name}");
+                    //Debug.Log($"WaitEndDialog - HideDialog ||| {gameObject.name}");
                     _indexDialogPanel = 0;
                     _cts?.Cancel();
                     return;

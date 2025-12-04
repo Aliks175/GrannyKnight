@@ -26,9 +26,9 @@ public class UiTimer : MonoBehaviour
 
     public void Stop()
     {
-        Debug.Log($"UiThree - Stop");
+        //Debug.Log($"UiThree - Stop");
         _textTimer.gameObject.SetActive(false);
-        Debug.Log($"_panelUi - {_textTimer.gameObject.activeSelf}");
+        //Debug.Log($"_panelUi - {_textTimer.gameObject.activeSelf}");
         _blackOut.Active();
     }
 }

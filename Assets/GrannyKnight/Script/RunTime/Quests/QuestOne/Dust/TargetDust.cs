@@ -79,11 +79,11 @@ public class TargetDust : MonoBehaviour, IHealtheble
         {
             if (!_isPlay) return;
             int health = player.TakeDamage();
-            Debug.Log("Damage on dust: " + health);
+            //Debug.Log("Damage on dust: " + health);
             _creater.CheckHealth(health);
             _isPlay = false;
             transform.position = this.transform.position - transform.forward;
-            Invoke("ChangePlay", 3f);
+            Invoke("ChangePlay", 1.5f);
         }
     }
 }

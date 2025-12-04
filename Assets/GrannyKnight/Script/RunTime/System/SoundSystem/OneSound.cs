@@ -53,7 +53,7 @@ public class OneSound : MonoBehaviour
     private async UniTaskVoid WaitEndSound(FMOD.Studio.EventInstance eventInstance, CancellationTokenSource cancel)
     {
             OnStartSound?.Invoke();
-        Debug.Log($"OnStartSound - {gameObject.name}");
+        //Debug.Log($"OnStartSound - {gameObject.name}");
         try
         {
             await UniTask.WaitUntil(
@@ -65,7 +65,7 @@ public class OneSound : MonoBehaviour
             //    _isActive = false;
             //    return;
             //}
-            Debug.Log($"OnEndSound - {gameObject.name}");
+            //Debug.Log($"OnEndSound - {gameObject.name}");
             OnEndSound?.Invoke();
 
         }

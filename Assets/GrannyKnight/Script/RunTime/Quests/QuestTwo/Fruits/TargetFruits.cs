@@ -7,6 +7,7 @@ public class TargetFruits : MonoBehaviour, IHealtheble
 {
     [SerializeField] private Rigidbody rb;
     [SerializeField] private EventReference _fall;
+    [SerializeField] private EventReference _hit;
     private Vector3 _toMove;
 
     private CancellationTokenSource _cancellationTokenSource;
@@ -19,7 +20,7 @@ public class TargetFruits : MonoBehaviour, IHealtheble
 
     public void TakeDamage(float damage)
     {
-        PlaySound();
+        PlaySound(_hit);
         rb.isKinematic = false;
         Vector3 basket = QuestTwo.Instance.BasketPos;
         float distance = this.transform.position.y - basket.y;
@@ -33,16 +34,17 @@ public class TargetFruits : MonoBehaviour, IHealtheble
     private async UniTaskVoid DestroyFruit(CancellationToken cancellationToken)
     {
         await UniTask.WaitUntil(() => this.transform.position.y <= _toMove.y, cancellationToken: cancellationToken);
+        PlaySound(_fall);
         QuestTwo.Instance.OnFruitCollected();
         QuestTwo.Instance.ParticleStart(transform.position);
         Destroy(this.gameObject);
     }
 
-    private void PlaySound()
+    private void PlaySound(EventReference eventReference)
     {
-        if (!_fall.IsNull)
+        if (!eventReference.IsNull)
         {
-            RuntimeManager.PlayOneShot(_fall);
+            RuntimeManager.PlayOneShot(eventReference);
         }
     }
 }

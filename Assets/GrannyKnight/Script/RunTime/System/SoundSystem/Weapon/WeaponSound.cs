@@ -34,7 +34,7 @@ public class WeaponSound : MonoBehaviour
     {
         if (!_isSystemFire) return;
         if (_isStartPreFire) return;
-        Debug.Log("PreFire");
+        //Debug.Log("PreFire");
         PlaySound(ref _onPreFire, _preFire);
         //_onPreFire = RuntimeManager.CreateInstance(_preFire); // Создаем событие Звука 
         //_onPreFire.start();
@@ -44,7 +44,7 @@ public class WeaponSound : MonoBehaviour
     public void Fire()
     {
         if (!_isSystemFire) return;
-        Debug.Log("Fire");
+        //Debug.Log("Fire");
         PlaySound(ref _onFire, _fire);
     }
 

@@ -45,18 +45,18 @@ public class DustCreater : Quest
     // принудительная остановка квеста провал квеста и тд 
     public override void StopQuest(QuestEnding quest)
     {
-        switch (quest)
-        {
-            case QuestEnding.Good:
-                Debug.Log("Good endind");
-                break;
-            case QuestEnding.Bad:
-                Debug.Log("Bad endind");
-                break;
-            case QuestEnding.Middle:
-                Debug.Log("Middle endind");
-                break;
-        }
+        //switch (quest)
+        //{
+        //    case QuestEnding.Good:
+        //        Debug.Log("Good endind");
+        //        break;
+        //    case QuestEnding.Bad:
+        //        Debug.Log("Bad endind");
+        //        break;
+        //    case QuestEnding.Middle:
+        //        //Debug.Log("Middle endind");
+        //        break;
+        //}
         EndGame(quest);
     }
 
@@ -103,7 +103,7 @@ public class DustCreater : Quest
         GameObject dust = Instantiate(_prefabDust, _spawnPoint.position, Quaternion.identity, transform);
         dust.GetComponent<TargetDust>().SetParameters(_stageDust[_stageDust.Length - 1], this, _playerTarget, _stageDust.Length - 1);
         _dusts.Add(dust);
-        Debug.Log(_fullHealth);
+        //Debug.Log(_fullHealth);
     }
 
     private void CreateChild(int stage, Transform trans)
