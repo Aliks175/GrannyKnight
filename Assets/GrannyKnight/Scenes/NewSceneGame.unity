@@ -19442,7 +19442,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.06666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 507f4deb56cdcfe428f45f33cc76557a, type: 2}
+  m_NavMeshData: {fileID: 0}
   m_BuildHeightMesh: 0
 --- !u!33 &1164272052663959145
 MeshFilter:
@@ -35500,9 +35500,9 @@ MonoBehaviour:
         z: 3.579511
       Rotation:
         value:
-          x: -0.033849217
+          x: -0.033849213
           y: 0.81263816
-          z: 0.04743866
+          z: 0.047438662
           w: 0.57984746
     - Position:
         x: 26.019997
@@ -53026,6 +53026,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 8481263228954578062}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnEnd:
     m_PersistentCalls:
       m_Calls:
@@ -53138,6 +53150,18 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 8100824844389202777}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 8481263228954578062}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -56123,7 +56147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 3
   _timeToRegen: 5
-  _timeToInv: 2
+  _timeToInv: 1.5
   _vingetteToGo:
   - 0
   - 1
@@ -107063,7 +107087,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.06666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: de7b1306848c276418479b93ba5b372b, type: 2}
+  m_NavMeshData: {fileID: 0}
   m_BuildHeightMesh: 0
 --- !u!1 &6810055603990941996
 GameObject:
@@ -136164,7 +136188,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8485520484131356086
 Transform:
   m_ObjectHideFlags: 0
