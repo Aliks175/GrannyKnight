@@ -1,5 +1,29 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8110243226894975276
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21bf7f712d84d26478ebe6a299f21738, type: 3}
+  m_Name: Activation Track (4)
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_AnimClip: {fileID: 0}
+  m_Locked: 0
+  m_Muted: 0
+  m_CustomPlayableFullTypename: 
+  m_Curves: {fileID: 0}
+  m_Parent: {fileID: 11400000}
+  m_Children: []
+  m_Clips: []
+  m_Markers:
+    m_Objects: []
+  m_PostPlaybackState: 0
 --- !u!114 &-7829298125967457459
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -508,6 +532,7 @@ MonoBehaviour:
   - {fileID: 6837144778729206919}
   - {fileID: 5537204196569250360}
   - {fileID: -2714647291405224114}
+  - {fileID: -8110243226894975276}
   m_FixedDuration: 0
   m_EditorSettings:
     m_Framerate: 60
@@ -619,13 +644,13 @@ MonoBehaviour:
     m_Start: 0
     m_ClipIn: 0
     m_Asset: {fileID: -2922170248332383375}
-    m_Duration: 19.483333333333317
+    m_Duration: 20.583333333333332
     m_TimeScale: 1
     m_ParentTrack: {fileID: 4065395847019753463}
     m_EaseInDuration: 0
     m_EaseOutDuration: 0
     m_BlendInDuration: -1
-    m_BlendOutDuration: -1
+    m_BlendOutDuration: 1.1000000000000156
     m_MixInCurve:
       serializedVersion: 2
       m_Curve:
@@ -675,7 +700,7 @@ MonoBehaviour:
     m_ParentTrack: {fileID: 4065395847019753463}
     m_EaseInDuration: 0
     m_EaseOutDuration: 0
-    m_BlendInDuration: -1
+    m_BlendInDuration: 1.1000000000000156
     m_BlendOutDuration: -1
     m_MixInCurve:
       serializedVersion: 2
