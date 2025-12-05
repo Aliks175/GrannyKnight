@@ -38,8 +38,6 @@ public class UiOne : MonoBehaviour
     public void OnUpdateUi(float enemyHealth)
     {
         _sliderProgress.value = enemyHealth;
-        //_textDiscription = $"{countItem} / {StartcountItem}\n\n{countEnemy} / {StartcountEnemy}";
-        //_textProgressQuest.SetText(_textDiscription);
     }
 
     private void DisablePrompt()
