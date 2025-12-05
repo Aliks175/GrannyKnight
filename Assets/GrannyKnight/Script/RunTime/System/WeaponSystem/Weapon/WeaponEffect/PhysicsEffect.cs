@@ -17,6 +17,7 @@ public class PhysicsEffect : WeaponEffectAbstract
     public UnityEvent OnFire;
     public UnityEvent OnEndFire;
     public UnityEvent OnSystemDisableSound;
+    public UnityEvent OnSystemInitializationSound;
 
     private void OnDisable()
     {
@@ -40,6 +41,7 @@ public class PhysicsEffect : WeaponEffectAbstract
         _isShootAnimationID = Animator.StringToHash("IsShoot");
         _testWeapon.OnFirePhysics += Fire;
         _testWeapon.OnEndFire += ControlFire;
+        OnSystemInitializationSound?.Invoke();
     }
 
     private void Fire()
@@ -60,19 +62,7 @@ public class PhysicsEffect : WeaponEffectAbstract
             _particleSystem.Play();
         }
         OnFire?.Invoke();
-        //CreateMark(typeShoot.raycastHit);
     }
-
-    //private void CreateMark(RaycastHit Pos)
-    //{
-    //    if (Pos.point != Vector3.zero)
-    //    {
-    //        Mark tempMark = _controlViewMark.GetMark();
-    //        tempMark.transform.position = Pos.point;
-    //        tempMark.transform.rotation = Quaternion.LookRotation(Pos.normal);
-    //        tempMark.SetMark();
-    //    }
-    //}
 
     private void ControlFire()
     {

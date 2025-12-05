@@ -27,6 +27,10 @@ public class FairyItem : MonoBehaviour
         _isFree = false;
     }
 
+   
+        
+    
+
     public void StartProgressPickUp()
     {
         _tweenProgressPickUp.Play();
@@ -61,6 +65,7 @@ public class FairyItem : MonoBehaviour
     public void ResetItem()
     {
         transform.localScale = Vector3.one * 2;
+        _isFree = true;
         _meshRenderer.enabled = true;
     }
 }

@@ -41,6 +41,12 @@ public class ControlFairyItem : MonoBehaviour
         OnLostItem?.Invoke(_countFairyItem);
     }
 
+    public void ResetFairyItem()
+    {
+        _countFairyItem = _item.Count;
+        OnLostItem?.Invoke(_countFairyItem);
+    }
+
     public FairyItem GetFairyTarget()
     {
         FairyItem fairyTarget = null;

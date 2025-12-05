@@ -33,6 +33,13 @@ public class SlingshotWeaponSound : MonoBehaviour
         //STOPPING Ч останавливаетс€.
     }
 
+    public void SystemInitialization()
+    {
+        _isSystemFire = true;
+        _onPreFire = RuntimeManager.CreateInstance(_preFire);
+        _onFire = RuntimeManager.CreateInstance(_fire);
+    }
+
     public void PreFire()
     {
         if (!_isSystemFire) return;

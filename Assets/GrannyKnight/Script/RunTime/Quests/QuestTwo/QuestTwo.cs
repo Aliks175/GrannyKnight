@@ -69,6 +69,7 @@ public class QuestTwo : Quest
         OnStart?.Invoke();
         RestoreFruits();
         _fruitCount = 0;
+        _uiTwo.ResetUi();
         _uiTwo.StartTimerGame(StartGame);
     }
 

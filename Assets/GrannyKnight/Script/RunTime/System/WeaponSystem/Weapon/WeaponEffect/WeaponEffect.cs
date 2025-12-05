@@ -21,6 +21,7 @@ public class WeaponEffect : WeaponEffectAbstract
     public UnityEvent OnFire;
     public UnityEvent OnEndFire;
     public UnityEvent OnSystemDisableSound;
+    public UnityEvent OnSystemInitializationSound;
 
     private void OnDisable()
     {
@@ -46,6 +47,7 @@ public class WeaponEffect : WeaponEffectAbstract
         _testWeapon.OnPreFire += PreFire;
         _testWeapon.OnFireRaycast += Fire;
         _testWeapon.OnEndFire += ControlFire;
+        OnSystemInitializationSound?.Invoke();
     }
 
     private void PreFire()

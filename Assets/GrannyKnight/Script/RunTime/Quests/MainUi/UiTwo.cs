@@ -30,6 +30,11 @@ public class UiTwo : MonoBehaviour
         Invoke(nameof(DisablePrompt), _timeDisablePrompt);
     }
 
+    public void ResetUi()
+    {
+        _timerUi.fillAmount = 0;
+    }
+
     public void Stop()
     {
         _panelUi.SetActive(false);

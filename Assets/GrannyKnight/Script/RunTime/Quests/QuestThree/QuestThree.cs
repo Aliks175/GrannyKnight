@@ -106,6 +106,7 @@ public class QuestThree : Quest
         _controlFairyItem.SpawnBlins();
         _controlDollyCart.Initialization();
         _controlDollyCart.Play();
+        _controlFairyItem.ResetFairyItem();
         ControlUi();
         OnStart?.Invoke();
         _uiThree.OnUpdateUi(_countTempEnemy, _countTempItem);

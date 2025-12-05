@@ -54,6 +54,12 @@ public class WeaponSound : MonoBehaviour
         _isStartPreFire = false;
     }
 
+    public void SystemInitialization()
+    {
+        _isSystemFire = true;
+        _onPreFire = RuntimeManager.CreateInstance(_preFire);
+        _onFire = RuntimeManager.CreateInstance(_fire);
+    }
 
     public void SystemDisableSound()
     {

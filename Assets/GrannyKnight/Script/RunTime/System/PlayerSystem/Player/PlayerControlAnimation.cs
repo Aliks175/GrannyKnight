@@ -25,6 +25,7 @@ public class PlayerControlAnimation : MonoBehaviour
         _activeAnimator = _animatorArmorHand;
         ChangeAnimator(_animatorArmorHand);
         _isArmor = true;
+        _isPlayerControl = true;
     }
 
     public void SetSpeed(float speed)
@@ -70,12 +71,14 @@ public class PlayerControlAnimation : MonoBehaviour
         {
             case EquipHand.ArmorHand:
                 ChangeAnimator(_animatorArmorHand);
+                _isArmor = true;
                 break;
             case EquipHand.GlovesHand:
                 ChangeAnimator(_animatorGlovesHand);
                 _isArmor = false;
                 break;
             default:
+                _isArmor = false;
                 break;
         }
     }
