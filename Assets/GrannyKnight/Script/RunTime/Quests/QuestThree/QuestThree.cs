@@ -17,6 +17,7 @@ public class QuestThree : Quest
     [SerializeField] private int _valueWaves;
     [Header("VictoryCondition")]
     [SerializeField] private VictoryCondition victoryConditions;
+
     private int _wavesCount;
     private int _enemyForWave;
     private int _countAllEnemy;
@@ -27,10 +28,37 @@ public class QuestThree : Quest
     public override event Action<QuestEnding> OnEnd;
     public override event Action OnStart;
 
+    private void OnEnable()
+    {
+        _controlFairyItem.OnEnd += () => StopQuest(QuestEnding.Bad);
+        _fairyCreater.OnCheckOverWaves += CheckOverWaves;
+        _controlFairyItem.OnLostItem += (contex) =>
+        {
+            _countTempItem = contex;
+            _uiThree.OnUpdateUi(_countTempEnemy, _countTempItem);
+        };
+        _fairyCreater.OnSleepFairy += () =>
+        {
+            _countTempEnemy--;
+            _uiThree.OnUpdateUi(_countTempEnemy, _countTempItem);
+        };
+    }
+
     private void OnDisable()
     {
         _fairyCreater.OnCheckOverWaves -= CheckOverWaves;
         _controlFairyItem.OnEnd -= () => StopQuest(QuestEnding.Bad);
+
+        _controlFairyItem.OnLostItem -= (contex) =>
+        {
+            _countTempItem = contex;
+            _uiThree.OnUpdateUi(_countTempEnemy, _countTempItem);
+        };
+        _fairyCreater.OnSleepFairy -= () =>
+        {
+            _countTempEnemy--;
+            _uiThree.OnUpdateUi(_countTempEnemy, _countTempItem);
+        };
     }
 
     private void Start()
@@ -45,8 +73,6 @@ public class QuestThree : Quest
             FinalTarget = _finalMoveTarget,
             MovePoints = _movePoints,
         };
-        _controlFairyItem.OnEnd += () => StopQuest(QuestEnding.Bad);
-        _fairyCreater.OnCheckOverWaves += CheckOverWaves;
         _fairyCreater.Initialization(fairyTargets, this);
         _controlDollyCart.Initialization();
         _controlFairyItem.Initialization();
@@ -71,6 +97,19 @@ public class QuestThree : Quest
     public FairyItem GetFairyTarget()
     {
         return _controlFairyItem.GetFairyTarget();
+    }
+
+    public void ResetGame()
+    {
+        _wavesCount = 0;
+        _isActiveQuest = false;
+        _controlFairyItem.SpawnBlins();
+        _controlDollyCart.Initialization();
+        _controlDollyCart.Play();
+        ControlUi();
+        OnStart?.Invoke();
+        _uiThree.OnUpdateUi(_countTempEnemy, _countTempItem);
+        _uiThree.StartTimerGame(StartGame);
     }
 
     private void StartGame()
@@ -133,16 +172,7 @@ public class QuestThree : Quest
         _countTempItem = _countItem;
         _countTempEnemy = _countAllEnemy;
         _uiThree.Initialization(_countAllEnemy, _countItem);
-        _controlFairyItem.OnLostItem += (contex) =>
-        {
-            _countTempItem = contex;
-            _uiThree.OnUpdateUi(_countTempEnemy, _countTempItem);
-        };
-        _fairyCreater.OnSleepFairy += () =>
-        {
-            _countTempEnemy--;
-            _uiThree.OnUpdateUi(_countTempEnemy, _countTempItem);
-        };
+
     }
 
     private void CountAllEnemy()

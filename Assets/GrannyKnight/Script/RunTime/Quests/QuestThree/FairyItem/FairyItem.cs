@@ -37,7 +37,7 @@ public class FairyItem : MonoBehaviour
         // Выключать анимацию , изменять скейл на 1,1,1
         // отключать отображение 
         _tweenProgressPickUp.Pause();
-        transform.localScale = Vector3.one;
+        transform.localScale = Vector3.one * 2;
         _meshRenderer.enabled = false;
     }
 
@@ -56,5 +56,11 @@ public class FairyItem : MonoBehaviour
         _isFree = true;
         transform.localScale = Vector3.one*2;
         _tweenProgressPickUp.Pause();
+    }
+
+    public void ResetItem()
+    {
+        transform.localScale = Vector3.one * 2;
+        _meshRenderer.enabled = true;
     }
 }

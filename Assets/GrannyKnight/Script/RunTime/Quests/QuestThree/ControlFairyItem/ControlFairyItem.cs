@@ -6,6 +6,8 @@ public class ControlFairyItem : MonoBehaviour
 {
     public int CountItem => _item.Count;
     [SerializeField] private List<FairyItem> _item;
+    [Header("PositionBlins")]
+    [SerializeField] private List<Transform> _positionBlins;
     private int _countFairyItem;
 
     public Action OnEnd;
@@ -16,6 +18,16 @@ public class ControlFairyItem : MonoBehaviour
         foreach (var item in _item)
         {
             item.OnLost -= CheckLostItems;
+        }
+    }
+
+    public void SpawnBlins()
+    {
+        for (int i = 0; i < _item.Count; i++)
+        {
+            _item[i].transform.rotation = Quaternion.identity;
+            _item[i].transform.position = _positionBlins[i].transform.position;
+            _item[i].ResetItem();
         }
     }
 
