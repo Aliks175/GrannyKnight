@@ -23,7 +23,7 @@ public class DustCreater : Quest
     public override void StartQuest()
     {
         OnStart?.Invoke();
-        SetHealth();
+        _fullHealth = SetHealth();
         _uiOne.Initialization(_fullHealth);
         _uiOne.StartTimerGame(StartGame);
     }
@@ -136,10 +136,12 @@ public class DustCreater : Quest
         Gizmos.DrawLine(_spawnPoint.position + new Vector3(0, 0, -_spawnWidth), _spawnPoint.position + new Vector3(0, 0, _spawnWidth));
     }
 
-    private void SetHealth()
+    private float SetHealth( )
     {
-        _fullHealth += _stageDust[_stageDust.Length - 1].HealthStage;
-        _fullHealth += _stageDust[_stageDust.Length - 1].CountChildStage * _stageDust[_stageDust.Length - 2].HealthStage;
-        _fullHealth += _stageDust[_stageDust.Length - 2].CountChildStage * _stageDust[_stageDust.Length - 1].CountChildStage * _stageDust[_stageDust.Length - 3].HealthStage;
+        float health = 0f;
+        health += _stageDust[_stageDust.Length - 1].HealthStage;
+        health += _stageDust[_stageDust.Length - 1].CountChildStage * _stageDust[_stageDust.Length - 2].HealthStage;
+        health += _stageDust[_stageDust.Length - 2].CountChildStage * _stageDust[_stageDust.Length - 1].CountChildStage * _stageDust[_stageDust.Length - 3].HealthStage;
+        return health;
     }
 }
