@@ -26,6 +26,7 @@ public class UiTwo : MonoBehaviour
     {
         _panelUi.SetActive(true);
         _uiTimer.StartTimerGame(action);
+        _progressUI.fillAmount = 0f;
         Invoke(nameof(DisablePrompt), _timeDisablePrompt);
     }
 

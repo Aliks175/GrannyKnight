@@ -25,10 +25,21 @@ public class QuestTwo : Quest
     [SerializeField] private float _timeToQuest;
     [SerializeField] private int[] _targetFruit;
     [SerializeField] private ParticleSystem _particle;
+    [SerializeField] private GameObject[] _fruits;
 
     // Приватные поля
     private Tween _currentTween;
+    private FruitData[] _originalFruitData;
     private CancellationTokenSource _cts;
+
+    [System.Serializable]
+    private struct FruitData
+    {
+        public GameObject prefab;
+        public Vector3 position;
+        public Quaternion rotation;
+        public Transform parent;
+    }
     private float _timer;
     private float _sleepEndTime;
     private int _maxCountFruit;
@@ -56,6 +67,8 @@ public class QuestTwo : Quest
     public override void StartQuest()
     {
         OnStart?.Invoke();
+        RestoreFruits();
+        _fruitCount = 0;
         _uiTwo.StartTimerGame(StartGame);
     }
 
@@ -245,7 +258,9 @@ public class QuestTwo : Quest
         InitializeSingleton();
         ResetBasketPosition();
         _timer = _timeToQuest;
+        _fruitCount = 0;
         CalculateMaxCountFruit();
+        SaveOriginalFruits();
         _uiTwo.Initialization(_timer, _maxCountFruit);
     }
 
@@ -254,6 +269,37 @@ public class QuestTwo : Quest
         _maxCountFruit = 0;
         if (_targetFruit == null) return;
         _maxCountFruit = _targetFruit[2];
+    }
+    private void SaveOriginalFruits()
+    {
+        if (_originalFruitData == null)
+        {
+            _originalFruitData = new FruitData[_fruits.Length];
+            for (int i = 0; i < _fruits.Length; i++)
+            {
+                GameObject copy = Instantiate(_fruits[i], _fruits[i].transform.parent);
+                copy.SetActive(false);
+                _originalFruitData[i] = new FruitData
+                {
+                    prefab = copy,
+                    position = _fruits[i].transform.position,
+                    rotation = _fruits[i].transform.rotation,
+                    parent = _fruits[i].transform.parent
+                };
+            }
+        }
+    }
+
+    private void RestoreFruits()
+    {
+        for (int i = 0; i < _originalFruitData.Length; i++)
+        {
+            if (_fruits[i] == null)
+            {
+                _fruits[i] = Instantiate(_originalFruitData[i].prefab, _originalFruitData[i].position, _originalFruitData[i].rotation, _originalFruitData[i].parent);
+                _fruits[i].SetActive(true);
+            }
+        }
     }
 
     #endregion
