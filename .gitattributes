@@ -1,21 +1,19 @@
-# Auto detect text files and perform LF normalization
-## Unity ##
 
+## Unity ##
 
 *.cs diff=csharp text
 *.cginc text
 *.shader text
 
-
-*.physicsMaterial2D text eol=lf merge=unityyamlmerge
-*.physicMaterial text eol=lf merge=unityyamlmerge
-*.mat text eol=lf merge=unityyamlmerge
-*.anim text eol=lf merge=unityyamlmerge
-*.unity text eol=lf merge=unityyamlmerge
-*.prefab text eol=lf merge=unityyamlmerge
-*.asset text eol=lf merge=unityyamlmerge
-*.meta text eol=lf merge=unityyamlmerge
-*.controller text eol=lf merge=unityyamlmerge
+*.mat merge=unityyamlmerge eol=lf
+*.anim merge=unityyamlmerge eol=lf
+*.unity merge=unityyamlmerge eol=lf
+*.prefab merge=unityyamlmerge eol=lf
+*.physicsMaterial2D merge=unityyamlmerge eol=lf
+*.physicMaterial merge=unityyamlmerge eol=lf
+*.asset merge=unityyamlmerge eol=lf
+*.meta merge=unityyamlmerge eol=lf
+*.controller merge=unityyamlmerge eol=lf
 
 
 ## git-lfs ##
