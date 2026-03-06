@@ -1,26 +1,13 @@
 using UnityEngine;
 using Zenject;
 
-public class GameManagerInstaller : MonoInstaller
+namespace Refactor
 {
-    [SerializeField] private TestGameManager _testGameManager;
-
-    public override void InstallBindings()
+    public class GameManagerInstaller : MonoInstaller
     {
-        BindGameManager();
-        BindLoading();
-    }
-
-    private void BindGameManager()
-    {
-        Container.Bind<TestGameManager>()
-           .FromInstance(_testGameManager)
-           .AsSingle();
-    }
-
-    private void BindLoading()
-    {
-        Container.Bind<TestLoading>()
-          .AsSingle();
+        [SerializeField] private TestPlayerCharacter testPlayerCharacter;
+        public override void InstallBindings()
+        {
+        }
     }
 }

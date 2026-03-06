@@ -20,7 +20,7 @@ public class PlayerCharacter : MonoBehaviour
 
     private void SetUp( Transform head, CinemachineCamera cinemachineCamera)
     {
-        _playerControlAnimation.Initialization();
+        //_playerControlAnimation.Initialization();
         _playerMover.Initialization(_playerControlAnimation);
         _playerLook.Initialization();
         _playerAim.Initialization(cinemachineCamera);

@@ -94,8 +94,8 @@ public class PlayerMover : MonoBehaviour
     private void OnUpdate()
     {
         _isGrounded = Physics.OverlapSphere(_groundPoint.position, _groundPointRadius, _groundLayer).Length > 0;
-        _playerControlAnimation.SetCheckGround(_isGrounded);
-        _playerControlAnimation.SetSpeed(Vector3.SqrMagnitude(_final));
+        //_playerControlAnimation.SetCheckGround(_isGrounded);
+        //_playerControlAnimation.SetSpeed(Vector3.SqrMagnitude(_final));
     }
 
     //private void OnDrawGizmos()

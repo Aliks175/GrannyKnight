@@ -89,13 +89,14 @@ public class PlayerControlAnimation : MonoBehaviour
         _activeAnimator = animator;
         _activeAnimator.gameObject.SetActive(true);
     }
+
+    //public enum EquipHand
+    //{
+    //    ArmorHand,
+    //    GlovesHand,
+    //    SlingshotHand,
+    //    PodmetatusHand,
+    //    EasterEggsHand,
+    //}
 }
 
-public enum EquipHand
-{
-    ArmorHand,
-    GlovesHand,
-    SlingshotHand,
-    PodmetatusHand,
-    EasterEggsHand,
-}

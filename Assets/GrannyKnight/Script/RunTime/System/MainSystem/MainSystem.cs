@@ -10,7 +10,7 @@ public class MainSystem : MonoBehaviour
     [SerializeField] private PlayerSystem _playerSystem;
     [SerializeField] private SoundSystem _soundSystem;
     [Header("Other")]
-    [SerializeField] private InputControl _inputControl;
+    //[SerializeField] private InputControl _inputControl;
     [SerializeField] private PlayerCharacter _player;
     [SerializeField] private Transform _head;
     public static event Action OnUpdate;
@@ -30,7 +30,7 @@ public class MainSystem : MonoBehaviour
     private void Initialization()
     {
         _playerSystem.Initialization(_player, _head);
-        _inputControl.Initialization(_weaponSystem);
+        //_inputControl.Initialization(_weaponSystem);
         _weaponSystem.Initialization(_player.PlayerData, _head);
         _soundSystem.Initialization();
         _historySystem.Initialization();
