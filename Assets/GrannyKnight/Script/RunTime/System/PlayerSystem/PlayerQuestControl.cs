@@ -13,7 +13,8 @@ public class PlayerQuestControl : MonoBehaviour
     public void Initialization(IPlayerDatable playerDatable)
     {
         _mainQuestList = new QuestList();
-        _questViewControl.Initialization();
+        if (_questViewControl != null)
+            _questViewControl.Initialization();
         _playerDatable = playerDatable;
         _listQuestData = new();
     }

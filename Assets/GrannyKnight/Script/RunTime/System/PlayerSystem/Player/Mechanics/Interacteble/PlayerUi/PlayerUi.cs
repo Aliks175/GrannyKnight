@@ -7,6 +7,7 @@ public class PlayerUi : MonoBehaviour
 
     public void UpdateText(string text)
     {
+        if (_textDescription == null) return;
         if (_textDescription.text == text) return;
         _textDescription.text = text;
     }
