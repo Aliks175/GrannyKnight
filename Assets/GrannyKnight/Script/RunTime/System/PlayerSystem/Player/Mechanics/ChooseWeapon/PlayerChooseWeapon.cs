@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class PlayerChooseWeapon : MonoBehaviour
 {
-    [SerializeField] private BazeWeapon _slingshot;
-    [SerializeField] private BazeWeapon _podmetatus;
-    [SerializeField] private BazeWeapon _easterEggs;
+    //[SerializeField] private BazeWeapon _slingshot;
+    //[SerializeField] private BazeWeapon _podmetatus;
+    //[SerializeField] private BazeWeapon _easterEggs;
     private Weapon _slingshotHand;
     private Weapon _podmetatusHand;
     private Weapon _easterEggsHand;
@@ -18,9 +18,9 @@ public class PlayerChooseWeapon : MonoBehaviour
     public void Initialization(IPlayerDatable playerDatable )
     {
         _iplayerDatable = playerDatable;
-        CreateWeapon(ref _slingshotHand, _slingshot);
-        CreateWeapon(ref _podmetatusHand, _podmetatus);
-        CreateWeapon(ref _easterEggsHand, _easterEggs);
+        //CreateWeapon(ref _slingshotHand, _slingshot);
+        //CreateWeapon(ref _podmetatusHand, _podmetatus);
+        //CreateWeapon(ref _easterEggsHand, _easterEggs);
     }
 
     public void GiveWeapon(EquipHand slotNumber)
@@ -61,9 +61,9 @@ public class PlayerChooseWeapon : MonoBehaviour
         }
     }
 
-    private void CreateWeapon(ref Weapon weapon, BazeWeapon bazeWeapon)
-    {
-        weapon = new();
-        weapon.Initialization(bazeWeapon, _iplayerDatable);
-    }
+    //private void CreateWeapon(ref Weapon weapon, BazeWeapon bazeWeapon)
+    //{
+    //    weapon = new();
+    //    weapon.Initialization(bazeWeapon, _iplayerDatable);
+    //}
 }

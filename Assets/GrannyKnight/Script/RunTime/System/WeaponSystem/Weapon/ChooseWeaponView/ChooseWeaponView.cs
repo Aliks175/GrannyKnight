@@ -58,11 +58,11 @@ public class ChooseWeaponView : MonoBehaviour
         }
         _activeWeapon = weaponEffect;
 
-        if (weapon.TypeShoot == TypeShootPhysics.Physics)
+        if (weapon.TypeShoot == TypeShootingSystem.Physics)
         {
             OnWeaponPhisicEquip?.Invoke(_activeWeapon);
         }
-        else if (weapon.TypeShoot == TypeShootPhysics.Raycast)
+        else if (weapon.TypeShoot == TypeShootingSystem.Raycast)
         {
             OnWeaponRaycastEquip?.Invoke(_activeWeapon);
         }

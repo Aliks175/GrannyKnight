@@ -1,20 +1,20 @@
-using Refactor;
 using UnityEngine;
 using Zenject;
 
 public class UiInstaller : MonoInstaller
 {
-    [SerializeField] private PlayerUi _playerUi;
+    [SerializeField] private PlayerUi _prefPlayerUi;
 
     public override void InstallBindings()
     {
-        BindUi();
+        BindFactoryUi();
     }
 
-    private void BindUi()
+    private void BindFactoryUi()
     {
-        Container.Bind<PlayerUi>()
-       .FromInstance(_playerUi)
-       .AsSingle();
+        Container.Bind<FactoryPlayerUi>()
+       .AsSingle()
+       .WithArguments(_prefPlayerUi)
+       .NonLazy();
     }
 }

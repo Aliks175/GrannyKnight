@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.Events;
+using Zenject;
 
 public class MainSystem : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class MainSystem : MonoBehaviour
     [SerializeField] private Transform _head;
     public static event Action OnUpdate;
     public UnityEvent OnStartGame;
+
+    
 
     private void Start()
     {

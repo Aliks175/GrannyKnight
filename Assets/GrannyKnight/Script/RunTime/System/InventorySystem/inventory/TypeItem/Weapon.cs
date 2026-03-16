@@ -5,7 +5,7 @@ public class Weapon : Item
 {
     private DataWeapon DataWeapon;
     public TypeWeapon TypeWeapon => DataWeapon.TypeWeapon;
-    public  TypeShootPhysics TypeShoot => DataWeapon.TypeShoot;
+    public  TypeShootingSystem TypeShoot => DataWeapon.TypeShoot;
     public int Damage => DataWeapon.Damage;
     public float TimeWaitFire => DataWeapon.TimeWaitFire;
     public float Range => DataWeapon.Range;
@@ -18,11 +18,11 @@ public class Weapon : Item
     public override void Initialization(BazeItem bazeItem, IPlayerDatable characterData)
     {
         base.Initialization(bazeItem, characterData);
-        if (bazeItem is BazeWeapon weapon)
-        {
-            DataWeapon = weapon.DataWeapon;
-            //characterData.ChooseWeapon.SetWeapon(DataWeapon.TypeWeapon, this);
-        }
+        //if (bazeItem is BazeWeapon weapon)
+        //{
+        //    DataWeapon = weapon.DataWeapon;
+        //    //characterData.ChooseWeapon.SetWeapon(DataWeapon.TypeWeapon, this);
+        //}
     }
 }
 
@@ -34,8 +34,9 @@ public enum TypeWeapon
     Sling,
 }
 
-public enum TypeShootPhysics
+public enum TypeShootingSystem
 {
+    none,
     Raycast,
     Physics
 }
@@ -44,7 +45,7 @@ public enum TypeShootPhysics
 public struct DataWeapon
 {
     public TypeWeapon TypeWeapon;
-    public TypeShootPhysics TypeShoot;
+    public TypeShootingSystem TypeShoot;
     public int Damage;
     public float TimeWaitFire;
     [Header("For Raycast weapon")]

@@ -50,8 +50,8 @@ public class WeaponSystem : MonoBehaviour
     {
         if (_activeWeapon == null) return;
        
-        if (_activeWeapon.TypeShoot == TypeShootPhysics.Raycast) _shootingWeapon.Shoot(value, _activeWeapon);
-        else if (_activeWeapon.TypeShoot == TypeShootPhysics.Physics) _physicsWeapon.Shoot(value);
+        if (_activeWeapon.TypeShoot == TypeShootingSystem.Raycast) _shootingWeapon.Shoot(value, _activeWeapon);
+        else if (_activeWeapon.TypeShoot == TypeShootingSystem.Physics) _physicsWeapon.Shoot(value);
     }
 
     private void SetWeapon(Weapon weapon)

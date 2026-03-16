@@ -6,8 +6,6 @@ using Zenject;
 
 public class PlayerInstaller : MonoInstaller
 {
-
-    [SerializeField] private TypePlay _typePlay;
     [Header("Continue")]
     [SerializeField] private TestPlayerCharacter _playerCharecter;
     [SerializeField] private SettingsPlayer _settingsPlayer;
@@ -29,10 +27,7 @@ public class PlayerInstaller : MonoInstaller
         BindPlayer();
         BindInput();
         BindImporter();
-        if (_typePlay == TypePlay.Game)
-        {
-            BindImporterUI();
-        }
+        BindUI();
     }
 
     private void BindPlayer()
@@ -65,6 +60,10 @@ public class PlayerInstaller : MonoInstaller
            .AsSingle()
            .WithArguments(_animatorHand, _settingsPlayer)
            .NonLazy();
+
+        Container.BindInterfacesAndSelfTo<TestPlayerWeapon>()
+           .AsSingle()
+           .NonLazy();
     }
 
     private void BindInput()
@@ -77,7 +76,6 @@ public class PlayerInstaller : MonoInstaller
            .AsSingle()
            .NonLazy();
     }
-
 
     private void BindImporter()
     {
@@ -94,19 +92,20 @@ public class PlayerInstaller : MonoInstaller
         Container.BindInterfacesAndSelfTo<ImporterMoveAnimation>()
            .AsSingle()
            .NonLazy();
-    }
 
-    private void BindImporterUI()
-    {
-        Container.BindInterfacesAndSelfTo<ImporterInteractebleUI>()
+        Container.BindInterfacesAndSelfTo<ImporterPlayerWeaponAnimation>()
            .AsSingle()
            .NonLazy();
     }
 
-}
+    private void BindUI()
+    {
+        Container.BindInterfacesAndSelfTo<ImporterInteractebleUI>()
+           .AsSingle()
+           .NonLazy();
 
-public enum TypePlay
-{
-    Test,
-    Game
+        Container.BindInterfacesAndSelfTo<TestPlayerSetUpUi>()
+          .AsSingle()
+          .NonLazy();
+    }
 }
