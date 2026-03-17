@@ -13,5 +13,8 @@ public class SystemInstaller : MonoInstaller
         Container.Bind<SystemBuss>()
       .AsSingle()
       .NonLazy();
+
+        Container.Bind<Loading>()
+        .AsSingle();
     }
 }

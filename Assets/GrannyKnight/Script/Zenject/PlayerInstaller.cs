@@ -7,7 +7,7 @@ using Zenject;
 public class PlayerInstaller : MonoInstaller
 {
     [Header("Continue")]
-    [SerializeField] private TestPlayerCharacter _playerCharecter;
+    [SerializeField] private PlayerCharacter _playerCharecter;
     [SerializeField] private SettingsPlayer _settingsPlayer;
     [SerializeField] private CharacterController _characterController;
     [SerializeField] private Transform _groundPoint;
@@ -32,21 +32,21 @@ public class PlayerInstaller : MonoInstaller
 
     private void BindPlayer()
     {
-        Container.Bind<TestPlayerCharacter>()
+        Container.Bind<PlayerCharacter>()
         .FromInstance(_playerCharecter)
         .AsSingle();
 
-        Container.BindInterfacesAndSelfTo<TestPlayerMove>()
+        Container.BindInterfacesAndSelfTo<PlayerMove>()
             .AsSingle()
             .WithArguments(_settingsPlayer, _characterController, _groundPoint)
             .NonLazy();
 
-        Container.Bind<TestPlayerLook>()
+        Container.Bind<PlayerLook>()
             .AsSingle()
             .WithArguments(_settingsPlayer, _headSlot, _playerCharecter.transform)
             .NonLazy();
 
-        Container.BindInterfacesAndSelfTo<TestPlayerAim>()
+        Container.BindInterfacesAndSelfTo<PlayerAim>()
             .AsSingle()
             .WithArguments(_settingsPlayer, cinemachineCamera)
             .NonLazy();
@@ -61,7 +61,7 @@ public class PlayerInstaller : MonoInstaller
            .WithArguments(_animatorHand, _settingsPlayer)
            .NonLazy();
 
-        Container.BindInterfacesAndSelfTo<TestPlayerWeapon>()
+        Container.BindInterfacesAndSelfTo<PlayerWeapon>()
            .AsSingle()
            .NonLazy();
     }

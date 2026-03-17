@@ -1,11 +1,9 @@
 using UnityEngine;
 using Zenject;
 
-namespace Refactor
-{
     public class GameManagerInstaller : MonoInstaller
     {
-        [SerializeField] private TestPlayerCharacter _prefPlayer;
+        [SerializeField] private PlayerCharacter _prefPlayer;
 
         public override void InstallBindings()
         {
@@ -20,4 +18,3 @@ namespace Refactor
             .NonLazy();
         }
     }
-}
