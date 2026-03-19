@@ -1,4 +1,3 @@
-using UnityEngine;
 using Zenject;
 
 public class SystemInstaller : MonoInstaller
@@ -11,10 +10,13 @@ public class SystemInstaller : MonoInstaller
     public void BindSystem()
     {
         Container.Bind<SystemBuss>()
-      .AsSingle()
-      .NonLazy();
+        .AsSingle()
+        .NonLazy();
 
         Container.Bind<Loading>()
         .AsSingle();
+
+        Container.BindInterfacesAndSelfTo<GameManager>()
+       .AsSingle();
     }
 }

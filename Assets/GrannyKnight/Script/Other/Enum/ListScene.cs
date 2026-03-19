@@ -1,6 +1,6 @@
 public enum ListScene
 {
-    Menu = 0,
-    Game = 1,
-    FreeGame = 2
+    Menu = 1,
+    Game ,
+    FreeGame 
 }
