@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class InputControl : MonoBehaviour
 {
@@ -38,13 +39,8 @@ public class InputControl : MonoBehaviour
     private void SetUp()
     {
         _playerActions.Enable();
-        _playerActions.Jump.performed += Context =>
-        {
-            if (_isPlayerControl)
-            {
-            _playerMover.Jump();
-            }
-        };
+        _playerActions.Jump.performed += Jump; 
+      
         _playerActions.Aim.started += Context => _playerAim.AimingOn();
         _playerActions.Aim.canceled += Context => _playerAim.AimingOff();
         _playerActions.Aim.started += _playerMover.ActiveAimSpeed;
@@ -56,15 +52,17 @@ public class InputControl : MonoBehaviour
         _playerActions.Help.started += Context => _playerHintSystem.MoveTarget();
     }
 
+    private void Jump(InputAction.CallbackContext obj)
+    {
+        if (_isPlayerControl)
+        {
+            _playerMover.Jump();
+        }
+    }
+
     private void OnDisable()
     {
-        _playerActions.Jump.performed -= Context =>
-        {
-            if (_isPlayerControl)
-            {
-                _playerMover.Jump();
-            }
-        };
+        _playerActions.Jump.performed -= Jump;
         _playerActions.Aim.started -= Context => _playerAim.AimingOn();
         _playerActions.Aim.canceled -= Context => _playerAim.AimingOff();
         _playerActions.Aim.started -= _playerMover.ActiveAimSpeed;
