@@ -69,7 +69,6 @@ public class ControlFairyItem : MonoBehaviour
             _countFairyItem = 0;
             OnEnd?.Invoke();
         }
-        Debug.Log($"Lost Items {_countFairyItem}");
         OnLostItem?.Invoke(_countFairyItem);
     }
 }
