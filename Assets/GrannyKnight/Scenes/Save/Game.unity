@@ -10232,6 +10232,8 @@ PlayableDirector:
     value: {fileID: 8987664949390847295}
   - key: {fileID: 826461605736855798, guid: eb367f7a2b96a2c40904de700f944e2f, type: 2}
     value: {fileID: 213734386531491082}
+  - key: {fileID: 4773580426817528732, guid: eb367f7a2b96a2c40904de700f944e2f, type: 2}
+    value: {fileID: 1810989433953735101}
   m_ExposedReferences:
     m_References: []
 --- !u!4 &276449860113150299
@@ -15025,21 +15027,9 @@ MonoBehaviour:
           m_CallState: 2
     - m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 4601039191704176148}
-          m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
-          m_MethodName: ShowDialog
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 4601039191704176148}
-          m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
-          m_MethodName: NextLine
+        - m_Target: {fileID: 9007277428804823663}
+          m_TargetAssemblyTypeName: DialogueSingle, Assembly-CSharp
+          m_MethodName: Active
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -28779,7 +28769,7 @@ MonoBehaviour:
         z: 3.579511
       Rotation:
         value:
-          x: -0.033849213
+          x: -0.033849217
           y: 0.81263816
           z: 0.047438662
           w: 0.57984746
@@ -35266,12 +35256,27 @@ MonoBehaviour:
   m_Events:
     m_Signals:
     - {fileID: 11400000, guid: c739d96a9dd4c3347891c2ea495da95c, type: 2}
+    - {fileID: 11400000, guid: 397812b6ca3a05942bfc3d3f70a28825, type: 2}
     m_Events:
     - m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 250973209039340567}
           m_TargetAssemblyTypeName: QuestGetter, Assembly-CSharp
           m_MethodName: GetQuest
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6707803793171946535}
+          m_TargetAssemblyTypeName: DialogueSingle, Assembly-CSharp
+          m_MethodName: Active
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -41514,7 +41519,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 43.55
+  m_fontSize: 37.2
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -75868,6 +75873,18 @@ MonoBehaviour:
   OnInteract:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 2249668198189247820}
+        m_TargetAssemblyTypeName: SoundSystem, Assembly-CSharp
+        m_MethodName: StopSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1959189850492690569}
         m_TargetAssemblyTypeName: CutsceneManager, Assembly-CSharp
         m_MethodName: EndCutscene
@@ -77937,6 +77954,7 @@ GameObject:
   - component: {fileID: 6553233299147225865}
   - component: {fileID: 1744905449465891201}
   - component: {fileID: 7549099675335571666}
+  - component: {fileID: 9007277428804823663}
   m_Layer: 0
   m_Name: Signals
   m_TagString: Untagged
@@ -109206,6 +109224,10 @@ PrefabInstance:
       value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 1755770945706375486, guid: 713227ae324d77742a94479c495a3a9f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1755770945706375486, guid: 713227ae324d77742a94479c495a3a9f, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -109256,6 +109278,10 @@ PrefabInstance:
     - target: {fileID: 2677054694884247776, guid: 713227ae324d77742a94479c495a3a9f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: -180
+      objectReference: {fileID: 0}
+    - target: {fileID: 2718716997555772943, guid: 713227ae324d77742a94479c495a3a9f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2718716997555772943, guid: 713227ae324d77742a94479c495a3a9f, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -115935,6 +115961,7 @@ GameObject:
   - component: {fileID: 849503847698322808}
   - component: {fileID: 1810989433953735101}
   - component: {fileID: 250973209039340567}
+  - component: {fileID: 6707803793171946535}
   m_Layer: 0
   m_Name: SignalTwo
   m_TagString: Untagged
@@ -115942,6 +115969,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6707803793171946535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6707803793171946534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c92c18e80970e141b6e5a42d467291d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dialoque: {fileID: 11400000, guid: 844d047376d27b448b54a3e6b5735d0a, type: 2}
 --- !u!23 &6708395072875398954
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -145705,6 +145745,19 @@ Transform:
   - {fileID: 1459963044370042460}
   m_Father: {fileID: 8727445146325484682}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9007277428804823663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4248792625211928825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c92c18e80970e141b6e5a42d467291d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dialoque: {fileID: 11400000, guid: 4ee50af2eff06844ab743f486fc402b5, type: 2}
 --- !u!114 &9008458058299039349
 MonoBehaviour:
   m_ObjectHideFlags: 0
