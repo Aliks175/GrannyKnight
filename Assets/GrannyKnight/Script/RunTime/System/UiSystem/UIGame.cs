@@ -29,6 +29,18 @@ public class UIGame : MonoBehaviour
         _settings.Initialization();
     }
 
+    public void ControlStateGame()
+    {
+        if (_isPaused)
+        {
+            ResumeGame();
+        }
+        else
+        {
+            PauseGame();
+        }
+    }
+
     public void PauseGame()
     {
         Cursor.lockState = CursorLockMode.None;
@@ -36,6 +48,7 @@ public class UIGame : MonoBehaviour
         _settings.gameObject.SetActive(false);
         _inputControl.ControlMovePlayer(false);
         _isPaused = true;
+        Time.timeScale = 0f;
     }
 
     public void ResumeGame()
@@ -45,6 +58,7 @@ public class UIGame : MonoBehaviour
         _settings.gameObject.SetActive(false);
         _inputControl.ControlMovePlayer(true);
         _isPaused = false;
+        Time.timeScale = 1f;
     }
 
     public void OnMenuButton()
@@ -74,14 +88,5 @@ public class UIGame : MonoBehaviour
     private void ChangeSensity()
     {
         _playerLook.Sensitivity = PlayerPrefs.GetFloat(SaveName.Sensitivity.ToString(), 1f);
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (_isPaused) ResumeGame();
-            else PauseGame();
-        }
     }
 }

@@ -3,7 +3,8 @@ using UnityEngine.InputSystem;
 
 public class InputControl : MonoBehaviour
 {
-    [SerializeField] private PlayerControlAnimation playerControlAnimation;
+    [SerializeField] private PlayerControlAnimation _playerControlAnimation;
+    [SerializeField] private UIGame _uIGame;
     private PlayerSystemActions _playerInput;
     private PlayerSystemActions.PlayerActions _playerActions;
     private PlayerMover _playerMover;
@@ -33,14 +34,14 @@ public class InputControl : MonoBehaviour
     public void ControlMovePlayer(bool isPlayerControl)
     {
         _isPlayerControl = isPlayerControl;
-        playerControlAnimation.ControlMovePlayer(isPlayerControl);
+        _playerControlAnimation.ControlMovePlayer(isPlayerControl);
     }
 
     private void SetUp()
     {
         _playerActions.Enable();
-        _playerActions.Jump.performed += Jump; 
-      
+        _playerActions.Jump.performed += Jump;
+        _playerActions.Pause.started += OnPause;
         _playerActions.Aim.started += Context => _playerAim.AimingOn();
         _playerActions.Aim.canceled += Context => _playerAim.AimingOff();
         _playerActions.Aim.started += _playerMover.ActiveAimSpeed;
@@ -50,14 +51,6 @@ public class InputControl : MonoBehaviour
         _playerActions.Shoot.started += _weaponSystem.Shoot;
         _playerActions.Shoot.canceled += _weaponSystem.Shoot;
         _playerActions.Help.started += Context => _playerHintSystem.MoveTarget();
-    }
-
-    private void Jump(InputAction.CallbackContext obj)
-    {
-        if (_isPlayerControl)
-        {
-            _playerMover.Jump();
-        }
     }
 
     private void OnDisable()
@@ -88,6 +81,22 @@ public class InputControl : MonoBehaviour
         if (_isPlayerControl)
         {
             _playerLook.ProcessLook(_playerActions.Look.ReadValue<Vector2>());
+        }
+    }
+
+    private void OnPause(InputAction.CallbackContext Context)
+    {
+        if (Context.phase == InputActionPhase.Started)
+        {
+            _uIGame.ControlStateGame();
+        }
+    }
+
+    private void Jump(InputAction.CallbackContext obj)
+    {
+        if (_isPlayerControl)
+        {
+            _playerMover.Jump();
         }
     }
 }
