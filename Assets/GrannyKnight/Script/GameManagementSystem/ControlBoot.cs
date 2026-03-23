@@ -4,15 +4,16 @@ using Zenject;
 
 public class ControlBoot : MonoBehaviour
 {
-    [SerializeField] private LoadingScreen _loadingScreen;
+    private LoadingScreen _loadingScreen;
     private GameManager _gameManager;
 
     [Inject]
-    private void Construct(GameManager gameManager)
+    private void Construct(GameManager gameManager, LoadingScreen loadingScreen)
     {
         _gameManager = gameManager;
+        _loadingScreen = loadingScreen;
     }
-
+    
     private void OnDisable()
     {
         _gameManager.OnLoad -= OnLoad;

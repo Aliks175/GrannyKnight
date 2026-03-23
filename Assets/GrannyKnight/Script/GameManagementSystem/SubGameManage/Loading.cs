@@ -5,7 +5,7 @@ public class Loading
 {
     public AsyncOperation LoadAdditive(ListScene listScene)
     {
-       return SceneManager.LoadSceneAsync((int)listScene, LoadSceneMode.Additive);
+        return SceneManager.LoadSceneAsync((int)listScene, LoadSceneMode.Additive);
     }
 
     //public void LoadSingle(ListScene listScene)
@@ -15,6 +15,11 @@ public class Loading
 
     public AsyncOperation UnLoadAdditive(ListScene listScene)
     {
-      return  SceneManager.UnloadSceneAsync((int)listScene);
+        return SceneManager.UnloadSceneAsync((int)listScene);
+    }
+
+    public void LoadSingle(ListScene listScene)
+    {
+        SceneManager.LoadScene((int)listScene);
     }
 }
