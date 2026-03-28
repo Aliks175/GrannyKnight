@@ -1,29 +1,32 @@
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using Zenject;
 
 public class ControlLoading : MonoBehaviour
 {
-    private Loading _testLoading;
+    private GameManager _gameManager;
 
     [Inject]
-    public void Construct(Loading testLoading)
+    public void Construct(GameManager gameManager)
     {
-        _testLoading = testLoading;
+        _gameManager = gameManager;
     }
 
     public void LoadGame()
     {
-        _testLoading.LoadSingle(ListScene.Game);
+        _gameManager.LoadGame();
+        //_testLoading.LoadSingle(ListScene.Game);
     }
 
     public void LoadMenu()
     {
-        _testLoading.LoadSingle(ListScene.Menu);
+        _gameManager.LoadMenu();
+        //_testLoading.LoadSingle(ListScene.Menu);
     }
 
     public void LoadFreeGame()
     {
-        _testLoading.LoadSingle(ListScene.FreeGame);
+        _gameManager.LoadFreeGame();
     }
 
     public void Exit()

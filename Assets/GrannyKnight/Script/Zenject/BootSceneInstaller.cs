@@ -3,17 +3,17 @@ using Zenject;
 
 public class BootSceneInstaller : MonoInstaller
 {
-    [SerializeField] private GameManager _testGameManager;
+    //[SerializeField] private GameManager _testGameManager;
 
     public override void InstallBindings()
     {
-        BindGameManager();
+        //BindGameManager();
     }
 
     private void BindGameManager()
     {
-        Container.Bind<GameManager>()
-           .FromInstance(_testGameManager)
-           .AsSingle();
+        //Container.Bind<GameManager>()
+        //   .FromInstance(_testGameManager)
+        //   .AsSingle();
     }
 }

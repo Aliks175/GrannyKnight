@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Rendering;
+using Zenject;
 
 public class UIGame : MonoBehaviour
 {
@@ -9,7 +10,9 @@ public class UIGame : MonoBehaviour
     //[SerializeField] private InputControl _inputControl;
     //[SerializeField] private PlayerLook _playerLook;
 
+
     private bool _isPaused = false;
+
 
     private void Awake()
     {
