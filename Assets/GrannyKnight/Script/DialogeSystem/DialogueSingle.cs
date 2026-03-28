@@ -13,6 +13,7 @@ public class DialogueSingle : MonoBehaviour
         this.dialogueManager = dialogueManager;
     }
 
+    [Tooltip("метод начала диалога")]
     public async void StartDialogue()
     {
         if (_dialogueID == null)

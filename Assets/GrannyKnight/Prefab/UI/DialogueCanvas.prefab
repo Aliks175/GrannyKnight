@@ -60,15 +60,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.49056602, g: 0.49056602, b: 0.49056602, a: 0.05490196}
+  m_Color: {r: 0.3018868, g: 0.3004628, b: 0.3004628, a: 0.6666667}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -403,9 +403,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speakerText: {fileID: 5802587184604624770}
+  _skipCanvas: {fileID: 2552468014086843769}
+  _animText: 1
   _typingSpeed: 50
   _visTime: 3
-  _skipCanvas: {fileID: 2552468014086843769}
+  _buttonSkip: {fileID: 0}
 --- !u!225 &4600533167873715543
 CanvasGroup:
   m_ObjectHideFlags: 0
