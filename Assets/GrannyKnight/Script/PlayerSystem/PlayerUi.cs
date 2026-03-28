@@ -18,7 +18,7 @@ public class PlayerUi : MonoBehaviour
 
     private void Start()
     {
-        _systemBuss.ConstructPlayerUi(this);
+        //_systemBuss.ConstructPlayerUi(this);
     }
 
     public void UpdateText(string text)

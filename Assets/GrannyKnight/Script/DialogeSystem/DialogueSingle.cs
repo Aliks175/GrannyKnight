@@ -1,11 +1,25 @@
 using UnityEngine;
+using Zenject;
+using Cysharp.Threading.Tasks;
 
 public class DialogueSingle : MonoBehaviour
 {
-    [SerializeField] private Dialogue _dialoque;
+    [SerializeField] private DialogueID _dialogueID;
+    private DialogueManager dialogueManager;
 
-    public void Active()
+    [Inject]
+    public void Construct(DialogueManager dialogueManager)
     {
-        DialogueManager.Instance.StartDialogue(_dialoque);
+        this.dialogueManager = dialogueManager;
     }
+
+    public async void StartDialogue()
+    {
+        if (_dialogueID == null)
+        {
+            return;
+        }
+        await dialogueManager.StartDialogue(_dialogueID);
+    }
+
 }

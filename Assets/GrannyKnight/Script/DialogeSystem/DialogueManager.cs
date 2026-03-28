@@ -1,135 +1,129 @@
 using Cysharp.Threading.Tasks;
-using System.Threading;
-using TMPro;
 using UnityEngine;
+using FMOD.Studio;
 
-public class DialogueManager : MonoBehaviour
+public class DialogueManager
 {
-    public static DialogueManager Instance;
+    private readonly LocalizationManager localization;
+    private readonly DialogueCanvas dialogueUI;
 
-    [Header("UI Elements")]
-    [SerializeField] private GameObject _dialogueUI;
-    [SerializeField] private TMP_Text _dialogueText, _nameText;
-    [SerializeField] private float _delayBetweenChars = 0.05f;
-    [SerializeField] private float _delayAfterPunctuation = 0.5f;
+    private bool skipRequested;
+    private UniTaskCompletionSource skipTcs;
 
-    private string[] _lines, _names;
-    private int currentLine;
-    private string _fullText;
-    private bool _isTyping = false;
-    private CancellationTokenSource _typingCancellationTokenSource;
+    private EventInstance currentInstance;
+    private bool hasActiveInstance;
 
-    void Awake()
+    public DialogueManager(LocalizationManager localization, DialogueCanvas dialogueUI)
     {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
-        _dialogueUI.SetActive(false);
+        this.localization = localization;
+        this.dialogueUI = dialogueUI;
     }
 
-    public void StartDialogue(Dialogue dialogue)
+    public async UniTask StartDialogue(DialogueID dialogueId)
     {
-        _lines = new string[dialogue.Lines.Length];
-        for (int i = 0; i < dialogue.Lines.Length; i++)
+        var file = Resources.Load<TextAsset>(dialogueId.filePath);
+
+        if (file == null)
         {
-            _lines[i] = dialogue.Lines[i].Line;
+            Debug.LogError($"File not found: {dialogueId.filePath}");
+            return;
         }
-        _names = new string[dialogue.Lines.Length];
-        for (int i = 0; i < dialogue.Lines.Length; i++)
+
+        var db = JsonUtility.FromJson<DialogueDatabase>(file.text);
+        var dialogue = db.dialogues.Find(d => d.id == dialogueId.dialogueId);
+
+        if (dialogue == null)
         {
-            _names[i] = dialogue.Lines[i].Character.ToString();
+            Debug.LogError($"Dialogue not found: {dialogueId.dialogueId}");
+            return;
         }
-        currentLine = 0;
-        ControlVisible(true);
-        UpdateDialogue();
+
+        await PlayDialogue(dialogue);
     }
 
-    public void HideDialog()
+    private async UniTask PlayDialogue(Dialogue dialogue)
     {
-        ControlVisible(false);
-    }
+        dialogueUI.Show(); 
 
-    public void ShowDialog()
-    {
-        ControlVisible(true);
-    }
-
-    public void NextLine()
-    {
-        currentLine++;
-        if (currentLine < _lines.Length)
+        foreach (var line in dialogue.lines)
         {
-            UpdateDialogue();
-        }
-        else
-        {
-            ControlVisible(false);
-        }
-    }
+            skipRequested = false;
+            skipTcs = new UniTaskCompletionSource();
 
-    private void UpdateDialogue()
-    {
-        _nameText.text = _names[currentLine];
-        _fullText = _lines[currentLine];
-        if (!_isTyping) StartTyping();
-        else NextText();
-    }
+            string text = localization.GetText(line.key);
+            string speaker = localization.GetText(line.speaker) + ": ";
 
-    public void StartTyping()
-    {
-        if (!_isTyping)
-        {
-            _typingCancellationTokenSource?.Cancel();
-            _typingCancellationTokenSource = new CancellationTokenSource();
-            TypeText(_typingCancellationTokenSource.Token).Forget();
-        }
-    }
+            //  UI
+            var textTask = dialogueUI.ShowLine(speaker, text);
 
-    private async UniTaskVoid TypeText(CancellationToken cancellationToken)
-    {
-        _isTyping = true;
-        _dialogueText.text = _fullText;
-        _dialogueText.maxVisibleCharacters = 0;
-        _dialogueText.ForceMeshUpdate();
-        int totalCharacters = _fullText.Length;
+            //  Звук
+            UniTask soundTask = UniTask.CompletedTask;
+            hasActiveInstance = false;
 
-        for (int i = 0; i <= totalCharacters; i++)
-        {
-            if (cancellationToken.IsCancellationRequested) return;
-            _dialogueText.maxVisibleCharacters = i;
-            // Проверяем текущий символ на пунктуацию для добавления задержки
-            if (i > 0 && i < totalCharacters)
+            if (!string.IsNullOrEmpty(line.fmodEvent))
             {
-                char currentChar = _fullText[i - 1];
-                if (currentChar == '.' || currentChar == '!' || currentChar == '?')
-                {
-                    await UniTask.Delay((int)(_delayAfterPunctuation * 1000), cancellationToken: cancellationToken);
-                }
+                currentInstance = AudioManager.Play(line.fmodEvent);
+                hasActiveInstance = true;
+                soundTask = WaitForSound(currentInstance);
             }
-            await UniTask.Delay((int)(_delayBetweenChars * 1000), cancellationToken: cancellationToken);
+
+            //  Ждём либо завершение, либо skip
+            await UniTask.WhenAny(
+                UniTask.WhenAll(textTask, soundTask),
+                skipTcs.Task
+            );
+
+            // если skip — убедимся что текст полностью показан
+            if (skipRequested)
+            {
+                dialogueUI.Skip();
+                await UniTask.Yield();
+            }
+
+            CleanupSound();
         }
-        _isTyping = false;
-    }
-    public void SkipTyping()
-    {
-        if (_isTyping)
-        {
-            _typingCancellationTokenSource?.Cancel();
-            _dialogueText.maxVisibleCharacters = _dialogueText.textInfo.characterCount;
-            _isTyping = false;
-        }
-    }
-    public void NextText()
-    {
-        _typingCancellationTokenSource?.Cancel();
-        _typingCancellationTokenSource = new CancellationTokenSource();
-        TypeText(_typingCancellationTokenSource.Token).Forget();
+
+        dialogueUI.Hide();
     }
 
-    private void ControlVisible(bool isVisible)
+    private async UniTask WaitForSound(EventInstance instance)
     {
-        if (_dialogueUI.activeSelf != isVisible)
+        PLAYBACK_STATE state;
+
+        while (true)
         {
-            _dialogueUI.SetActive(isVisible);
+            instance.getPlaybackState(out state);
+
+            if (state == PLAYBACK_STATE.STOPPED)
+                break;
+
+            await UniTask.Yield();
         }
+    }
+
+    public void SkipLine()
+    {
+        if (skipRequested)
+            return;
+
+        skipRequested = true;
+
+        if (hasActiveInstance)
+        {
+            currentInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        }
+
+        skipTcs?.TrySetResult();
+
+        dialogueUI.Skip();
+    }
+
+    private void CleanupSound()
+    {
+        if (!hasActiveInstance)
+            return;
+
+        currentInstance.release();
+        hasActiveInstance = false;
     }
 }

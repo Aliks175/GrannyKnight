@@ -1,23 +1,23 @@
-using UnityEngine;
+using System;
+using System.Collections.Generic;
 
-[CreateAssetMenu(fileName = "Dialogue", menuName = "Dialogue")]
-public class Dialogue : ScriptableObject
+[Serializable]
+public class DialogueDatabase
 {
-    public DialogueLine[] Lines;
+    public List<Dialogue> dialogues;
 }
 
-[System.Serializable]
-public struct DialogueLine
+[Serializable]
+public class Dialogue
 {
-    public Character Character;
-    [TextArea(4, 10)] public string Line;
+    public string id;
+    public List<DialogueLine> lines;
 }
 
-public enum Character
+[Serializable]
+public class DialogueLine
 {
-    Аликсандэр,
-    Бабуля,
-    Сыч,
-    Гвинька,
-    Кролик
+    public string key;
+    public string fmodEvent;
+    public string speaker;
 }
