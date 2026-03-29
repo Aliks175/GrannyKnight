@@ -3,7 +3,7 @@ using DG.Tweening;
 
 public class MazeGate : MonoBehaviour
 {
-    [SerializeField] private float _moveY = 3f;
+    //[SerializeField] private float _moveY = 3f;
     [SerializeField] private float _moveDuration = 1f;
     [SerializeField] private Ease _moveEase = Ease.InOutCubic;
     private GameObject _gate;

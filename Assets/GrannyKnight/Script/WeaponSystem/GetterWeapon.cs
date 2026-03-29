@@ -12,7 +12,7 @@ public class GetterWeapon : MonoBehaviour
     public void Construct(SystemBuss systemBuss)
     {
         _systemBuss = systemBuss;
-        Debug.Log("GetterWeapon Construct ");
+        Debug.Log($"GetterWeapon Construct - {gameObject.name}");
         
     }
 
