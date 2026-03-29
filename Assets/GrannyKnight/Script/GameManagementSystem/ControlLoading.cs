@@ -24,10 +24,22 @@ public class ControlLoading : MonoBehaviour
         //_testLoading.LoadSingle(ListScene.Menu);
     }
 
-    public void LoadFreeGame()
+    public void AddScene(ListScene listScene)
     {
-        _gameManager.LoadFreeGame();
+        _gameManager.AddScene(listScene);
+        //_testLoading.LoadSingle(ListScene.Game);
     }
+
+    public void RemoveScene(ListScene listScene)
+    {
+        _gameManager.RemoveScene(listScene);
+        //_testLoading.LoadSingle(ListScene.Game);
+    }
+
+    //public void LoadFreeGame()
+    //{
+    //    _gameManager.LoadFreeGame();
+    //}
 
     public void Exit()
     {

@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 public class SystemBuss
 {
@@ -6,6 +7,7 @@ public class SystemBuss
 
     public event Action<PlayerUi> OnConstructPlayerUi;
     public event Action<PlayerCharacter> OnSpawnPlayer;
+    public event Action<IEventHistoryble> OnEventHistory;
 
     public void ConstructPlayerUi(PlayerUi playerUi)
     {
@@ -21,5 +23,10 @@ public class SystemBuss
     public PlayerCharacter GetPlayer()
     {
         return player;
+    }
+
+    public void SetEventHistory(IEventHistoryble interactebleEventHistory)
+    {
+        OnEventHistory?.Invoke(interactebleEventHistory);
     }
 }

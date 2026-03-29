@@ -40,45 +40,46 @@ public class GameManager : IDisposable, IInitializable
         _loading.LoadAdditive(ListScene.Menu);
     }
 
+
+    public void AddScene(ListScene listScene)
+    {
+        _loading.LoadAdditive(listScene);
+    }
+
+    public void RemoveScene(ListScene listScene)
+    {
+        _loading.UnLoadAdditive(listScene);
+    }
+
     public void LoadGame()
     {
-        //scenesLoading.Add(_loading.UnLoadAdditive(ListScene.Menu));
-        //scenesLoading.Add(_loading.LoadAdditive(ListScene.Game));
-
-        CheckAsyncOperation(_loading.UnLoadAdditive(ListScene.Menu));
-        CheckAsyncOperation(_loading.LoadAdditive(ListScene.Game));
-
+        CheckAsyncOperation(_loading.LoadSingle(ListScene.GamePlay));
+        CheckAsyncOperation(_loading.LoadAdditive(ListScene.RoomPlayer));
         StartTimer(_cancellationToken.Token).Forget();
     }
 
     public void LoadMenu()
     {
-        CheckAsyncOperation(_loading.UnLoadAdditive(ListScene.Game));
-        CheckAsyncOperation(_loading.LoadAdditive(ListScene.Menu));
-
-
+        CheckAsyncOperation(_loading.LoadSingle(ListScene.Menu));
         StartTimer(_cancellationToken.Token).Forget();
     }
 
-    public void LoadFreeGame()
-    {
-        _loading.UnLoadAdditive(ListScene.Game);
-        _loading.UnLoadAdditive(ListScene.Menu);
-        _loading.LoadAdditive(ListScene.FreeGame);
-    }
+    //public void LoadFreeGame()
+    //{
+    //    _loading.UnLoadAdditive(ListScene.Game);
+    //    _loading.UnLoadAdditive(ListScene.Menu);
+    //    //_loading.LoadAdditive(ListScene.FreeGame);
+    //}
 
     private async UniTaskVoid StartTimer(CancellationToken token)
     {
         try
         {
+            _totalSceneProgress = 0;
             for (int i = 0; i < scenesLoading.Count; i++)
             {
                 while (!scenesLoading[i].isDone)
                 {
-                    //token.ThrowIfCancellationRequested();
-
-                    _totalSceneProgress = 0;
-
                     foreach (AsyncOperation operation in scenesLoading)
                     {
                         _totalSceneProgress += operation.progress;

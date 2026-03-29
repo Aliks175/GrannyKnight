@@ -1,4 +1,3 @@
-using Refactor;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,12 +12,13 @@ public class FactoryBullet
     private int _index;
     private int _damage;
 
-    public FactoryBullet(Bullet prefBullet, int sizePool,int damage,float timeDisable)
+    private const string _nameParentBulletPool = "BulletPool";
+
+    public FactoryBullet(Bullet prefBullet, int sizePool, int damage, float timeDisable)
     {
         _sizePool = sizePool;
         _prefBullet = prefBullet;
-        _bulletPool = new GameObject();
-        _bulletPool.name = "BulletPool";
+
         _objectPool = new();
         _index = 0;
         _damage = damage;
@@ -38,6 +38,7 @@ public class FactoryBullet
     {
         if (_objectPool.Count <= 0)
         {
+            CheckCreateParent();
             CreateBulletPool(_sizePool);
         }
     }
@@ -68,5 +69,14 @@ public class FactoryBullet
         }
         _index++;
         return tempgameObject;
+    }
+
+    private void CheckCreateParent()
+    {
+        _bulletPool = GameObject.Find(_nameParentBulletPool);
+        if (_bulletPool == null)
+        {
+            _bulletPool = new GameObject(_nameParentBulletPool);
+        }
     }
 }

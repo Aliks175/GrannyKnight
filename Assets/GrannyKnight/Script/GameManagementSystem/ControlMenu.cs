@@ -7,5 +7,6 @@ public class ControlMenu : MonoBehaviour
     private void Start()
     {
         _uISettings.Initialization();
+        Cursor.lockState = CursorLockMode.None;
     }
 }

@@ -3,6 +3,13 @@ using UnityEngine.SceneManagement;
 
 public class Loading
 {
+    //public void LoadGame(ListScene listScene)
+    //{
+    //    LoadSingle(ListScene.Game);
+
+    //}
+
+
     public AsyncOperation LoadAdditive(ListScene listScene)
     {
         return SceneManager.LoadSceneAsync((int)listScene, LoadSceneMode.Additive);
@@ -18,8 +25,8 @@ public class Loading
         return SceneManager.UnloadSceneAsync((int)listScene);
     }
 
-    public void LoadSingle(ListScene listScene)
+    public AsyncOperation LoadSingle(ListScene listScene)
     {
-        SceneManager.LoadScene((int)listScene);
+        return SceneManager.LoadSceneAsync((int)listScene);
     }
 }
