@@ -1,20 +1,35 @@
 using UnityEngine;
+using Zenject;
 
 public class Teleported : MonoBehaviour
 {
-    [SerializeField] private CharacterController _playerCharacter;
     [SerializeField] private Transform _positionTeleported;
+    private PlayerCharacter _player;
+    private SystemBuss _systemBuss;
 
-    private void Start()
+    [Inject]
+    public void Construct(SystemBuss systemBuss)
     {
-        _playerCharacter = GameObject.FindFirstObjectByType<CharacterController>();
+        _systemBuss = systemBuss;
     }
 
     public void ActiveTeleport()
     {
-        if (_playerCharacter == null) return;
-        _playerCharacter.enabled = false;
-        _playerCharacter.transform.position = _positionTeleported.position;
-        _playerCharacter.enabled = true;
+        if (CheckPlayer()) { return; }
+        
+        _player.gameObject.SetActive(false);
+        _player.transform.position = _positionTeleported.position;
+        _player.gameObject.SetActive(true);
+    }
+
+
+    private bool CheckPlayer()
+    {
+        if (_player == null) 
+        {
+            _player = _systemBuss.GetPlayer();
+        }
+
+        return _player == null;
     }
 }

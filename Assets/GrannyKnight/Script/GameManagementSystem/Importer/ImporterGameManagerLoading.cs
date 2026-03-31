@@ -14,7 +14,7 @@ public class ImporterGameManagerLoading : IDisposable, IInitializable
 
     public void Dispose()
     {
-        _gameManager.OnLoad += OnLoad;
+        _gameManager.OnLoad -= OnLoad;
     }
 
     public void Initialize()

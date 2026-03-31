@@ -1,6 +1,10 @@
 public enum ListScene
 {
-    Menu = 0,
-    Game ,
-    FreeGame 
+    Menu ,
+    GamePlay ,
+    RoomPlayer,
+    HomeSecondFloor,
+    YardHouse,
+    Maze,
+    Sleep
 }
