@@ -10,6 +10,7 @@ namespace Refactor
     {
         private TestWeapon _weapon;
         private DataWeaponPhysics _physicsWeapon;
+        private TrajectoryPredictor _trajectoryPredictor;
         private Transform _head;
 
         private CancellationTokenSource _cancellationToken;
@@ -68,6 +69,8 @@ namespace Refactor
                     {
                         tempTime += Time.deltaTime;
                     }
+                    ControlVisibleTrajectory(_isFire);
+                    ControlTrajectoryPredictor(tempTime);
                     //Debug.Log($"TempTime = {tempTime}");
                 }
                 Fire(tempTime);
@@ -85,7 +88,8 @@ namespace Refactor
             Bullet tempBullet = _physicsWeapon.GetBullet();
             ControlBullet(tempBullet);
             //Debug.Log($"tempForce = {tempForce}");
-            tempBullet.Rigidbody.AddForce(direction * tempForce, ForceMode.Impulse);
+
+            tempBullet.Rigidbody.AddForce(direction * tempForce, ForceMode.VelocityChange);
         }
 
         private float ControlForce(float tempTime)
@@ -114,7 +118,21 @@ namespace Refactor
             Rigidbody tempRigidbody = tempBullet.Rigidbody;
             tempRigidbody.angularVelocity = Vector3.zero;
             tempRigidbody.linearVelocity = Vector3.zero;
-            tempRigidbody.position = _weapon.FirePoint.position;
+            tempRigidbody.position = _weapon.Point.FirePoint.position;
+        }
+
+        private void ControlTrajectoryPredictor(float tempTime)
+        {
+            if (_trajectoryPredictor == null) { return; }
+            float tempForce = ControlForce(tempTime);
+            Vector3 direction = ControlAngle(tempTime);
+            _trajectoryPredictor.ShowTrajectory(_weapon.Point.FirePoint.position, tempForce * direction);
+        }
+
+        private void ControlVisibleTrajectory(bool visible)
+        {
+            if (_trajectoryPredictor == null) { return; }
+            _trajectoryPredictor.ControlVisible(visible);
         }
 
         private bool ControlCurrentWeapon(TestWeapon testWeapon)
@@ -127,6 +145,7 @@ namespace Refactor
             {
                 _physicsWeapon = testWeapon.DataWeapon as DataWeaponPhysics;
                 _weapon = testWeapon;
+                _trajectoryPredictor = testWeapon.Point.TryGetComponent(out TrajectoryPredictor trajectoryPredictor) ? trajectoryPredictor : null;
             }
             else
             {

@@ -1,8 +1,6 @@
 using Cysharp.Threading.Tasks;
-using Refactor;
 using UnityEngine;
 using Zenject;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class GetterWeapon : MonoBehaviour
 {
@@ -17,17 +15,20 @@ public class GetterWeapon : MonoBehaviour
         //Debug.Log($"GetterWeapon Construct - {gameObject.name}");
     }
 
-    private void OnEnable()
-    {
-        if (_systemBuss == null) { return; }
-        WaitPlayer().Forget();
-    }
+    //private void OnEnable()
+    //{
+    //    Debug.Log($"SystemBuss - null {_systemBuss == null}");
+    //    if (_systemBuss == null) { return; }
+    //    WaitPlayer().Forget();
+    //}
 
     public void Active()
     {
         //WaitPlayer().Forget();
         //CheckPlayer();
-        _playerWeapon.GiveWeapon(_equipHand);
+        Debug.Log($"_playerWeapon - null {_playerWeapon == null}");
+        WaitPlayer().Forget();
+        
     }
 
     //private void CheckPlayer()
@@ -46,6 +47,8 @@ public class GetterWeapon : MonoBehaviour
     {
         PlayerCharacter playerCharacter = await _systemBuss.GetPlayer();
         _playerWeapon = playerCharacter;
+        _playerWeapon.GiveWeapon(_equipHand);
+        Debug.Log($"_playerWeapon - null {_playerWeapon == null}");
         //SetPlayer(playerCharacter);
     }
 }
