@@ -1,5 +1,7 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
+using Zenject;
 
 public class SpriteRotateDirectional : MonoBehaviour
 {
@@ -10,8 +12,9 @@ public class SpriteRotateDirectional : MonoBehaviour
     [SerializeField] private SpriteRenderer _spriteRenderer;
     [SerializeField] private Transform _transform;
     [SerializeField] private Animator _animator;
-    [SerializeField] private Camera _camera;
-   
+    [SerializeField] private Transform _cameraTransform;
+    private SystemBuss _systemBuss;
+
     private Vector2 _backSide = new Vector2(0f, -1f);
     private Vector2 _frontSide = new Vector2(0f, 1f);
     private Vector2 _leftSide = new Vector2(1f, 0f);
@@ -20,17 +23,29 @@ public class SpriteRotateDirectional : MonoBehaviour
     private int _moveX;
     private int _moveY;
 
+    [Inject]
+    public void Construct(SystemBuss systemBuss)
+    {
+        _systemBuss = systemBuss;
+    }
+
+    private void OnEnable()
+    {
+        WaitPlayer().Forget();
+    }
+
     private void Start()
     {
         _moveX = Animator.StringToHash("MoveX");
         _moveY = Animator.StringToHash("MoveY");
-        _camera = Camera.main;
     }
 
     private void LateUpdate()
     {
-        Vector3 cameraForward = _camera.transform.forward;
-        cameraForward = new Vector3(cameraForward.x, 0f, cameraForward.z);
+        Vector3 cameraForward = _cameraTransform.position - transform.position;
+        cameraForward.y = 0;
+        //Vector3 cameraForward = _cameraTransform.transform.forward;
+        //cameraForward = new Vector3(cameraForward.x, 0f, cameraForward.z);
 
         float singleAngle = Vector3.SignedAngle(_transform.forward, cameraForward, Vector3.up);
         Vector2 animationDirection = _backSide;
@@ -59,6 +74,11 @@ public class SpriteRotateDirectional : MonoBehaviour
         _animator.SetFloat(_moveY, animationDirection.y);
     }
 
+    public void SetTarget(Transform player)
+    {
+        _cameraTransform = player;
+    }
+
     public void PickUpSet()
     {
         _animator.SetBool("PickUp", true);
@@ -67,5 +87,12 @@ public class SpriteRotateDirectional : MonoBehaviour
     public void Dead()
     {
         _animator.SetTrigger("Dead");
+    }
+
+    private async UniTaskVoid WaitPlayer()
+    {
+        if (_systemBuss == null) { return; }
+        PlayerCharacter playerCharacter = await _systemBuss.GetPlayer();
+        SetTarget(playerCharacter.transform);
     }
 }

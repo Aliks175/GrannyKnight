@@ -1,40 +1,62 @@
+using Cysharp.Threading.Tasks;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 using Random = UnityEngine.Random;
 
 public class DustCreater : Quest
 {
     [Header("Компоненты")]
     [Tooltip("Стадии пыли")][SerializeField] private StageDust[] _stageDust;
-    [Tooltip("Префаб пыли")][SerializeField] private GameObject _prefabDust;
+    [Tooltip("Префаб пыли")][SerializeField] private TargetDust _prefabDust;
     [Tooltip("Точки старта")][SerializeField] private Transform _spawnPoint;
     [Tooltip("Область создания пыли")][SerializeField] private float _spawnWidth;
     [Tooltip("Игрок")][SerializeField] private Transform _playerTarget;
 
     [Tooltip("Визуальные частицы при уничтожении")][SerializeField] private GameObject _effectOnDeath;
     [SerializeField] private UiOne _uiOne;
-    private List<GameObject> _dusts = new List<GameObject>();
+
+    private List<TargetDust> _dusts = new List<TargetDust>();
+    private SystemBuss _systemBuss;
+    private FactoryDust _factoryDust;
     private float _fullHealth = 0f;
 
     public override event Action<QuestEnding> OnEnd;
     public override event Action OnStart;
 
+    [Inject]
+    public void Construct(SystemBuss systemBuss, FactoryDust factoryDust)
+    {
+        _systemBuss = systemBuss;
+        _factoryDust = factoryDust;
+    }
+
+    private void OnEnable()
+    {
+        if (_systemBuss == null) { return; }
+        WaitPlayer().Forget();
+    }
+
     public override void StartQuest()
     {
         OnStart?.Invoke();
         _fullHealth = SetHealth();
-        _uiOne.Initialization(_fullHealth);
-        _uiOne.StartTimerGame(StartGame);
+        StartGame();
+        if (_uiOne != null)
+        {
+            _uiOne.Initialization(_fullHealth);
+            _uiOne.StartTimerGame(StartGame);
+        }
     }
 
-    public void OnDustDie(Transform dust, int stage)
+    public void OnDustDie(TargetDust dust, int stage)
     {
-        Instantiate(_effectOnDeath, dust.position, Quaternion.identity, transform);
-        _dusts.Remove(dust.gameObject);
+        Instantiate(_effectOnDeath, dust.transform.position, Quaternion.identity, transform);
+        _dusts.Remove(dust);
         if (stage > 0)
         {
-            CreateChild(stage, dust);
+            CreateChild(stage, dust.transform);
         }
         if (_dusts.Count == 0)
         {
@@ -63,8 +85,12 @@ public class DustCreater : Quest
     public void Damage(float damage)
     {
         _fullHealth -= damage;
-        _uiOne.OnUpdateUi(_fullHealth);
+        if (_uiOne != null)
+        {
+            _uiOne.OnUpdateUi(_fullHealth);
+        }
     }
+
     public void CheckHealth(int health)
     {
         if (health <= 0)
@@ -75,11 +101,36 @@ public class DustCreater : Quest
 
     private void EndGame(QuestEnding quest)
     {
-        _uiOne.Stop();
+        if (_uiOne != null)
+        {
+            _uiOne.Stop();
+        }
+
         OnEnd?.Invoke(quest);
         ClearEnemy();
-        _playerTarget.gameObject.GetComponent<PlayerHealthSystem>().Die();
+        //_playerTarget.gameObject.GetComponent<PlayerHealthSystem>().Die();
     }
+
+    //private void CheckPlayer()
+    //{
+    //    PlayerCharacter player = _systemBuss.GetPlayer();
+    //    if (player == null)
+    //    {
+    //        Debug.LogError("Not Found Player");
+    //        return;
+    //    }
+    //    else
+    //    {
+    //        _playerTarget = player.transform;
+    //    }
+    //}
+
+    private async UniTaskVoid WaitPlayer()
+    {
+        PlayerCharacter playerCharacter = await _systemBuss.GetPlayer();
+        _playerTarget = playerCharacter.transform;
+    }
+
 
     private void ClearEnemy()
     {
@@ -87,7 +138,8 @@ public class DustCreater : Quest
         {
             for (int i = 0; i < _dusts.Count; i++)
             {
-                GameObject temp = _dusts[i];
+
+                TargetDust temp = _dusts[i];
                 if (temp != null)
                 {
                     Destroy(temp);
@@ -100,11 +152,14 @@ public class DustCreater : Quest
     private void StartGame()
     {
         //if (_playerTarget == null) _playerTarget = FindAnyObjectByType<PlayerCharacter>().gameObject.transform;
-        GameObject dust = Instantiate(_prefabDust, _spawnPoint.position, Quaternion.identity, transform);
-        dust.GetComponent<TargetDust>().SetParameters(_stageDust[_stageDust.Length - 1], this, _playerTarget, _stageDust.Length - 1);
+        TargetDust dust = _factoryDust.GetDust();
+        dust.transform.position = _spawnPoint.position;
+        dust.SetParameters(_stageDust[_stageDust.Length - 1], this, _playerTarget, _stageDust.Length - 1);
         _dusts.Add(dust);
         //Debug.Log(_fullHealth);
     }
+
+
 
     private void CreateChild(int stage, Transform trans)
     {
@@ -114,8 +169,10 @@ public class DustCreater : Quest
         for (int i = 0; i < childCount; i++)
         {
             Vector3 spawnPos = GetRandomPositionInRectangle(trans.position, SpawnWidthStage, SpawnHeightStage);
-            GameObject dust = Instantiate(_prefabDust, spawnPos, Quaternion.identity, transform);
-            dust.GetComponent<TargetDust>().SetParameters(_stageDust[stage - 1], this, _playerTarget, stage - 1);
+
+            TargetDust dust = _factoryDust.GetDust();
+            dust.transform.position = spawnPos;
+            dust.SetParameters(_stageDust[stage - 1], this, _playerTarget, stage - 1);
             _dusts.Add(dust);
         }
     }
@@ -136,7 +193,7 @@ public class DustCreater : Quest
         Gizmos.DrawLine(_spawnPoint.position + new Vector3(0, 0, -_spawnWidth), _spawnPoint.position + new Vector3(0, 0, _spawnWidth));
     }
 
-    private float SetHealth( )
+    private float SetHealth()
     {
         float health = 0f;
         health += _stageDust[_stageDust.Length - 1].HealthStage;

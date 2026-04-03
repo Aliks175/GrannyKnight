@@ -1,6 +1,8 @@
+using Cysharp.Threading.Tasks;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 using Random = UnityEngine.Random;
 
 public class FairyCreater : MonoBehaviour
@@ -12,16 +14,26 @@ public class FairyCreater : MonoBehaviour
     [SerializeField] private List<Transform> _spawnPointers;
     private List<Fairy> fairies;
     private QuestThree _questThree;
+    private SystemBuss _systemBuss;
+    private Transform _playerCharacter;
+
     private FairyTargets _fairyTargets;
     private int _valueEnemyFollow;
     public event Action OnCheckOverWaves;
     public event Action OnSleepFairy;
+
+    [Inject]
+    public void Construct(SystemBuss systemBuss)
+    {
+        _systemBuss = systemBuss;
+    }
 
     public void Initialization(FairyTargets fairyTargets, QuestThree questThree)
     {
         fairies = new();
         _fairyTargets = fairyTargets;
         _questThree = questThree;
+        WaitPlayer().Forget();
     }
 
     public void SpawnEnemy(int enemyForWave)
@@ -50,6 +62,12 @@ public class FairyCreater : MonoBehaviour
         }
     }
 
+    private async UniTaskVoid WaitPlayer()
+    {
+        PlayerCharacter playerCharacter = await _systemBuss.GetPlayer();
+        _playerCharacter = playerCharacter.transform;
+    }
+
     private void CreateEnemy(FairyType fairyType)
     {
         int indexSpawnPointer = Random.Range(0, _spawnPointers.Count);
@@ -57,7 +75,7 @@ public class FairyCreater : MonoBehaviour
         fairies.Add(enemy);
         FairyTargets tempFairyTargets = _fairyTargets;
         ControlEnemyFollow(ref fairyType, ref tempFairyTargets);
-        enemy.Instantiate(fairyType, tempFairyTargets, this);
+        enemy.Instantiate(fairyType, tempFairyTargets, this, _playerCharacter);
         enemy.Play();
     }
 

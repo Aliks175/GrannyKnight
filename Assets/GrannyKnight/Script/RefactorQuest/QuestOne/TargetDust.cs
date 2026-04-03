@@ -34,6 +34,7 @@ public class TargetDust : MonoBehaviour, IHealtheble
         _endPoint = distance;
         gameObject.transform.localScale = stage.BaseScaleStage * Vector3.one;
         _isPlay = true;
+        SetSpriteRotate();
     }
 
     public void TakeDamage(float damage)
@@ -55,13 +56,22 @@ public class TargetDust : MonoBehaviour, IHealtheble
 
     private void Die()
     {
-        _creater.OnDustDie(this.transform, _stage);
-        Destroy(gameObject);
+        _creater.OnDustDie(this, _stage);
+        gameObject.SetActive(false);
     }
 
     private void ChangePlay()
     {
         _isPlay = true;
+    }
+
+    private void SetSpriteRotate()
+    {
+        SpriteRotate spriteRotate = GetComponentInChildren<SpriteRotate>();
+        if (spriteRotate != null )
+        {
+            spriteRotate.SetTarget(_endPoint);
+        }
     }
 
     private void Update()

@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class FactoryBullet
 {
+    private List<Bullet> _objectPool;
     private Bullet _prefBullet;
     private GameObject _bulletPool;
-    private List<Bullet> _objectPool;
 
     private float _timeDisable;
     private int _sizePool;

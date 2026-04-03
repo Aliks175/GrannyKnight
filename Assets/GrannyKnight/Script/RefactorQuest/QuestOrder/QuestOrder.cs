@@ -9,11 +9,13 @@ public class QuestOrder : MonoBehaviour
     [SerializeField] private float _returnToStartTime;
     [SerializeField] private bool _needToReset;
     [SerializeField] private UnityEvent _onComplete, _onLose, _returnToStart;
+
     private void Awake()
     {
         _currentOrder = new int[_rightOrder.Length];
         InvokeReturnToStart();
     }
+
     public void SetElement(int value)
     {
         for (int i = 0; i < _currentOrder.Length; i++)

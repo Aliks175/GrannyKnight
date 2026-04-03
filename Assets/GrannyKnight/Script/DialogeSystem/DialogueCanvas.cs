@@ -34,11 +34,11 @@ public class DialogueCanvas : MonoBehaviour
     }
     void OnEnable()
     {
-        _buttonSkip.action.started += ShowSkipOrSkip;
+        //_buttonSkip.action.started += ShowSkipOrSkip;
     }
     void OnDisable()
     {
-        _buttonSkip.action.started -= ShowSkipOrSkip;
+        //_buttonSkip.action.started -= ShowSkipOrSkip;
     }
     public async UniTask ShowLine(string speaker, string text)
     {

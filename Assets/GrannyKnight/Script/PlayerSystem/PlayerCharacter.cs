@@ -1,13 +1,16 @@
 using UnityEngine;
 using Zenject;
 
+[RequireComponent(typeof(CharacterController))]
 public class PlayerCharacter : MonoBehaviour
 {
     public PlayerMove PlayerMove => _playerMove;
     public PlayerLook PlayerLook => _playerLook;
     public PlayerAim PlayerAim => _playerAim;
     public PlayerWeapon PlayerWeapon => _playerWeapon;
+    public CharacterController CharacterController => _characterController;
 
+    private CharacterController _characterController;
     private PlayerMove _playerMove;
     private PlayerWeapon _playerWeapon;
     private PlayerLook _playerLook;
@@ -22,6 +25,7 @@ public class PlayerCharacter : MonoBehaviour
         _playerAim = playerAim;
         _playerWeapon = playerWeapon;
         _systemBuss = systemBuss;
+        _characterController = GetComponent<CharacterController>() ;
     }
 
     private void Awake()
@@ -32,10 +36,5 @@ public class PlayerCharacter : MonoBehaviour
     public void GiveWeapon(EquipHand equipHand)
     {
         PlayerWeapon.GiveWeapon(equipHand);
-    }
-
-    public void Teleport()
-    {
-
     }
 }

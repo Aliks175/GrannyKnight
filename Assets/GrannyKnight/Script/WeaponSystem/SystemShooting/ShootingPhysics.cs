@@ -68,7 +68,7 @@ namespace Refactor
                     {
                         tempTime += Time.deltaTime;
                     }
-                    Debug.Log($"TempTime = {tempTime}");
+                    //Debug.Log($"TempTime = {tempTime}");
                 }
                 Fire(tempTime);
             }
@@ -84,7 +84,7 @@ namespace Refactor
             Vector3 direction = ControlAngle(tempTime);
             Bullet tempBullet = _physicsWeapon.GetBullet();
             ControlBullet(tempBullet);
-            Debug.Log($"tempForce = {tempForce}");
+            //Debug.Log($"tempForce = {tempForce}");
             tempBullet.Rigidbody.AddForce(direction * tempForce, ForceMode.Impulse);
         }
 

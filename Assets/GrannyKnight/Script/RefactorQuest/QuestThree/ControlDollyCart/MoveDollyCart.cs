@@ -30,7 +30,7 @@ public class MoveDollyCart : MonoBehaviour
         }
     }
 
-    private void OnUpdate()
+    private void Update()
     {
         if (!_isPlay) return;
         _tempPosition += Time.deltaTime * _speed;

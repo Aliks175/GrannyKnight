@@ -35,31 +35,35 @@ public class QuestThree : Quest
         _controlFairyItem.OnLostItem += (contex) =>
         {
             _countTempItem = contex;
+            if(_uiThree == null) { return; }
             _uiThree.OnUpdateUi(_countTempEnemy, _countTempItem);
         };
         _fairyCreater.OnSleepFairy += () =>
         {
             _countTempEnemy--;
+            if (_uiThree == null) { return; }
             _uiThree.OnUpdateUi(_countTempEnemy, _countTempItem);
         };
     }
 
-    private void OnDisable()
-    {
-        _fairyCreater.OnCheckOverWaves -= CheckOverWaves;
-        _controlFairyItem.OnEnd -= () => StopQuest(QuestEnding.Bad);
+    //private void OnDisable()
+    //{
+    //    _fairyCreater.OnCheckOverWaves -= CheckOverWaves;
+    //    _controlFairyItem.OnEnd -= () => StopQuest(QuestEnding.Bad);
 
-        _controlFairyItem.OnLostItem -= (contex) =>
-        {
-            _countTempItem = contex;
-            _uiThree.OnUpdateUi(_countTempEnemy, _countTempItem);
-        };
-        _fairyCreater.OnSleepFairy -= () =>
-        {
-            _countTempEnemy--;
-            _uiThree.OnUpdateUi(_countTempEnemy, _countTempItem);
-        };
-    }
+    //    _controlFairyItem.OnLostItem -= (contex) =>
+    //    {
+    //        _countTempItem = contex;
+    //        if (_uiThree == null) { return; }
+    //        _uiThree.OnUpdateUi(_countTempEnemy, _countTempItem);
+    //    };
+    //    _fairyCreater.OnSleepFairy -= () =>
+    //    {
+    //        _countTempEnemy--;
+    //        if (_uiThree == null) { return; }
+    //        _uiThree.OnUpdateUi(_countTempEnemy, _countTempItem);
+    //    };
+    //}
 
     private void Start()
     {
@@ -82,6 +86,8 @@ public class QuestThree : Quest
     public override void StartQuest()
     {
         OnStart?.Invoke();
+        StartGame();
+        if (_uiThree == null) { return; }
         _uiThree.OnUpdateUi(_countTempEnemy, _countTempItem);
         _uiThree.StartTimerGame(StartGame);
     }
@@ -90,7 +96,10 @@ public class QuestThree : Quest
     {
         OnEnd?.Invoke(quest);
         _controlDollyCart.Stop();
+        if (_uiThree != null)
+        {
         _uiThree.Stop();
+        }
         _fairyCreater.Stop();
     }
 
@@ -109,6 +118,7 @@ public class QuestThree : Quest
         _controlFairyItem.ResetFairyItem();
         ControlUi();
         OnStart?.Invoke();
+        if (_uiThree == null) { return; }
         _uiThree.OnUpdateUi(_countTempEnemy, _countTempItem);
         _uiThree.StartTimerGame(StartGame);
     }
@@ -172,6 +182,7 @@ public class QuestThree : Quest
         _countItem = _controlFairyItem.CountItem;
         _countTempItem = _countItem;
         _countTempEnemy = _countAllEnemy;
+        if (_uiThree == null) { return; }
         _uiThree.Initialization(_countAllEnemy, _countItem);
 
     }

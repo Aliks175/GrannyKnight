@@ -1,6 +1,8 @@
+using Cysharp.Threading.Tasks;
 using Refactor;
 using UnityEngine;
 using Zenject;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class GetterWeapon : MonoBehaviour
 {
@@ -12,25 +14,38 @@ public class GetterWeapon : MonoBehaviour
     public void Construct(SystemBuss systemBuss)
     {
         _systemBuss = systemBuss;
-        Debug.Log($"GetterWeapon Construct - {gameObject.name}");
-        
+        //Debug.Log($"GetterWeapon Construct - {gameObject.name}");
+    }
+
+    private void OnEnable()
+    {
+        if (_systemBuss == null) { return; }
+        WaitPlayer().Forget();
     }
 
     public void Active()
     {
-        CheckPlayer();
+        //WaitPlayer().Forget();
+        //CheckPlayer();
         _playerWeapon.GiveWeapon(_equipHand);
     }
 
-    private void CheckPlayer()
+    //private void CheckPlayer()
+    //{
+    //    if (_playerWeapon == null)
+    //    {
+    //        _playerWeapon = _systemBuss.GetPlayer();
+    //    }
+    //    if (_playerWeapon == null)
+    //    {
+    //        Debug.LogError("Not Found Player");
+    //    }
+    //}
+
+    private async UniTaskVoid WaitPlayer()
     {
-        if (_playerWeapon == null)
-        {
-            _playerWeapon = _systemBuss.GetPlayer();
-        }
-        if (_playerWeapon == null)
-        {
-            Debug.LogError("Not Found Player");
-        }
+        PlayerCharacter playerCharacter = await _systemBuss.GetPlayer();
+        _playerWeapon = playerCharacter;
+        //SetPlayer(playerCharacter);
     }
 }

@@ -55,6 +55,7 @@ namespace Refactor
             if (_currenthand == (int)equipHand) { return; }
             _currenthand = (int)equipHand;
 
+            Debug.Log($"ChangeHand(EquipHand = {equipHand})");
             switch (equipHand)
             {
                 case EquipHand.ArmorHand:

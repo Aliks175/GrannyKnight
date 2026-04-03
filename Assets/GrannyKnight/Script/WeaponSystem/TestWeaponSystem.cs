@@ -69,6 +69,7 @@ namespace Refactor
                     _currentShootingSystem = _shootingPhysics;
                     break;
                 case TypeShootingSystem.none:
+                    _currentShootingSystem.StopShoot();
                     _currentShootingSystem = null;
                     break;
 

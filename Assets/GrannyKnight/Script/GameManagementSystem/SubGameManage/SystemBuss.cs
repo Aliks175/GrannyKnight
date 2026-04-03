@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using System;
 using UnityEngine;
 
@@ -20,8 +21,9 @@ public class SystemBuss
         OnSpawnPlayer?.Invoke(playerCharacter);
     }
 
-    public PlayerCharacter GetPlayer()
+    public async UniTask<PlayerCharacter> GetPlayer()
     {
+        await UniTask.WaitUntil(() => player != null);
         return player;
     }
 

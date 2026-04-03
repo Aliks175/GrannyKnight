@@ -69,8 +69,14 @@ public class QuestTwo : Quest
         OnStart?.Invoke();
         RestoreFruits();
         _fruitCount = 0;
+        StartGame();
+
+        Debug.Log($"StartGame");
+        if (_uiTwo != null)
+        {
         _uiTwo.ResetUi();
         _uiTwo.StartTimerGame(StartGame);
+        }
     }
 
     public void CollectFruit(Vector3 fruitPosition, float time)
@@ -85,7 +91,10 @@ public class QuestTwo : Quest
         if (!_isQuestActive) return;
 
         _fruitCount++;
-        _uiTwo.OnUpdateUiProgress(_fruitCount);
+        if (_uiTwo != null)
+        {
+            _uiTwo.OnUpdateUiProgress(_fruitCount);
+        }
         UpdateSleepTimer();
 
         //Debug.Log($"Fruits collected: {_fruitCount}");
@@ -99,6 +108,7 @@ public class QuestTwo : Quest
         _isQuestActive = false;
         Cleanup();
         OnEnd?.Invoke(questEnding);
+        EndGame();
     }
 
     public void ParticleStart(Vector3 pos)
@@ -128,7 +138,12 @@ public class QuestTwo : Quest
 
     private void EndGame()
     {
-        _uiTwo.Stop();
+        Debug.Log($"EndGame");
+        Debug.Log($"Fruits collected: {_fruitCount}");
+        if (_uiTwo != null)
+        {
+            _uiTwo.Stop();
+        }
     }
 
     private async UniTaskVoid StartTimer()
@@ -138,7 +153,10 @@ public class QuestTwo : Quest
         {
             await UniTask.Delay(TimeSpan.FromSeconds(1));
             _timer--;
-            _uiTwo.OnUpdateUiTimer(_timer);
+            if (_uiTwo != null)
+            {
+                _uiTwo.OnUpdateUiTimer(_timer);
+            }
         }
         CompleteQuest();
     }
@@ -244,7 +262,7 @@ public class QuestTwo : Quest
         {
             StopQuest(QuestEnding.Good);
         }
-        EndGame();
+        
     }
 
     private void Cleanup()
@@ -262,7 +280,10 @@ public class QuestTwo : Quest
         _fruitCount = 0;
         CalculateMaxCountFruit();
         SaveOriginalFruits();
-        _uiTwo.Initialization(_timer, _maxCountFruit);
+        if (_uiTwo != null)
+        {
+            _uiTwo.Initialization(_timer, _maxCountFruit);
+        }
     }
 
     private void CalculateMaxCountFruit()

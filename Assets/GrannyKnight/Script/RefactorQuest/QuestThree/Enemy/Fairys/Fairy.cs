@@ -41,10 +41,10 @@ public class Fairy : MonoBehaviour, IHealtheble
 
     private void OnDisable()
     {
-        //MainSystem.OnUpdate -= OnUpdate;
+        End();
     }
 
-    public void Instantiate(FairyType fairyType, FairyTargets fairyTargets, FairyCreater fairyCreater)
+    public void Instantiate(FairyType fairyType, FairyTargets fairyTargets, FairyCreater fairyCreater,Transform playerCharacter)
     {
         _count = fairyType.ValueChangeTarget;
         _timeWait = fairyType.TimeWait;
@@ -55,6 +55,21 @@ public class Fairy : MonoBehaviour, IHealtheble
         _fairyCreater = fairyCreater;
         _waitDash = new WaitForSeconds(_timeWait);
         _waitTimer = new WaitForSeconds(_timerPickUp);
+        SetSpriteRotate(playerCharacter);
+    }
+
+    private void SetSpriteRotate(Transform playerCharacter)
+    {
+        SpriteRotate spriteRotate = GetComponentInChildren<SpriteRotate>();
+        if (spriteRotate != null)
+        {
+            spriteRotate.SetTarget(playerCharacter);
+        }
+        SpriteRotateDirectional spriteRotateDirectional = GetComponentInChildren<SpriteRotateDirectional>();
+        if (spriteRotateDirectional != null)
+        {
+            spriteRotateDirectional.SetTarget(playerCharacter);
+        }
     }
 
     public void TakeDamage(float damage)
@@ -75,7 +90,6 @@ public class Fairy : MonoBehaviour, IHealtheble
         ChangeTarget();
         if (_isFollow)
         {
-            //MainSystem.OnUpdate += OnUpdate;
             _isPlay = true;
             _coroutine = StartCoroutine(WaitDashToTarget());
         }
@@ -123,7 +137,7 @@ public class Fairy : MonoBehaviour, IHealtheble
         MoveDashToTarget();
     }
 
-    private void OnUpdate()
+    private void Update()
     {
         MoveFollowToTarget();
     }
@@ -158,7 +172,7 @@ public class Fairy : MonoBehaviour, IHealtheble
     private void MoveFollowToTarget()
     {
         if (!_isPlay) return;
-        transform.position = Vector3.LerpUnclamped(transform.position, _activeTarget.position, _speed * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, _activeTarget.position, _speed * Time.deltaTime);
     }
     #endregion
 
@@ -215,6 +229,7 @@ public class Fairy : MonoBehaviour, IHealtheble
     public void Stop()
     {
         OnSystemStop?.Invoke();
-        Destroy(gameObject, 1f);
+        _isPlay = false;
+        gameObject.SetActive(false);
     }
 }
