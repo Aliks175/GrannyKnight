@@ -69,14 +69,15 @@ namespace Refactor
                     {
                         tempTime += Time.deltaTime;
                     }
-                    ControlVisibleTrajectory(_isFire);
                     ControlTrajectoryPredictor(tempTime);
+                    ControlVisibleTrajectory(_isFire);
                     //Debug.Log($"TempTime = {tempTime}");
                 }
                 Fire(tempTime);
             }
             catch (OperationCanceledException)
             {
+                ControlVisibleTrajectory(false);
                 Debug.Log("Операция отменена ");
             }
         }
