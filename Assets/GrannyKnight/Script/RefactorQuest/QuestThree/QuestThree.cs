@@ -163,7 +163,9 @@ public class QuestThree : Quest
 
     private void CheckOverWaves()
     {
+        Debug.Log($"CheckOverWaves PRE = {_enemyForWave}");
         _enemyForWave--;
+        Debug.Log($"CheckOverWaves POST = {_enemyForWave}");
         if (_enemyForWave <= 0)
         {
             StartWaves();

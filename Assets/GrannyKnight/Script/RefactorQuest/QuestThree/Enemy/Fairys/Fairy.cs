@@ -39,11 +39,6 @@ public class Fairy : MonoBehaviour, IHealtheble
     public UnityEvent _changeTarget;
     public UnityEvent _dieEvent;
 
-    private void OnDisable()
-    {
-        End();
-    }
-
     public void Instantiate(FairyType fairyType, FairyTargets fairyTargets, FairyCreater fairyCreater,Transform playerCharacter)
     {
         _count = fairyType.ValueChangeTarget;

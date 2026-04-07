@@ -27,10 +27,6 @@ public class FairyItem : MonoBehaviour
         _isFree = false;
     }
 
-   
-        
-    
-
     public void StartProgressPickUp()
     {
         _tweenProgressPickUp.Play();
