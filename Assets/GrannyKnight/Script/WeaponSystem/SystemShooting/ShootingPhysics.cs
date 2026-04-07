@@ -18,6 +18,9 @@ namespace Refactor
         private int _currentId;
         private bool _isFire;
 
+        public event Action OnCharge;
+        public event Action OnShoot;
+
         public ShootingPhysics(Transform head)
         {
             _head = head;
@@ -57,6 +60,7 @@ namespace Refactor
             {
                 _nextTimeToFire = Time.time + _physicsWeapon.TimeWaitFire;
                 StartTimer(_cancellationToken.Token).Forget();
+                OnCharge?.Invoke();
             }
         }
 
@@ -71,7 +75,7 @@ namespace Refactor
                 {
                     await UniTask.Yield(PlayerLoopTiming.Update);
 
-                    if (tempTime < timeWaitMaxForce)
+                    if (tempTime <= timeWaitMaxForce)
                     {
                         tempTime += Time.deltaTime;
                     }
@@ -90,6 +94,7 @@ namespace Refactor
 
         private void Fire(float tempTime)
         {
+            OnShoot?.Invoke();
             float tempForce = ControlForce(tempTime);
             Vector3 direction = ControlAngle(tempTime);
             Bullet tempBullet = _physicsWeapon.GetBullet();
@@ -114,7 +119,8 @@ namespace Refactor
         private float ControlStat(float tempTime, float min, float max)
         {
             tempTime = tempTime > _physicsWeapon.TimeWaitMaxForce ? _physicsWeapon.TimeWaitMaxForce : tempTime;
-            float _coefficient = tempTime / _physicsWeapon.TimeWaitMaxForce;
+
+            float _coefficient = ControlCoefficientMaxForce(tempTime);
             float tempForce = max * _coefficient;
             tempForce = Mathf.Clamp(tempForce, min, max);
             return tempForce;
@@ -140,6 +146,20 @@ namespace Refactor
         {
             if (_trajectoryPredictor == null) { return; }
             _trajectoryPredictor.ControlVisible(visible);
+        }
+
+        private float ControlCoefficientMaxForce(float tempTime)
+        {
+            float _coefficient;
+            if (_physicsWeapon.TimeWaitMaxForce <= 0)
+            {
+                _coefficient = 1f;
+            }
+            else
+            {
+                _coefficient = tempTime / _physicsWeapon.TimeWaitMaxForce;
+            }
+            return _coefficient;
         }
 
         private bool ControlCurrentWeapon(TestWeapon testWeapon)

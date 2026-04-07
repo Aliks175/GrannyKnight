@@ -14,7 +14,7 @@ namespace Refactor
             _playerWeapon = playerWeapon;
             _weaponSystem = weaponSystem;
         }
-
+        
         public void Dispose()
         {
             _playerWeapon.OnChangeHand -= OnChangeWeapon;

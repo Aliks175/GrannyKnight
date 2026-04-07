@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6314926899278768274, guid: 9df23eb387cd11446a16c138e0d22671, type: 3}
+      propertyPath: WeaponEffectAbstract
+      value: 
+      objectReference: {fileID: 4643875457867033328}
     - target: {fileID: 6509391222630022158, guid: 9df23eb387cd11446a16c138e0d22671, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -71,5 +75,31 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8656960497580664736, guid: 9df23eb387cd11446a16c138e0d22671, type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 4643875457867033328}
   m_SourcePrefab: {fileID: 100100000, guid: 9df23eb387cd11446a16c138e0d22671, type: 3}
+--- !u!1 &2801012786935673167 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8656960497580664736, guid: 9df23eb387cd11446a16c138e0d22671, type: 3}
+  m_PrefabInstance: {fileID: 6844488464508049135}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4643875457867033328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2801012786935673167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 049ac910c548f0748982f1bfe08b5c77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnShooteble:
+    m_PersistentCalls:
+      m_Calls: []
+  OnChargeeble:
+    m_PersistentCalls:
+      m_Calls: []

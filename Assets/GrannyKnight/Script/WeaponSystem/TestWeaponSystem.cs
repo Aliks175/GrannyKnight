@@ -28,7 +28,7 @@ namespace Refactor
             _shootingPhysics = shootingPhysics;
             _weaponControlAnimation = weaponControlAnimation;
         }
-
+       
         public void ChangeShootSystem(TypeShootingSystem typeShootingSystem)
         {
             if (_currentTypeShootingSystem != typeShootingSystem)
@@ -41,6 +41,7 @@ namespace Refactor
         public void SetWeapon(TestWeapon currentWeapon)
         {
             _currentWeapon = currentWeapon;
+            _weaponControlAnimation.SetWeapon(currentWeapon);
         }
 
         public void Shoot(bool isFire)
