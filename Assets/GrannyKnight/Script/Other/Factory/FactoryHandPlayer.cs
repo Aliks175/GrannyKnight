@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public class FactoryWeapon : IInitializable
+public class FactoryHandPlayer : IInitializable
 {
     private List<TestBazeWeapon> _bazeWeapons;
 
@@ -10,7 +10,7 @@ public class FactoryWeapon : IInitializable
 
     private Transform _handSlot;
 
-    public FactoryWeapon(List<TestBazeWeapon> bazeWeapons, Transform handSlot)
+    public FactoryHandPlayer(List<TestBazeWeapon> bazeWeapons, Transform handSlot)
     {
         _bazeWeapons = bazeWeapons;
         _weaponList = new();
@@ -19,7 +19,7 @@ public class FactoryWeapon : IInitializable
 
     public void Initialize()
     {
-        CreateWeapon();
+        CreateHand();
     }
 
     public TestWeapon GetWeapon(EquipHand equipHand)
@@ -64,19 +64,16 @@ public class FactoryWeapon : IInitializable
         return testWeapon;
     }
 
-    private void CreateWeapon()
+    private void CreateHand()
     {
         for (int i = 0; i < _bazeWeapons.Count; i++)
         {
-            //DataWeapon dataWeapon = _bazeWeapons[i].DataWeapon;
             DataWeapon dataWeapon = CreateDataWeapon(_bazeWeapons[i].DataWeapon);
             if (dataWeapon == null)
             {
                 Debug.LogError($"Not Found WeaponSetting");
                 break;
             }
-
-
             DataItem dataItem = CreateModelItem(_bazeWeapons[i].DataItem);
             TestWeapon testWeapon = new TestWeapon(dataWeapon, dataItem);
             _weaponList.Add(testWeapon);
@@ -102,7 +99,6 @@ public class FactoryWeapon : IInitializable
     private DataItem CreateModelItem(DataItem dataItem)
     {
         ShootPoint tempModel = GameObject.Instantiate(dataItem.Model, _handSlot);
-        tempModel.gameObject.SetActive(false);
         DataItem tempDataItem = new DataItem()
         {
             Id = dataItem.Id,

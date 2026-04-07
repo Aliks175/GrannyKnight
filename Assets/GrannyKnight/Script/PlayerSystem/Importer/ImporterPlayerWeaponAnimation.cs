@@ -25,6 +25,6 @@ public class ImporterPlayerWeaponAnimation : IDisposable, IInitializable
 
     private void OnChangeWeapon(object sender, OnDataEquipHand dataEquipHand)
     {
-        _playerControlAnimation.ChangeHand(dataEquipHand.EquipHand);
+        _playerControlAnimation.ChangeHand(dataEquipHand);
     }
 }

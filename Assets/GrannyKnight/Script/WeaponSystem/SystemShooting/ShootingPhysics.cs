@@ -14,12 +14,14 @@ namespace Refactor
         private Transform _head;
 
         private CancellationTokenSource _cancellationToken;
+        private float _nextTimeToFire;
         private int _currentId;
         private bool _isFire;
 
         public ShootingPhysics(Transform head)
         {
             _head = head;
+            _currentId = -1;
         }
 
         public void Shoot(TestWeapon testWeapon)
@@ -51,7 +53,11 @@ namespace Refactor
 
         private void ChargeFire()
         {
-            StartTimer(_cancellationToken.Token).Forget();
+            if (Time.time >= _nextTimeToFire)
+            {
+                _nextTimeToFire = Time.time + _physicsWeapon.TimeWaitFire;
+                StartTimer(_cancellationToken.Token).Forget();
+            }
         }
 
         private async UniTaskVoid StartTimer(CancellationToken token)

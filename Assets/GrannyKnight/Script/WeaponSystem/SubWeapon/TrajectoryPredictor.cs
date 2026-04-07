@@ -15,6 +15,7 @@ public class TrajectoryPredictor : MonoBehaviour
     private void Start()
     {
         _lineRenderer = GetComponent<LineRenderer>();
+        ControlVisible(false);
     }
 
     public void ControlVisible(bool visible)

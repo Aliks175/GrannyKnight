@@ -19,7 +19,8 @@ public class PlayerInstaller : MonoInstaller
     [SerializeField] private CinemachineCamera cinemachineCamera;
 
     [Header("PlayerControlAnimation")]
-    [SerializeField] private Animator _animatorHand;
+    [SerializeField] private Animator _armorHandAnimator;
+    [SerializeField] private Animator _glovesHandAnimator;
 
 
     public override void InstallBindings()
@@ -58,7 +59,7 @@ public class PlayerInstaller : MonoInstaller
 
         Container.BindInterfacesAndSelfTo<TestPlayerControlAnimation>()
            .AsSingle()
-           .WithArguments(_animatorHand, _settingsPlayer)
+           .WithArguments(_armorHandAnimator, _glovesHandAnimator, _settingsPlayer)
            .NonLazy();
 
         Container.BindInterfacesAndSelfTo<PlayerWeapon>()

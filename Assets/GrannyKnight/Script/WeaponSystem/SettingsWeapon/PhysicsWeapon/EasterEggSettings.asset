@@ -9,12 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 586ee73cffaee1c45887cc5ba5bd05b4, type: 3}
+  m_Script: {fileID: 11500000, guid: 0e078c067632b6b4e95a0659a3545352, type: 3}
   m_Name: EasterEggSettings
   m_EditorClassIdentifier: 
   _typeWeapon: 1
-  _typeShootingSystem: 1
-  _timeWaitFire: 0.8
-  _damage: 15
-  _range: 100
-  _isAutoFire: 0
+  _typeShootingSystem: 2
+  _timeWaitFire: 1
+  _damage: 10
+  _prefBullet: {fileID: 9101796531419377570, guid: 2b62b49a8df48e1478fb151de9673072, type: 3}
+  _maxForce: 30
+  _minForce: 5
+  _maxAngle: 10
+  _minAngle: 5
+  _timeWaitMaxForce: 1
+  _sizePoolBullet: 5

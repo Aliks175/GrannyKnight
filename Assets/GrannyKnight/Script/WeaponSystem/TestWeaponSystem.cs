@@ -15,17 +15,18 @@ namespace Refactor
 
         private ShootingRaycast _shootingRaycast;
         private ShootingPhysics _shootingPhysics;
-
+        private WeaponControlAnimation _weaponControlAnimation;
 
         private TestWeapon _currentWeapon;
         private TypeShootingSystem _currentTypeShootingSystem;
         private IShootingSystemble _currentShootingSystem;
 
 
-        public TestWeaponSystem(ShootingRaycast shootingRaycast, ShootingPhysics shootingPhysics)
+        public TestWeaponSystem(ShootingRaycast shootingRaycast, ShootingPhysics shootingPhysics, WeaponControlAnimation weaponControlAnimation)
         {
             _shootingRaycast = shootingRaycast;
             _shootingPhysics = shootingPhysics;
+            _weaponControlAnimation = weaponControlAnimation;
         }
 
         public void ChangeShootSystem(TypeShootingSystem typeShootingSystem)
