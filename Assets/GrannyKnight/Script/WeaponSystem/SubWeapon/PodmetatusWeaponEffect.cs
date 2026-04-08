@@ -7,6 +7,8 @@ public class PodmetatusWeaponEffect : WeaponEffectAbstract
     public override Animator AnimatorWeapon => throw new System.NotImplementedException();
   
     public override int IdWeapon => throw new System.NotImplementedException();
+    [SerializeField] private ParticleSystem _flash;
+    [SerializeField] private ParticleSystem _lazerBullet;
 
     private Animator _animator;
     private int _shootAnimationID;

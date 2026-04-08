@@ -101,7 +101,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb64b306902eaf64389063d7a14f66c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cameraTransform: {fileID: 0}
   _IsRotateOnlyForY: 0
 --- !u!114 &4659423956619110064
 MonoBehaviour:
@@ -120,7 +119,7 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 705203023762058863}
   _transform: {fileID: 2232106529671829742}
   _animator: {fileID: 7494408028186571555}
-  _camera: {fileID: 0}
+  _cameraTransform: {fileID: 0}
 --- !u!1 &5974444628303889598
 GameObject:
   m_ObjectHideFlags: 0
@@ -178,7 +177,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4969196822489808502
 MonoBehaviour:
