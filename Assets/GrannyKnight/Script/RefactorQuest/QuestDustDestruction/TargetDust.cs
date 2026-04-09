@@ -6,7 +6,7 @@ public class TargetDust : MonoBehaviour, IHealtheble
 {
     [SerializeField] private SpriteRenderer _sprite;
     [SerializeField] private float _timeToTakeDamage;
-    private DustCreater _creater;
+    private QuestDustDestruction _creater;
     private Transform _endPoint;
     private Tween _tweenTakeDamage;
     private float _health;
@@ -23,7 +23,7 @@ public class TargetDust : MonoBehaviour, IHealtheble
         _tweenTakeDamage?.Kill();
     }
 
-    public void SetParameters(StageDust stage, DustCreater creater, Transform distance, int index)
+    public void SetParameters(StageDust stage, QuestDustDestruction creater, Transform distance, int index)
     {
         _sprite.color = stage.ColorStage;
         _alpha = new Color(stage.ColorStage.r, stage.ColorStage.g, stage.ColorStage.b, 0f);

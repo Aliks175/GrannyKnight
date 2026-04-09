@@ -5,7 +5,7 @@ using UnityEngine;
 using Zenject;
 using Random = UnityEngine.Random;
 
-public class DustCreater : Quest
+public class QuestDustDestruction : Quest
 {
     [Header("Компоненты")]
     [Tooltip("Стадии пыли")][SerializeField] private StageDust[] _stageDust;

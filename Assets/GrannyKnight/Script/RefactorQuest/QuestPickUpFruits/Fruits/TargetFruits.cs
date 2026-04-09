@@ -22,11 +22,11 @@ public class TargetFruits : MonoBehaviour, IHealtheble
     {
         PlaySound(_hit);
         rb.isKinematic = false;
-        Vector3 basket = QuestTwo.Instance.BasketPos;
+        Vector3 basket = QuestPickUpFruits.Instance.BasketPos;
         float distance = this.transform.position.y - basket.y;
         float time = Mathf.Sqrt(2 * distance / Mathf.Abs(Physics.gravity.y));
         _toMove = new Vector3(this.transform.position.x, basket.y, this.transform.position.z);
-        QuestTwo.Instance.CollectFruit(_toMove, time);
+        QuestPickUpFruits.Instance.CollectFruit(_toMove, time);
         _cancellationTokenSource = new CancellationTokenSource();
         DestroyFruit(_cancellationTokenSource.Token).Forget();
     }
@@ -35,8 +35,8 @@ public class TargetFruits : MonoBehaviour, IHealtheble
     {
         await UniTask.WaitUntil(() => this.transform.position.y <= _toMove.y, cancellationToken: cancellationToken);
         PlaySound(_fall);
-        QuestTwo.Instance.OnFruitCollected();
-        QuestTwo.Instance.ParticleStart(transform.position);
+        QuestPickUpFruits.Instance.OnFruitCollected();
+        QuestPickUpFruits.Instance.ParticleStart(transform.position);
         Destroy(this.gameObject);
     }
 

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class QuestThree : Quest
+public class QuestFairyDestruction : Quest
 {
     [Header("SubSystem")]
     [SerializeField] private FairyCreater _fairyCreater;

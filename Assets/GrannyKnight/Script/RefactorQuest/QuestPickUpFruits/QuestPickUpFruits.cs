@@ -4,10 +4,10 @@ using System;
 using System.Threading;
 using UnityEngine;
 
-public class QuestTwo : Quest
+public class QuestPickUpFruits : Quest
 {
     // Синглтон с ленивой инициализацией
-    public static QuestTwo Instance { get; private set; }
+    public static QuestPickUpFruits Instance { get; private set; }
 
     // События
     public override event Action<QuestEnding> OnEnd;
@@ -30,7 +30,8 @@ public class QuestTwo : Quest
     // Приватные поля
     private Tween _currentTween;
     private FruitData[] _originalFruitData;
-    private CancellationTokenSource _cts;
+    private CancellationTokenSource _ctsSleepPeriod;
+    private CancellationTokenSource _ctsTimerEndGame;
 
     [System.Serializable]
     private struct FruitData
@@ -82,7 +83,7 @@ public class QuestTwo : Quest
     public void CollectFruit(Vector3 fruitPosition, float time)
     {
         if (!_isQuestActive) return;
-        CancelCurrentOperations();
+        CancelCurrentOperations(_ctsSleepPeriod);
         MoveBasketToFruit(fruitPosition, time);
     }
 
@@ -125,7 +126,9 @@ public class QuestTwo : Quest
     {
         if(_fruitCount >= _targetFruit[2])
         {
-            _timer = 0;
+            CancelCurrentOperations(_ctsSleepPeriod);
+            CancelCurrentOperations(_ctsTimerEndGame);
+            CompleteQuest();
         }
     }
 
@@ -133,7 +136,8 @@ public class QuestTwo : Quest
     {
         _isQuestActive = true;
         ResetQuestState();
-        StartTimer().Forget();
+        _ctsTimerEndGame = new CancellationTokenSource();
+        StartTimer(_ctsTimerEndGame).Forget();
     }
 
     private void EndGame()
@@ -146,18 +150,19 @@ public class QuestTwo : Quest
         }
     }
 
-    private async UniTaskVoid StartTimer()
+    private async UniTaskVoid StartTimer(CancellationTokenSource _cts)
     {
         _timer = _timeToQuest;
-        while (_timer > 0)
-        {
-            await UniTask.Delay(TimeSpan.FromSeconds(1));
-            _timer--;
-            if (_uiTwo != null)
-            {
-                _uiTwo.OnUpdateUiTimer(_timer);
-            }
-        }
+        await UniTask.Delay(TimeSpan.FromSeconds(_timer), cancellationToken: _cts.Token);
+        //while (_timer > 0)
+        //{
+        //    await UniTask.Delay(TimeSpan.FromSeconds(1));
+        //    _timer--;
+        //    if (_uiTwo != null)
+        //    {
+        //        _uiTwo.OnUpdateUiTimer(_timer);
+        //    }
+        //}
         CompleteQuest();
     }
 
@@ -187,11 +192,11 @@ public class QuestTwo : Quest
         Cleanup();
     }
 
-    private void CancelCurrentOperations()
+    private void CancelCurrentOperations(CancellationTokenSource cancellationToken)
     {
-        _cts?.Cancel();
+        cancellationToken?.Cancel();
         _currentTween?.Kill();
-        _cts = null;
+        cancellationToken = null;
     }
 
     private void MoveBasketToFruit(Vector3 fruitPosition, float time)
@@ -216,19 +221,19 @@ public class QuestTwo : Quest
 
     private void StartSleepTimer()
     {
-        CancelCurrentOperations();
+        CancelCurrentOperations(_ctsSleepPeriod);
 
-        _cts = new CancellationTokenSource();
-        WaitForSleepPeriod().Forget();
+        _ctsSleepPeriod = new CancellationTokenSource();
+        WaitForSleepPeriod(_ctsSleepPeriod).Forget();
     }
 
-    private async UniTaskVoid WaitForSleepPeriod()
+    private async UniTaskVoid WaitForSleepPeriod(CancellationTokenSource cancellationToken)
     {
         try
         {
             await UniTask.WaitUntil(
                 () => Time.time >= _sleepEndTime,
-                cancellationToken: _cts.Token
+                cancellationToken: cancellationToken.Token
             );
 
             ReturnBasketToStart();
@@ -267,9 +272,9 @@ public class QuestTwo : Quest
 
     private void Cleanup()
     {
-        CancelCurrentOperations();
-        _cts?.Dispose();
-        _cts = null;
+        CancelCurrentOperations(_ctsTimerEndGame);
+        _ctsTimerEndGame?.Dispose();
+        _ctsTimerEndGame = null;
     }
 
     private void Initialization()

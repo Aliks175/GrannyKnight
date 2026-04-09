@@ -13,7 +13,7 @@ public class FairyCreater : MonoBehaviour
     [Header("SpawnPointers")]
     [SerializeField] private List<Transform> _spawnPointers;
     private List<Fairy> fairies;
-    private QuestThree _questThree;
+    private QuestFairyDestruction _questThree;
     private SystemBuss _systemBuss;
     private Transform _playerCharacter;
 
@@ -28,7 +28,7 @@ public class FairyCreater : MonoBehaviour
         _systemBuss = systemBuss;
     }
 
-    public void Initialization(FairyTargets fairyTargets, QuestThree questThree)
+    public void Initialization(FairyTargets fairyTargets, QuestFairyDestruction questThree)
     {
         fairies = new();
         _fairyTargets = fairyTargets;

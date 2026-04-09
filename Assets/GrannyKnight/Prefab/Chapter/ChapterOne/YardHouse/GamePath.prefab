@@ -3646,7 +3646,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5305301719684839155
 Transform:
   m_ObjectHideFlags: 0
@@ -3768,10 +3768,10 @@ MonoBehaviour:
   OnInteract:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2880686789133806032}
-        m_TargetAssemblyTypeName: GetterWeapon, Assembly-CSharp
-        m_MethodName: Active
-        m_Mode: 1
+      - m_Target: {fileID: 2909789593132685482}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3780,10 +3780,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2909789593132685482}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 2880686789133806032}
+        m_TargetAssemblyTypeName: GetterWeapon, Assembly-CSharp
+        m_MethodName: Active
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -5192,13 +5192,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4627239883813109}
-  - component: {fileID: 2276651592465779795}
+  - component: {fileID: 4924580266518846156}
   - component: {fileID: 2724786626705193047}
   - component: {fileID: 4642794798991420303}
   - component: {fileID: 4612966063206824358}
   - component: {fileID: 1346299783508058892}
   m_Layer: 0
-  m_Name: QuestOne
+  m_Name: QuestPickUpFruits
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5220,7 +5220,7 @@ Transform:
   - {fileID: 8216097765766318764}
   m_Father: {fileID: 6643110675962599476}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2276651592465779795
+--- !u!114 &4924580266518846156
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5229,16 +5229,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 3698070057209920523}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cc74c7e1d9de244386937ad012309e1, type: 3}
+  m_Script: {fileID: 11500000, guid: b2187611efe8e0a4b9976d0553a7dd8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _uiTwo: {fileID: 0}
   _basket: {fileID: 6106775453785552627}
   _startPos: {fileID: 8855339301458603383}
-  _timeToSleep: 3
+  _timeToSleep: 5
   _movementDurationToBack: 1
   _timeToQuest: 60
-  _targetFruit: 080000000e0000000f000000
+  _targetFruit: 03000000070000000f000000
   _particle: {fileID: 2205227656809560888}
   _fruits:
   - {fileID: 7270037036662688802}
@@ -5291,7 +5291,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3698070057209920523}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 888dc73cdff501e4296a6573a9ac2b1b, type: 3}
   m_Name: 
@@ -5314,7 +5314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a600f3c29d15aaf41ad35e00011f8f09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  quest: {fileID: 2276651592465779795}
+  quest: {fileID: 4924580266518846156}
   _indexMainQuest: 2
   OnStart:
     m_PersistentCalls:
@@ -5498,7 +5498,7 @@ GameObject:
   - component: {fileID: 8898223455574929097}
   - component: {fileID: 5447029771918857649}
   m_Layer: 0
-  m_Name: QuestThree
+  m_Name: QuestFairyDestruction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6130,7 +6130,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3008499438148431648}
   m_Layer: 0
-  m_Name: QuestZoneFour
+  m_Name: PasswordSelection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7865,7 +7865,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5919710150453770047}
   m_Layer: 0
-  m_Name: QuestZoneThree
+  m_Name: FairyDestruction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8122,7 +8122,7 @@ GameObject:
   - component: {fileID: 2516933089091846315}
   - component: {fileID: 7994878556268441422}
   m_Layer: 0
-  m_Name: QuestTwo
+  m_Name: QuestDustDestruction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8173,7 +8173,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5441104880803094800}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 905bef49ef85db8458894a038ff1e393, type: 3}
   m_Name: 
@@ -12098,7 +12098,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6643110675962599476}
   m_Layer: 0
-  m_Name: QuestZoneOne
+  m_Name: PickUpFruits
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13330,7 +13330,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1308579160416834487}
   m_Layer: 0
-  m_Name: QuestZoneTwo
+  m_Name: DustDestruction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14070,8 +14070,8 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 2276651592465779795}
-          m_TargetAssemblyTypeName: QuestTwo, Assembly-CSharp
+        - m_Target: {fileID: 4924580266518846156}
+          m_TargetAssemblyTypeName: QuestPickUpFruits, Assembly-CSharp
           m_MethodName: StartQuest
           m_Mode: 1
           m_Arguments:
