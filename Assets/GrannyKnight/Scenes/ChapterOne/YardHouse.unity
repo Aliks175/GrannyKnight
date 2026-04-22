@@ -976,6 +976,17 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!114 &764888817 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2013325318321461485, guid: f1a5a15d787c8fb438e01b3cbe0b5181, type: 3}
+  m_PrefabInstance: {fileID: 1605698695087950577}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &896741760
 Mesh:
   m_ObjectHideFlags: 0
@@ -1970,6 +1981,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prefDust: {fileID: 2926301680631440346, guid: e78a258c872f68f4b8f12b6137a59f21, type: 3}
   _sizePool: 10
+  _blackout: {fileID: 764888817}
+  _stageHealth: 02000000050000000a000000
+  _timeImmunity: 2
+  _timeToRegen: 10
+  _healthPlayer: 3
 --- !u!43 &1545212838
 Mesh:
   m_ObjectHideFlags: 0
@@ -8562,14 +8578,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 283774240540222973, guid: f1a5a15d787c8fb438e01b3cbe0b5181, type: 3}
-      propertyPath: _idHistoryData
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2880686789133806032, guid: f1a5a15d787c8fb438e01b3cbe0b5181, type: 3}
-      propertyPath: _equipHand
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 2909789593132685482, guid: f1a5a15d787c8fb438e01b3cbe0b5181, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -8617,10 +8625,6 @@ PrefabInstance:
     - target: {fileID: 3528647463729365952, guid: f1a5a15d787c8fb438e01b3cbe0b5181, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4924580266518846156, guid: f1a5a15d787c8fb438e01b3cbe0b5181, type: 3}
-      propertyPath: _timeToQuest
-      value: 60
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9141,6 +9145,10 @@ PrefabInstance:
     - target: {fileID: 5955712875337841790, guid: f9e303ead68e1cb4292b1f9440fdd1f4, type: 3}
       propertyPath: m_Name
       value: Environment
+      objectReference: {fileID: 0}
+    - target: {fileID: 6054801371506831802, guid: f9e303ead68e1cb4292b1f9440fdd1f4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6330352095520714274, guid: f9e303ead68e1cb4292b1f9440fdd1f4, type: 3}
       propertyPath: m_Mesh

@@ -4,4 +4,5 @@ public enum TypeWeapon
     EasterEgg,
     Metlomet,
     Sling,
+    Sword
 }

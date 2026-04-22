@@ -1,8 +1,9 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public class FactoryDust
+public class FactoryDust : IDisposable
 {
     private List<TargetDust> _objectPool;
     private TargetDust _prefDust;
@@ -12,13 +13,19 @@ public class FactoryDust
     private int _index;
     private const string _nameParentDustPool = "DustPool";
 
-    public FactoryDust(DiContainer diContainer,TargetDust prefDust, int sizePool)
+    public FactoryDust(DiContainer diContainer, TargetDust prefDust, int sizePool)
     {
         _container = diContainer;
         _sizePool = sizePool;
         _prefDust = prefDust;
         _objectPool = new();
         _index = 0;
+    }
+
+    public void Dispose()
+    {
+        GameObject.Destroy(_parentPool);
+        _objectPool.Clear();
     }
 
     public TargetDust GetDust()

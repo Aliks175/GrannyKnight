@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Refactor
 {
-    public class TestPlayerControlAnimation //: ITickable
+    public class TestPlayerControlAnimation
     {
         private Animator _armorHandAnimator;
         private Animator _glovesHandAnimator;
@@ -121,4 +121,5 @@ public enum EquipHand
     SlingshotHand,
     PodmetatusHand,
     EasterEggsHand,
+    SwordHand
 }

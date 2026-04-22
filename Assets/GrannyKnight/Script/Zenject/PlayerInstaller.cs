@@ -57,12 +57,16 @@ public class PlayerInstaller : MonoInstaller
             .WithArguments(_settingsPlayer, _headSlot)
             .NonLazy();
 
-        Container.BindInterfacesAndSelfTo<TestPlayerControlAnimation>()
+        Container.Bind<TestPlayerControlAnimation>()
            .AsSingle()
            .WithArguments(_armorHandAnimator, _glovesHandAnimator, _settingsPlayer)
            .NonLazy();
 
-        Container.BindInterfacesAndSelfTo<PlayerWeapon>()
+        Container.Bind<PlayerWeapon>()
+           .AsSingle()
+           .NonLazy();
+
+        Container.Bind<PlayerHealth>()
            .AsSingle()
            .NonLazy();
     }

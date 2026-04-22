@@ -46,6 +46,9 @@ public class FactoryWeapon : IInitializable
             case EquipHand.EasterEggsHand:
                 id = (int)TypeWeapon.EasterEgg;
                 break;
+            case EquipHand.SwordHand:
+                id = (int)TypeWeapon.Sword;
+                break;
         }
         return id;
     }

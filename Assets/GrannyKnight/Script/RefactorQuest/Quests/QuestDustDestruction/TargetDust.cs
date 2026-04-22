@@ -83,16 +83,35 @@ public class TargetDust : MonoBehaviour, IHealtheble
         }
     }
 
-    void OnTriggerEnter(Collider other)
+   private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.TryGetComponent(out PlayerHealthSystem player))
+        Damage(other);
+
+
+        //if (other.gameObject.TryGetComponent(out PlayerHealthSystem player))
+        //{
+        //    if (!_isPlay) return;
+        //    int health = player.TakeDamage();
+        //    //Debug.Log("Damage on dust: " + health);
+        //    _creater.CheckHealth(health);
+        //    _isPlay = false;
+        //    transform.position = this.transform.position - transform.forward;
+        //    Invoke("ChangePlay", 2f);
+        //}
+    }
+
+    private void Damage(Collider other)
+    {
+        if (other.gameObject.TryGetComponent(out PlayerCharacter player))
         {
             if (!_isPlay) return;
-            int health = player.TakeDamage();
+
+            player.TakeDamage(1);
+            //int health = player.TakeDamage();
             //Debug.Log("Damage on dust: " + health);
-            _creater.CheckHealth(health);
+            //_creater.CheckHealth(health);
             _isPlay = false;
-            transform.position = this.transform.position - transform.forward;
+            //transform.position = this.transform.position - transform.forward;
             Invoke("ChangePlay", 2f);
         }
     }

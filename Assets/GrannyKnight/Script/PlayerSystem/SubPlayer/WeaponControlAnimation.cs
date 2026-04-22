@@ -4,7 +4,7 @@ public class WeaponControlAnimation
 {
     private WeaponEffectAbstract _weaponEffect;
     private TestWeapon _testWeapon;
-    private bool _isEquipedWeapon => _testWeapon != null;
+    private bool _isEquipedWeapon => _weaponEffect != null;
 
     //public WeaponControlAnimation()
     //{

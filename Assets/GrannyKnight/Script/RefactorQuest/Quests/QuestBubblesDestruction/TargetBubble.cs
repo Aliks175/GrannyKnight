@@ -9,10 +9,6 @@ public class TargetBubble : MonoBehaviour, IHealtheble
     public void Construct(ControlBubbles controlBubbles)
     {
         _controlBubbles = controlBubbles;
-    }
-
-    private void Start()
-    {
         _controlBubbles.AddBubbles(this);
     }
 

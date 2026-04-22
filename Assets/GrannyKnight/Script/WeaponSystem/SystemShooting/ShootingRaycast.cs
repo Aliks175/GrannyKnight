@@ -123,6 +123,7 @@ namespace Refactor
                         target.TakeDamage(_raycastWeapon.Damage);
                     }
                 }
+                Debug.Log("OnShoot");
                 OnShoot?.Invoke();
             }
         }

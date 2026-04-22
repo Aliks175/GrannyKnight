@@ -20,22 +20,25 @@ public class QuestDustDestruction : Quest
     private List<TargetDust> _dusts = new List<TargetDust>();
     private SystemBuss _systemBuss;
     private FactoryDust _factoryDust;
+    private BlackoutScreen _playerStrategy;
     private float _fullHealth = 0f;
 
     public override event Action<QuestEnding> OnEnd;
     public override event Action OnStart;
 
     [Inject]
-    public void Construct(SystemBuss systemBuss, FactoryDust factoryDust)
+    public void Construct(SystemBuss systemBuss, FactoryDust factoryDust, BlackoutScreen playerStrategy)
     {
         _systemBuss = systemBuss;
         _factoryDust = factoryDust;
+        _playerStrategy = playerStrategy;
     }
 
     private void OnEnable()
     {
         if (_systemBuss == null) { return; }
         WaitPlayer().Forget();
+        _playerStrategy.OnEnd += End;
     }
 
     public override void StartQuest()
@@ -53,7 +56,7 @@ public class QuestDustDestruction : Quest
     public void OnDustDie(TargetDust dust, int stage)
     {
         Instantiate(_effectOnDeath, dust.transform.position, Quaternion.identity, transform);
-        _dusts.Remove(dust);
+        //_dusts.Remove(dust);
         if (stage > 0)
         {
             CreateChild(stage, dust.transform);
@@ -91,12 +94,10 @@ public class QuestDustDestruction : Quest
         }
     }
 
-    public void CheckHealth(int health)
+    private void End()
     {
-        if (health <= 0)
-        {
-            StopQuest(QuestEnding.Bad);
-        }
+        StopQuest(QuestEnding.Bad);
+        _playerStrategy.OnEnd -= End;
     }
 
     private void EndGame(QuestEnding quest)
@@ -128,25 +129,26 @@ public class QuestDustDestruction : Quest
     private async UniTaskVoid WaitPlayer()
     {
         PlayerCharacter playerCharacter = await _systemBuss.GetPlayer();
+        playerCharacter.SetStrategyHealtheble(_playerStrategy);
         _playerTarget = playerCharacter.transform;
     }
 
 
     private void ClearEnemy()
     {
-        if (_dusts.Count > 0)
-        {
-            for (int i = 0; i < _dusts.Count; i++)
-            {
-
-                TargetDust temp = _dusts[i];
-                if (temp != null)
-                {
-                    Destroy(temp);
-                }
-            }
-            _dusts.Clear();
-        }
+        _factoryDust.Dispose();
+        //if (_dusts.Count > 0)
+        //{
+        //    for (int i = 0; i < _dusts.Count; i++)
+        //    {
+        //        TargetDust temp = _dusts[i];
+        //        if (temp != null)
+        //        {
+        //            Destroy(temp);
+        //        }
+        //    }
+        //    _dusts.Clear();
+        //}
     }
 
     private void StartGame()
