@@ -815,11 +815,11 @@ GameObject:
   - component: {fileID: 4716688878474444213}
   - component: {fileID: 4507681920637750900}
   - component: {fileID: 1247545126952681636}
+  - component: {fileID: 6148920823348333670}
+  - component: {fileID: 4819138678003625211}
   - component: {fileID: 3389597326825999540}
   - component: {fileID: 5947354970615693764}
   - component: {fileID: 4806015482949383020}
-  - component: {fileID: 6148920823348333670}
-  - component: {fileID: 4819138678003625211}
   m_Layer: 6
   m_Name: InteractiveOne
   m_TagString: Untagged
@@ -919,45 +919,6 @@ CapsuleCollider:
   m_Height: 13.337734
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 3.4451406, z: -0.00000011920929}
---- !u!114 &3389597326825999540
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4347324984813409910}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca7519075b245ac4582bc9eb7c51f655, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _idHistoryData: 3
---- !u!114 &5947354970615693764
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4347324984813409910}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6dd514f04dc7d6419d7625124f58722, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _equipHand: -1
---- !u!114 &4806015482949383020
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4347324984813409910}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50a9c76790441c84192006c23f3ca5c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _positionTeleported: {fileID: 1661834629083370599}
 --- !u!114 &6148920823348333670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1001,18 +962,45 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 4806015482949383020}
-        m_TargetAssemblyTypeName: Teleported, Assembly-CSharp
-        m_MethodName: ActiveTeleport
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+--- !u!114 &3389597326825999540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4347324984813409910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca7519075b245ac4582bc9eb7c51f655, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _idHistoryData: 3
+--- !u!114 &5947354970615693764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4347324984813409910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6dd514f04dc7d6419d7625124f58722, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _equipHand: -1
+--- !u!114 &4806015482949383020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4347324984813409910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50a9c76790441c84192006c23f3ca5c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _positionTeleported: {fileID: 1661834629083370599}
 --- !u!1 &4521038126014206645
 GameObject:
   m_ObjectHideFlags: 0
@@ -1684,21 +1672,9 @@ MonoBehaviour:
     OnInteract:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 4347324984813409910}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 5947354970615693764}
-          m_TargetAssemblyTypeName: GetterWeapon, Assembly-CSharp
-          m_MethodName: Active
+        - m_Target: {fileID: 4806015482949383020}
+          m_TargetAssemblyTypeName: Teleported, Assembly-CSharp
+          m_MethodName: ActiveTeleport
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
