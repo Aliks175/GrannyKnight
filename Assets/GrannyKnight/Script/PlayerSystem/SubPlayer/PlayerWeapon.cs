@@ -19,6 +19,7 @@ public class PlayerWeapon
         if (!CheckHand(slotNumber)) { return; }
         switch (slotNumber)
         {
+            case EquipHand.none:
             case EquipHand.ArmorHand:
             case EquipHand.GlovesHand:
                 _equipWeapon = null;
