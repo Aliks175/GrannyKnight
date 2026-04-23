@@ -642,6 +642,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ec0fb26e06fc1b4cbeb1413c4af8264, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _rightOrder: 
 --- !u!1 &103075518
 GameObject:
   m_ObjectHideFlags: 0
@@ -3561,7 +3562,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c92c18e80970e141b6e5a42d467291d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dialogueID: {fileID: 11400000, guid: 16e66a106b0984d46aed52c858844fbc, type: 2}
+  _dialoguePath: 0
+  DialogueId: 0
 --- !u!114 &553209678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5742,6 +5744,63 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1001 &921716689
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5727779336638163859, guid: 4d070e519d123154782605eae5e6632b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.8776207
+      objectReference: {fileID: 0}
+    - target: {fileID: 5727779336638163859, guid: 4d070e519d123154782605eae5e6632b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.69825
+      objectReference: {fileID: 0}
+    - target: {fileID: 5727779336638163859, guid: 4d070e519d123154782605eae5e6632b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.0844121
+      objectReference: {fileID: 0}
+    - target: {fileID: 5727779336638163859, guid: 4d070e519d123154782605eae5e6632b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5727779336638163859, guid: 4d070e519d123154782605eae5e6632b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5727779336638163859, guid: 4d070e519d123154782605eae5e6632b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5727779336638163859, guid: 4d070e519d123154782605eae5e6632b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5727779336638163859, guid: 4d070e519d123154782605eae5e6632b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5727779336638163859, guid: 4d070e519d123154782605eae5e6632b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5727779336638163859, guid: 4d070e519d123154782605eae5e6632b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7307003409511765574, guid: 4d070e519d123154782605eae5e6632b, type: 3}
+      propertyPath: m_Name
+      value: Dialogue_1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4d070e519d123154782605eae5e6632b, type: 3}
 --- !u!1001 &1008409395
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6417,7 +6476,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _prefDust: {fileID: 2926301680631440346, guid: e78a258c872f68f4b8f12b6137a59f21, type: 3}
+  _orderObject: {fileID: 0}
   _sizePool: 10
+  _blackout: {fileID: 0}
+  _stageHealth: 
+  _timeImmunity: 0
+  _timeToRegen: 0
+  _healthPlayer: 0
 --- !u!1 &1193414038
 GameObject:
   m_ObjectHideFlags: 0
@@ -7827,6 +7892,10 @@ PrefabInstance:
       propertyPath: _camera
       value: 
       objectReference: {fileID: 330585545}
+    - target: {fileID: 7708450366024678125, guid: 85b5771590e069943a061dcdf2aa1dc5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14272,6 +14341,10 @@ PrefabInstance:
       propertyPath: _camera
       value: 
       objectReference: {fileID: 330585545}
+    - target: {fileID: 7708450366024678125, guid: 85b5771590e069943a061dcdf2aa1dc5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -23782,3 +23855,4 @@ SceneRoots:
   - {fileID: 183647806}
   - {fileID: 1943709218}
   - {fileID: 527284055}
+  - {fileID: 921716689}
