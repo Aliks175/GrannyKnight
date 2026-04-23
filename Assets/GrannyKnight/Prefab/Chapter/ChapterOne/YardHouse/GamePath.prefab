@@ -6075,7 +6075,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6dd514f04dc7d6419d7625124f58722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _equipHand: 1
+  _equipHand: -1
 --- !u!1 &3702347289990280618
 GameObject:
   m_ObjectHideFlags: 0
@@ -6461,7 +6461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6dd514f04dc7d6419d7625124f58722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _equipHand: 1
+  _equipHand: -1
 --- !u!114 &8898223455574929097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9452,7 +9452,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6dd514f04dc7d6419d7625124f58722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _equipHand: 1
+  _equipHand: -1
 --- !u!114 &7994878556268441422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15209,7 +15209,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6882254327368207056}
   - component: {fileID: 2158611867379297780}
-  - component: {fileID: 3581315133079966735}
   m_Layer: 0
   m_Name: View
   m_TagString: Untagged
@@ -15287,19 +15286,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3581315133079966735
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8441864344810917715}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb64b306902eaf64389063d7a14f66c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _IsRotateOnlyForY: 1
 --- !u!1 &8474188093252505279
 GameObject:
   m_ObjectHideFlags: 0
@@ -16350,6 +16336,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 1
           m_CallState: 2
+        - m_Target: {fileID: 7147881669418328624}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
   - Name: "\u0412\u043E\u0437\u0432\u0440\u0430\u0449\u0435\u043D\u0438\u0435 \u0434\u043E\u043C\u043E\u0439
       \u0438\u0437 \u043F\u043E\u0434\u0432\u0430\u043B\u0430"
     Id: 11
@@ -16634,6 +16632,18 @@ MonoBehaviour:
             m_BoolArgument: 1
           m_CallState: 2
         - m_Target: {fileID: 7448945859661395687}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 7147881669418328624}
           m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_MethodName: SetActive
           m_Mode: 6
@@ -22489,6 +22499,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Basket
       objectReference: {fileID: 0}
+    - target: {fileID: 2592699486447248813, guid: a60b6826abe21704a8a1064e2fae2df5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3538074070318891756, guid: a60b6826abe21704a8a1064e2fae2df5, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.5665092
@@ -22535,7 +22549,11 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: cee87fa2db611ad419c8337559389ed9, type: 3}
     - target: {fileID: 3609963331629179018, guid: a60b6826abe21704a8a1064e2fae2df5, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6141536898114316136, guid: a60b6826abe21704a8a1064e2fae2df5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
