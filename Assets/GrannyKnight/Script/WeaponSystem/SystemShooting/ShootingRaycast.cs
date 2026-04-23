@@ -15,7 +15,8 @@ namespace Refactor
         private int _currentId;
         private bool _isFire;
 
-        //public event Action OnPreFire;
+        public event Action OnShoot;
+        public event Action OnEndShoot;
         //public event Action OnFirePhysics;
         //public event Action<RaycastHit> OnFireRaycast;
         //public event Action OnEndFire;
@@ -58,6 +59,7 @@ namespace Refactor
         {
             //OnEndFire?.Invoke();
             _isFire = false;
+            
         }
 
         private bool ControlCurrentWeapon(TestWeapon testWeapon)
@@ -99,9 +101,11 @@ namespace Refactor
                     await UniTask.Delay(TimeSpan.FromSeconds(time));
                     Fire();
                 }
+                OnEndShoot?.Invoke();
             }
             catch (OperationCanceledException)
             {
+                OnEndShoot?.Invoke();
                 Debug.Log("Операция отменена ");
             }
         }
@@ -119,8 +123,8 @@ namespace Refactor
                         target.TakeDamage(_raycastWeapon.Damage);
                     }
                 }
-                //OnFireRaycast?.Invoke(hit);
-                Debug.Log("Fire ");
+                Debug.Log("OnShoot");
+                OnShoot?.Invoke();
             }
         }
     }

@@ -5,7 +5,7 @@ public class TestWeapon
     public TypeWeapon TypeWeapon => _dataWeapon.TypeWeapon;
     public TypeShootingSystem TypeShootingSystem => _dataWeapon.TypeShootingSystem;
     public DataWeapon DataWeapon => _dataWeapon;
-    public Transform FirePoint => _dataItem.Model.FirePoint;
+    public ShootPoint Point => _dataItem.Model;
     public int ID => _dataItem.Id;
 
     private DataWeapon _dataWeapon;

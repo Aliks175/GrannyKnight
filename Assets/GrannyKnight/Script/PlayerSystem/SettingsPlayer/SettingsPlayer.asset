@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79e6cfe3c09f66b498449b3d3f196079, type: 3}
   m_Name: SettingsPlayer
   m_EditorClassIdentifier: 
-  _movementSpeed: 8
+  _movementSpeed: 6
   _coefficientSpeedForAim: 0.5
   _coefficientSpeedWalkForAir: 0.5
   _jumpHeight: 1
   _groundLayer:
     serializedVersion: 2
-    m_Bits: 257
+    m_Bits: 256
   _groundPointRadius: 1
   _gravity: -19.6
   _sensitivityY: 30
@@ -32,3 +32,4 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   _distanceInteracteble: 2
+  _coefficientSmoothSpeed: 0.1

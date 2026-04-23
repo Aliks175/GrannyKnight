@@ -15,11 +15,16 @@ namespace Refactor
             BindFactory();
             BindSystem();
             BindImporter();
+            BindAnimation();
         }
 
         private void BindImporter()
         {
             Container.BindInterfacesAndSelfTo<ImporterPlayerWeaponSystem>()
+           .AsSingle()
+           .NonLazy();
+
+            Container.BindInterfacesAndSelfTo<ImporterShootingControlAnimation>()
            .AsSingle()
            .NonLazy();
         }
@@ -47,6 +52,13 @@ namespace Refactor
           .AsSingle()
           .WithArguments(_head)
           .NonLazy();
+        }
+
+        private void BindAnimation()
+        {
+            Container.BindInterfacesAndSelfTo<WeaponControlAnimation>()
+           .AsSingle()
+           .NonLazy();
         }
     }
 }
