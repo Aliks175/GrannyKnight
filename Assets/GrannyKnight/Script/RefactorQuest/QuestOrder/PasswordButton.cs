@@ -5,6 +5,8 @@ using Zenject;
 public class PasswordButton : Interacteble
 {
     [SerializeField] private int _number;
+    [SerializeField] private UnityEvent _toBase;
+    public bool IsActive = true;
     private QuestPasswordSelection _quest;
 
     [Inject]
@@ -13,26 +15,14 @@ public class PasswordButton : Interacteble
         _quest = quest;
         _quest.RegisterButton(this);
     }
-    public void ResetState(ButtonPasswordState state)
+    public void ResetState()
     {
-        switch (state)
-        {
-            case ButtonPasswordState.Base:
-                break;
-            case ButtonPasswordState.Lose:
-                break;
-            case ButtonPasswordState.Win:
-                break;
-        }
+        _toBase.Invoke();
     }
     public override void BaseInteract()
     {
+        if (!IsActive) return;
+        base.BaseInteract();
         _quest.SetElement(_number);
-    }
-    public enum ButtonPasswordState
-    {
-        Base,
-        Lose,
-        Win
     }
 }

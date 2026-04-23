@@ -2,10 +2,11 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Zenject;
 
 public class QuestPasswordSelection : Quest
 {
-    private List<int> _rightOrder = new List<int>();
+    [SerializeField]private List<int> _rightOrder = new List<int>();
     private List<int> _currentOrder = new List<int>();
     private List<PasswordButton> _buttons = new();
 
@@ -16,16 +17,17 @@ public class QuestPasswordSelection : Quest
     {
         _buttons.Add(button);
     }
+
     public void SetElement(int value)
     {
         int index = _currentOrder.Count;
 
         if (_rightOrder[index] != value)
         {
-            foreach (var button in _buttons) button.ResetState(PasswordButton.ButtonPasswordState.Lose);
+            foreach (var button in _buttons) button.ResetState();
             OnEnd?.Invoke(QuestEnding.Bad);
             _currentOrder.Clear();
-            StopQuest(QuestEnding.Bad);
+            Debug.Log("Again");
             return;
         }
 
@@ -34,7 +36,8 @@ public class QuestPasswordSelection : Quest
         if (_currentOrder.Count == _rightOrder.Count)
         {
             OnEnd?.Invoke(QuestEnding.Good);
-            foreach (var button in _buttons) button.ResetState(PasswordButton.ButtonPasswordState.Win);
+            foreach (var button in _buttons) button.IsActive = false;
+            Debug.Log("Good ending");
         }
     }
 
@@ -42,15 +45,10 @@ public class QuestPasswordSelection : Quest
     {
         _currentOrder.Clear();
         OnStart?.Invoke();
-        foreach (var button in _buttons) button.ResetState(PasswordButton.ButtonPasswordState.Base);
-    }
-    public void SetOrder(List<int> rightOrder)
-    {
-        _rightOrder = rightOrder;
     }
 
     public override void StopQuest(QuestEnding quest)
     {
-        throw new NotImplementedException();
+        //
     }
 }
