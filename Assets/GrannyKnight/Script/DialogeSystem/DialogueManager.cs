@@ -1,17 +1,18 @@
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using FMOD.Studio;
+using System;
 
 public class DialogueManager
 {
     private readonly LocalizationManager localization;
     private readonly DialogueCanvas dialogueUI;
 
-    private bool skipRequested;
-    private UniTaskCompletionSource skipTcs;
+    private CancellationTokenSource cts;
 
-    private EventInstance currentInstance;
-    private bool hasActiveInstance;
+    private bool skipRequested;
+    private UniTaskCompletionSource dialogueFinishedTcs;
 
     public DialogueManager(LocalizationManager localization, DialogueCanvas dialogueUI)
     {
@@ -19,79 +20,99 @@ public class DialogueManager
         this.dialogueUI = dialogueUI;
     }
 
-    public async UniTask StartDialogue(DialogueID dialogueId)
+    public async UniTask StartDialogue(string filePath, string dialogueId)
     {
-        var file = Resources.Load<TextAsset>(dialogueId.filePath);
+        await StopCurrentDialogue();
 
+        var file = Resources.Load<TextAsset>(filePath);
         if (file == null)
         {
-            Debug.LogError($"File not found: {dialogueId.filePath}");
+            Debug.LogError($"File not found: {filePath}");
             return;
         }
 
         var db = JsonUtility.FromJson<DialogueDatabase>(file.text);
-        var dialogue = db.dialogues.Find(d => d.id == dialogueId.dialogueId);
+        var dialogue = db.dialogues.Find(d => d.id == dialogueId);
 
         if (dialogue == null)
         {
-            Debug.LogError($"Dialogue not found: {dialogueId.dialogueId}");
+            Debug.LogError($"Dialogue not found: {dialogueId}");
             return;
         }
 
-        await PlayDialogue(dialogue);
+        cts = new CancellationTokenSource();
+        dialogueFinishedTcs = new UniTaskCompletionSource();
+
+        RunDialogue(dialogue, cts.Token).Forget();
+
+        await dialogueFinishedTcs.Task; 
     }
 
-    private async UniTask PlayDialogue(Dialogue dialogue)
+    private async UniTaskVoid RunDialogue(Dialogue dialogue, CancellationToken token)
     {
-        dialogueUI.Show(); 
-
-        foreach (var line in dialogue.lines)
+        try
         {
-            skipRequested = false;
-            skipTcs = new UniTaskCompletionSource();
+            dialogueUI.Show();
 
-            string text = localization.GetText(line.key);
-            string speaker = localization.GetText(line.speaker) + ": ";
-
-            //  UI
-            var textTask = dialogueUI.ShowLine(speaker, text);
-
-            //  Звук
-            UniTask soundTask = UniTask.CompletedTask;
-            hasActiveInstance = false;
-
-            if (!string.IsNullOrEmpty(line.fmodEvent))
+            foreach (var line in dialogue.lines)
             {
-                currentInstance = AudioManager.Play(line.fmodEvent);
-                hasActiveInstance = true;
-                soundTask = WaitForSound(currentInstance);
+                token.ThrowIfCancellationRequested();
+
+                skipRequested = false;
+
+                string text = localization.GetText(line.key);
+                string speaker = localization.GetText(line.speaker) + ": ";
+
+                var textTask = dialogueUI.ShowLine(speaker, text);
+
+                EventInstance instance = default;
+                bool hasInstance = false;
+
+                UniTask soundTask = UniTask.CompletedTask;
+
+                if (!string.IsNullOrEmpty(line.fmodEvent))
+                {
+                    instance = AudioManager.Play(line.fmodEvent);
+                    hasInstance = true;
+                    soundTask = WaitForSound(instance, token);
+                }
+
+                await UniTask.WhenAny(
+                    UniTask.WhenAll(textTask, soundTask),
+                    UniTask.WaitUntil(() => skipRequested, cancellationToken: token)
+                );
+
+                token.ThrowIfCancellationRequested();
+
+                if (skipRequested)
+                {
+                    dialogueUI.Skip();
+                    await UniTask.Yield();
+                }
+
+                if (hasInstance)
+                {
+                    instance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+                    instance.release();
+                }
             }
-
-            //  Ждём либо завершение, либо skip
-            await UniTask.WhenAny(
-                UniTask.WhenAll(textTask, soundTask),
-                skipTcs.Task
-            );
-
-            // если skip — убедимся что текст полностью показан
-            if (skipRequested)
-            {
-                dialogueUI.Skip();
-                await UniTask.Yield();
-            }
-
-            CleanupSound();
         }
-
-        dialogueUI.Hide();
+        catch (OperationCanceledException) { }
+        finally
+        {
+            dialogueUI.Hide();
+            dialogueFinishedTcs?.TrySetResult(); 
+        }
     }
 
-    private async UniTask WaitForSound(EventInstance instance)
+    private async UniTask WaitForSound(EventInstance instance, CancellationToken token)
     {
         PLAYBACK_STATE state;
 
         while (true)
         {
+            token.ThrowIfCancellationRequested();
+
             instance.getPlaybackState(out state);
 
             if (state == PLAYBACK_STATE.STOPPED)
@@ -108,22 +129,23 @@ public class DialogueManager
 
         skipRequested = true;
 
-        if (hasActiveInstance)
-        {
-            currentInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-        }
-
-        skipTcs?.TrySetResult();
-
+        dialogueFinishedTcs?.TrySetResult();
         dialogueUI.Skip();
     }
 
-    private void CleanupSound()
+    public async UniTask StopCurrentDialogue()
     {
-        if (!hasActiveInstance)
+        if (cts == null)
             return;
 
-        currentInstance.release();
-        hasActiveInstance = false;
+        cts.Cancel();
+
+        if (dialogueFinishedTcs != null)
+        {
+            await dialogueFinishedTcs.Task; 
+        }
+
+        cts.Dispose();
+        cts = null;
     }
 }
