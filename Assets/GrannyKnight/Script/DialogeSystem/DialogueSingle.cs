@@ -4,7 +4,9 @@ using Cysharp.Threading.Tasks;
 
 public class DialogueSingle : MonoBehaviour
 {
-    [SerializeField] private DialogueID _dialogueID;
+    [SerializeField] private FilePath _dialoguePath;
+    [Range(0,15)]public int DialogueId;
+    private string path = "Dialogues/";
     private DialogueManager dialogueManager;
 
     [Inject]
@@ -16,11 +18,15 @@ public class DialogueSingle : MonoBehaviour
     [Tooltip("метод начала диалога")]
     public async void StartDialogue()
     {
-        if (_dialogueID == null)
+        if (!System.Enum.IsDefined(typeof(FilePath), _dialoguePath))
         {
             return;
         }
-        await dialogueManager.StartDialogue(_dialogueID);
+        await dialogueManager.StartDialogue(path + _dialoguePath.ToString(), DialogueId.ToString());
     }
 
+}
+public enum FilePath
+{
+    RoomGG
 }
