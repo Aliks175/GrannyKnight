@@ -317,6 +317,17 @@ Transform:
   - {fileID: 203844589}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1037365023 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4806015482949383020, guid: 8c8a0a2ebdfbf8d488c6c001b2f34412, type: 3}
+  m_PrefabInstance: {fileID: 2831211830287010515}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50a9c76790441c84192006c23f3ca5c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1393830778
 GameObject:
   m_ObjectHideFlags: 0
@@ -483,6 +494,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: GamePath
       objectReference: {fileID: 0}
+    - target: {fileID: 4819138678003625211, guid: 8c8a0a2ebdfbf8d488c6c001b2f34412, type: 3}
+      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1037365023}
+    - target: {fileID: 4819138678003625211, guid: 8c8a0a2ebdfbf8d488c6c001b2f34412, type: 3}
+      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 2831211830287010525}
+    - target: {fileID: 4819138678003625211, guid: 8c8a0a2ebdfbf8d488c6c001b2f34412, type: 3}
+      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ActiveTeleport
+      objectReference: {fileID: 0}
+    - target: {fileID: 4819138678003625211, guid: 8c8a0a2ebdfbf8d488c6c001b2f34412, type: 3}
+      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: ActiveHistory
+      objectReference: {fileID: 0}
+    - target: {fileID: 4819138678003625211, guid: 8c8a0a2ebdfbf8d488c6c001b2f34412, type: 3}
+      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Teleported, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4819138678003625211, guid: 8c8a0a2ebdfbf8d488c6c001b2f34412, type: 3}
+      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: EventHistory, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 7657667775503236428, guid: 8c8a0a2ebdfbf8d488c6c001b2f34412, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1004.04175
@@ -537,6 +572,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1d46033f3b10404459e9ad628c609300, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2831211830287010525 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3389597326825999540, guid: 8c8a0a2ebdfbf8d488c6c001b2f34412, type: 3}
+  m_PrefabInstance: {fileID: 2831211830287010515}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca7519075b245ac4582bc9eb7c51f655, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
