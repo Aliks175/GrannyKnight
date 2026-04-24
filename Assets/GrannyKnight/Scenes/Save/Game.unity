@@ -6187,7 +6187,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c92c18e80970e141b6e5a42d467291d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dialoque: {fileID: 11400000, guid: fbb2e86787cdebb47ac4b62cfd35d188, type: 2}
+  _dialoguePath: 0
+  DialogueId: 0
 --- !u!1 &34197914474526517
 GameObject:
   m_ObjectHideFlags: 0
@@ -7113,8 +7114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a600f3c29d15aaf41ad35e00011f8f09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  quest: {fileID: 7302042465137095878}
-  _indexMainQuest: 2
+  quest: {fileID: 0}
   OnStart:
     m_PersistentCalls:
       m_Calls:
@@ -8447,7 +8447,7 @@ TerrainCollider:
   m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_TerrainData: {fileID: 15600000, guid: ce30c2dbc5f03be45a98d3d09365ee63, type: 2}
+  m_TerrainData: {fileID: 15600000, guid: 562a6d035e8f45a48a7b734ba3426861, type: 2}
   m_EnableTreeColliders: 1
 --- !u!4 &193767007094708285
 Transform:
@@ -15423,7 +15423,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   quest: {fileID: 3171797216576761689}
-  _indexMainQuest: 1
   OnStart:
     m_PersistentCalls:
       m_Calls:
@@ -22535,7 +22534,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c92c18e80970e141b6e5a42d467291d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dialoque: {fileID: 11400000, guid: bbc025c1dff17054cb412c2512c062d1, type: 2}
+  _dialoguePath: 0
+  DialogueId: 0
 --- !u!224 &833426800675115305
 RectTransform:
   m_ObjectHideFlags: 0
@@ -24516,7 +24516,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &988691718907210196
@@ -26853,7 +26853,7 @@ Terrain:
   m_GameObject: {fileID: 9101447123206938853}
   m_Enabled: 1
   serializedVersion: 6
-  m_TerrainData: {fileID: 15600000, guid: ce30c2dbc5f03be45a98d3d09365ee63, type: 2}
+  m_TerrainData: {fileID: 15600000, guid: 562a6d035e8f45a48a7b734ba3426861, type: 2}
   m_TreeDistance: 5000
   m_TreeBillboardDistance: 50
   m_TreeCrossFadeLength: 5
@@ -30583,7 +30583,7 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 8022243222838028738}
   _transform: {fileID: 2704040938726429772}
   _animator: {fileID: 9013803593058710672}
-  _camera: {fileID: 0}
+  _cameraTransform: {fileID: 0}
 --- !u!1 &1520704512547526941
 GameObject:
   m_ObjectHideFlags: 0
@@ -33580,7 +33580,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c92c18e80970e141b6e5a42d467291d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dialoque: {fileID: 11400000, guid: d93c768033734e54f8fc0a38a90cfbe8, type: 2}
+  _dialoguePath: 0
+  DialogueId: 0
 --- !u!23 &1745203754398896893
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -62827,7 +62828,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c92c18e80970e141b6e5a42d467291d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dialoque: {fileID: 11400000, guid: f0b063d2b4a77294eb7188216888b750, type: 2}
+  _dialoguePath: 0
+  DialogueId: 0
 --- !u!4 &3277673868371289013
 Transform:
   m_ObjectHideFlags: 0
@@ -63505,7 +63507,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   quest: {fileID: 6854424745878592691}
-  _indexMainQuest: 3
   OnStart:
     m_PersistentCalls:
       m_Calls:
@@ -72734,7 +72735,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c92c18e80970e141b6e5a42d467291d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dialoque: {fileID: 11400000, guid: 4d5b8a979f7466a4db6beb25ea0d067b, type: 2}
+  _dialoguePath: 0
+  DialogueId: 0
 --- !u!1 &3984224744171359947
 GameObject:
   m_ObjectHideFlags: 0
@@ -74112,7 +74114,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c92c18e80970e141b6e5a42d467291d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dialoque: {fileID: 11400000, guid: da7b95578b9ca0a408c176295612c67d, type: 2}
+  _dialoguePath: 0
+  DialogueId: 0
 --- !u!1 &4107003066883796708
 GameObject:
   m_ObjectHideFlags: 0
@@ -93957,7 +93960,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c92c18e80970e141b6e5a42d467291d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dialoque: {fileID: 11400000, guid: 5a64da1978b2e264d8c4907989fd9799, type: 2}
+  _dialoguePath: 0
+  DialogueId: 0
 --- !u!1 &5474669625037380517
 GameObject:
   m_ObjectHideFlags: 0
@@ -125247,7 +125251,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c92c18e80970e141b6e5a42d467291d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dialoque: {fileID: 11400000, guid: 47e3422f0deae374187ba16f03541fc0, type: 2}
+  _dialoguePath: 0
+  DialogueId: 0
 --- !u!114 &7427755083876988630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132262,7 +132267,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1001 &8022935316970298954
