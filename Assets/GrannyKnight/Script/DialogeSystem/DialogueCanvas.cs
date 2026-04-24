@@ -25,7 +25,7 @@ public class DialogueCanvas : MonoBehaviour
     public event Action OnSkip;
     //private DialogueManager _dialogueManager;
 
-    void Start()
+    private void Awake ()
     {
         _canvasGroup = GetComponent<CanvasGroup>();
         _canvasGroup.alpha = 0;
