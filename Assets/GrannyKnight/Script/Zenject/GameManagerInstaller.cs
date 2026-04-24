@@ -3,24 +3,27 @@ using Zenject;
 
 public class GameManagerInstaller : MonoInstaller
 {
-    [SerializeField] private TestGameManager _testGameManager;
+    [SerializeField] private PlayerCharacter _prefPlayer;
+   
 
     public override void InstallBindings()
     {
-        BindGameManager();
-        BindLoading();
+        BindFactoryPlayer();
+        //BindLoading();
     }
 
-    private void BindGameManager()
-    {
-        Container.Bind<TestGameManager>()
-           .FromInstance(_testGameManager)
-           .AsSingle();
-    }
+    //private void BindLoading()
+    //{
+    //    Container.Bind<ControlLoading>()
+    //    .FromInstance(_controlLoading)
+    //    .AsSingle();
+    //}
 
-    private void BindLoading()
+    private void BindFactoryPlayer()
     {
-        Container.Bind<TestLoading>()
-          .AsSingle();
+        Container.Bind<FactoryPlayer>()
+        .AsSingle()
+        .WithArguments(_prefPlayer)
+        .NonLazy();
     }
 }

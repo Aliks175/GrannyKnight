@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4302955764780615265}
   - component: {fileID: 7835928053805220484}
   - component: {fileID: 7420253803079999477}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: FruitPear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.8
+  m_Radius: 0.4
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &7835928053805220484
 Rigidbody:
@@ -96,6 +96,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 7835928053805220484}
+  _fall:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  _hit:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!1001 &2548147148050044198
 PrefabInstance:
   m_ObjectHideFlags: 0

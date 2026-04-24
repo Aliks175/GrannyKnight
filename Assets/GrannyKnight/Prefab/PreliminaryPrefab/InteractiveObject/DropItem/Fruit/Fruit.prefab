@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5592359867951175541}
   - component: {fileID: 5444414749366796025}
   - component: {fileID: 4916548963990125110}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Fruit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.8
+  m_Radius: 0.25
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &5444414749366796025
 Rigidbody:
@@ -103,6 +103,13 @@ MonoBehaviour:
       Data3: 889280646
       Data4: -1181437785
     Path: event:/Item/UseWeapon/Slingshot/Fall
+  _hit:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!1001 &212717753089720361
 PrefabInstance:
   m_ObjectHideFlags: 0
