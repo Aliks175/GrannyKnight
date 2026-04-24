@@ -3,8 +3,9 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using FMOD.Studio;
 using System;
+using Zenject;
 
-public class DialogueManager
+public class DialogueManager : IInitializable, IDisposable
 {
     private readonly LocalizationManager localization;
     private readonly DialogueCanvas dialogueUI;
@@ -18,6 +19,16 @@ public class DialogueManager
     {
         this.localization = localization;
         this.dialogueUI = dialogueUI;
+    }
+
+    public void Dispose()
+    {
+        dialogueUI.OnSkip -= SkipLine;
+    }
+
+    public void Initialize()
+    {
+        dialogueUI.OnSkip += SkipLine;
     }
 
     public async UniTask StartDialogue(string filePath, string dialogueId)
@@ -148,4 +159,5 @@ public class DialogueManager
         cts.Dispose();
         cts = null;
     }
+
 }
