@@ -21,6 +21,7 @@ public class GameInstaller : MonoInstaller
         BindFactoryDust();
         BindPlayerStrategyHealth();
         BindQuestPasswordSelection();
+        BindQuestClearBaseMent();
     }
 
     private void BindFactoryDust()
@@ -30,6 +31,7 @@ public class GameInstaller : MonoInstaller
            .WithArguments(_prefDust, _sizePool)
            .NonLazy();
     }
+
     private void BindPlayerStrategyHealth()
     {
         Container.BindInterfacesAndSelfTo<BlackoutScreen>()
@@ -37,12 +39,18 @@ public class GameInstaller : MonoInstaller
           .WithArguments(_blackout, _healthPlayer, _timeImmunity, _timeToRegen, _stageHealth)
           .NonLazy();
     }
+
     private void BindQuestPasswordSelection()
     {
         Container.Bind<QuestPasswordSelection>()
            .FromInstance(_orderObject)
            .AsSingle()
            .NonLazy();
+    }
 
+    private void BindQuestClearBaseMent()
+    {
+        Container.Bind<ControlTarget>()
+           .AsSingle();
     }
 }

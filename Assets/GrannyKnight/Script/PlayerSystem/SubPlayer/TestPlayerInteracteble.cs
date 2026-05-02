@@ -32,7 +32,7 @@ namespace Refactor
                 }
                 else
                 {
-                    Debug.LogError($"Not Found IInteracteble Script this -> {hit.collider.gameObject.name}");
+                    //Debug.LogError($"Not Found IInteracteble Script this -> {hit.collider.gameObject.name}");
                     ChangeCurrentInteracteble(null);
                 }
             }

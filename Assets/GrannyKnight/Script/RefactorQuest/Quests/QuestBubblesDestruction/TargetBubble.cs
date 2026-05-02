@@ -1,20 +1,22 @@
 using UnityEngine;
 using Zenject;
 
-public class TargetBubble : MonoBehaviour, IHealtheble
+public class TargetBubble : MonoBehaviour, IHealtheble, ITarget
 {
-    private ControlBubbles _controlBubbles;
+    private ControlTarget _controlTarget;
+
+    public GameObject Body => gameObject;
 
     [Inject]
-    public void Construct(ControlBubbles controlBubbles)
+    public void Construct(ControlTarget controlBubbles)
     {
-        _controlBubbles = controlBubbles;
-        _controlBubbles.AddBubbles(this);
+        _controlTarget = controlBubbles;
+        _controlTarget.AddBubbles(this);
     }
 
     public void TakeDamage(float damage)
     {
-        _controlBubbles.AddCountBubblesDestruction();
+        _controlTarget.AddCountTargetDestruction();
         gameObject.SetActive(false);
     }
 }
