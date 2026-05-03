@@ -24,8 +24,8 @@ public class DialogueSingle : MonoBehaviour
         }
         await dialogueManager.StartDialogue(path + _dialoguePath.ToString(), DialogueId.ToString());
     }
-
 }
+
 public enum FilePath
 {
     RoomGG

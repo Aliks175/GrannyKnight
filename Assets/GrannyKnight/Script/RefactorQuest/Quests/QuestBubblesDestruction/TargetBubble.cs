@@ -1,20 +1,35 @@
 using UnityEngine;
 using Zenject;
 
-public class TargetBubble : MonoBehaviour, IHealtheble
+public class TargetBubble : MonoBehaviour, IHealtheble, ITarget
 {
-    private ControlBubbles _controlBubbles;
+    public GameObject Body => gameObject;
+    [SerializeField] private ParticleSystem _particleSystem;
+    [SerializeField] private GameObject _body;
+    private Collider _collider;
+    private ControlTarget _controlTarget;
+    private bool _isAlive;
 
     [Inject]
-    public void Construct(ControlBubbles controlBubbles)
+    public void Construct(ControlTarget controlBubbles)
     {
-        _controlBubbles = controlBubbles;
-        _controlBubbles.AddBubbles(this);
+        _controlTarget = controlBubbles;
+        _controlTarget.AddBubbles(this);
+        _isAlive = true;
+    }
+
+    private void Awake()
+    {
+        _collider = GetComponent<Collider>();
     }
 
     public void TakeDamage(float damage)
     {
-        _controlBubbles.AddCountBubblesDestruction();
-        gameObject.SetActive(false);
+        if (!_isAlive) { return; }
+        _isAlive = false;
+        _controlTarget.AddCountTargetDestruction();
+        _collider.enabled = false;
+        _body.SetActive(false);
+        _particleSystem.Play();
     }
 }
