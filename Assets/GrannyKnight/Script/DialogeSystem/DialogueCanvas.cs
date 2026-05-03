@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using System.Threading;
 using UnityEngine.InputSystem;
 using Zenject;
+using System;
 
 public class DialogueCanvas : MonoBehaviour
 {
@@ -20,18 +21,22 @@ public class DialogueCanvas : MonoBehaviour
     private bool _skipVis = false;
     private CanvasGroup _canvasGroup;
     private CancellationTokenSource _skipCancellationToken;
-    private DialogueManager _dialogueManager;
-    void Start()
+
+    public event Action OnSkip;
+    //private DialogueManager _dialogueManager;
+
+    private void Awake ()
     {
         _canvasGroup = GetComponent<CanvasGroup>();
         _canvasGroup.alpha = 0;
         _skipCanvas.alpha = 0;
     }
-    [Inject]
-    public void Construct(DialogueManager dialogueManager)
-    {
-        this._dialogueManager = dialogueManager;
-    }
+
+    //[Inject]
+    //public void Construct(DialogueManager dialogueManager)
+    //{
+    //    this._dialogueManager = dialogueManager;
+    //}
     void OnEnable()
     {
         //_buttonSkip.action.started += ShowSkipOrSkip;
@@ -83,11 +88,14 @@ public class DialogueCanvas : MonoBehaviour
         _skipCanvas.alpha = 0;
         _canvasGroup.alpha = 1;
     }
+
     public void Skip()
     {
         _slipRequested = true;
-        _dialogueManager.SkipLine();
+        OnSkip?.Invoke();
+        //_dialogueManager.SkipLine();
     }
+
     public void ShowSkipOrSkip(InputAction.CallbackContext context)
     {
         if (_skipCanvas.alpha > 0)

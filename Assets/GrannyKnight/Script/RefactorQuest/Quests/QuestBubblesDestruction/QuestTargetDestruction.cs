@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using Zenject;
 
-public class QuestBubblesDestruction : Quest
+public class QuestTargetDestruction : Quest
 {
     //  вест суть игроку нужно порозить ’ мешеней на локации
     // кажда€ уничтоженна€ мишень двигает счетчик как только игрок
@@ -15,13 +15,13 @@ public class QuestBubblesDestruction : Quest
     // 
 
     [SerializeField] private int _countBubblesDestruction;
-    private ControlBubbles _controlBubbles;
+    private ControlTarget _controlBubbles;
 
     public override event Action<QuestEnding> OnEnd;
     public override event Action OnStart;
 
     [Inject]
-    public void Construct(ControlBubbles controlBubbles)
+    public void Construct(ControlTarget controlBubbles)
     {
         _controlBubbles = controlBubbles;
     }

@@ -7,7 +7,6 @@ public class HistoryManager : MonoBehaviour
 {
     [SerializeField] private List<HistoryData> _history;
 
-
     public void ActiveHistory(int id)
     {
         HistoryData historyData = FindHistoryData(id);
