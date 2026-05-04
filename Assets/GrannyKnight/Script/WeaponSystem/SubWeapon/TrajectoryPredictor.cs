@@ -26,20 +26,26 @@ public class TrajectoryPredictor : MonoBehaviour
 
     public void ShowTrajectory(Vector3 origin, Vector3 speed)
     {
-        Vector3 position = origin;
+        Vector3 originPosition = origin;
         _points = new Vector3[_maxPoints];
         for (int i = 0; i < _points.Length; i++)
         {
             float time = i * _wimeWait;
             Vector3 nextPoint = origin + speed * time + Physics.gravity * time * time / _coefficient;
-            Vector3 direction = nextPoint - position;
+            Vector3 direction = nextPoint - originPosition;
+
             _points[i] = nextPoint;
-            if (Physics.Raycast(position, direction.normalized, out RaycastHit hit, direction.magnitude, _layerIgnor))
+            if (Physics.Raycast(originPosition, direction.normalized, out RaycastHit hit, direction.magnitude, _layerIgnor))
             {
                 MoveHitMarker(hit);
                 _lineRenderer.positionCount = i;
                 break;
             }
+            else
+            {
+                _hitMarker.gameObject.SetActive(false);
+            }
+            originPosition = nextPoint;
         }
         _lineRenderer.SetPositions(_points);
     }

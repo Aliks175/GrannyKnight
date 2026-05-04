@@ -41,7 +41,7 @@ public class SleepInstaller : MonoInstaller
 
     private void BindQuestBubblesDestruction()
     {
-        Container.Bind<ControlBubbles>()
+        Container.Bind<ControlTarget>()
            .AsSingle();
     }
 

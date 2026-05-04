@@ -61,18 +61,8 @@ namespace Refactor
             if (_currenthand == (int)equipHand.EquipHand) { return; }
             _currenthand = (int)equipHand.EquipHand;
 
-            if (CheckClearHand(equipHand.EquipHand))
-            {
-                if (equipHand.EquipHand == EquipHand.ArmorHand)
-                {
-                    ChangeHand(_armorHandAnimator);
-                }
-                else
-                {
-                    ChangeHand(_glovesHandAnimator);
-                }
-                return;
-            }
+            if (CheckClearHand(equipHand.EquipHand)) { return; }
+
             ChangeHand(equipHand.Weapon.Point.AnimatorHand);
         }
 
@@ -97,7 +87,23 @@ namespace Refactor
 
         private bool CheckClearHand(EquipHand equipHand)
         {
-            return equipHand == EquipHand.GlovesHand || equipHand == EquipHand.ArmorHand;
+            bool isClearHand = false;
+            if (equipHand == EquipHand.GlovesHand)
+            {
+                ChangeHand(_glovesHandAnimator);
+                isClearHand = true;
+            }
+            else if (equipHand == EquipHand.ArmorHand)
+            {
+                ChangeHand(_armorHandAnimator);
+                isClearHand = true;
+            }
+            else if (equipHand == EquipHand.none)
+            {
+                ClearHand();
+                isClearHand = true;
+            }
+            return isClearHand;
         }
 
         private void ChangeHand(Animator newAnimator)
@@ -109,6 +115,15 @@ namespace Refactor
             }
             _activeAnimator = newAnimator;
             _activeAnimator.gameObject.SetActive(true);
+        }
+
+        private void ClearHand()
+        {
+            if (_activeAnimator != null)
+            {
+                _activeAnimator.gameObject.SetActive(false);
+            }
+            _activeAnimator = null;
         }
     }
 }

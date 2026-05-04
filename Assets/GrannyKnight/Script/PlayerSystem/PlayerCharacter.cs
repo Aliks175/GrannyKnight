@@ -54,7 +54,8 @@ public class PlayerCharacter : MonoBehaviour
     public void ChangeSize(float size, float minSize = 0.5f)
     {
         size = Mathf.Clamp01(size);
-        size = size > 0 ? size : minSize;
+        size = size >= 0.1f ? size : minSize;
         transform.localScale = Vector3.one * size;
+        _playerMove.ChangeCoefficientKidSpeedMove(0.8f);
     }
 }

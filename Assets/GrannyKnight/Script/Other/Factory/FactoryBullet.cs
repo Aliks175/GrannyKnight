@@ -36,8 +36,9 @@ public class FactoryBullet
 
     private void CheckBulletPool()
     {
-        if (_objectPool.Count <= 0)
+        if (_objectPool.Count <= 0 || _bulletPool == null)
         {
+            _objectPool.Clear();
             CheckCreateParent();
             CreateBulletPool(_sizePool);
         }
