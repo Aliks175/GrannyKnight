@@ -6,9 +6,9 @@ public class ImporterInteractebleUI : IDisposable, IInitializable
 {
     private PlayerUi _playerUi;
     private SystemBuss _systemBuss;
-    private TestPlayerInteracteble _playerInteracteble;
+    private PlayerInteracteble _playerInteracteble;
 
-    public ImporterInteractebleUI(SystemBuss systemBuss, TestPlayerInteracteble playerInteracteble)
+    public ImporterInteractebleUI(SystemBuss systemBuss, PlayerInteracteble playerInteracteble)
     {
         _systemBuss = systemBuss;
         _playerInteracteble = playerInteracteble;

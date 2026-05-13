@@ -14,7 +14,7 @@ public class ControlTarget
         _targets = new();
     }
 
-    public void AddBubbles(ITarget targetBubble)
+    public void AddTarget(ITarget targetBubble)
     {
         targetBubble.Body.SetActive(false);
         _targets.Add(targetBubble);

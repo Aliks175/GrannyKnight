@@ -1,9 +1,12 @@
+using System.Collections;
 using UnityEngine;
 using Zenject;
 
 public class TargetItemDurst : MonoBehaviour, IHealtheble, ITarget
 {
     public GameObject Body => gameObject;
+    [SerializeField] private ParticleSystem _lifeEffect;
+    [SerializeField] private ParticleSystem _deadEffect;
     [SerializeField] private float _maxHealth;
     private ControlTarget _controlTarget;
     private float _health;
@@ -13,7 +16,7 @@ public class TargetItemDurst : MonoBehaviour, IHealtheble, ITarget
     public void Construct(ControlTarget controlBubbles)
     {
         _controlTarget = controlBubbles;
-        _controlTarget.AddBubbles(this);
+        _controlTarget.AddTarget(this);
     }
 
     private void Start()
@@ -33,6 +36,7 @@ public class TargetItemDurst : MonoBehaviour, IHealtheble, ITarget
         _health -= damage;
         if (_health > 0)
         {
+            _deadEffect.Play();
             //OnHit?.Invoke();
             // Анимация
         }
@@ -43,8 +47,19 @@ public class TargetItemDurst : MonoBehaviour, IHealtheble, ITarget
     }
 
     private void Dead()
-    {
+    {   
+        _lifeEffect.Stop();
+        Debug.Log("main.duration" + _deadEffect.main.duration);
+        _deadEffect.Play();
+        StartCoroutine(WaitEffect(_deadEffect.main.duration));
         _controlTarget.AddCountTargetDestruction();
+    }
+
+    private IEnumerator WaitEffect(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
         gameObject.SetActive(false);
     }
+
+
 }

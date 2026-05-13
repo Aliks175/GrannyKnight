@@ -18,6 +18,7 @@ public class PlayerUi : MonoBehaviour
 
     private void Start()
     {
+        ControlVisibleCursor(false);
         _systemBuss.ConstructPlayerUi(this);
     }
 

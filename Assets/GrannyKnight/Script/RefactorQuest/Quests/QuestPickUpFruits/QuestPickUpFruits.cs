@@ -71,13 +71,9 @@ public class QuestPickUpFruits : Quest
         RestoreFruits();
         _fruitCount = 0;
         StartGame();
-
         Debug.Log($"StartGame");
-        if (_uiTwo != null)
-        {
-        _uiTwo.ResetUi();
-        _uiTwo.StartTimerGame(StartGame);
-        }
+         _uiTwo.StartTimerGame();
+        
     }
 
     public void CollectFruit(Vector3 fruitPosition, float time)
@@ -116,7 +112,7 @@ public class QuestPickUpFruits : Quest
     {
         _particle.transform.position = pos;
         _particle.Play();
-    }    
+    }
 
     #endregion
 
@@ -124,7 +120,7 @@ public class QuestPickUpFruits : Quest
 
     private void CheckWin()
     {
-        if(_fruitCount >= _targetFruit[2])
+        if (_fruitCount >= _targetFruit[2])
         {
             CancelCurrentOperations(_ctsSleepPeriod);
             CancelCurrentOperations(_ctsTimerEndGame);
@@ -267,7 +263,7 @@ public class QuestPickUpFruits : Quest
         {
             StopQuest(QuestEnding.Good);
         }
-        
+
     }
 
     private void Cleanup()
@@ -285,10 +281,7 @@ public class QuestPickUpFruits : Quest
         _fruitCount = 0;
         CalculateMaxCountFruit();
         SaveOriginalFruits();
-        if (_uiTwo != null)
-        {
-            _uiTwo.Initialization(_timer, _maxCountFruit);
-        }
+        _uiTwo.Initialization(_maxCountFruit);
     }
 
     private void CalculateMaxCountFruit()

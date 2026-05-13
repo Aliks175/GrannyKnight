@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
-using System;
 
 public class GameInstaller : MonoInstaller
 {
@@ -22,6 +21,7 @@ public class GameInstaller : MonoInstaller
         BindPlayerStrategyHealth();
         BindQuestPasswordSelection();
         BindQuestClearBaseMent();
+        BindFollowMove();
     }
 
     private void BindFactoryDust()
@@ -51,6 +51,12 @@ public class GameInstaller : MonoInstaller
     private void BindQuestClearBaseMent()
     {
         Container.Bind<ControlTarget>()
+           .AsSingle();
+    }
+
+    private void BindFollowMove()
+    {
+        Container.Bind<MoveToPlayer>()
            .AsSingle();
     }
 }

@@ -14,13 +14,18 @@ public class TargetBubble : MonoBehaviour, IHealtheble, ITarget
     public void Construct(ControlTarget controlBubbles)
     {
         _controlTarget = controlBubbles;
-        _controlTarget.AddBubbles(this);
+        _controlTarget.AddTarget(this);
         _isAlive = true;
     }
 
     private void Awake()
     {
         _collider = GetComponent<Collider>();
+    }
+
+    private void OnDisable()
+    {
+        Destroy(gameObject, 1f);
     }
 
     public void TakeDamage(float damage)

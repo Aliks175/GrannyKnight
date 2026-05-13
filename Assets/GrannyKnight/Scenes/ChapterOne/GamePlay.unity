@@ -119,6 +119,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &373021602
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 373021603}
+  m_Layer: 0
+  m_Name: PointMaze
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &373021603
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 373021602}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 26.820908, y: 1.3474997, z: -63.082077}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 614921061}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &614921060
 GameObject:
   m_ObjectHideFlags: 0
@@ -152,6 +183,7 @@ Transform:
   - {fileID: 866130156}
   - {fileID: 2104664812}
   - {fileID: 1612963697}
+  - {fileID: 373021603}
   m_Father: {fileID: 813644237}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &614921062
@@ -166,7 +198,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 725d63b0c0353a84691e2d2adbe015c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnPoint: {fileID: 2104664812}
+  _spawnPoint: {fileID: 866130156}
 --- !u!1 &813644236
 GameObject:
   m_ObjectHideFlags: 0
@@ -239,7 +271,7 @@ Transform:
   m_GameObject: {fileID: 866130155}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1000.94, y: 0.04, z: 0.64}
+  m_LocalPosition: {x: -1001.106, y: 1.135, z: -1.887}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -264,6 +296,10 @@ PrefabInstance:
     - target: {fileID: 2873249629815602092, guid: f2f70522fe298504fa640f144e3f4b6c, type: 3}
       propertyPath: m_Name
       value: SceneContext
+      objectReference: {fileID: 0}
+    - target: {fileID: 2873249629815602092, guid: f2f70522fe298504fa640f144e3f4b6c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3467805520185381508, guid: f2f70522fe298504fa640f144e3f4b6c, type: 3}
       propertyPath: m_LocalPosition.x

@@ -10,13 +10,13 @@ namespace Refactor
         private PlayerMove _playerMover;
         private PlayerLook _playerLook;
         private PlayerAim _playerAim;
-        private TestPlayerInteracteble _playerInteracteble;
+        private PlayerInteracteble _playerInteracteble;
         private TestWeaponSystem _weaponSystem;
         private PlayerSystemActions _playerInput;
         private PlayerSystemActions.PlayerActions _playerActions;
         private bool _isPlayerControl;
 
-        public PlayerInputControl(PlayerCharacter testPlayerCharacter, PlayerSystemActions inputActions, TestPlayerInteracteble testPlayerInteracteble, TestWeaponSystem testWeaponSystem)
+        public PlayerInputControl(PlayerCharacter testPlayerCharacter, PlayerSystemActions inputActions, PlayerInteracteble testPlayerInteracteble, TestWeaponSystem testWeaponSystem)
         {
             _weaponSystem = testWeaponSystem;
             _playerInteracteble = testPlayerInteracteble;

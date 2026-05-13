@@ -1,3 +1,4 @@
+using Refactor;
 using UnityEngine;
 using Zenject;
 
@@ -11,6 +12,7 @@ public class PlayerCharacter : MonoBehaviour
     public PlayerHealth PlayerHealth => _playerHealth;
     public CharacterController CharacterController => _characterController;
 
+    private PlayerInteracteble _playerInteracteble;
     private CharacterController _characterController;
     private PlayerMove _playerMove;
     private PlayerWeapon _playerWeapon;
@@ -20,7 +22,7 @@ public class PlayerCharacter : MonoBehaviour
     private SystemBuss _systemBuss;
 
     [Inject]
-    public void Construct(PlayerMove playerMove, PlayerLook playerLook, PlayerAim playerAim, PlayerWeapon playerWeapon, SystemBuss systemBuss, PlayerHealth playerHealth)
+    public void Construct(PlayerMove playerMove, PlayerLook playerLook, PlayerAim playerAim, PlayerWeapon playerWeapon, SystemBuss systemBuss, PlayerHealth playerHealth, PlayerInteracteble playerInteracteble)
     {
         _playerMove = playerMove;
         _playerLook = playerLook;
@@ -28,12 +30,18 @@ public class PlayerCharacter : MonoBehaviour
         _playerHealth = playerHealth;
         _playerWeapon = playerWeapon;
         _systemBuss = systemBuss;
+        _playerInteracteble = playerInteracteble;
         _characterController = GetComponent<CharacterController>();
     }
 
     private void Awake()
     {
         _systemBuss.SpawnPlayer(this);
+    }
+
+    public void SetUseItem(IItemUseble itemUseble)
+    {
+        _playerInteracteble.SetUseItem(itemUseble);
     }
 
     public void SetStrategyHealtheble(IPlayerStrategyHealtheble strategy)
