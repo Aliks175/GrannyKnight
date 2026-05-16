@@ -3,7 +3,7 @@ using UnityEngine;
 using Zenject;
 
 [RequireComponent(typeof(CharacterController))]
-public class PlayerCharacter : MonoBehaviour
+public class PlayerCharacter : MonoBehaviour, IHealtheble
 {
     public PlayerMove PlayerMove => _playerMove;
     public PlayerLook PlayerLook => _playerLook;
@@ -49,7 +49,7 @@ public class PlayerCharacter : MonoBehaviour
         PlayerHealth.SetStrategyHealtheble(strategy);
     }
 
-    public void TakeDamage(int Damage)
+    public void TakeDamage(float Damage)
     {
         _playerHealth.TakeDamage(Damage);
     }

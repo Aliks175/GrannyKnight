@@ -18,14 +18,14 @@ public class ImporterAnimationMonster : IDisposable, IInitializable
     {
         _healthMonsterGarden.OnHit -= OnHit;
         _healthMonsterGarden.OnDead -= OnDead;
-        _attackMonsterGarden.OnAttack -= OnAttack;
+        _attackMonsterGarden.OnPrepareAttack -= OnAttack;
     }
 
     public void Initialize()
     {
         _healthMonsterGarden.OnHit += OnHit;
         _healthMonsterGarden.OnDead += OnDead;
-        _attackMonsterGarden.OnAttack += OnAttack;
+        _attackMonsterGarden.OnPrepareAttack += OnAttack;
     }
 
     private void OnAttack()

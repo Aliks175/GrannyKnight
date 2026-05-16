@@ -1,18 +1,19 @@
 using Refactor;
 using System;
-using UnityEngine;
 using Zenject;
 
 public class ImporterShootingControlAnimation : IDisposable, IInitializable
 {
     private ShootingRaycast _shootingRaycast;
     private ShootingPhysics _shootingPhysics;
+    private HitingMelee _hitingMelee;
     private WeaponControlAnimation _weaponControlAnimation;
 
-    public ImporterShootingControlAnimation(ShootingRaycast shootingRaycast, ShootingPhysics shootingPhysics, WeaponControlAnimation weaponControlAnimation)
+    public ImporterShootingControlAnimation(ShootingRaycast shootingRaycast, ShootingPhysics shootingPhysics, HitingMelee hitingMelee, WeaponControlAnimation weaponControlAnimation)
     {
         _shootingRaycast = shootingRaycast;
         _shootingPhysics = shootingPhysics;
+        _hitingMelee = hitingMelee;
         _weaponControlAnimation = weaponControlAnimation;
     }
 
@@ -22,6 +23,9 @@ public class ImporterShootingControlAnimation : IDisposable, IInitializable
         _shootingRaycast.OnEndShoot -= OnEndShoot;
         _shootingPhysics.OnShoot -= OnShoot;
         _shootingPhysics.OnCharge -= OnCharge;
+        _hitingMelee.OnAttackOne -= OnShoot;
+        _hitingMelee.OnAttackTwo -= OnShootTwo;
+        _hitingMelee.OnBlock -= OnBlock;
     }
 
     public void Initialize()
@@ -30,6 +34,24 @@ public class ImporterShootingControlAnimation : IDisposable, IInitializable
         _shootingRaycast.OnEndShoot += OnEndShoot;
         _shootingPhysics.OnShoot += OnShoot;
         _shootingPhysics.OnCharge += OnCharge;
+
+        _hitingMelee.OnAttackOne += OnShoot;
+        _hitingMelee.OnAttackTwo += OnShootTwo;
+        _hitingMelee.OnBlock += OnBlock;
+    }
+    private void OnShoot()
+    {
+        _weaponControlAnimation.OnShoot();
+    }
+
+    private void OnShootTwo()
+    {
+        _weaponControlAnimation.OnShootTwo();
+    }
+
+    private void OnBlock(bool isActive)
+    {
+        _weaponControlAnimation.OnBlock(isActive);
     }
 
     private void OnCharge()
@@ -37,10 +59,6 @@ public class ImporterShootingControlAnimation : IDisposable, IInitializable
         _weaponControlAnimation.OnCharge();
     }
 
-    private void OnShoot()
-    {
-        _weaponControlAnimation.OnShoot();
-    }
 
     private void OnEndShoot()
     {

@@ -6,25 +6,20 @@ public class WeaponControlAnimation
     private TestWeapon _testWeapon;
     private bool _isEquipedWeapon => _weaponEffect != null;
 
-    //public WeaponControlAnimation()
-    //{
-
-    //}
-
     public void SetWeapon(TestWeapon testWeapon)
     {
-        Debug.Log($"SetWeapon = null {testWeapon == null}");
+        //Debug.Log($"SetWeapon = null {testWeapon == null}");
         if (_testWeapon == testWeapon) { return; }
         if (!CheckWeapon(testWeapon)) { return; }
     }
 
     public void OnShoot()
     {
-        Debug.Log($"WeaponControlAnimation --- OnShoot ");
+        //    Debug.Log($"WeaponControlAnimation --- OnShoot ");
         if (_isEquipedWeapon)
         {
-            _weaponEffect.OnShoot();
-            Debug.Log($"OnShoot = null {_isEquipedWeapon}");
+            _weaponEffect.OnAttackOne();
+            //Debug.Log($"OnShoot = null {_isEquipedWeapon}");
 
         }
     }
@@ -34,8 +29,24 @@ public class WeaponControlAnimation
         if (_isEquipedWeapon)
         {
             _weaponEffect.OnEndShoot();
-            Debug.Log($"OnEndShoot = null {_isEquipedWeapon}");
+            //Debug.Log($"OnEndShoot = null {_isEquipedWeapon}");
 
+        }
+    }
+
+    public void OnBlock(bool isActive)
+    {
+        if (_isEquipedWeapon)
+        {
+            _weaponEffect.OnBlock(isActive);
+        }
+    }
+
+    public void OnShootTwo()
+    {
+        if (_isEquipedWeapon)
+        {
+            _weaponEffect.OnAttackTwo();
         }
     }
 
@@ -45,7 +56,7 @@ public class WeaponControlAnimation
         {
             _weaponEffect.OnCharge();
 
-            Debug.Log($"OnCharge = null {_isEquipedWeapon}");
+            //Debug.Log($"OnCharge = null {_isEquipedWeapon}");
         }
     }
 
@@ -55,14 +66,14 @@ public class WeaponControlAnimation
         _testWeapon = testWeapon;
         if (testWeapon == null)
         {
-            Debug.Log($"CheckWeapon = null ");
+            //Debug.Log($"CheckWeapon = null ");
             _weaponEffect = null;
         }
         else
         {
             _weaponEffect = testWeapon.Point.WeaponEffectAbstract;
             isFindWeaponEffect = true;
-            Debug.Log($"CheckWeapon = NOT null");
+            //Debug.Log($"CheckWeapon = NOT null");
         }
         return isFindWeaponEffect;
     }

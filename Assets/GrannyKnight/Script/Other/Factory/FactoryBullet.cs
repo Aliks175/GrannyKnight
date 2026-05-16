@@ -12,9 +12,9 @@ public class FactoryBullet
     private int _index;
     private int _damage;
 
-    private const string _nameParentBulletPool = "BulletPool";
+    private readonly string _nameParentBulletPool;
 
-    public FactoryBullet(Bullet prefBullet, int sizePool, int damage, float timeDisable)
+    public FactoryBullet(Bullet prefBullet, int sizePool, int damage, float timeDisable,string nameParent)
     {
         _sizePool = sizePool;
         _prefBullet = prefBullet;
@@ -23,6 +23,7 @@ public class FactoryBullet
         _index = 0;
         _damage = damage;
         _timeDisable = timeDisable;
+        _nameParentBulletPool = nameParent;
     }
 
     public Bullet GetBullet()
@@ -30,6 +31,7 @@ public class FactoryBullet
         Bullet tempgameObject = null;
         CheckBulletPool();
         tempgameObject = GetNextBullet();
+        ControlBullet(tempgameObject);
         tempgameObject.gameObject.SetActive(true);
         return tempgameObject;
     }
@@ -79,5 +81,12 @@ public class FactoryBullet
         {
             _bulletPool = new GameObject(_nameParentBulletPool);
         }
+    }
+
+    private void ControlBullet(Bullet tempBullet)
+    {
+        Rigidbody tempRigidbody = tempBullet.Rigidbody;
+        tempRigidbody.angularVelocity = Vector3.zero;
+        tempRigidbody.linearVelocity = Vector3.zero;
     }
 }

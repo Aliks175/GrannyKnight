@@ -33,7 +33,7 @@ public class Teleported : MonoBehaviour
         _player.CharacterController.enabled = false;
         _player.transform.position = _positionTeleported.position;
         _player.transform.forward = _positionTeleported.forward;
-        Debug.Log($"{gameObject.name}_positionTeleported = {_positionTeleported.position}");
+        //Debug.Log($"{gameObject.name}_positionTeleported = {_positionTeleported.position}");
         _player.CharacterController.enabled = true;
     }
 }

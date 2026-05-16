@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30119cb083b2f4046a889ea723192a3e, type: 3}
+  m_Name: SwordSettings
+  m_EditorClassIdentifier: 
+  _typeWeapon: 4
+  _typeShootingSystem: 3
+  _timeWaitFire: 2
+  _damage: 15
+  _prefBullet: {fileID: 9101796531419377570, guid: 5038266eaead94242b88633f2ea2ff2e, type: 3}
+  _speedBullet: 10
+  _sizePoolBullet: 3
+  _layerEnemy:
+    serializedVersion: 2
+    m_Bits: 4096
+  _timeWaitNextHit: 1
+  _timeActiveHit: 0.6
+  _rangeHit: 1
+  _damageHit: 10

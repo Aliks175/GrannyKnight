@@ -28,7 +28,7 @@ public class SlingshotWeaponEffect : WeaponEffectAbstract
         throw new System.NotImplementedException();
     }
 
-    public override void OnShoot()
+    public override void OnAttackOne()
     {
         _animator.SetBool(_isShootAnimationID, false);
         OnShooteble?.Invoke();

@@ -15,6 +15,18 @@ public class SleepInstaller : MonoInstaller
     [SerializeField] private TargetMonsterGarden _prefMonster;
     [SerializeField] private TargetBossGarden _prefBoss;
 
+    [Header("FactoryBulletSettings")]
+    [SerializeField] private Bullet _prefBullet;
+    [SerializeField] private float _timeDisable;
+    [SerializeField] private int _sizePool;
+    [SerializeField] private int _damage;
+    private const string _nameParent = "DarkBulletPool";
+
+
+
+
+
+
     public override void InstallBindings()
     {
         BindQuestBubblesDestruction();
@@ -56,7 +68,28 @@ public class SleepInstaller : MonoInstaller
         Container.Bind<DestroyBossGarden>()
         .AsSingle();
 
-        Container.BindInterfacesAndSelfTo<MoveToPlayer>()
+        Container.BindInterfacesAndSelfTo<FairyAnimation>()
         .AsSingle();
+
+        Container.BindInterfacesAndSelfTo<MoveToPlayer>()
+            .AsTransient();
+
+        Container.Bind<FairySimpleMove>()
+        .AsTransient();
+
+        Container.Bind<FairyAttack>()
+       .AsTransient();
+
+        Container.Bind<FactoryBullet>()
+            .AsSingle()
+            .WithArguments(_prefBullet, _sizePool, 1, _timeDisable, _nameParent)
+            .WhenInjectedInto<FairyAttack>();
+
+
+        Container.Bind<MoveToPlayer>()
+            .AsTransient()
+            .WhenInjectedInto<TargetDustGarden>();
+
+
     }
 }

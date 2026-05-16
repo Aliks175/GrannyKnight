@@ -2,5 +2,6 @@ public enum TypeShootingSystem
 {
     none,
     Raycast,
-    Physics
+    Physics,
+    Melee
 }

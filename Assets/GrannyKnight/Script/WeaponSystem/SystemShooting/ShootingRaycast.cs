@@ -40,7 +40,7 @@ namespace Refactor
             _cancellationToken?.Dispose();
         }
 
-        public void Shoot(TestWeapon testWeapon)
+        public void AttackOne(TestWeapon testWeapon)
         {
             if (testWeapon == null) return;
             if (!ControlCurrentWeapon(testWeapon)) { return; }
@@ -59,7 +59,6 @@ namespace Refactor
         {
             //OnEndFire?.Invoke();
             _isFire = false;
-            
         }
 
         private bool ControlCurrentWeapon(TestWeapon testWeapon)

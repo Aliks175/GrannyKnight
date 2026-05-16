@@ -34,7 +34,7 @@ public class UseTrigerItem : MonoBehaviour, IItemUseble
         if (_isReadyActive) { return; }
 
         player.SetUseItem(this);
-        Debug.Log("Enter");
+        //Debug.Log("Enter");
         _isReadyActive = true;
         PlayerTriggerEnter?.Invoke();
         if (_showPrompt == null) { return; }

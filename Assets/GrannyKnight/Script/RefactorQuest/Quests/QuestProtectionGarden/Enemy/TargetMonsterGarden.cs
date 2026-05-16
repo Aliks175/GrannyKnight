@@ -6,7 +6,8 @@ public class TargetMonsterGarden : MonoBehaviour, IHealtheble
 {
     protected HealthMonsterGarden _healthMonsterGarden;
     protected AttackMonsterGarden _attackMonsterGarden;
-    private AnimationMonsterGarden _animationMonsterGarden;
+    protected AnimationMonsterGarden _animationMonsterGarden;
+
     private bool Alife => _healthMonsterGarden.Alife;
 
     public event Action<TargetMonsterGarden> OnDestroy;
@@ -19,8 +20,15 @@ public class TargetMonsterGarden : MonoBehaviour, IHealtheble
         _animationMonsterGarden = animationMonsterGarden;
     }
 
+    private void OnEnable()
+    {
+        _attackMonsterGarden.OnAttack += OnAttack;
+        _attackMonsterGarden.Initialization();
+    }
+
     private void OnDisable()
     {
+        _attackMonsterGarden.OnAttack -= OnAttack;
         _animationMonsterGarden.Dispose();
         _attackMonsterGarden.Dispose();
     }
@@ -31,16 +39,23 @@ public class TargetMonsterGarden : MonoBehaviour, IHealtheble
         _healthMonsterGarden.CheckHealth(damage);
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected void OnAttack()
     {
         if (!Alife) { return; }
-        _attackMonsterGarden.Damage(other);
+        _attackMonsterGarden.AttackPlayer();
     }
-   
+
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (!Alife) { return; }
+    //    _attackMonsterGarden.Damage(other);
+    //}
+
+
     public virtual void OnDead()
     {
         //_animationMonsterGarden.Dispose();
         OnDestroy?.Invoke(this);
         Destroy(gameObject);
-    } 
+    }
 }

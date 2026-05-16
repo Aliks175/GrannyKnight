@@ -41,10 +41,10 @@ public class BlackoutScreen : IPlayerStrategyHealtheble, IDisposable
         _cancelToken = null;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         if (!CheckImmunityDamage()) { return; }
-        _healthPlayer -= damage;
+        _healthPlayer -= 1;
         Debug.Log($"_healthPlayer = {_healthPlayer}");
         CheckHealth();
     }

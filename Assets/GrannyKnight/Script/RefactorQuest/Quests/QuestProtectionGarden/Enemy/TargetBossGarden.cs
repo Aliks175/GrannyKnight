@@ -17,6 +17,9 @@ public class TargetBossGarden : TargetMonsterGarden, IHealtheble
     private void OnDisable()
     {
         _moveToPlayer.Dispose();
+        _attackMonsterGarden.OnAttack -= OnAttack;
+        _animationMonsterGarden.Dispose();
+        _attackMonsterGarden.Dispose();
     }
 
     private void OnEnable()
@@ -25,19 +28,21 @@ public class TargetBossGarden : TargetMonsterGarden, IHealtheble
         {
             _agent = GetComponent<NavMeshAgent>();
         }
+        _attackMonsterGarden.OnAttack += OnAttack;
+        _attackMonsterGarden.Initialization();
+        _moveToPlayer.Initialization(_agent);
         //_attackMonsterGarden.Start();
     }
 
     private void Start()
     {
         if (_agent == null) { return; }
-        _moveToPlayer.Initialization(_agent);
         _moveToPlayer.StartMove();
     }
 
     public override void OnDead()
     {
-        _moveToPlayer.Dispose();
+        //_moveToPlayer.Dispose();
         base.OnDead();
     }
 }
