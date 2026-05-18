@@ -41,7 +41,6 @@ public class Pot : MonoBehaviour, IngredientIncome
     void AddFinal(Ingredient ingredient)
     {
         _ingredients.Add(ingredient);
-        RecipeCheck();
     }
     bool MatchRecipe(Recipe recipe)
     {
