@@ -17,10 +17,6 @@ public class BottleMix :IngredientObject, IngredientIncome
     {
         _recipe = quest.RecipeWater;
     }
-    void Awake()
-    {
-        ingredients.Clear();
-    }
     bool movingUp = false;
     public void Income(Ingredient ingredient)
     {
