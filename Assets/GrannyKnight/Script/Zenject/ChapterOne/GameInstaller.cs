@@ -7,7 +7,7 @@ public class GameInstaller : MonoInstaller
 {
     [Header("QuestDustDestruction")]
     [SerializeField] private TargetDust _prefDust;
-    [SerializeField] private QuestPasswordSelection _orderObject;
+    
     [SerializeField] private int _sizePool;
     [Header("UIDustDestruction")]
     [SerializeField] private Image _blackout;
@@ -15,6 +15,9 @@ public class GameInstaller : MonoInstaller
     [SerializeField] private float _timeImmunity;
     [SerializeField] private float _timeToRegen;
     [SerializeField] private int _healthPlayer;
+    [Header("Квесты объекты")]
+    [SerializeField] private QuestPasswordSelection _orderObject;
+    [SerializeField] private DragManager _dragObject;
 
     public override void InstallBindings()
     {
@@ -22,6 +25,7 @@ public class GameInstaller : MonoInstaller
         BindPlayerStrategyHealth();
         BindQuestPasswordSelection();
         BindQuestClearBaseMent();
+        BindQuestDrag();
     }
 
     private void BindFactoryDust()
@@ -44,6 +48,13 @@ public class GameInstaller : MonoInstaller
     {
         Container.Bind<QuestPasswordSelection>()
            .FromInstance(_orderObject)
+           .AsSingle()
+           .NonLazy();
+    }
+    private void BindQuestDrag()
+    {
+        Container.Bind<DragManager>()
+           .FromInstance(_dragObject)
            .AsSingle()
            .NonLazy();
     }
