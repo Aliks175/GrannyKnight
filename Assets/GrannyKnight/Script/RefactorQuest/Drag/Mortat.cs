@@ -82,6 +82,7 @@ public class Mortat : MonoBehaviour, IngredientIncome
     {
         if (other.gameObject.TryGetComponent<IngredientObject>(out var component))
         {
+            if (component.Ingredient == null) return;
             if (gameObject.layer != _base) gameObject.layer = _base;
             if (component.Ingredient.ingredientType == IngredientType.Standard)
             {
@@ -93,6 +94,7 @@ public class Mortat : MonoBehaviour, IngredientIncome
     {
         if (other.gameObject.TryGetComponent<IngredientObject>(out var component))
         {
+            if (component.Ingredient == null) return;
             if (component.Ingredient.ingredientType == IngredientType.Standard)
             {
                 _tempObj = null;
