@@ -3,22 +3,11 @@ using System.Collections.Generic;
 
 public class ControlTarget
 {
-    private List<ITarget> _targets;
     private int _goalCountTargetDestruction;
     private int _countTargetDestruction;
 
+    public event Action OnStartQuest;
     public event Action OnStopQuest;
-
-    public ControlTarget()
-    {
-        _targets = new();
-    }
-
-    public void AddTarget(ITarget targetBubble)
-    {
-        targetBubble.Body.SetActive(false);
-        _targets.Add(targetBubble);
-    }
 
     public void AddCountTargetDestruction()
     {
@@ -32,18 +21,11 @@ public class ControlTarget
     public void StartQuest(int countBubblesDestruction)
     {
         _goalCountTargetDestruction = countBubblesDestruction;
-        foreach (var targetBubble in _targets)
-        {
-            targetBubble.Body.SetActive(true);
-        }
+        OnStartQuest?.Invoke();
     }
 
     public void StopQuest()
     {
         OnStopQuest?.Invoke();
-        foreach (var targetBubble in _targets)
-        {
-            targetBubble.Body.SetActive(false);
-        }
     }
 }

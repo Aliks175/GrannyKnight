@@ -5,11 +5,12 @@ using Zenject;
 public class SleepInstaller : MonoInstaller
 {
     [Header("UIProtectionGarden")]
-    [SerializeField] private Image _blackout;
-    [SerializeField] private int[] _stageHealth;
+    [SerializeField] private Image _imageScroller;
+    [SerializeField] private Canvas _canvas;
     [SerializeField] private float _timeImmunity;
-    [SerializeField] private float _timeToRegen;
-    [SerializeField] private int _healthPlayer;
+    [SerializeField] private float _startHealth;
+    //[SerializeField] private int[] _stageHealth;
+    //[SerializeField] private int _healthPlayer;
 
     [Header("ProtectionGardenSettings")]
     [SerializeField] private TargetMonsterGarden _prefMonster;
@@ -22,11 +23,6 @@ public class SleepInstaller : MonoInstaller
     [SerializeField] private int _damage;
     private const string _nameParent = "DarkBulletPool";
 
-
-
-
-
-
     public override void InstallBindings()
     {
         BindQuestBubblesDestruction();
@@ -37,10 +33,17 @@ public class SleepInstaller : MonoInstaller
 
     private void BindPlayerStrategyHealth()
     {
-        Container.BindInterfacesAndSelfTo<BlackoutScreen>()
+        //(Image image, float startHealth, float timeImmunity)
+        Container.BindInterfacesAndSelfTo<HealthBarScreen>()
           .AsSingle()
-          .WithArguments(_blackout, _healthPlayer, _timeImmunity, _timeToRegen, _stageHealth)
+          .WithArguments(_imageScroller, _canvas, _startHealth, _timeImmunity)
           .NonLazy();
+
+
+        //Container.BindInterfacesAndSelfTo<BlackoutScreen>()
+        //  .AsSingle()
+        //  .WithArguments(_blackout, _healthPlayer, _timeImmunity, _timeToRegen, _stageHealth)
+        //  .NonLazy();
     }
 
     private void BindFactory()
@@ -82,7 +85,7 @@ public class SleepInstaller : MonoInstaller
 
         Container.Bind<FactoryBullet>()
             .AsSingle()
-            .WithArguments(_prefBullet, _sizePool, 1, _timeDisable, _nameParent)
+            .WithArguments(_prefBullet, _sizePool, _damage, _timeDisable, _nameParent)
             .WhenInjectedInto<FairyAttack>();
 
 
@@ -90,6 +93,8 @@ public class SleepInstaller : MonoInstaller
             .AsTransient()
             .WhenInjectedInto<TargetDustGarden>();
 
+        Container.Bind<DustAttack>()
+           .AsTransient();
 
     }
 }

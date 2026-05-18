@@ -6,20 +6,21 @@ using UnityEngine;
 public class AttackMonsterGarden : IDisposable
 {
     private CancellationTokenSource _cancellationToken;
-    private PlayerCharacter _player;
     private DangerZone _dangerZone;
     private Transform _body;
     private bool _isPlay;
-    private const float _waitTime = 1.3f;
+    private float _damage;
+    private const float _waitTime = 2f;
 
     public event Action OnPrepareAttack;
     public event Action OnAttack;
 
-    public AttackMonsterGarden(DangerZone dangerZone, Transform body)
+    public AttackMonsterGarden(DangerZone dangerZone, Transform body,float damage)
     {
         _isPlay = true;
         _cancellationToken = new CancellationTokenSource();
         _dangerZone = dangerZone;
+        _damage = damage;
         _body = body;
     }
 
@@ -37,26 +38,18 @@ public class AttackMonsterGarden : IDisposable
         _cancellationToken = null;
     }
 
-
     public void Damage(Collider other)
     {
         if (!_isPlay) return;
-        if (other.gameObject.TryGetComponent(out PlayerCharacter player))
-        {
-            if (_player == null)
-            {
-                _player = player;
-            }
-            OnPrepareAttack?.Invoke();
-            WaitTimeNextAttack(_cancellationToken.Token).Forget();
-        }
+        OnPrepareAttack?.Invoke();
+        WaitTimeNextAttack(_cancellationToken.Token).Forget();
     }
 
     public void AttackPlayer()
     {
-        if (_dangerZone.CheckPlayer(_body.position, 1.2f))
+        if (_dangerZone.CheckPlayer(_body.position, 1.6f,out PlayerCharacter playerCharacter))
         {
-            _player.TakeDamage(1);
+            playerCharacter.TakeDamage(_damage);
         }
     }
 

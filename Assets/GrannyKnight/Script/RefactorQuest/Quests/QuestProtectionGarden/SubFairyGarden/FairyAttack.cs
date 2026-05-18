@@ -40,12 +40,13 @@ public class FairyAttack
         if (_target == null) { return; }
         _timeNextAttack = Time.time + _waitTimeAttack;
         _isAttack = false;
+        Debug.Log($"_target {_target}");
         Bullet tempBullet = _factoryBullet.GetBullet();
         tempBullet.Rigidbody.position = _body.position;
 
         tempBullet.Rigidbody.AddForce(_target.position - _body.position, ForceMode.VelocityChange);
         _target = null;
-        Debug.Log("OnShoot");
+        //Debug.Log("OnShoot");
     }
 
 

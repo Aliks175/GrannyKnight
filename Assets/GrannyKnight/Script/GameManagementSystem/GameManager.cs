@@ -60,6 +60,7 @@ public class GameManager : IDisposable, IInitializable
 
     public void LoadMenu()
     {
+        scenesLoading.Clear();
         CheckAsyncOperation(_loading.LoadSingle(ListScene.Menu));
         StartTimer(_cancellationToken.Token).Forget();
     }

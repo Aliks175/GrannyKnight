@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System;
 using UnityEngine;
 
 public class DustAttack
@@ -6,18 +7,24 @@ public class DustAttack
     private Transform _body;
     private DangerZone _dangerZone;
     private float _timeWaitTouch;
+    private float _damage;
     private float _timeNextTouch;
     private int _countTouch;
     private int _maxTouch;
     private bool _isAttack;
 
-    public void Start(DangerZone dangerZone, Transform body, int maxTouch, float timeWaitTouch)
+    public event Action OnEndAttack;
+    public event Action OnAttack;
+
+    public void Start(DangerZone dangerZone, Transform body, int maxTouch, float timeWaitTouch, float damage)
     {
         _dangerZone = dangerZone;
         _body = body;
         _maxTouch = maxTouch;
         _timeWaitTouch = timeWaitTouch;
         _dangerZone.OnEnter += Damage;
+        _isAttack = false;
+        _damage = damage;
     }
 
     public void Dispose()
@@ -27,29 +34,25 @@ public class DustAttack
 
     private void Damage(Collider collider)
     {
-        if (Time.time > _timeNextTouch)
-        {
-            _timeNextTouch = Time.time + _timeWaitTouch;
-            _countTouch++;
-            if (_countTouch > 3)
-            {
-                Attack(collider);
-            }
-            else
-            {
-                _body.DOScale(_countTouch, 1f).Play();
-            }
-        }
-       
+        Debug.Log($"FindPlayer / _isAttack = {_isAttack}");
+        if (_isAttack) { return; }
+        _isAttack = true;
+        OnPreAttack();
     }
 
-    private void Attack(Collider collider)
+    private void OnPreAttack()
     {
-        if (_isAttack) { return; }
-        if (_dangerZone.CheckPlayer(_body.position, 2))
-        {
+        OnAttack?.Invoke();
+    }
 
+    public void Attack()
+    {
+        if (_dangerZone.CheckPlayer(_body.position, 2, out PlayerCharacter playerCharacter))
+        {
+            playerCharacter.TakeDamage(_damage);
         }
-        
+        _body.DOScale(0.1f, 0.5f)
+                .OnComplete(() => OnEndAttack?.Invoke())
+                .Play();
     }
 }

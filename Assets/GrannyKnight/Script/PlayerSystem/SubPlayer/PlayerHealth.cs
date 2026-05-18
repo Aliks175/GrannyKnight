@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class PlayerHealth
 {
     private IPlayerStrategyHealtheble _playerHealtheble;
@@ -10,6 +12,7 @@ public class PlayerHealth
 
     public void TakeDamage(float damage)
     {
+        Debug.Log($"TakeDamage - {damage}");
         if (_playerHealtheble == null) { return; }
         if (_isBlockActive) { return; }
         _playerHealtheble.TakeDamage(damage);

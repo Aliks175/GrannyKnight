@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AnimationMonsterGarden : IDisposable
 {
+    private ParticleSystem _particleSystem;
     private SpriteRenderer _spriteRenderer;
     private Transform _body;
     private Vector3 _startPos;
@@ -13,12 +14,9 @@ public class AnimationMonsterGarden : IDisposable
 
     private bool isAlife;
 
-    //private Sequence _currentSequence;
-    //private Sequence _currentSequence;
-
     public event Action OnEndAnimationDead;
 
-    public AnimationMonsterGarden(SpriteRenderer spriteRenderer, Transform body)
+    public AnimationMonsterGarden(SpriteRenderer spriteRenderer, Transform body, ParticleSystem particleSystem)
     {
         _spriteRenderer = spriteRenderer;
         _body = body;
@@ -26,6 +24,7 @@ public class AnimationMonsterGarden : IDisposable
         _defaultColor = spriteRenderer.color;
         _startPos = _body.position;
         isAlife = true;
+        _particleSystem = particleSystem;
     }
 
     public void Dispose()
@@ -47,7 +46,6 @@ public class AnimationMonsterGarden : IDisposable
                 .Append(_spriteRenderer.DOColor(_defaultColor, 0.2f))
                 .SetLink(_body.gameObject)
                 .SetAutoKill(false);
-            //.OnComplete(() => DefaultStage());
         }
         _onHitDamage.Restart();
     }
@@ -61,41 +59,21 @@ public class AnimationMonsterGarden : IDisposable
             .Join(_body.DOScale(2, 1f))
             .Append(_body.DOScale(0.1f, 0.3f))
             .SetLink(_body.gameObject)
-            .OnComplete(()=> OnEndAnimationDead?.Invoke());
+            .OnComplete(() => OnEndAnimationDead?.Invoke());
         OnDead.Play();
     }
 
     public void OnAttack()
     {
         if (!isAlife) { return; }
+        _particleSystem.Play();
         Sequence OnAttack = DOTween.Sequence();
-        OnAttack.Append(_body.DOScaleY(1.5f, 0.3f).SetLoops(4, LoopType.Yoyo))
-            .Append(_body.DOPunchPosition(-_body.forward * 2, 1f, 0, 0))
-        .Join(_body.DOScale(1, 1f))
-        .SetLink(_body.gameObject);
+        OnAttack.Append(
+            _body.DOScaleY(1.5f, 0.5f)
+            .SetLoops(4, LoopType.Yoyo)
+            .SetEase(Ease.InOutSine));
 
+        OnAttack.SetLink(_body.gameObject);
         OnAttack.Play();
     }
-
-    //private void ChangeSequence(Sequence sequence)
-    //{
-    //    if (_currentSequence != null)
-    //    {
-    //        _currentSequence?.Kill(true);
-    //    }
-    //    _currentSequence = sequence;
-    //}
-
-    //private void OnEndAnimation()
-    //{
-    //    OnEndAnimationDead?.Invoke();
-    //}
-
-    //private void DefaultStage()
-    //{
-    //    _spriteRenderer.color = _defaultColor;
-    //    _body.localScale = Vector3.one;
-    //}
-
-
 }

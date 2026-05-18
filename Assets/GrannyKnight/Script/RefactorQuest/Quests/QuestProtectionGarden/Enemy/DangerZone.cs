@@ -29,12 +29,25 @@ public class DangerZone : MonoBehaviour
         return _countPlayer > 0;
     }
 
+    public bool CheckPlayer(Vector3 position, float radius, out PlayerCharacter playerCharacter)
+    {
+        playerCharacter = null;
+        if (CheckPlayer(position, radius))
+        {
+            if (_player[0].gameObject.TryGetComponent(out PlayerCharacter player))
+            {
+                playerCharacter = player;
+            }
+        }
+        return playerCharacter != null;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (CheckPlayer(transform.position, _radius))
         {
             //Debug.Log("OnTriggerEnter");
-            OnEnter?.Invoke(other);
+            OnEnter?.Invoke(_player[0]);
             //_coroutine = StartCoroutine(WaitAttack(other));
            StartCoroutine(WaitAttack(other));
         }
@@ -46,7 +59,7 @@ public class DangerZone : MonoBehaviour
         if (CheckPlayer(transform.position, _radius))
         {
             //Debug.Log("WaitAttack");
-            OnEnter?.Invoke(other);
+            OnEnter?.Invoke(_player[0]);
             //_coroutine = StartCoroutine(WaitAttack(other));
             StartCoroutine(WaitAttack(other));
         }
