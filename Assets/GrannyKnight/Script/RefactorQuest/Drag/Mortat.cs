@@ -68,7 +68,8 @@ public class Mortat : MonoBehaviour, IngredientIncome
         if (ingredient == null) return;
         if (_ingredients.Count >= 2) return;
         if (_tempObj == null) return;
-        if (ingredient.ingredientType == IngredientType.Standard) _ingredients.Add(ingredient);
+        if (ingredient.ingredientType == IngredientType.Water) return;
+        _ingredients.Add(ingredient);
         GameObject temp = Instantiate(_tempObj, _positionCreate.position, Quaternion.identity, this.transform);
         _createdObjects.Add(temp);
         temp.GetComponent<Rigidbody>().isKinematic = true;
