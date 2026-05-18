@@ -25,7 +25,7 @@ public class Pot : MonoBehaviour, IngredientIncome
     void Awake()
     {
         _water = null;
-        _ingredients.Clear();
+        CleareIng();
     }
     public void Income(Ingredient ingredient)
     {
@@ -71,6 +71,11 @@ public class Pot : MonoBehaviour, IngredientIncome
                 Debug.Log("Bad ending");
                 OnPotEndBad?.Invoke();
             } 
+            CleareIng();
         }
+    }
+    public void CleareIng()
+    {
+        _ingredients.Clear();
     }
 }
