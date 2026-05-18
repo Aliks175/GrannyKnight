@@ -10,6 +10,8 @@ public class Pot : MonoBehaviour, IngredientIncome
     private Recipe _recipeWater;
     private Recipe _recipeFinal;
     private DragManager _dragManager;
+    private int _countBad = 0;
+    private int _countNeed = 3;
     [Header("Ивенты")]
     public UnityEvent OnPotAdd;
     public  UnityEvent OnPotEndGood;
@@ -67,9 +69,8 @@ public class Pot : MonoBehaviour, IngredientIncome
             } 
             else
             {
-                _dragManager.StopQuest(QuestEnding.Bad);
-                Debug.Log("Bad ending");
-                OnPotEndBad?.Invoke();
+                _countBad++;
+                if (_countBad >= _countNeed) Lose();               
             } 
             CleareIng();
         }
@@ -77,5 +78,12 @@ public class Pot : MonoBehaviour, IngredientIncome
     public void CleareIng()
     {
         _ingredients.Clear();
+        _countBad = 0;
+    }
+    private void Lose()
+    {
+        _dragManager.StopQuest(QuestEnding.Bad);
+        Debug.Log("Bad ending");
+        OnPotEndBad?.Invoke();
     }
 }
