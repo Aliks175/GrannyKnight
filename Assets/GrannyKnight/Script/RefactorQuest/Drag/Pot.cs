@@ -38,6 +38,7 @@ public class Pot : MonoBehaviour, IngredientIncome
     }
     void AddWater(Ingredient ingredient)
     {
+        if (_water != null) return;
         _water = ingredient;   
     }
     void AddFinal(Ingredient ingredient)
@@ -63,9 +64,11 @@ public class Pot : MonoBehaviour, IngredientIncome
         {
             if (MatchRecipe(_recipeFinal) && _recipeWater.result == _water)
             {
+                _countBad = 0;
                 _dragManager.StopQuest(QuestEnding.Good);
                 Debug.Log("Good ending");
                 OnPotEndGood?.Invoke();
+                
             } 
             else
             {
@@ -78,12 +81,14 @@ public class Pot : MonoBehaviour, IngredientIncome
     public void CleareIng()
     {
         _ingredients.Clear();
-        _countBad = 0;
+        _water = null;
     }
     private void Lose()
     {
-        _dragManager.StopQuest(QuestEnding.Bad);
+        _countBad = 0;
+        _dragManager.StopQuest(QuestEnding.Bad);   
         Debug.Log("Bad ending");
         OnPotEndBad?.Invoke();
+        
     }
 }
