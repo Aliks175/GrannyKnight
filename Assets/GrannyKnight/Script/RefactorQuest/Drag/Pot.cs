@@ -60,23 +60,21 @@ public class Pot : MonoBehaviour, IngredientIncome
     }
     public void RecipeCheck()
     {
-        if (_recipeFinal.ingredients.Count == _ingredients.Count && _water != null)
+        if (MatchRecipe(_recipeFinal) && _recipeWater.result == _water)
         {
-            if (MatchRecipe(_recipeFinal) && _recipeWater.result == _water)
-            {
-                _countBad = 0;
-                _dragManager.StopQuest(QuestEnding.Good);
-                Debug.Log("Good ending");
-                OnPotEndGood?.Invoke();
-                
-            } 
-            else
-            {
-                _countBad++;
-                if (_countBad >= _countNeed) Lose();               
-            } 
-            CleareIng();
-        }
+            _countBad = 0;
+            _dragManager.StopQuest(QuestEnding.Good);
+            Debug.Log("Good ending");
+            OnPotEndGood?.Invoke();
+            
+        } 
+        else
+        {
+            _countBad++;
+            if (_countBad >= _countNeed) Lose();               
+        } 
+        
+        CleareIng();
     }
     public void CleareIng()
     {
