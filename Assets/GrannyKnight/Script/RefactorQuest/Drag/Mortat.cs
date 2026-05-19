@@ -1,38 +1,39 @@
 using System.Collections.Generic;
-using System;
 using UnityEngine;
-using Zenject;
 using UnityEngine.Events;
-using Unity.VisualScripting;
+using Zenject;
 
 public class Mortat : MonoBehaviour, IngredientIncome
 {
     private Recipe _recipes;
     private int _clicsNeed = 5;
-    [SerializeField] private GameObject _createPrefab;
+    [SerializeField] private IngredientObject _createPrefab;
     [SerializeField] private Transform _positionCreate;
     [SerializeField] private LayerMask _layerTo;
     [Header("Ивенты")]
     public UnityEvent OnMortarClick;
-    public  UnityEvent OnMortarIncome;
-    public  UnityEvent OnMortarCreate;
+    public UnityEvent OnMortarIncome;
+    public UnityEvent OnMortarCreate;
     private List<Ingredient> _ingredients = new List<Ingredient>();
-    private int _clickCount = 0;    
-    private List<GameObject> _createdObjects = new List<GameObject>();
-    private GameObject _tempObj;
+    private int _clickCount = 0;
+    private List<IngredientObject> _createdObjects = new List<IngredientObject>();
+    private IngredientObject _tempObj;
+    private Camera _camera;
     private LayerMask _base;
-    
+
     void Awake()
     {
         _base = this.gameObject.layer;
         _ingredients.Clear();
     }
     [Inject]
-    public void Construct(DragManager quest)
+    public void Construct(DragQuest quest, Camera camera)
     {
         _recipes = quest.RecipeMortar;
         _clicsNeed = quest.NumberMortar;
+        _camera = camera;
     }
+
     void OnMouseDown()
     {
         _clickCount++;
@@ -42,13 +43,14 @@ public class Mortat : MonoBehaviour, IngredientIncome
             if (MatchRecipe(_recipes))
             {
                 Debug.Log("Совпало " + _recipes.name);
-                GameObject temp = Instantiate(_createPrefab, _positionCreate.position, Quaternion.identity);
-                temp.GetComponent<IngredientObject>().Ingredient= _recipes.result;
+                IngredientObject temp = Instantiate(_createPrefab, _positionCreate.position, Quaternion.identity);
+                temp.Construct(_camera);
+                temp.Ingredient = _recipes.result;
                 _ingredients.Clear();
                 OnMortarCreate?.Invoke();
                 foreach (var obj in _createdObjects)
                 {
-                    Destroy(obj);
+                    Destroy(obj.gameObject);
                 }
                 _clickCount = 0;
                 gameObject.layer = (int)Mathf.Log(_layerTo.value, 2);
@@ -70,11 +72,12 @@ public class Mortat : MonoBehaviour, IngredientIncome
         if (_tempObj == null) return;
         if (ingredient.ingredientType == IngredientType.Water) return;
         _ingredients.Add(ingredient);
-        GameObject temp = Instantiate(_tempObj, _positionCreate.position, Quaternion.identity, this.transform);
+        IngredientObject temp = Instantiate(_tempObj, _positionCreate.position, Quaternion.identity, this.transform);
+        temp.Construct(_camera);
         _createdObjects.Add(temp);
         temp.GetComponent<Rigidbody>().isKinematic = true;
         //temp.layer = LayerMask.NameToLayer("AlchimiIng");
-        temp.transform.localScale*=0.5f;
+        temp.transform.localScale *= 0.5f;
         _clickCount = 0;
         OnMortarIncome?.Invoke();
     }
@@ -86,7 +89,7 @@ public class Mortat : MonoBehaviour, IngredientIncome
             if (gameObject.layer != _base) gameObject.layer = _base;
             if (component.Ingredient.ingredientType == IngredientType.Standard)
             {
-                _tempObj = other.gameObject;
+                _tempObj = component;
             }
         }
     }

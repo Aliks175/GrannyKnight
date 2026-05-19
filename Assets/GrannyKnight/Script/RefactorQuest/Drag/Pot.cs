@@ -9,7 +9,7 @@ public class Pot : MonoBehaviour, IngredientIncome
     [SerializeField] private List<Ingredient> _ingredients = new List<Ingredient>();
     private Recipe _recipeWater;
     private Recipe _recipeFinal;
-    private DragManager _dragManager;
+    private DragQuest _dragManager;
     private int _countBad = 0;
     private int _countNeed = 3;
     [Header("Ивенты")]
@@ -18,7 +18,7 @@ public class Pot : MonoBehaviour, IngredientIncome
     public  UnityEvent OnPotEndBad;
 
     [Inject]
-    public void Construct(DragManager quest)
+    public void Construct(DragQuest quest)
     {
         _recipeWater = quest.RecipePot;
         _recipeFinal = quest.RecipeFinal;

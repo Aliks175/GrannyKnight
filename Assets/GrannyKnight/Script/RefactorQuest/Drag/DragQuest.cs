@@ -1,7 +1,8 @@
 using System;
+using Unity.Cinemachine;
 using UnityEngine;
 
-public class DragManager : Quest
+public class DragQuest : Quest
 {
     [SerializeField] private GameObject _cameraQuest;
     [Header("Настройка рецептов")]

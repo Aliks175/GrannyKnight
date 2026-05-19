@@ -16,7 +16,7 @@ public class GameInstaller : MonoInstaller
     [SerializeField] private int _healthPlayer;
     [Header("Квесты объекты")]
     [SerializeField] private QuestPasswordSelection _orderObject;
-    [SerializeField] private DragManager _dragObject;
+    [SerializeField] private DragQuest _dragObject;
 
     public override void InstallBindings()
     {
@@ -53,7 +53,7 @@ public class GameInstaller : MonoInstaller
     }
     private void BindQuestDrag()
     {
-        Container.Bind<DragManager>()
+        Container.Bind<DragQuest>()
            .FromInstance(_dragObject)
            .AsSingle()
            .NonLazy();

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using Zenject;
 
 public class StirController : MonoBehaviour
 {
@@ -17,11 +18,13 @@ public class StirController : MonoBehaviour
     private int completedCircles;
     [Header("Ивенты")]
     public UnityEvent OnStartCircle;
-    public  UnityEvent OnEndCircle;
+    public UnityEvent OnEndCircle;
     public UnityEvent OnStopCircle;
-    private void Awake()
+
+    [Inject]
+    public void Construct(Camera camera)
     {
-        cam = Camera.main;
+        cam = camera;
     }
 
     private void Update()
@@ -56,7 +59,7 @@ public class StirController : MonoBehaviour
 
     private void TrackMouseRotation()
     {
-        Vector3 screenCenter =  cam.WorldToScreenPoint(stirCenter.position);
+        Vector3 screenCenter = cam.WorldToScreenPoint(stirCenter.position);
 
         Vector2 dir = (Vector2)Input.mousePosition - (Vector2)screenCenter;
 
@@ -65,7 +68,7 @@ public class StirController : MonoBehaviour
 
         float currentAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 
-        float delta =  Mathf.DeltaAngle(lastAngle, currentAngle);
+        float delta = Mathf.DeltaAngle(lastAngle, currentAngle);
 
         accumulatedAngle += delta;
 

@@ -13,7 +13,7 @@ public class BottleMix :IngredientObject, IngredientIncome
     int shakeCount = 0;
 
     [Inject]
-    public void Construct(DragManager quest)
+    public void Construct(DragQuest quest)
     {
         _recipe = quest.RecipeWater;
     }
