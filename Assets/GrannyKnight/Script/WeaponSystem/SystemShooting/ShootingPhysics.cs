@@ -26,8 +26,14 @@ namespace Refactor
             _head = head;
             _currentId = -1;
         }
+        public void Initialize()
+        {
+            _cancellationToken?.Dispose();
+            _cancellationToken = new CancellationTokenSource();
+        }
 
-        public void Shoot(TestWeapon testWeapon)
+
+        public void AttackOne(TestWeapon testWeapon)
         {
             if (testWeapon == null) return;
             if (_isFire) { return; }
@@ -36,12 +42,6 @@ namespace Refactor
             ChargeFire();
         }
 
-
-        public void Initialize()
-        {
-            _cancellationToken?.Dispose();
-            _cancellationToken = new CancellationTokenSource();
-        }
 
         public void Dispose()
         {

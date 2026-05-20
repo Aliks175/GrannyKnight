@@ -1,6 +1,6 @@
-using Cysharp.Threading.Tasks;
 using System;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 using Random = UnityEngine.Random;
@@ -22,6 +22,7 @@ public class QuestDustDestruction : Quest
     private FactoryDust _factoryDust;
     private BlackoutScreen _playerStrategy;
     private float _fullHealth = 0f;
+    private float _maxHealth = 0f;
 
     public override event Action<QuestEnding> OnEnd;
     public override event Action OnStart;
@@ -41,16 +42,18 @@ public class QuestDustDestruction : Quest
         _playerStrategy.OnEnd += End;
     }
 
+    private void Awake()
+    {
+        _fullHealth = SetHealth();
+        _maxHealth = _fullHealth;
+        _uiOne.Initialization();
+    }
+
     public override void StartQuest()
     {
         OnStart?.Invoke();
-        _fullHealth = SetHealth();
         StartGame();
-        if (_uiOne != null)
-        {
-            _uiOne.Initialization(_fullHealth);
-            _uiOne.StartTimerGame(StartGame);
-        }
+        _uiOne.StartTimerGame();
     }
 
     public void OnDustDie(TargetDust dust, int stage)
@@ -61,7 +64,7 @@ public class QuestDustDestruction : Quest
         {
             CreateChild(stage, dust.transform);
         }
-        if (_dusts.Count == 0)
+        if (_fullHealth < 1f)
         {
             StopQuest(QuestEnding.Good);
         }
@@ -88,10 +91,7 @@ public class QuestDustDestruction : Quest
     public void Damage(float damage)
     {
         _fullHealth -= damage;
-        if (_uiOne != null)
-        {
-            _uiOne.OnUpdateUi(_fullHealth);
-        }
+        _uiOne.OnUpdateUi(_fullHealth / _maxHealth);
     }
 
     private void End()
@@ -109,6 +109,7 @@ public class QuestDustDestruction : Quest
 
         OnEnd?.Invoke(quest);
         ClearEnemy();
+        _playerStrategy.OffUi();
         //_playerTarget.gameObject.GetComponent<PlayerHealthSystem>().Die();
     }
 

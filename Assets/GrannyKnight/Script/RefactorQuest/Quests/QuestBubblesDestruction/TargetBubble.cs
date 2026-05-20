@@ -14,13 +14,24 @@ public class TargetBubble : MonoBehaviour, IHealtheble, ITarget
     public void Construct(ControlTarget controlBubbles)
     {
         _controlTarget = controlBubbles;
-        _controlTarget.AddBubbles(this);
         _isAlive = true;
+        _controlTarget.OnStartQuest += Start;
     }
 
     private void Awake()
     {
         _collider = GetComponent<Collider>();
+        _controlTarget.OnStopQuest += OnStopQuest;
+    }
+
+    private void OnDisable()
+    {
+        _controlTarget.OnStartQuest -= Start;
+    }
+
+    private void Start()
+    {
+        gameObject.SetActive(true);
     }
 
     public void TakeDamage(float damage)
@@ -31,5 +42,13 @@ public class TargetBubble : MonoBehaviour, IHealtheble, ITarget
         _collider.enabled = false;
         _body.SetActive(false);
         _particleSystem.Play();
+        OnStopQuest();
     }
+
+    private void OnStopQuest()
+    {
+        _controlTarget.OnStopQuest -= OnStopQuest;
+        Destroy(gameObject, 1f);
+    }
+
 }

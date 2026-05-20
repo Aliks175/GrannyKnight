@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 using Zenject;
 
 public class ImporterAnimationMonster : IDisposable, IInitializable
@@ -13,19 +14,19 @@ public class ImporterAnimationMonster : IDisposable, IInitializable
         _attackMonsterGarden = attackMonsterGarden;
         _animationMonsterGarden = animationMonsterGarden;
     }
-    
+
     public void Dispose()
     {
         _healthMonsterGarden.OnHit -= OnHit;
         _healthMonsterGarden.OnDead -= OnDead;
-        _attackMonsterGarden.OnAttack -= OnAttack;
+        _attackMonsterGarden.OnPrepareAttack -= OnAttack;
     }
 
     public void Initialize()
     {
         _healthMonsterGarden.OnHit += OnHit;
         _healthMonsterGarden.OnDead += OnDead;
-        _attackMonsterGarden.OnAttack += OnAttack;
+        _attackMonsterGarden.OnPrepareAttack += OnAttack;
     }
 
     private void OnAttack()

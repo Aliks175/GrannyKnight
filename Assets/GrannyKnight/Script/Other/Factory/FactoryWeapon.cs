@@ -99,6 +99,13 @@ public class FactoryWeapon : IInitializable
             DataWeaponPhysics tempWeaponPhysics = new DataWeaponPhysics(weaponSetting);
             dataWeapon = tempWeaponPhysics;
         }
+        else if (weaponSetting.TypeShootingSystem == TypeShootingSystem.Melee)
+        {
+            DataWeaponMelee tempWeaponPhysics = new DataWeaponMelee(weaponSetting);
+            dataWeapon = tempWeaponPhysics;
+        }
+
+
         return dataWeapon;
     }
 

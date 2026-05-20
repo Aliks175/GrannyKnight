@@ -52,6 +52,11 @@ namespace Refactor
           .AsSingle()
           .WithArguments(_head)
           .NonLazy();
+
+            Container.BindInterfacesAndSelfTo<HitingMelee>()
+         .AsSingle()
+         .WithArguments(_head)
+         .NonLazy();
         }
 
         private void BindAnimation()

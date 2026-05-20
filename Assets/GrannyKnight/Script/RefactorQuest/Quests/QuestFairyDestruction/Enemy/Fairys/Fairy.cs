@@ -53,6 +53,16 @@ public class Fairy : MonoBehaviour, IHealtheble
         SetSpriteRotate(playerCharacter);
     }
 
+    private void OnDisable()
+    {
+        if (_coroutine != null)
+        {
+            StopCoroutine( _coroutine );
+        }
+        _tween?.Kill();
+        Destroy(gameObject,2f);
+    }
+
     private void SetSpriteRotate(Transform playerCharacter)
     {
         SpriteRotate spriteRotate = GetComponentInChildren<SpriteRotate>();

@@ -31,7 +31,7 @@ public class PodmetatusWeaponEffect : WeaponEffectAbstract
         throw new System.NotImplementedException();
     }
 
-    public override void OnShoot()
+    public override void OnAttackOne()
     {
         _animator.SetBool(_isShootAnimationID, true);
         _animator.SetTrigger(_shootAnimationID);

@@ -52,7 +52,7 @@ public class PlayerInstaller : MonoInstaller
             .WithArguments(_settingsPlayer, cinemachineCamera)
             .NonLazy();
 
-        Container.BindInterfacesAndSelfTo<TestPlayerInteracteble>()
+        Container.BindInterfacesAndSelfTo<PlayerInteracteble>()
             .AsSingle()
             .WithArguments(_settingsPlayer, _headSlot)
             .NonLazy();

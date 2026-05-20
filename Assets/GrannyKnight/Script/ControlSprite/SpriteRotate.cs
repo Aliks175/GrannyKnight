@@ -40,7 +40,7 @@ public class SpriteRotate : MonoBehaviour
     private void Update()
     {
         if (!_isReady) { return; }
-        Vector3 tempDirection = _cameraTransform.position - transform.position;
+        Vector3 tempDirection = transform.position - _cameraTransform.position;
         tempDirection.y = _IsRotateOnlyForY ? 0 : tempDirection.y;
         transform.rotation = Quaternion.LookRotation(tempDirection);
     }

@@ -1,45 +1,33 @@
-using System;
 using TMPro;
 using UnityEngine;
 
 public class UiThree : MonoBehaviour
 {
     [SerializeField] private GameObject _panelUi;
-    [SerializeField] private TextMeshProUGUI _textProgressQuest;
-    [SerializeField] private UiTimer _uiTimer;
     [SerializeField] private GameObject _panelPrompt;
-    [SerializeField] private float _timeDisablePrompt;
-
-    private int _startcountEnemy;
+    [SerializeField] private TextMeshPro _textProgressQuest;
     private int _startcountItem;
 
-    public void Initialization(int countEnemy, int countItem)
+    public void Initialization(int countItem)
     {
-        _startcountEnemy = countEnemy;
         _startcountItem = countItem;
     }
 
-    public void StartTimerGame(Action action)
+    public void StartTimerGame()
     {
         _panelUi.SetActive(true);
-        _uiTimer.StartTimerGame(action);
-        Invoke(nameof(DisablePrompt), _timeDisablePrompt);
+        _panelPrompt.SetActive(true);
     }
 
     public void Stop()
     {
         _panelUi.SetActive(false);
-        _uiTimer.Stop();
-    }
-
-    public void OnUpdateUi(int countEnemy, int countItem)
-    {
-       string textDiscription = $"{countEnemy} / {_startcountEnemy}\n\n\n\n{countItem} / {_startcountItem}";
-        _textProgressQuest.SetText(textDiscription);
-    }
-
-    private void DisablePrompt()
-    {
         _panelPrompt.SetActive(false);
+    }
+
+    public void OnUpdateUi(int countItem)
+    {
+        string textDiscription = $"{countItem} / {_startcountItem}";
+        _textProgressQuest.SetText(textDiscription);
     }
 }

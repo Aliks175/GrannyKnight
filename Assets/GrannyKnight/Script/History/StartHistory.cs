@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class StartHistory : MonoBehaviour
@@ -6,6 +7,12 @@ public class StartHistory : MonoBehaviour
 
     private void Start()
     {
+        StartCoroutine(WaitStartSecond());
+    }
+
+    private IEnumerator WaitStartSecond()
+    {
+        yield return new WaitForSeconds(1f);
         _history.ActiveHistory();
     }
 }

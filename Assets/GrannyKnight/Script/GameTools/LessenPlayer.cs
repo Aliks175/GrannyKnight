@@ -4,7 +4,7 @@ using Zenject;
 
 public class LessenPlayer : MonoBehaviour
 {
-    [SerializeField] private float _sivePlayer;
+    [SerializeField] private float _sizePlayer;
     private PlayerCharacter _player;
     private SystemBuss _systemBuss;
 
@@ -29,6 +29,6 @@ public class LessenPlayer : MonoBehaviour
 
     private void OnLessen()
     {
-        _player.ChangeSize(_sivePlayer);
+        _player.ChangeSize(_sizePlayer);
     }
 }

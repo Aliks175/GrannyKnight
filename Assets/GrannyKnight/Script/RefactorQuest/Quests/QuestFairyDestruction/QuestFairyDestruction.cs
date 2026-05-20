@@ -35,14 +35,14 @@ public class QuestFairyDestruction : Quest
         _controlFairyItem.OnLostItem += (contex) =>
         {
             _countTempItem = contex;
-            if(_uiThree == null) { return; }
-            _uiThree.OnUpdateUi(_countTempEnemy, _countTempItem);
+            if (_uiThree == null) { return; }
+            _uiThree.OnUpdateUi(_countTempItem);
         };
         _fairyCreater.OnSleepFairy += () =>
         {
             _countTempEnemy--;
             if (_uiThree == null) { return; }
-            _uiThree.OnUpdateUi(_countTempEnemy, _countTempItem);
+            _uiThree.OnUpdateUi(_countTempItem);
         };
     }
 
@@ -88,8 +88,8 @@ public class QuestFairyDestruction : Quest
         OnStart?.Invoke();
         StartGame();
         if (_uiThree == null) { return; }
-        _uiThree.OnUpdateUi(_countTempEnemy, _countTempItem);
-        _uiThree.StartTimerGame(StartGame);
+        _uiThree.OnUpdateUi(_countTempItem);
+        _uiThree.StartTimerGame();
     }
 
     public override void StopQuest(QuestEnding quest)
@@ -119,8 +119,8 @@ public class QuestFairyDestruction : Quest
         ControlUi();
         OnStart?.Invoke();
         if (_uiThree == null) { return; }
-        _uiThree.OnUpdateUi(_countTempEnemy, _countTempItem);
-        _uiThree.StartTimerGame(StartGame);
+        _uiThree.OnUpdateUi(_countTempItem);
+        _uiThree.StartTimerGame();
     }
 
     private void StartGame()
@@ -185,7 +185,7 @@ public class QuestFairyDestruction : Quest
         _countTempItem = _countItem;
         _countTempEnemy = _countAllEnemy;
         if (_uiThree == null) { return; }
-        _uiThree.Initialization(_countAllEnemy, _countItem);
+        _uiThree.Initialization(_countItem);
 
     }
 

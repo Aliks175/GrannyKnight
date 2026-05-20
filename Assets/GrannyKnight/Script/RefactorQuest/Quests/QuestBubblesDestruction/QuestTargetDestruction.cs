@@ -40,6 +40,7 @@ public class QuestTargetDestruction : Quest
     {
         OnStart?.Invoke();
         _controlBubbles.StartQuest(_countBubblesDestruction);
+        Debug.Log("StartQuest()");
     }
 
     public override void StopQuest(QuestEnding quest)

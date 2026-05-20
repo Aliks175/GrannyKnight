@@ -21,13 +21,12 @@ public class MoveToPlayer : IDisposable
 
     public void Dispose()
     {
-       
         //_waitStayToken?.Cancel();
         //_waitStayToken?.Dispose();
         //_waitStayToken = null;
         if (_agent != null)
         {
-        _agent.isStopped = true;
+        //_agent.isStopped = true;
         ControlMove(false);
         }
     }
@@ -60,7 +59,7 @@ public class MoveToPlayer : IDisposable
             await UniTask.Delay(TimeSpan.FromSeconds(0.1f), cancellationToken:cancellationToken);
             if (CheckDistance())
             {
-                Debug.Log($"Move");
+                //Debug.Log($"Move");
                 Move(_player.transform.position);
             }
         }
@@ -123,7 +122,7 @@ public class MoveToPlayer : IDisposable
 
         if (!_agent.isOnNavMesh)
         {
-            Debug.LogError($"isOnNavMesh = {_agent.isOnNavMesh}");
+            //Debug.LogError($"isOnNavMesh = {_agent.isOnNavMesh}");
             return false;
         }
 
@@ -159,8 +158,8 @@ public class MoveToPlayer : IDisposable
         Vector3 durection = _agent.transform.position - _player.transform.position;
         float distance = durection.magnitude;
 
-        Debug.Log($"distance = {distance}");
-        Debug.Log($"CheckDistance = {_stopDistance < distance}");
+        //Debug.Log($"distance = {distance}");
+        //Debug.Log($"CheckDistance = {_stopDistance < distance}");
         return _stopDistance < distance;
     }
 }

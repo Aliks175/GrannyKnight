@@ -8,6 +8,8 @@ public class UiInstaller : MonoInstaller
     public override void InstallBindings()
     {
         BindFactoryUi();
+        BindPromptUi();
+        BindImporter();
     }
 
     private void BindFactoryUi()
@@ -16,5 +18,17 @@ public class UiInstaller : MonoInstaller
        .AsSingle()
        .WithArguments(_prefPlayerUi)
        .NonLazy();
+    }
+
+    private void BindPromptUi()
+    {
+        Container.BindInterfacesAndSelfTo<PromptManager>()
+       .AsSingle();
+    }
+
+    private void BindImporter()
+    {
+        Container.BindInterfacesAndSelfTo<PromptManagerQuestImporter>()
+              .AsSingle();
     }
 }

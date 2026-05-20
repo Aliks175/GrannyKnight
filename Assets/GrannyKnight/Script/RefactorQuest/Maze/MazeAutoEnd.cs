@@ -9,6 +9,7 @@ public class MazeAutoEnd : MonoBehaviour
 
     private void OnAutoEnd()
     {
+        Debug.Log("OnAutoEnd");
         _events.Invoke();
         _isInvoke = true;
     }

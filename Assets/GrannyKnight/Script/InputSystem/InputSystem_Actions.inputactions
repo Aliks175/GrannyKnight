@@ -34,10 +34,19 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "ShootTwo",
+                    "type": "Button",
+                    "id": "129af0c6-3c9c-4bcd-ab3a-062effc5c3aa",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Interact",
                     "type": "Button",
                     "id": "852140f2-7766-474d-8707-702459ba45f3",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "Hold",
                     "initialStateCheck": false
@@ -64,7 +73,7 @@
                     "name": "Previous",
                     "type": "Button",
                     "id": "2776c80d-3c14-4091-8c56-d04ced07a2b0",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -181,6 +190,15 @@
                     "name": "SkipUi",
                     "type": "Button",
                     "id": "c0301c41-c39f-415a-829d-db4151939739",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Block",
+                    "type": "Button",
+                    "id": "53dfda1e-892c-466e-a305-453acbf28af9",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -691,6 +709,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "SkipUi",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ab6f068e-d999-45eb-a97c-7f3eb7c79ad9",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ShootTwo",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d74c492a-3ab0-4d14-8a97-f0732896d123",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Block",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

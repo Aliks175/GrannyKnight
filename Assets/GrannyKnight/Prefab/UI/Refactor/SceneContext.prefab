@@ -25,14 +25,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2873249629815602092}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5111597182608954954}
   - {fileID: 2353046247371616223}
-  - {fileID: 4138390099402046150}
+  - {fileID: 4611651570837537908}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &965450478417936643
@@ -51,7 +51,7 @@ MonoBehaviour:
   _monoInstallers:
   - {fileID: 6906416710416247736}
   - {fileID: 8135182214393220285}
-  - {fileID: 6052726076855049975}
+  - {fileID: 2302028014170566812}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -66,7 +66,7 @@ MonoBehaviour:
   OnPostResolve:
     m_PersistentCalls:
       m_Calls: []
-  _parentNewObjectsUnderSceneContext: 0
+  _parentNewObjectsUnderSceneContext: 1
   _contractNames: []
   _parentContractNames: []
 --- !u!1 &4741293877419279068
@@ -114,7 +114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _prefPlayerUi: {fileID: 5852727279792659631, guid: b228e48a51db9da45999038a56e55bea, type: 3}
---- !u!1 &8832898021478791131
+--- !u!1 &5524523858938997083
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,43 +122,42 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4138390099402046150}
-  - component: {fileID: 6052726076855049975}
+  - component: {fileID: 4611651570837537908}
+  - component: {fileID: 2302028014170566812}
   m_Layer: 0
-  m_Name: DialogueInstaller
+  m_Name: DialogueSystemInstaller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4138390099402046150
+--- !u!4 &4611651570837537908
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8832898021478791131}
+  m_GameObject: {fileID: 5524523858938997083}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3467805520185381508}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6052726076855049975
+--- !u!114 &2302028014170566812
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8832898021478791131}
+  m_GameObject: {fileID: 5524523858938997083}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7395e065214b12d4b84195ab2edceee8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueUI: {fileID: 0}
 --- !u!1 &9128861936035273520
 GameObject:
   m_ObjectHideFlags: 0

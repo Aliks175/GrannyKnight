@@ -8,14 +8,14 @@ public class QuestProtectionGarden : Quest
 {
     [SerializeField] private List<Transform> _posMonsterSpawn;
     private ControlProtectionGarden _controlProtectionGarden;
-    private BlackoutScreen _playerStrategy;
+    private HealthBarScreen _playerStrategy;
     private SystemBuss _systemBuss;
 
     public override event Action<QuestEnding> OnEnd;
     public override event Action OnStart;
 
     [Inject]
-    public void Construct(ControlProtectionGarden controlProtectionGarden, BlackoutScreen playerStrategy, SystemBuss systemBuss)
+    public void Construct(ControlProtectionGarden controlProtectionGarden, HealthBarScreen playerStrategy, SystemBuss systemBuss)
     {
         _controlProtectionGarden = controlProtectionGarden;
         _playerStrategy = playerStrategy;

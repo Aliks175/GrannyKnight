@@ -34,7 +34,7 @@ namespace Refactor
             }
             else
             {
-                Debug.Log($"ImporterPlayerWeaponSystem - OnChangeWeapon {weapon.TypeShootingSystem}");
+                //Debug.Log($"ImporterPlayerWeaponSystem - OnChangeWeapon {weapon.TypeShootingSystem}");
                 _weaponSystem.ChangeShootSystem(weapon.TypeShootingSystem);
             }
             _weaponSystem.SetWeapon(weapon);

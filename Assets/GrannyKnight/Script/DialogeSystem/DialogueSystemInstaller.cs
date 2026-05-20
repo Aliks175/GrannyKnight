@@ -1,18 +1,32 @@
-using Zenject;
 using UnityEngine;
+using Zenject;
 
 public class DialogueSystemInstaller : MonoInstaller
 {
-    [SerializeField] private DialogueCanvas dialogueUI;
-
+    [SerializeField] private string _pathLocalization = "Localization/ru";
     public override void InstallBindings()
     {
-        // Localization
-        Container.Bind<LocalizationManager>().AsSingle();
+        BindLocalization();
+        BindDialogue();
+        BindImporter();
+    }
 
-        // Dialogue
-        Container.Bind<DialogueCanvas>().FromInstance(dialogueUI).AsSingle();
-        Container.BindInterfacesAndSelfTo<DialogueManager>().AsSingle();
-        Container.BindInterfacesAndSelfTo<DialogueSystemInstalizer>().AsSingle();
+    private void BindLocalization()
+    {
+        Container.Bind<LocalizationManager>().AsTransient();
+    }
+
+    private void BindDialogue()
+    {
+        Container.BindInterfacesAndSelfTo<DialogueManager>()
+            .AsSingle()
+            .WithArguments(_pathLocalization);
+           
+        //Container.BindInterfacesAndSelfTo<DialogueSystemInstalizer>().AsSingle();
+    }
+
+    private void BindImporter()
+    {
+        Container.BindInterfacesAndSelfTo<DialogueManagerCanvasImporter>().AsSingle();
     }
 }

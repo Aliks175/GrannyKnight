@@ -13,7 +13,8 @@ public class HealthMonsterGarden
 
     public HealthMonsterGarden()
     {
-        _maxHP = UnityEngine.Random.Range(50, 100);
+        _maxHP = UnityEngine.Random.Range(25, 50);
+        //_maxHP = 900;
         _hP = _maxHP;
     }
 

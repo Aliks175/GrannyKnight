@@ -21,7 +21,6 @@ public class BlackoutScreen : IPlayerStrategyHealtheble, IDisposable
     private const float _constantOne = 1f;
     private const float _constantZero = 0f;
 
-
     public event Action OnEnd;
 
     public BlackoutScreen(Image image, int health, float timeImmunity, float timeToRegen, int[] stageHealth)
@@ -42,13 +41,18 @@ public class BlackoutScreen : IPlayerStrategyHealtheble, IDisposable
         _cancelToken = null;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
-
         if (!CheckImmunityDamage()) { return; }
-        _healthPlayer -= damage;
+        _healthPlayer -= 1;
         Debug.Log($"_healthPlayer = {_healthPlayer}");
         CheckHealth();
+    }
+
+    public void OffUi()
+    {
+        _blackoutImage.enabled = false;
+        _isAlife = false;
     }
 
     private void CheckHealth()
