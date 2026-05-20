@@ -1,4 +1,5 @@
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,6 +8,7 @@ public class QuestPrompt : MonoBehaviour
     [SerializeField] private CanvasGroup _canvasGroup;
     [SerializeField] protected RectTransform _backImage;
     [SerializeField] protected RectTransform _bodyText;
+    [SerializeField] protected TextMeshProUGUI _textPrompt;
     [SerializeField] protected float _endPosition;
     private Vector2 _bodyTextStartPos;
     private Vector2 _bodyTextEndPos;
@@ -14,7 +16,6 @@ public class QuestPrompt : MonoBehaviour
     private Tween _close;
     private Tween _shake;
     private bool _isVisible;
-    // 30 340
 
     private void Start()
     {
@@ -35,14 +36,12 @@ public class QuestPrompt : MonoBehaviour
 
         _shake = _backImage.DOShakeAnchorPos(0.5f, 20, 10)
                 .SetAutoKill(false);
-
     }
 
     private void Update()
     {
         if (Keyboard.current.tabKey.wasPressedThisFrame)
         {
-            Debug.Log($"Press  _isVisible {_isVisible}");
             if (_isVisible)
             {
                 _open.Restart();
@@ -57,5 +56,10 @@ public class QuestPrompt : MonoBehaviour
             }
             _isVisible = !_isVisible;
         }
+    }
+
+    public void SetText(string tempText)
+    {
+        _textPrompt.SetText(tempText);
     }
 }

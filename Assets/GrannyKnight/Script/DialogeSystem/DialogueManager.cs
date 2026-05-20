@@ -5,30 +5,31 @@ using FMOD.Studio;
 using System;
 using Zenject;
 
-public class DialogueManager : IInitializable, IDisposable
+public class DialogueManager : IDisposable
 {
     private readonly LocalizationManager localization;
-    private readonly DialogueCanvas dialogueUI;
+    private DialogueCanvas dialogueUI;
 
     private CancellationTokenSource cts;
 
     private bool skipRequested;
     private UniTaskCompletionSource dialogueFinishedTcs;
 
-    public DialogueManager(LocalizationManager localization, DialogueCanvas dialogueUI)
+    public DialogueManager(LocalizationManager localization, string pathLocalization)
     {
         this.localization = localization;
-        this.dialogueUI = dialogueUI;
+        localization.Load(pathLocalization);
+    }
+
+    public void Construct(DialogueCanvas dialogueCanvas)
+    {
+        dialogueUI = dialogueCanvas;
+        dialogueUI.OnSkip += SkipLine;
     }
 
     public void Dispose()
     {
         dialogueUI.OnSkip -= SkipLine;
-    }
-
-    public void Initialize()
-    {
-        dialogueUI.OnSkip += SkipLine;
     }
 
     public async UniTask StartDialogue(string filePath, string dialogueId)

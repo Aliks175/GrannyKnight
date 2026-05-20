@@ -784,7 +784,8 @@ MonoBehaviour:
       m_Calls: []
   _parentNewObjectsUnderSceneContext: 0
   _contractNames: []
-  _parentContractNames: []
+  _parentContractNames:
+  - GamePlay
 --- !u!4 &1400504432
 Transform:
   m_ObjectHideFlags: 0
@@ -1123,10 +1124,6 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1466751087}
-    - target: {fileID: 6829219647276315305, guid: 39ce8717b125a474eb2f6548ef76879f, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7512023492517469978, guid: 39ce8717b125a474eb2f6548ef76879f, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -1137,7 +1134,7 @@ PrefabInstance:
       objectReference: {fileID: 1466751087}
     - target: {fileID: 7703311581484594220, guid: 39ce8717b125a474eb2f6548ef76879f, type: 3}
       propertyPath: m_VersionIndex
-      value: 3319
+      value: 3331
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1150,9 +1147,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 0}
     - targetCorrespondingSourceObject: {fileID: 7822380266423307588, guid: 39ce8717b125a474eb2f6548ef76879f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 302769036081830453, guid: 39ce8717b125a474eb2f6548ef76879f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 39ce8717b125a474eb2f6548ef76879f, type: 3}

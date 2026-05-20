@@ -991,6 +991,50 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!1 &2448191803329673270
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4428563649625007914}
+  - component: {fileID: 7873809482495859927}
+  m_Layer: 0
+  m_Name: Prompts
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4428563649625007914
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2448191803329673270}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1004.0418, y: -4.226343, z: -0.38819885}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6488841365752234551}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7873809482495859927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2448191803329673270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f5153aa987595a4db46ef78342b04ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3058250020601010274
 GameObject:
   m_ObjectHideFlags: 0
@@ -3685,7 +3729,8 @@ Transform:
   m_LocalPosition: {x: -33.99508, y: -13.488874, z: 20.12559}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4428563649625007914}
   m_Father: {fileID: 3930366944221201796}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6143673999920520475
@@ -3728,6 +3773,18 @@ MonoBehaviour:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 7873809482495859927}
+          m_TargetAssemblyTypeName: GetterPrompt, Assembly-CSharp
+          m_MethodName: SetPromptID
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 30
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
@@ -3845,6 +3902,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 1
           m_CallState: 2
+        - m_Target: {fileID: 7873809482495859927}
+          m_TargetAssemblyTypeName: GetterPrompt, Assembly-CSharp
+          m_MethodName: SetPromptID
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 31
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
   - Name: "\u0414\u0438\u0430\u043B\u043E\u0433 \u0441 \u0422\u043E\u043C\u043E\u043C
       \u0443 \u0432\u044B\u043A\u043B\u044E\u0447\u0430\u0442\u0435\u043B\u044F"
     Id: 41
@@ -3883,6 +3952,18 @@ MonoBehaviour:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 7873809482495859927}
+          m_TargetAssemblyTypeName: GetterPrompt, Assembly-CSharp
+          m_MethodName: SetPromptID
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 333
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
@@ -3958,6 +4039,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 7873809482495859927}
+          m_TargetAssemblyTypeName: GetterPrompt, Assembly-CSharp
+          m_MethodName: SetPromptID
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 32
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - Name: "\u0412\u043E\u0437\u0432\u0440\u0430\u0449\u0435\u043D\u0438\u0435 \u0434\u043E\u043C\u043E\u0439"
     Id: 40
     OnInteract:
@@ -3983,6 +4076,18 @@ MonoBehaviour:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 7873809482495859927}
+          m_TargetAssemblyTypeName: GetterPrompt, Assembly-CSharp
+          m_MethodName: SetPromptID
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 33
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
@@ -5586,7 +5691,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 496531083504664124, guid: fbb4a306cedf27c4e95a37a0b1ee048d, type: 3}
       propertyPath: m_VersionIndex
-      value: 814
+      value: 820
       objectReference: {fileID: 0}
     - target: {fileID: 519627124552877801, guid: fbb4a306cedf27c4e95a37a0b1ee048d, type: 3}
       propertyPath: m_IsActive
@@ -5606,15 +5711,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1207731034787604460, guid: fbb4a306cedf27c4e95a37a0b1ee048d, type: 3}
       propertyPath: m_VersionIndex
-      value: 3695
+      value: 3701
       objectReference: {fileID: 0}
     - target: {fileID: 1365135260063317823, guid: fbb4a306cedf27c4e95a37a0b1ee048d, type: 3}
       propertyPath: m_VersionIndex
-      value: 808
+      value: 814
       objectReference: {fileID: 0}
     - target: {fileID: 1377283575343832942, guid: fbb4a306cedf27c4e95a37a0b1ee048d, type: 3}
       propertyPath: m_VersionIndex
-      value: 2924
+      value: 2930
       objectReference: {fileID: 0}
     - target: {fileID: 1544951806751741232, guid: fbb4a306cedf27c4e95a37a0b1ee048d, type: 3}
       propertyPath: m_VersionIndex
@@ -5674,7 +5779,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2282393419688517742, guid: fbb4a306cedf27c4e95a37a0b1ee048d, type: 3}
       propertyPath: m_VersionIndex
-      value: 4892
+      value: 4898
       objectReference: {fileID: 0}
     - target: {fileID: 2596186384617513531, guid: fbb4a306cedf27c4e95a37a0b1ee048d, type: 3}
       propertyPath: m_VersionIndex
@@ -5702,7 +5807,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3166026520417357224, guid: fbb4a306cedf27c4e95a37a0b1ee048d, type: 3}
       propertyPath: m_VersionIndex
-      value: 3662
+      value: 3668
       objectReference: {fileID: 0}
     - target: {fileID: 3701062249265720759, guid: fbb4a306cedf27c4e95a37a0b1ee048d, type: 3}
       propertyPath: m_VersionIndex
@@ -5722,7 +5827,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4518280895270637153, guid: fbb4a306cedf27c4e95a37a0b1ee048d, type: 3}
       propertyPath: m_VersionIndex
-      value: 5273
+      value: 5279
       objectReference: {fileID: 0}
     - target: {fileID: 4712492365076367069, guid: fbb4a306cedf27c4e95a37a0b1ee048d, type: 3}
       propertyPath: m_VersionIndex
@@ -5730,7 +5835,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4729797801215591968, guid: fbb4a306cedf27c4e95a37a0b1ee048d, type: 3}
       propertyPath: m_VersionIndex
-      value: 1200
+      value: 1206
       objectReference: {fileID: 0}
     - target: {fileID: 4861811491736587936, guid: fbb4a306cedf27c4e95a37a0b1ee048d, type: 3}
       propertyPath: m_VersionIndex
@@ -5762,7 +5867,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5263776099510882713, guid: fbb4a306cedf27c4e95a37a0b1ee048d, type: 3}
       propertyPath: m_VersionIndex
-      value: 1242
+      value: 1248
       objectReference: {fileID: 0}
     - target: {fileID: 5289822340297545469, guid: fbb4a306cedf27c4e95a37a0b1ee048d, type: 3}
       propertyPath: m_VersionIndex
@@ -5770,7 +5875,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5736455395486188995, guid: fbb4a306cedf27c4e95a37a0b1ee048d, type: 3}
       propertyPath: m_VersionIndex
-      value: 814
+      value: 820
       objectReference: {fileID: 0}
     - target: {fileID: 5934990280322854740, guid: fbb4a306cedf27c4e95a37a0b1ee048d, type: 3}
       propertyPath: m_VersionIndex
@@ -5778,7 +5883,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6358605640839042648, guid: fbb4a306cedf27c4e95a37a0b1ee048d, type: 3}
       propertyPath: m_VersionIndex
-      value: 543
+      value: 549
       objectReference: {fileID: 0}
     - target: {fileID: 6470204948506704781, guid: fbb4a306cedf27c4e95a37a0b1ee048d, type: 3}
       propertyPath: m_Name
@@ -5786,7 +5891,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7034130404876495255, guid: fbb4a306cedf27c4e95a37a0b1ee048d, type: 3}
       propertyPath: m_VersionIndex
-      value: 844
+      value: 850
       objectReference: {fileID: 0}
     - target: {fileID: 7217420950222931262, guid: fbb4a306cedf27c4e95a37a0b1ee048d, type: 3}
       propertyPath: m_VersionIndex
@@ -5806,7 +5911,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7997994206993087794, guid: fbb4a306cedf27c4e95a37a0b1ee048d, type: 3}
       propertyPath: m_VersionIndex
-      value: 824
+      value: 830
       objectReference: {fileID: 0}
     - target: {fileID: 8306101498540905485, guid: fbb4a306cedf27c4e95a37a0b1ee048d, type: 3}
       propertyPath: m_VersionIndex
@@ -5814,7 +5919,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8720359244273865078, guid: fbb4a306cedf27c4e95a37a0b1ee048d, type: 3}
       propertyPath: m_VersionIndex
-      value: 844
+      value: 850
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1847031306268211653, guid: fbb4a306cedf27c4e95a37a0b1ee048d, type: 3}
