@@ -5,11 +5,11 @@ OcclusionCullingSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_OcclusionBakeSettings:
-    smallestOccluder: 5
+    smallestOccluder: 1
     smallestHole: 0.25
     backfaceThreshold: 100
-  m_SceneGUID: 3aabddacc439cb047825e738de6b2c3d
-  m_OcclusionCullingData: {fileID: 36300000, guid: 7f30a0cfea7e218448504d774a449cb5, type: 2}
+  m_SceneGUID: 00000000000000000000000000000000
+  m_OcclusionCullingData: {fileID: 0}
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
@@ -198,7 +198,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 725d63b0c0353a84691e2d2adbe015c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnPoint: {fileID: 866130156}
+  _spawnPoint: {fileID: 1612963697}
 --- !u!1 &813644236
 GameObject:
   m_ObjectHideFlags: 0
@@ -240,12 +240,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 813644236}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e846c9d1c3c66024a8a0f955f7a7f9b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Value: 60
+  _Value: -1
 --- !u!1 &866130155
 GameObject:
   m_ObjectHideFlags: 0
@@ -403,7 +403,7 @@ Transform:
   m_GameObject: {fileID: 2104664811}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.051, y: 3.76218, z: 5.459}
+  m_LocalPosition: {x: 2.79, y: 4.65, z: -36.08}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
