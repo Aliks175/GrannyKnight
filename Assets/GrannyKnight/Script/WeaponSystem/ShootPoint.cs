@@ -17,9 +17,9 @@ public class ShootPoint : MonoBehaviour, IShootPointeble
     [SerializeField] Animator _animatorHand;
     [SerializeField] WeaponEffectAbstract _weaponEffectAbstract;
 
-
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.DrawSphere(_firePoint.position, 1);
-    //}
+   
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawSphere(_firePoint.position, 1);
+    }
 }

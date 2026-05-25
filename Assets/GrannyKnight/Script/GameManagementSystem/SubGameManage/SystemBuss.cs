@@ -6,12 +6,18 @@ public class SystemBuss
     private PlayerCharacter player;
 
     public event Action<PlayerUi> OnConstructPlayerUi;
+    public event Action OnReadySpawnPlayer;
     public event Action<PlayerCharacter> OnSpawnPlayer;
     public event Action<IEventHistoryble> OnEventHistory;
 
     public void ConstructPlayerUi(PlayerUi playerUi)
     {
         OnConstructPlayerUi?.Invoke(playerUi);
+    }
+
+    public void ReadySpawnPlayer( )
+    {
+        OnReadySpawnPlayer?.Invoke();
     }
 
     public void SpawnPlayer(PlayerCharacter playerCharacter)
