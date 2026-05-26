@@ -5,23 +5,16 @@ using Zenject;
 public class StartHistory : MonoBehaviour
 {
     [SerializeField] private EventHistory _history;
-    private SystemBuss _systemBuss;
-
-    [Inject]
-    public void Construct(SystemBuss systemBuss)
-    {
-        _systemBuss = systemBuss;
-    }
-
+    [SerializeField] private float _timeWait = 1f;
+  
     private void Start()
     {
-        _systemBuss.ReadySpawnPlayer();
         StartCoroutine(WaitStartSecond());
     }
 
     private IEnumerator WaitStartSecond()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(_timeWait);
         _history.ActiveHistory();
     }
 }

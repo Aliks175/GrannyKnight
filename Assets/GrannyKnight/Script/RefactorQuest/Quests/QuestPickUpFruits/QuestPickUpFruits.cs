@@ -3,6 +3,7 @@ using DG.Tweening;
 using System;
 using System.Threading;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class QuestPickUpFruits : Quest
 {
@@ -25,22 +26,25 @@ public class QuestPickUpFruits : Quest
     [SerializeField] private float _timeToQuest;
     [SerializeField] private int[] _targetFruit;
     [SerializeField] private ParticleSystem _particle;
-    [SerializeField] private GameObject[] _fruits;
+
+    [SerializeField] private TargetFruits[] _prefFruits;
+    [SerializeField] private Transform[] _fruits;
+    [SerializeField] private Transform _parant;
 
     // Приватные поля
     private Tween _currentTween;
-    private FruitData[] _originalFruitData;
+    //private FruitData[] _originalFruitData;
     private CancellationTokenSource _ctsSleepPeriod;
     private CancellationTokenSource _ctsTimerEndGame;
 
-    [System.Serializable]
-    private struct FruitData
-    {
-        public GameObject prefab;
-        public Vector3 position;
-        public Quaternion rotation;
-        public Transform parent;
-    }
+    //[System.Serializable]
+    //private struct FruitData
+    //{
+    //    public TargetFruits prefab;
+    //    public Vector3 position;
+    //    public Quaternion rotation;
+    //    public Transform parent;
+    //}
     private float _timer;
     private float _sleepEndTime;
     private int _maxCountFruit;
@@ -68,7 +72,8 @@ public class QuestPickUpFruits : Quest
     public override void StartQuest()
     {
         OnStart?.Invoke();
-        RestoreFruits();
+        SaveOriginalFruits();
+        //RestoreFruits();
         _fruitCount = 0;
         StartGame();
         Debug.Log($"StartGame");
@@ -280,7 +285,7 @@ public class QuestPickUpFruits : Quest
         _timer = _timeToQuest;
         _fruitCount = 0;
         CalculateMaxCountFruit();
-        SaveOriginalFruits();
+        //SaveOriginalFruits();
         _uiTwo.Initialization(_maxCountFruit);
     }
 
@@ -290,37 +295,46 @@ public class QuestPickUpFruits : Quest
         if (_targetFruit == null) return;
         _maxCountFruit = _targetFruit[2];
     }
+
     private void SaveOriginalFruits()
     {
-        if (_originalFruitData == null)
-        {
-            _originalFruitData = new FruitData[_fruits.Length];
+        //if (_originalFruitData == null)
+        //{
+            //_originalFruitData = new FruitData[_fruits.Length];
             for (int i = 0; i < _fruits.Length; i++)
             {
-                GameObject copy = Instantiate(_fruits[i], _fruits[i].transform.parent);
-                copy.SetActive(false);
-                _originalFruitData[i] = new FruitData
-                {
-                    prefab = copy,
-                    position = _fruits[i].transform.position,
-                    rotation = _fruits[i].transform.rotation,
-                    parent = _fruits[i].transform.parent
-                };
+                TargetFruits copy = Instantiate(GetFruits(), _fruits[i].position,Quaternion.identity, _parant);
+                //copy.SetActive(false);
+                //_originalFruitData[i] = new FruitData
+                //{
+                //    //prefab = copy,
+                //    position = _fruits[i].transform.position,
+                //    rotation = _fruits[i].transform.rotation,
+                //    parent = _fruits[i].transform.parent
+                //};
             }
-        }
+        //}
     }
 
-    private void RestoreFruits()
+    private TargetFruits GetFruits()
     {
-        for (int i = 0; i < _originalFruitData.Length; i++)
-        {
-            if (_fruits[i] == null)
-            {
-                _fruits[i] = Instantiate(_originalFruitData[i].prefab, _originalFruitData[i].position, _originalFruitData[i].rotation, _originalFruitData[i].parent);
-                _fruits[i].SetActive(true);
-            }
-        }
+      int count =  Random.Range(0, _prefFruits.Length);
+        return _prefFruits[count];
     }
+
+
+
+    //private void RestoreFruits()
+    //{
+    //    for (int i = 0; i < _originalFruitData.Length; i++)
+    //    {
+    //        if (_fruits[i] == null)
+    //        {
+    //            _fruits[i] = Instantiate(_originalFruitData[i].prefab, _originalFruitData[i].position, _originalFruitData[i].rotation, _originalFruitData[i].parent);
+    //            _fruits[i].SetActive(true);
+    //        }
+    //    }
+    //}
 
     #endregion
 }

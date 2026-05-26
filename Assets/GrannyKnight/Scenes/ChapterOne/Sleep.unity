@@ -12564,7 +12564,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1780463428}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f031cbaf917cc542b518bb4d2513fef, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b08a323d59056f449204b79508bd244, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!43 &1809877315
@@ -15520,6 +15520,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 631719786}
+    - target: {fileID: 1786822459128957566, guid: e19d45d7d2cb3aa44a20a79b7c01f3ae, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1800474711656861645, guid: e19d45d7d2cb3aa44a20a79b7c01f3ae, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -15773,6 +15777,10 @@ PrefabInstance:
       value: SetActive
       objectReference: {fileID: 0}
     - target: {fileID: 2409175528562737900, guid: e19d45d7d2cb3aa44a20a79b7c01f3ae, type: 3}
+      propertyPath: _history.Array.data[11].OnInteract.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 2409175528562737900, guid: e19d45d7d2cb3aa44a20a79b7c01f3ae, type: 3}
       propertyPath: _history.Array.data[0].OnInteract.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: UnityEngine.GameObject, UnityEngine
       objectReference: {fileID: 0}
@@ -15795,6 +15803,10 @@ PrefabInstance:
     - target: {fileID: 2409175528562737900, guid: e19d45d7d2cb3aa44a20a79b7c01f3ae, type: 3}
       propertyPath: _history.Array.data[9].OnInteract.m_PersistentCalls.m_Calls.Array.data[9].m_TargetAssemblyTypeName
       value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2409175528562737900, guid: e19d45d7d2cb3aa44a20a79b7c01f3ae, type: 3}
+      propertyPath: _history.Array.data[11].OnInteract.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ControlGame, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2409175528562737900, guid: e19d45d7d2cb3aa44a20a79b7c01f3ae, type: 3}
       propertyPath: _history.Array.data[0].OnInteract.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument

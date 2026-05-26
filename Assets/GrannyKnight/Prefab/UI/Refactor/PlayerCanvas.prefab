@@ -337,10 +337,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Q
+  m_text: q
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: dcbbb7cae919b974499714dc341a8ede, type: 2}
-  m_sharedMaterial: {fileID: -3526032815497595818, guid: dcbbb7cae919b974499714dc341a8ede, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 04cbb72c0f8ad1943bc695e8d8c5e90f, type: 2}
+  m_sharedMaterial: {fileID: 58835543087975762, guid: 04cbb72c0f8ad1943bc695e8d8c5e90f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1028,6 +1028,22 @@ PrefabInstance:
       propertyPath: m_RaycastTarget
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3177958133333657127, guid: aefe7df217b59b04e8167730b1c7a5a6, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3177958133333657127, guid: aefe7df217b59b04e8167730b1c7a5a6, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3177958133333657127, guid: aefe7df217b59b04e8167730b1c7a5a6, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3177958133333657127, guid: aefe7df217b59b04e8167730b1c7a5a6, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3600163417104532274, guid: aefe7df217b59b04e8167730b1c7a5a6, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1113,7 +1129,43 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6325300042508273025, guid: aefe7df217b59b04e8167730b1c7a5a6, type: 3}
+      propertyPath: m_Maskable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6325300042508273025, guid: aefe7df217b59b04e8167730b1c7a5a6, type: 3}
+      propertyPath: m_margin.w
+      value: 60.010254
+      objectReference: {fileID: 0}
+    - target: {fileID: 6325300042508273025, guid: aefe7df217b59b04e8167730b1c7a5a6, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+    - target: {fileID: 6325300042508273025, guid: aefe7df217b59b04e8167730b1c7a5a6, type: 3}
+      propertyPath: m_isRichText
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6325300042508273025, guid: aefe7df217b59b04e8167730b1c7a5a6, type: 3}
       propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6325300042508273025, guid: aefe7df217b59b04e8167730b1c7a5a6, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+    - target: {fileID: 6325300042508273025, guid: aefe7df217b59b04e8167730b1c7a5a6, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6325300042508273025, guid: aefe7df217b59b04e8167730b1c7a5a6, type: 3}
+      propertyPath: m_EmojiFallbackSupport
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6325300042508273025, guid: aefe7df217b59b04e8167730b1c7a5a6, type: 3}
+      propertyPath: m_useMaxVisibleDescender
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6489122434357008630, guid: aefe7df217b59b04e8167730b1c7a5a6, type: 3}
+      propertyPath: m_Maskable
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6489122434357008630, guid: aefe7df217b59b04e8167730b1c7a5a6, type: 3}
@@ -1123,6 +1175,10 @@ PrefabInstance:
     - target: {fileID: 7423910180783982295, guid: aefe7df217b59b04e8167730b1c7a5a6, type: 3}
       propertyPath: m_Name
       value: PanelQuestPrompt
+      objectReference: {fileID: 0}
+    - target: {fileID: 7423910180783982295, guid: aefe7df217b59b04e8167730b1c7a5a6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8010832534612552123, guid: aefe7df217b59b04e8167730b1c7a5a6, type: 3}
       propertyPath: _textPrompt

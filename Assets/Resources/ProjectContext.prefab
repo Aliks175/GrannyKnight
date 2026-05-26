@@ -181,7 +181,7 @@ GameObject:
   m_Icon: {fileID: 1638116407661442457, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8441677800652500903
 RectTransform:
   m_ObjectHideFlags: 0
@@ -338,14 +338,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1056692356452803036}
     m_Modifications:
-    - target: {fileID: 298577320907900590, guid: c2c0ece69836b6d4eb69b8eae21c75ea, type: 3}
-      propertyPath: m_RaycastTarget
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5968374546753362874, guid: c2c0ece69836b6d4eb69b8eae21c75ea, type: 3}
-      propertyPath: m_RaycastTarget
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6239589249266746268, guid: c2c0ece69836b6d4eb69b8eae21c75ea, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -426,21 +418,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7958308356377363602, guid: c2c0ece69836b6d4eb69b8eae21c75ea, type: 3}
-      propertyPath: m_RaycastTarget
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8129200118921756705, guid: c2c0ece69836b6d4eb69b8eae21c75ea, type: 3}
       propertyPath: m_Name
       value: LoadingScreen
       objectReference: {fileID: 0}
-    - target: {fileID: 9187951855019903569, guid: c2c0ece69836b6d4eb69b8eae21c75ea, type: 3}
-      propertyPath: m_SortingOrder
-      value: 100
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 2092206325856604398, guid: c2c0ece69836b6d4eb69b8eae21c75ea, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2c0ece69836b6d4eb69b8eae21c75ea, type: 3}
