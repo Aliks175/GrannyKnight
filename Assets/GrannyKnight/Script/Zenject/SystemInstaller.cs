@@ -1,10 +1,10 @@
-using System;
 using UnityEngine;
 using Zenject;
 
 public class SystemInstaller : MonoInstaller
 {
     [SerializeField] private LoadingScreen _loadingScreen;
+    [SerializeField] private CutsceneScreen _cutsceneScreen;
 
     public override void InstallBindings()
     {
@@ -38,6 +38,10 @@ public class SystemInstaller : MonoInstaller
         Container.Bind<LoadingScreen>()
        .FromInstance(_loadingScreen)
        .AsSingle();
+
+        Container.Bind<CutsceneScreen>()
+     .FromInstance(_cutsceneScreen)
+     .AsSingle();
     }
 
     private void BindImporter()

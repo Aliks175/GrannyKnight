@@ -15,5 +15,4 @@ public class SpawnPlayer : MonoBehaviour
     {
         _systemBuss.ReadySpawnPlayer();
     }
-
 }

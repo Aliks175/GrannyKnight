@@ -7,11 +7,13 @@ using Zenject;
 
 public class GameManager : IDisposable, IInitializable
 {
+    public AsyncOperation CurrentOperation => _currentOperation;
     private Loading _loading;
     private List<AsyncOperation> scenesLoading;
     private CancellationTokenSource _cancellationToken;
-    private float _totalSceneProgress;
     private OnProgressLoading _progressLoading;
+    private AsyncOperation _currentOperation;
+    private float _totalSceneProgress;
 
     public event EventHandler<OnProgressLoading> OnLoad;
 
@@ -43,7 +45,9 @@ public class GameManager : IDisposable, IInitializable
 
     public void AddScene(ListScene listScene)
     {
-        _loading.LoadAdditive(listScene);
+       var tempScene = _loading.LoadAdditive(listScene);
+        tempScene.allowSceneActivation = false;
+        _currentOperation = tempScene;
     }
 
     public void RemoveScene(ListScene listScene)
