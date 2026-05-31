@@ -1,7 +1,7 @@
 using UnityEngine;
 using Zenject;
 
-public class ControlLoading : MonoBehaviour
+public class ControlLoading
 {
     private GameManager _gameManager;
 

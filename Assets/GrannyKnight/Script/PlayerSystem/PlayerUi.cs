@@ -5,6 +5,11 @@ using Zenject;
 
 public class PlayerUi : MonoBehaviour
 {
+    public QuestPrompt QuestPrompt => _questPrompt;
+    public DialogueCanvas DialogueCanvas => _dialogueCanvas;
+
+    [SerializeField] private QuestPrompt _questPrompt;
+    [SerializeField] private DialogueCanvas _dialogueCanvas;
     [SerializeField] private TextMeshProUGUI _textDescription;
     [SerializeField] private Image _cursor;
 

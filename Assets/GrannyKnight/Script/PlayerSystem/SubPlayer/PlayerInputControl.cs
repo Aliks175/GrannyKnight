@@ -2,7 +2,6 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
-using static Unity.Collections.AllocatorManager;
 
 namespace Refactor
 {
@@ -15,9 +14,10 @@ namespace Refactor
         private TestWeaponSystem _weaponSystem;
         private PlayerSystemActions _playerInput;
         private PlayerSystemActions.PlayerActions _playerActions;
+        private SystemBuss _systemBuss;
         private bool _isPlayerControl;
 
-        public PlayerInputControl(PlayerCharacter testPlayerCharacter, PlayerSystemActions inputActions, PlayerInteracteble testPlayerInteracteble, TestWeaponSystem testWeaponSystem)
+        public PlayerInputControl(PlayerCharacter testPlayerCharacter, PlayerSystemActions inputActions, PlayerInteracteble testPlayerInteracteble, TestWeaponSystem testWeaponSystem, SystemBuss systemBuss)
         {
             _weaponSystem = testWeaponSystem;
             _playerInteracteble = testPlayerInteracteble;
@@ -26,6 +26,7 @@ namespace Refactor
             _playerAim = testPlayerCharacter.PlayerAim;
             _playerInput = inputActions;
             _playerActions = inputActions.Player;
+            _systemBuss = systemBuss;
         }
 
         public void Dispose()
@@ -57,6 +58,15 @@ namespace Refactor
             _playerActions.ShootTwo.canceled += OnShootTwo;
             _playerActions.Block.started += BlockControl;
             _playerActions.Block.canceled += BlockControl;
+            _playerActions.Pause.started += OnPause;
+        }
+
+        private void OnPause(InputAction.CallbackContext context)
+        {
+            if (context.phase == InputActionPhase.Started)
+            {
+                _systemBuss.Pause();
+            }
         }
 
         private void OnShoot(InputAction.CallbackContext context)

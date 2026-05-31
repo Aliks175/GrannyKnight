@@ -11,7 +11,6 @@ public class DialogueSystemInstalizer : IInitializable
 
     public void Initialize()
     {
-        // Больше не нужно загружать общий файл локализации
-        // Файлы локализации будут загружаться автоматически при запуске диалогов
+
     }
 }

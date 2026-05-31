@@ -8,7 +8,7 @@ public class SpriteRotate : MonoBehaviour
     private Transform _cameraTransform;
     private SystemBuss _systemBuss;
     private bool _isReady => _cameraTransform != null;
-
+   
     [Inject]
     public void Construct(SystemBuss systemBuss)
     {
@@ -40,6 +40,7 @@ public class SpriteRotate : MonoBehaviour
     private void Update()
     {
         if (!_isReady) { return; }
+       
         Vector3 tempDirection = transform.position - _cameraTransform.position;
         tempDirection.y = _IsRotateOnlyForY ? 0 : tempDirection.y;
         transform.rotation = Quaternion.LookRotation(tempDirection);

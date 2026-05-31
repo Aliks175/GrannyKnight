@@ -12,5 +12,6 @@ public class TestPlayerSetUpUi : IInitializable
     public void Initialize()
     {
         _factoryPlayerUi.CreatePlayerUi();
+        _factoryPlayerUi.CreateGameUi();
     }
 }

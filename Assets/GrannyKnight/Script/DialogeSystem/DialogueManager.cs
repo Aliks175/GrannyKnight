@@ -1,34 +1,37 @@
-using System.Threading;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 using FMOD.Studio;
 using System;
-using Zenject;
+using System.Threading;
+using UnityEngine;
 
-public class DialogueManager : IInitializable, IDisposable
+public class DialogueManager : IDisposable
 {
     private readonly LocalizationManager localization;
-    private readonly DialogueCanvas dialogueUI;
+    private DialogueCanvas dialogueUI;
 
     private CancellationTokenSource cts;
 
     private bool skipRequested;
     private UniTaskCompletionSource dialogueFinishedTcs;
 
-    public DialogueManager(LocalizationManager localization, DialogueCanvas dialogueUI)
+    public DialogueManager(LocalizationManager localization, string pathLocalization)
     {
         this.localization = localization;
-        this.dialogueUI = dialogueUI;
+        localization.Load(pathLocalization);
+    }
+
+    public void Construct(DialogueCanvas dialogueCanvas)
+    {
+        dialogueUI = dialogueCanvas;
+        dialogueUI.OnSkip += SkipLine;
     }
 
     public void Dispose()
     {
         dialogueUI.OnSkip -= SkipLine;
-    }
-
-    public void Initialize()
-    {
-        dialogueUI.OnSkip += SkipLine;
+        cts?.Cancel();
+        cts?.Dispose();
+        cts = null;
     }
 
     public async UniTask StartDialogue(string filePath, string dialogueId)
@@ -60,7 +63,7 @@ public class DialogueManager : IInitializable, IDisposable
 
         RunDialogue(dialogue, dialogueName, cts.Token).Forget();
 
-        await dialogueFinishedTcs.Task; 
+        await dialogueFinishedTcs.Task;
     }
 
     private async UniTaskVoid RunDialogue(Dialogue dialogue, string dialogueName, CancellationToken token)
@@ -125,7 +128,7 @@ public class DialogueManager : IInitializable, IDisposable
         finally
         {
             dialogueUI.Hide();
-            dialogueFinishedTcs?.TrySetResult(); 
+            dialogueFinishedTcs?.TrySetResult();
         }
     }
 
@@ -166,7 +169,7 @@ public class DialogueManager : IInitializable, IDisposable
 
         if (dialogueFinishedTcs != null)
         {
-            await dialogueFinishedTcs.Task; 
+            await dialogueFinishedTcs.Task;
         }
 
         cts.Dispose();

@@ -17,17 +17,12 @@ public class MoveDollyCart : MonoBehaviour
 
     public void Initialization()
     {
-        //MainSystem.OnUpdate += OnUpdate;
+        OnPlay(false);
     }
 
     public void OnPlay(bool isPlay = true)
     {
         _isPlay = isPlay;
-        if (!_isPlay)
-        {
-            //MainSystem.OnUpdate -= OnUpdate;
-            return;
-        }
     }
 
     private void Update()

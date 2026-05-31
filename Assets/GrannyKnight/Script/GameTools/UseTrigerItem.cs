@@ -1,5 +1,7 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
+using Zenject;
 
 public class UseTrigerItem : MonoBehaviour, IItemUseble
 {
@@ -7,11 +9,20 @@ public class UseTrigerItem : MonoBehaviour, IItemUseble
     public UnityEvent PlayerTriggerEnter;
     public UnityEvent PlayerTriggerExit;
     public UnityEvent PlayerUse;
+    private PlayerCharacter _playerCharacter;
+    private SystemBuss _systemBuss;
     private bool _isReadyActive;
 
-    private void Awake()
+    [Inject]
+    public void Construct(SystemBuss systemBuss)
     {
+        _systemBuss = systemBuss;
         _isReadyActive = false;
+    }
+
+    private void Start()
+    {
+        WaitPlayer().Forget();
     }
 
     public void Interact()
@@ -25,20 +36,21 @@ public class UseTrigerItem : MonoBehaviour, IItemUseble
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.TryGetComponent(out PlayerCharacter player))
+        if (other.CompareTag(Const.PlayerTag))
         {
-            player = other.GetComponentInParent<PlayerCharacter>();
+            if (_playerCharacter == null)
+            {
+                WaitPlayer().Forget();
+            }
+            else if (!_isReadyActive)
+            {
+                _playerCharacter.SetUseItem(this);
+                _isReadyActive = true;
+                PlayerTriggerEnter?.Invoke();
+                if (_showPrompt == null) { return; }
+                _showPrompt.ControlShow(true);
+            }
         }
-
-        if (player == null) { return; }
-        if (_isReadyActive) { return; }
-
-        player.SetUseItem(this);
-        //Debug.Log("Enter");
-        _isReadyActive = true;
-        PlayerTriggerEnter?.Invoke();
-        if (_showPrompt == null) { return; }
-        _showPrompt.ControlShow(true);
     }
 
     private void OnTriggerExit(Collider other)
@@ -52,5 +64,11 @@ public class UseTrigerItem : MonoBehaviour, IItemUseble
             if (_showPrompt == null) { return; }
             _showPrompt.ControlShow(false);
         }
+    }
+
+    private async UniTaskVoid WaitPlayer()
+    {
+        PlayerCharacter playerCharacter = await _systemBuss.GetPlayer();
+        _playerCharacter = playerCharacter;
     }
 }

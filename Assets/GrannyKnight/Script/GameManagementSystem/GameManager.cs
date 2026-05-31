@@ -7,11 +7,13 @@ using Zenject;
 
 public class GameManager : IDisposable, IInitializable
 {
+    public AsyncOperation CurrentOperation => _currentOperation;
     private Loading _loading;
     private List<AsyncOperation> scenesLoading;
     private CancellationTokenSource _cancellationToken;
-    private float _totalSceneProgress;
     private OnProgressLoading _progressLoading;
+    private AsyncOperation _currentOperation;
+    private float _totalSceneProgress;
 
     public event EventHandler<OnProgressLoading> OnLoad;
 
@@ -43,7 +45,9 @@ public class GameManager : IDisposable, IInitializable
 
     public void AddScene(ListScene listScene)
     {
-        _loading.LoadAdditive(listScene);
+        var tempScene = _loading.LoadAdditive(listScene);
+        tempScene.allowSceneActivation = false;
+        _currentOperation = tempScene;
     }
 
     public void RemoveScene(ListScene listScene)
@@ -53,6 +57,7 @@ public class GameManager : IDisposable, IInitializable
 
     public void LoadGame()
     {
+        scenesLoading.Clear();
         CheckAsyncOperation(_loading.LoadSingle(ListScene.GamePlay));
         CheckAsyncOperation(_loading.LoadAdditive(ListScene.RoomPlayer));
         StartTimer(_cancellationToken.Token).Forget();
@@ -61,8 +66,17 @@ public class GameManager : IDisposable, IInitializable
     public void LoadMenu()
     {
         scenesLoading.Clear();
+        if (CurrentOperation != null)
+        {
+            CurrentOperation.allowSceneActivation = true;
+        }
         CheckAsyncOperation(_loading.LoadSingle(ListScene.Menu));
         StartTimer(_cancellationToken.Token).Forget();
+    }
+
+    public void Exit()
+    {
+        Application.Quit();
     }
 
     //public void LoadFreeGame()

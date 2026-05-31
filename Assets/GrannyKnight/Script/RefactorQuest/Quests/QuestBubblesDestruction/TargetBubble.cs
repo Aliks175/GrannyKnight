@@ -6,22 +6,24 @@ public class TargetBubble : MonoBehaviour, IHealtheble, ITarget
     public GameObject Body => gameObject;
     [SerializeField] private ParticleSystem _particleSystem;
     [SerializeField] private GameObject _body;
+    [SerializeField] private SpriteRotate _spriteRotate;
     private Collider _collider;
     private ControlTarget _controlTarget;
     private bool _isAlive;
 
     [Inject]
-    public void Construct(ControlTarget controlBubbles)
+    public void Construct(ControlTarget controlBubbles,Transform transform)
     {
         _controlTarget = controlBubbles;
         _isAlive = true;
         _controlTarget.OnStartQuest += Start;
+        _spriteRotate.SetTarget(transform);
+        _controlTarget.OnStopQuest += OnStopQuest;
     }
 
-    private void Awake()
+    private void OnEnable()
     {
         _collider = GetComponent<Collider>();
-        _controlTarget.OnStopQuest += OnStopQuest;
     }
 
     private void OnDisable()

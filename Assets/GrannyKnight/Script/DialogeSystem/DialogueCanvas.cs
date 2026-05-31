@@ -1,11 +1,9 @@
+using Cysharp.Threading.Tasks;
+using System;
+using System.Threading;
 using TMPro;
 using UnityEngine;
-using Cysharp.Threading.Tasks;
-using UnityEngine.UI;
-using System.Threading;
 using UnityEngine.InputSystem;
-using Zenject;
-using System;
 
 public class DialogueCanvas : MonoBehaviour
 {
@@ -25,7 +23,7 @@ public class DialogueCanvas : MonoBehaviour
     public event Action OnSkip;
     //private DialogueManager _dialogueManager;
 
-    private void Awake ()
+    private void Awake()
     {
         _canvasGroup = GetComponent<CanvasGroup>();
         _canvasGroup.alpha = 0;
@@ -57,7 +55,7 @@ public class DialogueCanvas : MonoBehaviour
     private async UniTask TypeText(string speaker, string text)
     {
         _speakerText.text = speaker;
-        
+
         float delay = 1f / _typingSpeed;
 
         for (int i = 0; i < text.Length; i++)
@@ -81,7 +79,10 @@ public class DialogueCanvas : MonoBehaviour
     }
     public void Hide()
     {
-        _canvasGroup.alpha = 0;
+        if (_canvasGroup != null)
+        {
+            _canvasGroup.alpha = 0;
+        }
     }
     public void Show()
     {
@@ -107,14 +108,14 @@ public class DialogueCanvas : MonoBehaviour
             ShowSkipCanvas();
         }
     }
-    
+
     private async void ShowSkipCanvas()
     {
         _skipCancellationToken?.Cancel();
         _skipCancellationToken = new CancellationTokenSource();
-        
+
         _skipCanvas.alpha = 1;
-        
+
         await UniTask.Delay((int)(_visTime * 1000), cancellationToken: _skipCancellationToken.Token);
         _skipCanvas.alpha = 0;
     }

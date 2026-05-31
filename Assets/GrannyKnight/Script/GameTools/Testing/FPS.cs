@@ -7,5 +7,6 @@ public class FPS : MonoBehaviour
     private void Start()
     {
         Application.targetFrameRate = _Value;
+        QualitySettings.vSyncCount = 0;
     }
 }

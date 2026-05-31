@@ -1,6 +1,6 @@
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
-using DG.Tweening;
 
 public class UIButton : MonoBehaviour
 {
@@ -12,8 +12,11 @@ public class UIButton : MonoBehaviour
     [SerializeField] private float _clickDuration = 0.1f;
     private Button _button;
     private Vector3 _originalScale;
-    private Tween _tween;
-     void Start()
+    private Tween _tweenEnter;
+    private Tween _tweenExit;
+    private Tween _tweenClick;
+
+    private void Start()
     {
         _button = GetComponent<Button>();
         _originalScale = transform.localScale;
@@ -21,29 +24,40 @@ public class UIButton : MonoBehaviour
 
     public void OnPointerEnter()
     {
+        if (_tweenEnter.IsActive()) { return; }
         if (_button.interactable)
         {
-            _tween = transform.DOScale(_originalScale * _scaleMultiplier, _animationDuration);
-            _tween.Play();
+            _tweenEnter = transform.DOScale(_originalScale * _scaleMultiplier, _animationDuration)
+                .From(_originalScale)
+                .SetUpdate(true)
+                .SetLink(gameObject);
+            _tweenEnter.Play();
         }
-        Debug.Log("workong");
+        //Debug.Log("workong");
     }
 
     public void OnPointerExit()
     {
-        _tween = transform.DOScale(_originalScale, _animationDuration);
-        _tween.Play();
+        if (_tweenExit.IsActive()) { return; }
+        _tweenExit = transform.DOScale(_originalScale, _animationDuration)
+            .SetUpdate(true)
+             .SetLink(gameObject);
+        _tweenExit.Play();
     }
+
     public void AnimateClick()
     {
+        if (_tweenClick.IsActive()) { return; }
         if (_button.interactable)
         {
-            _tween = transform.DOScale(_originalScale * _clickScale, _clickDuration)
-                .OnComplete(() => 
+            _tweenClick = transform.DOScale(_originalScale * _clickScale, _clickDuration)
+                .SetLink(gameObject)
+                .SetUpdate(true)
+                .OnComplete(() =>
                 {
-                    _tween = transform.DOScale(_originalScale, _clickDuration);
+                    transform.localScale = _originalScale;
                 });
-            _tween.Play();
+            _tweenClick.Play();
         }
     }
 

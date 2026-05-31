@@ -17,7 +17,6 @@ public class AttackMonsterGarden : IDisposable
 
     public AttackMonsterGarden(DangerZone dangerZone, Transform body,float damage)
     {
-        _isPlay = true;
         _cancellationToken = new CancellationTokenSource();
         _dangerZone = dangerZone;
         _damage = damage;
@@ -26,7 +25,11 @@ public class AttackMonsterGarden : IDisposable
 
     public void Initialization()
     {
+        _isPlay = true;
         _dangerZone.OnEnter += Damage;
+        _cancellationToken?.Cancel();
+        _cancellationToken?.Dispose();
+        _cancellationToken = new CancellationTokenSource();
     }
 
     public void Dispose()
