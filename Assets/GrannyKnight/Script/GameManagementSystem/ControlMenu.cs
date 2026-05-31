@@ -23,4 +23,9 @@ public class ControlMenu : MonoBehaviour
     {
         _gameManager.LoadGame();
     }
+
+    public void Exit()
+    {
+        _gameManager.Exit();
+    }
 }

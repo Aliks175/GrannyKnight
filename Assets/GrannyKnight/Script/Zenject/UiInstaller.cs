@@ -4,6 +4,7 @@ using Zenject;
 public class UiInstaller : MonoInstaller
 {
     [SerializeField] private PlayerUi _prefPlayerUi;
+    [SerializeField] private GameUi _prefUi;
 
     public override void InstallBindings()
     {
@@ -16,7 +17,7 @@ public class UiInstaller : MonoInstaller
     {
         Container.Bind<FactoryPlayerUi>()
        .AsSingle()
-       .WithArguments(_prefPlayerUi)
+       .WithArguments(_prefPlayerUi, _prefUi)
        .NonLazy();
     }
 
