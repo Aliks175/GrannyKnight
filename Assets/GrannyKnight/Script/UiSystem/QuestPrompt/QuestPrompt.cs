@@ -17,6 +17,14 @@ public class QuestPrompt : MonoBehaviour
     private Tween _shake;
     private bool _isVisible;
 
+    private void OnDisable()
+    {
+        ClearTween(_open);
+        ClearTween(_close);
+        ClearTween(_shake);
+        gameObject.transform.DOKill();
+    }
+
     private void Start()
     {
         _bodyTextStartPos = _bodyText.anchoredPosition;
@@ -61,5 +69,13 @@ public class QuestPrompt : MonoBehaviour
     public void SetText(string tempText)
     {
         _textPrompt.SetText(tempText);
+    }
+
+    private void ClearTween(Tween tween)
+    {
+        if (tween != null)
+        {
+            tween.Kill();
+        }
     }
 }

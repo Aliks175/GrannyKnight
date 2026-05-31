@@ -1,9 +1,8 @@
-using System.Threading;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 using FMOD.Studio;
 using System;
-using Zenject;
+using System.Threading;
+using UnityEngine;
 
 public class DialogueManager : IDisposable
 {
@@ -30,6 +29,9 @@ public class DialogueManager : IDisposable
     public void Dispose()
     {
         dialogueUI.OnSkip -= SkipLine;
+        cts?.Cancel();
+        cts?.Dispose();
+        cts = null;
     }
 
     public async UniTask StartDialogue(string filePath, string dialogueId)
@@ -57,7 +59,7 @@ public class DialogueManager : IDisposable
 
         RunDialogue(dialogue, cts.Token).Forget();
 
-        await dialogueFinishedTcs.Task; 
+        await dialogueFinishedTcs.Task;
     }
 
     private async UniTaskVoid RunDialogue(Dialogue dialogue, CancellationToken token)
@@ -113,7 +115,7 @@ public class DialogueManager : IDisposable
         finally
         {
             dialogueUI.Hide();
-            dialogueFinishedTcs?.TrySetResult(); 
+            dialogueFinishedTcs?.TrySetResult();
         }
     }
 
@@ -154,7 +156,7 @@ public class DialogueManager : IDisposable
 
         if (dialogueFinishedTcs != null)
         {
-            await dialogueFinishedTcs.Task; 
+            await dialogueFinishedTcs.Task;
         }
 
         cts.Dispose();
