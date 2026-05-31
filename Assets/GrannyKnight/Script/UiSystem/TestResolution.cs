@@ -17,13 +17,8 @@ public class TestResolution : MonoBehaviour
 
         Resolution resolution = Screen.currentResolution;
         FindResol(resolution);
-
-        Debug.Log($"currentResolution {Screen.currentResolution}");
         _isFullScreen = true;
-
         _toggleFullScreen.isOn = _isFullScreen;
-
-
         _dropdownQuality.onValueChanged.AddListener(SetQuality);
         _dropdownResolution.onValueChanged.AddListener(SetResolution);
         _toggleFullScreen.onValueChanged.AddListener(ChangeFullScreen);
@@ -38,8 +33,8 @@ public class TestResolution : MonoBehaviour
             if (resolution.width == _settingResolution[i].Width && resolution.height == _settingResolution[i].Height)
             {
                 _dropdownResolution.value = i;
-                Debug.Log($"Idnex FindResol {i}");
-                Debug.Log($"FindResol Width {resolution.width} Height {resolution.height} isFullScreen {_isFullScreen}");
+                //Debug.Log($"Idnex FindResol {i}");
+                //Debug.Log($"FindResol Width {resolution.width} Height {resolution.height} isFullScreen {_isFullScreen}");
                 iscomplited = true;
                 break;
             }
@@ -47,7 +42,7 @@ public class TestResolution : MonoBehaviour
 
         if (!iscomplited)
         {
-            Debug.Log($"FindResol NOT FOUND");
+            //Debug.Log($"FindResol NOT FOUND");
             _dropdownResolution.value = 0;
         }
     }
@@ -57,7 +52,7 @@ public class TestResolution : MonoBehaviour
     public void SetQuality(int qualityindex)
     {
         QualitySettings.SetQualityLevel(qualityindex);
-        Debug.Log($"GetQualityLevel {QualitySettings.GetQualityLevel()}");
+        //Debug.Log($"GetQualityLevel {QualitySettings.GetQualityLevel()}");
     }
 
     #endregion
@@ -77,15 +72,16 @@ public class TestResolution : MonoBehaviour
     {
         _isFullScreen = isFullScreen;
         Resolution resolution = Screen.currentResolution;
+
         Screen.SetResolution(resolution.width, resolution.height, isFullScreen);
-        Debug.Log($"sad Width {resolution.width} Height {resolution.height} isFullScreen {_isFullScreen}");
+        //Debug.Log($"sad Width {resolution.width} Height {resolution.height} isFullScreen {_isFullScreen}");
     }
 
     private void sad(SettingResolution settingResolution)
     {
         Screen.SetResolution(settingResolution.Width, settingResolution.Height, _isFullScreen);
-        Debug.Log($"currentResolution {Screen.currentResolution}");
-        Debug.Log($"sad Width {settingResolution.Width} Height {settingResolution.Height} isFullScreen {_isFullScreen}");
+        //Debug.Log($"currentResolution {Screen.currentResolution}");
+        //Debug.Log($"sad Width {settingResolution.Width} Height {settingResolution.Height} isFullScreen {_isFullScreen}");
     }
     #endregion
 
