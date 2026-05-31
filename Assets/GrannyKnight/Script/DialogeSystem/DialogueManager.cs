@@ -17,7 +17,7 @@ public class DialogueManager : IDisposable
     public DialogueManager(LocalizationManager localization, string pathLocalization)
     {
         this.localization = localization;
-        localization.Load(pathLocalization);
+        //localization.Load(pathLocalization);
     }
 
     public void Construct(DialogueCanvas dialogueCanvas)
