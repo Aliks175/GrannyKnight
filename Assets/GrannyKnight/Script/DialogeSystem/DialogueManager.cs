@@ -51,15 +51,19 @@ public class DialogueManager : IInitializable, IDisposable
             return;
         }
 
+        // Извлекаем имя диалога из пути файла
+        string dialogueName = System.IO.Path.GetFileNameWithoutExtension(filePath);
+        localization.LoadDialogueLocalization(dialogueName);
+
         cts = new CancellationTokenSource();
         dialogueFinishedTcs = new UniTaskCompletionSource();
 
-        RunDialogue(dialogue, cts.Token).Forget();
+        RunDialogue(dialogue, dialogueName, cts.Token).Forget();
 
         await dialogueFinishedTcs.Task; 
     }
 
-    private async UniTaskVoid RunDialogue(Dialogue dialogue, CancellationToken token)
+    private async UniTaskVoid RunDialogue(Dialogue dialogue, string dialogueName, CancellationToken token)
     {
         try
         {
@@ -70,10 +74,13 @@ public class DialogueManager : IInitializable, IDisposable
                 token.ThrowIfCancellationRequested();
 
                 skipRequested = false;
-
-                string text = localization.GetText(line.key);
-                string speaker = localization.GetText(line.speaker) + ": ";
-
+                string speaker = string.Empty;
+                string text = localization.GetText(dialogueName, line.key);
+                if (text != string.Empty)
+                {
+                    speaker = localization.GetSpeakerName(line.speaker) + ": ";
+                }
+                
                 var textTask = dialogueUI.ShowLine(speaker, text);
 
                 EventInstance instance = default;
@@ -84,6 +91,12 @@ public class DialogueManager : IInitializable, IDisposable
                 if (!string.IsNullOrEmpty(line.fmodEvent))
                 {
                     instance = AudioManager.Play(line.fmodEvent);
+                    hasInstance = true;
+                    soundTask = WaitForSound(instance, token);
+                }
+                else
+                {
+                    instance = AudioManager.Play("event:/Dialogs/BaseSoundDialog");
                     hasInstance = true;
                     soundTask = WaitForSound(instance, token);
                 }

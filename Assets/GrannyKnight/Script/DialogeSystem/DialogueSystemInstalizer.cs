@@ -11,6 +11,7 @@ public class DialogueSystemInstalizer : IInitializable
 
     public void Initialize()
     {
-        localization.Load("Localization/ru");
+        // Больше не нужно загружать общий файл локализации
+        // Файлы локализации будут загружаться автоматически при запуске диалогов
     }
 }

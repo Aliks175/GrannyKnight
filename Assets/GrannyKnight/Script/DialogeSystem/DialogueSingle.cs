@@ -28,5 +28,11 @@ public class DialogueSingle : MonoBehaviour
 
 public enum FilePath
 {
-    RoomGG
+    RoomGG,
+    SychQuest,
+    GvinkaQuest,
+    QapchaQuest,
+    BAQuest,
+    SkladQuest,
+    AlchemiaQuest
 }
