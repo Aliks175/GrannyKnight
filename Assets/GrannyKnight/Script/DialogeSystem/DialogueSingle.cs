@@ -1,11 +1,9 @@
 using UnityEngine;
 using Zenject;
-using Cysharp.Threading.Tasks;
 
 public class DialogueSingle : MonoBehaviour
 {
     [SerializeField] private FilePath _dialoguePath;
-    [Range(0,15)]public int DialogueId;
     private string path = "Dialogues/";
     private DialogueManager dialogueManager;
 
@@ -16,13 +14,13 @@ public class DialogueSingle : MonoBehaviour
     }
 
     [Tooltip("метод начала диалога")]
-    public async void StartDialogue()
+    public async void StartDialogue(int dialogueId)
     {
         if (!System.Enum.IsDefined(typeof(FilePath), _dialoguePath))
         {
             return;
         }
-        await dialogueManager.StartDialogue(path + _dialoguePath.ToString(), DialogueId.ToString());
+        await dialogueManager.StartDialogue(path + _dialoguePath.ToString(), dialogueId.ToString());
     }
 }
 

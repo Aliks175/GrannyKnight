@@ -11,7 +11,7 @@ public class SpawnPlayer : MonoBehaviour
         _systemBuss = systemBuss;
     }
 
-    public void Start()
+    public void OnStart()
     {
         _systemBuss.ReadySpawnPlayer();
     }

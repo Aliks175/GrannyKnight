@@ -1,13 +1,14 @@
 using UnityEngine;
+using UnityEngine.Playables;
 using Zenject;
 
 public class RemoveScene : MonoBehaviour
 {
     [SerializeField] private ListScene listScene;
-    private ControlLoading _controlLoading;
+    private GameManager _controlLoading;
 
     [Inject]
-    public void Construct(ControlLoading controlLoading)
+    public void Construct(GameManager controlLoading)
     {
         _controlLoading = controlLoading;
     }
