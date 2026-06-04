@@ -3,7 +3,7 @@ using System;
 using UnityEngine;
 using Zenject;
 
-public class PlayerMove : ITickable
+public class PlayerMove : IFixedTickable //ITickable,
 {
     private Collider[] _colliders;
     private CharacterController _controller;
@@ -48,10 +48,15 @@ public class PlayerMove : ITickable
         _coefficientKidSpeedMove = 1;
     }
 
-    public void Tick()
+    public void FixedTick()
     {
         OnUpdate();
     }
+
+    //public void Tick()
+    //{
+     
+    //}
 
     public void ProcessMove(Vector2 pos)
     {

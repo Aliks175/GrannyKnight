@@ -33,8 +33,9 @@ public class ImporterBussEventHistory : IDisposable, IInitializable
         interactebleEventHistory.OnActiveHistory += OnActiveHistory;
     }
 
-    private void OnActiveHistory(int id)
+    private void OnActiveHistory(int id, IEventHistoryble eventHistoryble)
     {
+        eventHistoryble.OnActiveHistory -= OnActiveHistory;
         _historyManager.ActiveHistory(id);
     }
 }

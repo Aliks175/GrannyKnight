@@ -36,12 +36,12 @@ public class GameUi : MonoBehaviour
         ControlPause(false);
         _settings.Initialization();
         _systemBuss.ConstructGameUi(this);
-        Debug.Log("Start");
+        //Debug.Log("Start");
     }
 
     public void OnPause()
     {
-        Debug.Log("OnPause");
+        //Debug.Log("OnPause");
         _isPaused = !_isPaused;
         if (_isPaused)
         {
@@ -56,14 +56,14 @@ public class GameUi : MonoBehaviour
     public void PauseGame()
     {
         ControlPause(true);
-        Debug.Log("PauseGame");
+        //Debug.Log("PauseGame");
     }
 
     public void ResumeGame()
     {
         ControlPause(false);
        
-        Debug.Log("ResumeGame");
+        //Debug.Log("ResumeGame");
     }
 
     public void OnMenuButton()

@@ -8,6 +8,7 @@ public class SystemBuss
 
     public event Action<PlayerUi> OnConstructPlayerUi;
     public event Action OnReadySpawnPlayer;
+    public event Action OnEndDialog;
     public event Action<PlayerCharacter> OnSpawnPlayer;
     public event Action<IEventHistoryble> OnEventHistory;
 
@@ -46,5 +47,10 @@ public class SystemBuss
     public void SetEventHistory(IEventHistoryble interactebleEventHistory)
     {
         OnEventHistory?.Invoke(interactebleEventHistory);
+    }
+
+    public void EndDialog()
+    {
+        OnEndDialog?.Invoke();
     }
 }

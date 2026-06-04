@@ -43,6 +43,7 @@ public class QuestPasswordSelection : Quest
 
     public override void StartQuest()
     {
+        Debug.Log("QuestPasswordSelection");
         ResetItem();
         OnStart?.Invoke();
     }

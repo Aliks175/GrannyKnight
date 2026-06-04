@@ -27,13 +27,13 @@ public class CutsceneEvent : MonoBehaviour
 
     public void StartCutscene()
     {
-        Debug.Log("StartCutscene");
+        //Debug.Log("StartCutscene");
         _startCutscene?.Invoke();
     }
 
     public void EndCutscene()
     {
-        Debug.Log("EndCutscene");
+        //Debug.Log("EndCutscene");
         _endCutscene?.Invoke();
     }
     private void Played(PlayableDirector obj)

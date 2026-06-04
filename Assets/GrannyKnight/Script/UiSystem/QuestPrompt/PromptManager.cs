@@ -45,7 +45,7 @@ public class PromptManager: IInitializable
             return;
         }
        
-        Debug.Log("FilePrompt sucsses");
+        //Debug.Log("FilePrompt sucsses");
     }
 
     public void GetPrompt(int id)

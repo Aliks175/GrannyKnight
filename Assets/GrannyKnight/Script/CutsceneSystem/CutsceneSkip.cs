@@ -14,15 +14,21 @@ public class CutsceneSkip : MonoBehaviour
         CutsceneManager.OnEndCutscene += OffPanel;
     }
 
+    private void OnDisable()
+    {
+        CutsceneManager.OnStartCutscene -= OnPanel;
+        CutsceneManager.OnEndCutscene -= OffPanel;
+    }
+
     private void OnPanel()
     {
-        Debug.Log("OnPanel");
+        //Debug.Log("OnPanel");
         ControlVisible(true);
     }
 
     private void OffPanel()
     {
-        Debug.Log("OffPanel");
+        //Debug.Log("OffPanel");
         ControlVisible(false);
     }
 

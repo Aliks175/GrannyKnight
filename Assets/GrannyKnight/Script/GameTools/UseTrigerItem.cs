@@ -66,10 +66,10 @@ public class UseTrigerItem : MonoBehaviour, IItemUseble
     {
         PlayerCharacter playerCharacter = await _systemBuss.GetPlayer();
         _playerCharacter = playerCharacter;
-        if (!_isReadyActive)
-        {
-            SetItem();
-        }
+        //if (_isReadyActive)
+        //{
+        //    SetItem();
+        //}
     }
 
     private void SetItem()

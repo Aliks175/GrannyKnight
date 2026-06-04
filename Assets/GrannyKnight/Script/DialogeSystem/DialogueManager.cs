@@ -14,6 +14,8 @@ public class DialogueManager : IDisposable
     private bool skipRequested;
     private UniTaskCompletionSource dialogueFinishedTcs;
 
+    public event Action OnEndDialog;
+
     public DialogueManager(LocalizationManager localization, string pathLocalization)
     {
         this.localization = localization;
@@ -129,6 +131,8 @@ public class DialogueManager : IDisposable
         {
             dialogueUI.Hide();
             dialogueFinishedTcs?.TrySetResult();
+            OnEndDialog?.Invoke();
+            Debug.Log("DialogueManager --- Finally");
         }
     }
 
@@ -172,6 +176,8 @@ public class DialogueManager : IDisposable
             await dialogueFinishedTcs.Task;
         }
 
+        if (cts == null)
+            return;
         cts.Dispose();
         cts = null;
     }

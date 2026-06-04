@@ -1,20 +1,23 @@
+using Cysharp.Threading.Tasks;
 using System;
-using System.Collections;
 using UnityEngine;
 using Zenject;
 
 public class TimeActiveEvent : MonoBehaviour, IEventHistoryble
 {
-    [SerializeField] private float _waitTime;
     [SerializeField] private int _idHistoryData;
-    private Coroutine _coroutine;
     private SystemBuss _systemBuss;
-    public event Action<int> OnActiveHistory;
+    public event Action<int, IEventHistoryble> OnActiveHistory;
 
     [Inject]
     public void Construct(SystemBuss systemBuss)
     {
         _systemBuss = systemBuss;
+    }
+
+    private void OnDisable()
+    {
+        _systemBuss.OnEndDialog -= OnEndDialog;
     }
 
     private void Start()
@@ -24,13 +27,19 @@ public class TimeActiveEvent : MonoBehaviour, IEventHistoryble
 
     public void Active()
     {
-        if (_coroutine != null) { return; }
-        _coroutine = StartCoroutine(WaitTime());
+        SubEndDialog().Forget();
     }
 
-    private IEnumerator WaitTime()
+    private async UniTaskVoid SubEndDialog()
     {
-        yield return new WaitForSeconds(_waitTime);
-        OnActiveHistory?.Invoke(_idHistoryData);
+        await UniTask.NextFrame();
+        _systemBuss.OnEndDialog += OnEndDialog;
+    }
+
+    private void OnEndDialog()
+    {
+        Debug.Log($"OnEndDialog = {_idHistoryData}");
+        _systemBuss.OnEndDialog -= OnEndDialog;
+        OnActiveHistory?.Invoke(_idHistoryData, this);
     }
 }
