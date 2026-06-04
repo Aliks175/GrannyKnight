@@ -21,7 +21,7 @@ public class DialogueCanvas : MonoBehaviour
     private CancellationTokenSource _skipCancellationToken;
 
     public event Action OnSkip;
-    //private DialogueManager _dialogueManager;
+    private DialogueManager _dialogueManager;
 
     private void Awake()
     {
@@ -30,19 +30,19 @@ public class DialogueCanvas : MonoBehaviour
         _skipCanvas.alpha = 0;
     }
 
-    //[Inject]
-    //public void Construct(DialogueManager dialogueManager)
-    //{
-    //    this._dialogueManager = dialogueManager;
-    //}
-    void OnEnable()
+    private void OnEnable()
     {
-        //_buttonSkip.action.started += ShowSkipOrSkip;
+        _buttonSkip.action.started += ShowSkipOrSkip;
     }
-    void OnDisable()
+
+    private void OnDisable()
     {
-        //_buttonSkip.action.started -= ShowSkipOrSkip;
+        _buttonSkip.action.started -= ShowSkipOrSkip;
+        _skipCancellationToken?.Cancel();
+        _skipCancellationToken?.Dispose();
+        _skipCancellationToken = null;
     }
+
     public async UniTask ShowLine(string speaker, string text)
     {
         _slipRequested = false;
@@ -84,6 +84,7 @@ public class DialogueCanvas : MonoBehaviour
             _canvasGroup.alpha = 0;
         }
     }
+
     public void Show()
     {
         _skipCanvas.alpha = 0;
@@ -94,6 +95,7 @@ public class DialogueCanvas : MonoBehaviour
     {
         _slipRequested = true;
         OnSkip?.Invoke();
+        //Debug.Log("Skip");
         //_dialogueManager.SkipLine();
     }
 
@@ -105,12 +107,14 @@ public class DialogueCanvas : MonoBehaviour
         }
         else
         {
-            ShowSkipCanvas();
+      
+            ShowSkipCanvas().Forget();
         }
     }
 
-    private async void ShowSkipCanvas()
+    private async UniTaskVoid ShowSkipCanvas()
     {
+        //Debug.Log("ShowSkipCanvas");
         _skipCancellationToken?.Cancel();
         _skipCancellationToken = new CancellationTokenSource();
 

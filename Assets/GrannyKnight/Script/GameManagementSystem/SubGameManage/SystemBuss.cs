@@ -3,12 +3,12 @@ using System;
 
 public class SystemBuss
 {
-    private PlayerCharacter player;
+    private PlayerCharacter _player;
     private GameUi _gameUi;
 
     public event Action<PlayerUi> OnConstructPlayerUi;
-    public event Action<bool> OnPause;
     public event Action OnReadySpawnPlayer;
+    public event Action OnEndDialog;
     public event Action<PlayerCharacter> OnSpawnPlayer;
     public event Action<IEventHistoryble> OnEventHistory;
 
@@ -34,18 +34,23 @@ public class SystemBuss
 
     public void SpawnPlayer(PlayerCharacter playerCharacter)
     {
-        player = playerCharacter;
+        _player = playerCharacter;
         OnSpawnPlayer?.Invoke(playerCharacter);
     }
 
     public async UniTask<PlayerCharacter> GetPlayer()
     {
-        await UniTask.WaitUntil(() => player != null);
-        return player;
+        await UniTask.WaitUntil(() => _player != null);
+        return _player;
     }
 
     public void SetEventHistory(IEventHistoryble interactebleEventHistory)
     {
         OnEventHistory?.Invoke(interactebleEventHistory);
+    }
+
+    public void EndDialog()
+    {
+        OnEndDialog?.Invoke();
     }
 }

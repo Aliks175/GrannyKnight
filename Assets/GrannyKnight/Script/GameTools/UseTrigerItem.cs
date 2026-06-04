@@ -44,11 +44,7 @@ public class UseTrigerItem : MonoBehaviour, IItemUseble
             }
             else if (!_isReadyActive)
             {
-                _playerCharacter.SetUseItem(this);
-                _isReadyActive = true;
-                PlayerTriggerEnter?.Invoke();
-                if (_showPrompt == null) { return; }
-                _showPrompt.ControlShow(true);
+                SetItem();
             }
         }
     }
@@ -70,5 +66,19 @@ public class UseTrigerItem : MonoBehaviour, IItemUseble
     {
         PlayerCharacter playerCharacter = await _systemBuss.GetPlayer();
         _playerCharacter = playerCharacter;
+        //if (_isReadyActive)
+        //{
+        //    SetItem();
+        //}
+    }
+
+    private void SetItem()
+    {
+        if (_playerCharacter == null) { return; }
+        _playerCharacter.SetUseItem(this);
+        _isReadyActive = true;
+        PlayerTriggerEnter?.Invoke();
+        if (_showPrompt == null) { return; }
+        _showPrompt.ControlShow(true);
     }
 }

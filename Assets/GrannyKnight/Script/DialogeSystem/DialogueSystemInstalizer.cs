@@ -11,6 +11,6 @@ public class DialogueSystemInstalizer : IInitializable
 
     public void Initialize()
     {
-        //localization.Load("Localization/ru");
+
     }
 }

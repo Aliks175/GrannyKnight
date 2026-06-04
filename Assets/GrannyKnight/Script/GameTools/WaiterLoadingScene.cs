@@ -24,7 +24,8 @@ public class WaiterLoadingScene : MonoBehaviour
 
     private void Completed(AsyncOperation obj)
     {
-        _use?.Invoke();
+        _gameManager.CurrentOperation.completed -= Completed;
         _cutsceneScreen.OnBlackOut(false);
+        _use?.Invoke();
     }
 }

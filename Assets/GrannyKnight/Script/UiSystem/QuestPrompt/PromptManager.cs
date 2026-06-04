@@ -22,7 +22,7 @@ public class PromptManager: IInitializable
     public void Initialize()
     {
         SetChapterPrompt(_oneChapter);
-        _promptLocalization.Load(_localizationRu);
+        //_promptLocalization.Load(_localizationRu);
     }
 
     public void Construct(QuestPrompt questPrompt)
@@ -45,7 +45,7 @@ public class PromptManager: IInitializable
             return;
         }
        
-        Debug.Log("FilePrompt sucsses");
+        //Debug.Log("FilePrompt sucsses");
     }
 
     public void GetPrompt(int id)
@@ -59,7 +59,7 @@ public class PromptManager: IInitializable
         }
         else
         {
-            textPrompt = _promptLocalization.GetText(tempDataPrompt.Key);
+            //textPrompt = _promptLocalization.GetText(tempDataPrompt.Key);
             _questPrompt.SetText(textPrompt);
         }
     }

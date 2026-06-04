@@ -4,10 +4,10 @@ using Zenject;
 public class AddScene : MonoBehaviour
 {
     [SerializeField] private ListScene listScene;
-    private ControlLoading _controlLoading;
+    private GameManager _controlLoading;
 
     [Inject]
-    private void Construct(ControlLoading controlLoading)
+    private void Construct(GameManager controlLoading)
     {
         _controlLoading = controlLoading;
     }

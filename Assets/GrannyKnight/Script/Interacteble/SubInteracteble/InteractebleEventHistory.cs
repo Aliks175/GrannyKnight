@@ -6,7 +6,7 @@ public class InteractebleEventHistory : Interacteble , IEventHistoryble
 {
     [SerializeField] private int _idHistoryData;
     private SystemBuss _systemBuss;
-    public event Action<int> OnActiveHistory;
+    public event Action<int, IEventHistoryble> OnActiveHistory;
 
     [Inject]
     public void Construct(SystemBuss systemBuss)
@@ -27,6 +27,6 @@ public class InteractebleEventHistory : Interacteble , IEventHistoryble
 
     private void ActiveHistory()
     {
-        OnActiveHistory?.Invoke(_idHistoryData);
+        OnActiveHistory?.Invoke(_idHistoryData, this);
     }
 }

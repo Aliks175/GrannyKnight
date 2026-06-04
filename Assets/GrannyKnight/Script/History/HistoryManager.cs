@@ -12,6 +12,7 @@ public class HistoryManager : MonoBehaviour
         HistoryData historyData = FindHistoryData(id);
         if (historyData == null ) { return; }
         historyData.OnInteract?.Invoke();
+        Debug.Log($"HistoryManager = ActiveHistory {id}");
     }
 
     private HistoryData FindHistoryData(int id)

@@ -9,7 +9,7 @@ public class ControlAnimation : MonoBehaviour
     private void Awake()
     {
         _idControlisVisible = Animator.StringToHash(Const.ControlisVisible);
-        _animator = GetComponent<Animator>();
+        _animator = GetComponent<Animator>(); 
     }
 
     public void ControlShow(bool isVisible)

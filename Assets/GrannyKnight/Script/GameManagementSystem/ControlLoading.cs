@@ -35,13 +35,5 @@ public class ControlLoading
         //_testLoading.LoadSingle(ListScene.Game);
     }
 
-    //public void LoadFreeGame()
-    //{
-    //    _gameManager.LoadFreeGame();
-    //}
 
-    public void Exit()
-    {
-        Application.Quit();
-    }
 }

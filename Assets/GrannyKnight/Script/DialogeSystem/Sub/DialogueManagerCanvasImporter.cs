@@ -1,6 +1,7 @@
+using System;
 using Zenject;
 
-public class DialogueManagerCanvasImporter : IInitializable
+public class DialogueManagerCanvasImporter : IInitializable , IDisposable
 {
     private DialogueManager _dialogueManager;
     private SystemBuss _systemBuss;
@@ -14,6 +15,18 @@ public class DialogueManagerCanvasImporter : IInitializable
     public void Initialize()
     {
         _systemBuss.OnConstructPlayerUi += OnConstructPlayerUi;
+        _dialogueManager.OnEndDialog += OnEndDialog;
+    }
+
+    public void Dispose()
+    {
+        _systemBuss.OnConstructPlayerUi -= OnConstructPlayerUi;
+        _dialogueManager.OnEndDialog -= OnEndDialog;
+    }
+
+    private void OnEndDialog()
+    {
+        _systemBuss.EndDialog();
     }
 
     private void OnConstructPlayerUi(PlayerUi obj)

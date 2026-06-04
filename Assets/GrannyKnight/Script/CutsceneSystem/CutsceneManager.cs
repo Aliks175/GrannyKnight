@@ -1,12 +1,16 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class CutsceneManager : MonoBehaviour
 {
     public static CutsceneManager Instance;
     [SerializeField] private List<CutsceneStruct> cutscenes = new List<CutsceneStruct>();
-    public static Dictionary<string, GameObject> cutsceneDataBase = new Dictionary<string, GameObject>();
-    public static GameObject activeCutscene;
+    public static Dictionary<string, PlayableDirector> cutsceneDataBase = new Dictionary<string, PlayableDirector>();
+    public static PlayableDirector activeCutscene;
+    public static event Action OnStartCutscene;
+    public static event Action OnEndCutscene;
 
     private void Awake()
     {
@@ -14,7 +18,7 @@ public class CutsceneManager : MonoBehaviour
         InitializeCutsceneDataBase();
         foreach (var cutscene in cutsceneDataBase)
         {
-            if (cutscene.Value != null) cutscene.Value.SetActive(false);
+            if (cutscene.Value != null) cutscene.Value.gameObject.SetActive(false);
         }
     }
 
@@ -44,18 +48,34 @@ public class CutsceneManager : MonoBehaviour
         activeCutscene = cutsceneDataBase[cutsceneKey];
         foreach (var cutscene in cutsceneDataBase)
         {
-            if (cutscene.Value != null) cutscene.Value.SetActive(false);
+            if (cutscene.Value != null) cutscene.Value.gameObject.SetActive(false);
         }
-        cutsceneDataBase[cutsceneKey].SetActive(true);
+        PlayableDirector playableDirector = cutsceneDataBase[cutsceneKey];
+        playableDirector.gameObject.SetActive(true);
+        ControlStateCutscene(playableDirector);
     }
 
     public void EndCutscene()
     {
         if (activeCutscene != null)
         {
-            activeCutscene.SetActive(false);
+            activeCutscene.Stop();
+            activeCutscene.gameObject.SetActive(false);
             activeCutscene = null;
         }
+    }
+
+    private void ControlStateCutscene(PlayableDirector cutscene)
+    {
+        cutscene.Play();
+        cutscene.stopped += OnStopped;
+        OnStartCutscene?.Invoke();
+    }
+
+    private void OnStopped(PlayableDirector cutscene)
+    {
+        cutscene.stopped -= OnStopped;
+        OnEndCutscene?.Invoke();
     }
 }
 
@@ -63,5 +83,5 @@ public class CutsceneManager : MonoBehaviour
 public struct CutsceneStruct
 {
     public string cutsceneKey;
-    public GameObject cutsceneObject;
+    public PlayableDirector cutsceneObject;
 }
