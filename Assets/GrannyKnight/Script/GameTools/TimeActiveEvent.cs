@@ -38,7 +38,6 @@ public class TimeActiveEvent : MonoBehaviour, IEventHistoryble
 
     private void OnEndDialog()
     {
-        Debug.Log($"OnEndDialog = {_idHistoryData}");
         _systemBuss.OnEndDialog -= OnEndDialog;
         OnActiveHistory?.Invoke(_idHistoryData, this);
     }
