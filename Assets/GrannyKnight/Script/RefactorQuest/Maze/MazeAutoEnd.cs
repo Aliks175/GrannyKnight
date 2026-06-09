@@ -1,28 +1,39 @@
+using System;
 using UnityEngine;
-using UnityEngine.Events;
 
-public class MazeAutoEnd : MonoBehaviour
+public class MazeAutoEnd : Quest
 {
-    [SerializeField] private UnityEvent _events;
     [SerializeField] private float _delay;
-    private bool _isInvoke = false;
 
-    private void OnAutoEnd()
-    {
-        Debug.Log("OnAutoEnd");
-        _events.Invoke();
-        _isInvoke = true;
-    }
+    public override event Action<QuestEnding> OnEnd;
+    public override event Action OnStart;
+
 
     public void StopTimer()
     {
-        if (_isInvoke == true) return;
         CancelInvoke(nameof(OnAutoEnd));
-        //OnAutoEnd();
+        OnAutoEnd();
     }
 
-    public void StartTimer()
+    public override void StartQuest()
     {
+        OnStart?.Invoke();
         Invoke(nameof(OnAutoEnd), _delay);
+        Debug.Log("MazeAutoEnd - StartQuest");
+    }
+
+    public void CloseMaze()
+    {
+        StopQuest(QuestEnding.Good);
+    }
+
+    public override void StopQuest(QuestEnding quest)
+    {
+        CancelInvoke(nameof(OnAutoEnd));
+        OnEnd?.Invoke(quest);
+    }
+    private void OnAutoEnd()
+    {
+        StopQuest(QuestEnding.Bad);
     }
 }

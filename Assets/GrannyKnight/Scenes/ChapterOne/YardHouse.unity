@@ -6205,6 +6205,11 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &961597211 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2923807413347573675, guid: f1a5a15d787c8fb438e01b3cbe0b5181, type: 3}
+  m_PrefabInstance: {fileID: 6106023947627165458}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &963437287 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7506242955484521196, guid: f1a5a15d787c8fb438e01b3cbe0b5181, type: 3}
@@ -17768,6 +17773,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 1.96
       objectReference: {fileID: 0}
+    - target: {fileID: 667476794932976089, guid: f1a5a15d787c8fb438e01b3cbe0b5181, type: 3}
+      propertyPath: m_Name
+      value: WaitPreLoadNewScene
+      objectReference: {fileID: 0}
     - target: {fileID: 909780196467606394, guid: f1a5a15d787c8fb438e01b3cbe0b5181, type: 3}
       propertyPath: _idHistoryData
       value: 5
@@ -18337,6 +18346,10 @@ PrefabInstance:
       value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 4642794798991420303, guid: f1a5a15d787c8fb438e01b3cbe0b5181, type: 3}
+      propertyPath: OnEnd.m_PersistentCalls.m_Calls.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4642794798991420303, guid: f1a5a15d787c8fb438e01b3cbe0b5181, type: 3}
       propertyPath: OnEndBad.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -18349,6 +18362,14 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4642794798991420303, guid: f1a5a15d787c8fb438e01b3cbe0b5181, type: 3}
+      propertyPath: OnEnd.m_PersistentCalls.m_Calls.Array.data[3].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4642794798991420303, guid: f1a5a15d787c8fb438e01b3cbe0b5181, type: 3}
+      propertyPath: OnEnd.m_PersistentCalls.m_Calls.Array.data[3].m_Target
+      value: 
+      objectReference: {fileID: 961597211}
+    - target: {fileID: 4642794798991420303, guid: f1a5a15d787c8fb438e01b3cbe0b5181, type: 3}
       propertyPath: OnEndBad.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 5
       objectReference: {fileID: 0}
@@ -18357,12 +18378,20 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4642794798991420303, guid: f1a5a15d787c8fb438e01b3cbe0b5181, type: 3}
+      propertyPath: OnEnd.m_PersistentCalls.m_Calls.Array.data[3].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4642794798991420303, guid: f1a5a15d787c8fb438e01b3cbe0b5181, type: 3}
       propertyPath: OnEndBad.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1494319893}
     - target: {fileID: 4642794798991420303, guid: f1a5a15d787c8fb438e01b3cbe0b5181, type: 3}
       propertyPath: OnEndMidle.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4642794798991420303, guid: f1a5a15d787c8fb438e01b3cbe0b5181, type: 3}
+      propertyPath: OnEnd.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: SetActive
       objectReference: {fileID: 0}
     - target: {fileID: 4642794798991420303, guid: f1a5a15d787c8fb438e01b3cbe0b5181, type: 3}
       propertyPath: OnEndGood.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -18397,6 +18426,10 @@ PrefabInstance:
       value: StartCutscene
       objectReference: {fileID: 0}
     - target: {fileID: 4642794798991420303, guid: f1a5a15d787c8fb438e01b3cbe0b5181, type: 3}
+      propertyPath: OnEnd.m_PersistentCalls.m_Calls.Array.data[3].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4642794798991420303, guid: f1a5a15d787c8fb438e01b3cbe0b5181, type: 3}
       propertyPath: OnEndBad.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: CutsceneManager, Assembly-CSharp
       objectReference: {fileID: 0}
@@ -18419,6 +18452,10 @@ PrefabInstance:
     - target: {fileID: 4642794798991420303, guid: f1a5a15d787c8fb438e01b3cbe0b5181, type: 3}
       propertyPath: OnEndMidle.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: EndiPickUpFruitsMidle
+      objectReference: {fileID: 0}
+    - target: {fileID: 4642794798991420303, guid: f1a5a15d787c8fb438e01b3cbe0b5181, type: 3}
+      propertyPath: OnEnd.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 4642794798991420303, guid: f1a5a15d787c8fb438e01b3cbe0b5181, type: 3}
       propertyPath: OnEndBad.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName

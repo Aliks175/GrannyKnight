@@ -22,7 +22,7 @@ public class CutsceneManager : MonoBehaviour
         }
     }
 
-    private void InitializeCutsceneDataBase()
+    public void InitializeCutsceneDataBase()
     {
         cutsceneDataBase.Clear();
         for (int i = 0; i < cutscenes.Count; i++)
